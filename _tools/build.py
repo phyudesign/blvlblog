@@ -124,7 +124,7 @@ def write(path, s):
 
 if OUT.exists():
     for x in OUT.iterdir():
-        if x.name in ('wp-content', '.git', 'CNAME'): continue
+        if x.name in ('wp-content', '.git', 'CNAME', '_tools'): continue
         shutil.rmtree(x) if x.is_dir() else x.unlink()
 OUT.mkdir(parents=True, exist_ok=True)
 shutil.copytree(Path(__file__).parent / 'assets', OUT / 'assets', dirs_exist_ok=True)

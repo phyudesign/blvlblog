@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>검색 | blvl blog</title><meta name="description" content="블로그 검색">
+<link rel="canonical" href="https://blvlblog.com/search/"><meta property="og:type" content="website"><meta property="og:title" content="검색 | blvl blog">
+<meta property="og:description" content="블로그 검색"><meta property="og:url" content="https://blvlblog.com/search/">
+<link rel="alternate" type="application/rss+xml" title="blvl blog" href="/feed.xml">
+<link rel="stylesheet" href="/assets/blog.css">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4380904134243959" crossorigin="anonymous"></script>
+</head><body>
+<header class="hd"><div class="wrap"><a class="brand" href="/">blvl blog</a>
+<nav><a href="/">HOME</a><a href="/blog/">BLOG</a><a href="/category/art-culture/">ART &amp; CULTURE</a><a href="/category/life-tips/">LIFE TIPS</a><a href="/category/tech/">TECH</a><a href="/category/economy/">ECONOMY</a><a href="/search/" aria-label="검색">검색</a></nav></div></header>
+<main class="wrap"><h1 class="lh">검색</h1><input id="q" class="q" placeholder="검색어를 입력하세요" autofocus><div id="r" class="grid"></div>
+<script>
+let D=[];fetch('/search.json').then(r=>r.json()).then(j=>{D=j;const q=new URLSearchParams(location.search).get('q');if(q){I.value=q;go()}});
+const I=document.getElementById('q'),R=document.getElementById('r');
+const e=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function go(){const w=I.value.trim().toLowerCase().split(/\s+/).filter(Boolean);if(!w.length){R.innerHTML='';return}
+const hit=D.filter(p=>w.every(k=>(p.t+' '+p.x).toLowerCase().includes(k)));
+R.innerHTML=hit.length?hit.map(p=>`<a class="card" href="${p.u}"><div class="th">${p.i?`<img src="${e(p.i)}" alt="">`:'<div class="noimg"></div>'}</div><div class="cb"><h3>${e(p.t)}</h3><p>${e(p.x.slice(0,90))}</p><time>${p.d}</time></div></a>`).join(''):'<p class="none">검색 결과가 없어요.</p>'}
+I.addEventListener('input',go);
+</script></main>
+<footer class="ft"><div class="wrap">© 2026 blvl blog</div></footer>
+</body></html>

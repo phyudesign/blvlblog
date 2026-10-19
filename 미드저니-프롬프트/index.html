@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>미드저니 사용방법 EP3 - 프롬프트 명령어 완벽 가이드! | blvl blog</title><meta name="description" content="이제는 미드저니나 스테이블 디퓨전 같은 text to image Ai가 일반화되고 여러 분야에서 빠르게 활용되고 있습니다. 저도 포스팅의 대표이미지를 미드저니로 만들어 사용하고 있는데 제가 원하는 좋은 이미지를 생성하기 위해서는 적절하고 정확한 프롬프트의 입력이 필수입니다. 그래서 오늘은 실전에서 사용하면 고수 소리를 들을 수 있는 실전 프롬프트 몇가지를 알아보도록 하겠습니다.">
+<link rel="canonical" href="https://blvlblog.com/%EB%AF%B8%EB%93%9C%EC%A0%80%EB%8B%88-%ED%94%84%EB%A1%AC%ED%94%84%ED%8A%B8/"><meta property="og:type" content="website"><meta property="og:title" content="미드저니 사용방법 EP3 - 프롬프트 명령어 완벽 가이드! | blvl blog">
+<meta property="og:description" content="이제는 미드저니나 스테이블 디퓨전 같은 text to image Ai가 일반화되고 여러 분야에서 빠르게 활용되고 있습니다. 저도 포스팅의 대표이미지를 미드저니로 만들어 사용하고 있는데 제가 원하는 좋은 이미지를 생성하기 위해서는 적절하고 정확한 프롬프트의 입력이 필수입니다. 그래서 오늘은 실전에서 사용하면 고수 소리를 들을 수 있는 실전 프롬프트 몇가지를 알아보도록 하겠습니다."><meta property="og:url" content="https://blvlblog.com/%EB%AF%B8%EB%93%9C%EC%A0%80%EB%8B%88-%ED%94%84%EB%A1%AC%ED%94%84%ED%8A%B8/"><meta property="og:image" content="https://blvlblog.com/wp-content/uploads/2024/04/blvl_포스팅표지5.jpg">
+<link rel="alternate" type="application/rss+xml" title="blvl blog" href="/feed.xml">
+<link rel="stylesheet" href="/assets/blog.css">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4380904134243959" crossorigin="anonymous"></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "미드저니 사용방법 EP3 - 프롬프트 명령어 완벽 가이드!", "datePublished": "2024-04-03T00:59:19+09:00", "dateModified": "2024-04-24T16:45:05+09:00", "description": "이제는 미드저니나 스테이블 디퓨전 같은 text to image Ai가 일반화되고 여러 분야에서 빠르게 활용되고 있습니다. 저도 포스팅의 대표이미지를 미드저니로 만들어 사용하고 있는데 제가 원하는 좋은 이미지를 생성하기 위해서는 적절하고 정확한 프롬프트의 입력이 필수입니다. 그래서 오늘은 실전에서 사용하면 고수 소리를 들을 수 있는 실전 프롬프트 몇가지를 알아보도록 하겠습니다.", "mainEntityOfPage": "https://blvlblog.com/%EB%AF%B8%EB%93%9C%EC%A0%80%EB%8B%88-%ED%94%84%EB%A1%AC%ED%94%84%ED%8A%B8/"}</script></head><body>
+<header class="hd"><div class="wrap"><a class="brand" href="/">blvl blog</a>
+<nav><a href="/">HOME</a><a href="/blog/">BLOG</a><a href="/category/art-culture/">ART &amp; CULTURE</a><a href="/category/life-tips/">LIFE TIPS</a><a href="/category/tech/">TECH</a><a href="/category/economy/">ECONOMY</a><a href="/search/" aria-label="검색">검색</a></nav></div></header>
+<main class="wrap"><article class="post"><header><div class="meta"><a class="cat" href="/category/tech/">TECH</a><time>2024-04-03</time></div><h1>미드저니 사용방법 EP3 - 프롬프트 명령어 완벽 가이드!</h1></header>
+<div class="ad"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4380904134243959" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div>
+<div class="entry"><p>이제는 미드저니나 스테이블 디퓨전 같은 text to image Ai가 일반화되고 여러 분야에서 빠르게 활용되고 있습니다. 저도 포스팅의 대표이미지를 미드저니로 만들어 사용하고 있는데 제가 원하는 좋은 이미지를 생성하기 위해서는 적절하고 정확한 프롬프트의 입력이 필수입니다. 그래서 오늘은 실전에서 사용하면 고수 소리를 들을 수 있는 실전 프롬프트 몇가지를 알아보도록 하겠습니다.</p>
+<p>&nbsp;<br>
+<h2><strong>이것만 알면 나도 미드저니 마스터</strong></h2><br>
+기본적으로 미드저니 인물 이미지 프롬프트의 구조는 이렇습니다.<br>
+이미지의 용도(Style) + 인물의 감정 + 인물의 의상및 소품 + 카메라 앵글 + 카메라 효과 + 조명 + 카메라 종류 + 필름 종류 + 각종 Parameters</p>
+<p>언뜻 보면 복잡해 보이겠지만 미드저니는 Chat GPT와 다르게 문장구조 보다는 단문으로 이루어진 프롬프트를 더 쉽게 이해하기 때문에 장문의 요청사항을 단어 또는 구문으로 나누어준다 라는 개념으로 생각하면 더 쉬울겁니다</p>
+<p>아직 미드저니를 사용해 본 적이 없으시다면 멤버쉽 결제 없이 베타 버전으로 체험 해 볼 수 있습니다.<br>
+<span style="font-size: 18pt;"><strong><a href="https://www.midjourney.com/home" target="_blank" rel="noopener">midjourney</a> 홈페이지로 이동</strong></span></p>
+<p>&nbsp;<br>
+<h3><strong>1. 이미지의 용도</strong></h3><br>
+내가 원하는 이미지가 어떤 것인지 아래 프롬프트에서 골라 적용해 줍니다.<br>
+<table style="border-collapse: collapse; width: 100%; height: 225px;"><br>
+<tbody><br>
+<tr style="height: 25px;"><br>
+<td style="width: 36.3248%; height: 25px; text-align: center;"><strong>Portrait Photography</strong><br>
+(인물 사진)</td><br>
+<td style="width: 63.6752%; height: 25px; text-align: center;"></p>
+<p><img loading="lazy" class="wp-image-646" src="/wp-content/uploads/2024/04/Portrait-Photography-300x200.png" alt="" width="400" height="267" /> Portrait Photography</td><br>
+</tr><br>
+<tr style="height: 25px;"><br>
+<td style="width: 36.3248%; height: 25px; text-align: center;"><strong>Street Photography</strong><br>
+(길거리 스냅)</td><br>
+<td style="width: 63.6752%; height: 25px; text-align: center;"></p>
+<p><img loading="lazy" class="wp-image-648" src="/wp-content/uploads/2024/04/Street-Photography-300x200.png" alt="" width="400" height="267" /> Street Photography</td><br>
+</tr><br>
+<tr style="height: 25px;"><br>
+<td style="width: 36.3248%; height: 25px; text-align: center;"><strong>Product Photography</strong><br>
+(제품 사진)</td><br>
+<td style="width: 63.6752%; height: 25px; text-align: center;"></p>
+<p><img loading="lazy" class="wp-image-649" src="/wp-content/uploads/2024/04/Product-Photography-300x200.png" alt="" width="400" height="267" /> Product Photography</td><br>
+</tr><br>
+<tr style="height: 25px;"><br>
+<td style="width: 36.3248%; height: 25px; text-align: center;"><strong>Fashion Photography</strong><br>
+(패션 사진)</td><br>
+<td style="width: 63.6752%; height: 25px; text-align: center;"></p>
+<p><img loading="lazy" class="wp-image-650" src="/wp-content/uploads/2024/04/Fashion-Photography-300x200.png" alt="" width="400" height="267" /> Fashion Photography</td><br>
+</tr><br>
+<tr style="height: 25px;"><br>
+<td style="width: 36.3248%; height: 25px; text-align: center;"><strong>Food Photography</strong><br>
+(음식 사진)</td><br>
+<td style="width: 63.6752%; height: 25px; text-align: center;"></p>
+<p><img loading="lazy" class="wp-image-651" src="/wp-content/uploads/2024/04/Food-Photography-300x200.png" alt="" width="400" height="267" /> Food Photography</td><br>
+</tr><br>
+<tr style="height: 25px;"><br>
+<td style="width: 36.3248%; height: 25px; text-align: center;"><strong>Analog Photography</strong><br>
+(아날로그 사진)</td><br>
+<td style="width: 63.6752%; height: 25px; text-align: center;"></p>
+<p><img loading="lazy" class="wp-image-652" src="/wp-content/uploads/2024/04/Analog-Photography-300x200.png" alt="" width="400" height="267" /> Analog Photography</td><br>
+</tr><br>
+<tr style="height: 25px;"><br>
+<td style="width: 36.3248%; height: 25px; text-align: center;"><strong>Lo-fi Photography</strong><br>
+(로우파이 사진)</td><br>
+<td style="width: 63.6752%; height: 25px; text-align: center;"></p>
+<p><img loading="lazy" class="wp-image-654" src="/wp-content/uploads/2024/04/Lo-fi-Photography-1-300x200.png" alt="" width="400" height="267" /> Lo-fi Photography</td><br>
+</tr><br>
+<tr style="height: 25px;"><br>
+<td style="width: 36.3248%; height: 25px; text-align: center;"><strong>Fantasy Photography</strong><br>
+(판타지 사진)</td><br>
+<td style="width: 63.6752%; height: 25px; text-align: center;"><img loading="lazy" class="aligncenter wp-image-655" src="/wp-content/uploads/2024/04/Fantasy-Photography-300x200.png" alt="" width="400" height="267" /></td><br>
+</tr><br>
+<tr style="height: 25px;"><br>
+<td style="width: 36.3248%; height: 25px; text-align: center;"><strong>Macro Photography</strong><br>
+(접사 사진)</td><br>
+<td style="width: 63.6752%; height: 25px; text-align: center;"></p>
+<p><img loading="lazy" class="wp-image-656" src="/wp-content/uploads/2024/04/Macro-Photography-300x200.png" alt="" width="400" height="267" /> Macro Photography</td><br>
+</tr><br>
+</tbody><br>
+</table><br>
+&nbsp;</p>
+<p>&nbsp;<br>
+<h3><strong>2. 인물의 표현</strong></h3><br>
+인물의 감정과 의상및 소품 등은 되도록 구체적으로 적어주는 것이 좋습니다. 미드저니는 생각보다 더 디테일하고 많은 정보를 표현합니다.<br>
+<h4><strong>인물의 감정</strong></h4><br>
+<span style="font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; font-size: inherit;">Happy (행복), Joyful (기쁨), Excited (흥분), Elated (황홀함), Hopeful (희망적), Proud (자부심), Disgusted (혐오하는), Shocked (충격받은) 등 사람의 감정을 표현하는 영어단어를 적어주시면 됩니다.</span><br>
+<h4><strong>인물의 의상</strong></h4><br>
+<table style="border-collapse: collapse; width: 100%;"><br>
+<tbody><br>
+<tr style="height: 25px;"><br>
+<td style="width: 50%; height: 25px; text-align: center;"><strong>High Fashion<br>
+</strong><span style="font-size: 12pt;">고급스럽고 세련된 스타일</span><br>
+<strong><img loading="lazy" class="aligncenter size-large wp-image-658" src="/wp-content/uploads/2024/04/HF-651x1024.jpg" alt="" width="651" height="1024" /><br>
+</strong></td><br>
+<td style="width: 50%; height: 25px; text-align: center;"><strong>Vintage / Retro</strong><br>
+<span style="font-size: 12pt;">시대를 상징하는 스타일<br>
+<img loading="lazy" class="aligncenter size-large wp-image-662" src="/wp-content/uploads/2024/04/V-651x1024.jpg" alt="" width="651" height="1024" /><br>
+</span></td><br>
+</tr><br>
+<tr style="height: 25px;"><br>
+<td style="width: 50%; height: 25px; text-align: center;"><strong>Casual Chic<br>
+</strong><span style="font-size: 12pt;">캐주얼하지만 세련된 스타일<br>
+</span><strong><img loading="lazy" class="aligncenter size-large wp-image-663" src="/wp-content/uploads/2024/04/CC-651x1024.jpg" alt="" width="651" height="1024" /></strong></td><br>
+<td style="width: 50%; height: 25px; text-align: center;"><strong>Streetwear</strong><br>
+<span style="font-size: 12pt;">트랜디한 스트리트 패션 스타일<br>
+<img loading="lazy" class="aligncenter size-large wp-image-664" src="/wp-content/uploads/2024/04/SW-651x1024.jpg" alt="" width="651" height="1024" /></span></td><br>
+</tr><br>
+<tr style="height: 25px;"><br>
+<td style="width: 50%; height: 25px; text-align: center;"><strong>Urban<br>
+</strong><span style="font-size: 12pt;">도회적인 시크한 스타일<br>
+<img loading="lazy" class="aligncenter size-large wp-image-666" src="/wp-content/uploads/2024/04/U-651x1024.jpg" alt="" width="651" height="1024" /></span><strong><br>
+</strong></td><br>
+<td style="width: 50%; height: 25px; text-align: center;"><strong>Athletic<br>
+</strong><span style="font-size: 12pt;">역동적이고 스포티한 운동복 스타일<br>
+<img loading="lazy" class="aligncenter size-large wp-image-667" src="/wp-content/uploads/2024/04/A-651x1024.jpg" alt="" width="651" height="1024" /></span><strong><br>
+</strong></td><br>
+</tr><br>
+<tr style="height: 25px;"><br>
+<td style="width: 50%; height: 25px; text-align: center;"><strong>Bohemian / Boho<br>
+</strong><span style="font-size: 12pt;">자유롭고 창의적인 편안한 스타일<br>
+<img loading="lazy" class="aligncenter size-large wp-image-668" src="/wp-content/uploads/2024/04/B-651x1024.jpg" alt="" width="651" height="1024" /><br>
+</span></td><br>
+<td style="width: 50%; height: 25px; text-align: center;"><strong>Techwear<br>
+</strong><span style="font-size: 12pt;">기능이 강조된 실용적인 스타일<br>
+<img loading="lazy" class="aligncenter size-large wp-image-669" src="/wp-content/uploads/2024/04/T-651x1024.jpg" alt="" width="651" height="1024" /></span><strong><br>
+</strong></td><br>
+</tr><br>
+<tr style="height: 25px;"><br>
+<td style="width: 50%; height: 25px; text-align: center;"><strong>Hiphop<br>
+</strong><span style="font-size: 12pt;">자유로운 힙합 스타일<br>
+<img loading="lazy" class="aligncenter size-large wp-image-670" src="/wp-content/uploads/2024/04/H-651x1024.jpg" alt="" width="651" height="1024" /><br>
+</span></td><br>
+<td style="width: 50%; height: 25px; text-align: center;"><strong>Cyberpunk<br>
+</strong><span style="font-size: 12pt;">미래적인 느낌에 네온과 메탈릭을 가미한 스타일<br>
+<img loading="lazy" class="aligncenter size-large wp-image-671" src="/wp-content/uploads/2024/04/CP-651x1024.jpg" alt="" width="651" height="1024" /><br>
+</span></td><br>
+</tr><br>
+</tbody><br>
+</table><br>
+이 외에도 다양한 패션 스타일을 적용 가능합니다. 일반적으로 사용하는 패션 용어는 대부분 사용할 수 있습니다.<br>
+<h4><strong>소품 및 장비 등</strong></h4><br>
+스마트 기기(구체적인 기종입력), 노트북, 게임 콘솔, 헤드폰 및 스피커, 운동화(브랜드 별), 운동복(브랜드 별), 아웃도어 장비, 명품 백 및 가방류, 무기(총기류, 근접무기, 전술장비), 탈것 등 굉장히 다양하고 디테일한 기종및 소품을 입력할 수 있습니다.</p>
+<p>&nbsp;<br>
+<h3><strong>3. 촬영 세팅</strong></h3><br>
+촬영 세팅은 카메라 앵글 및 효과를 표현하는 방법입니다. 이 프롬프트를 통해 피사체만으로 표현하기 힘든 스토리를 담을 수 있습니다. 예를 들면 클로즈업으로 인물을 가까이에서 표현하면 인물의 감정에 집중하게 되고 와이드로 빠지면 배경 이미지에 따라 긴장감을 줄 수도, 여유로움을 표현 할 수도 있습니다. 그 외 다양한 카메라 앵글이나 효과 등으로 다양한 스토리를 표현할 수 있습니다.<br>
+<h4><strong>카메라 앵글</strong></h4><br>
+<table style="border-collapse: collapse; width: 100%; height: 150px;"><br>
+<tbody><br>
+<tr style="height: 25px;"><br>
+<td style="width: 38.3191%; height: 25px; text-align: center;"><strong>Eye-Level Shot</strong></td><br>
+<td style="width: 61.6809%; height: 25px;">눈 높이의 기본 앵글. 가장 안정적인 느낌을 줍니다.</td><br>
+</tr><br>
+<tr style="height: 25px;"><br>
+<td style="width: 38.3191%; height: 25px; text-align: center;"><strong>High-Angle Shot</strong></td><br>
+<td style="width: 61.6809%; height: 25px;">눈 보다 높은 곳에서 바라본 부감.</td><br>
+</tr><br>
+<tr style="height: 25px;"><br>
+<td style="width: 38.3191%; height: 25px; text-align: center;"><strong>Extreme High-Angle Shot</strong></td><br>
+<td style="width: 61.6809%; height: 25px;">정수리가 보일 정도의 높이에서 찍는 극 부감.</td><br>
+</tr><br>
+<tr style="height: 25px;"><br>
+<td style="width: 38.3191%; height: 25px; text-align: center;"><strong>Close-Up Shot</strong></td><br>
+<td style="width: 61.6809%; height: 25px;">특정 부위를 가까에서 디테일하게 찍는 접사.</td><br>
+</tr><br>
+<tr style="height: 25px;"><br>
+<td style="width: 38.3191%; height: 25px; text-align: center;"><strong>Low-Angle Shot</strong></td><br>
+<td style="width: 61.6809%; height: 25px;">눈 보다 낮은 위치에서 찍는 앙각. 광각에 유리.</td><br>
+</tr><br>
+<tr style="height: 25px;"><br>
+<td style="width: 38.3191%; height: 25px; text-align: center;"><strong>Wide-Angle Shot</strong></td><br>
+<td style="width: 61.6809%; height: 25px;">배경을 많이 보이게 하는 광각.(왜곡 주의)</td><br>
+</tr><br>
+</tbody><br>
+</table><br>
+참고로 인물 전신샷은 프롬프트로 적용하기 까다롭습니다.<br>
+때문에 한가지 팁을 드리자면 인물묘사에서 '걸어간다' 라던지 신발에 대한 묘사를 하면 전신을 보여줘야 한다고 Ai가 판단하게 됩니다. 배경에 대한 묘사를 디테일하게 하는것으로도 전신샷을 유도 할 수 있습니다.<br>
+<h4><strong>카메라 효과</strong></h4><br>
+<table style="border-collapse: collapse; width: 100%; height: 150px;"><br>
+<tbody><br>
+<tr style="height: 25px;"><br>
+<td style="width: 23.5043%; height: 25px; text-align: center;"><strong>Motion Blur</strong></td><br>
+<td style="width: 76.4957%; height: 25px;">물체의 움직임에 잔상을 줘서 역동적인 느낌을 줍니다</td><br>
+</tr><br>
+<tr style="height: 25px;"><br>
+<td style="width: 23.5043%; height: 25px; text-align: center;"><strong>Panning</strong></td><br>
+<td style="width: 76.4957%; height: 25px;">카메라가 좌 우로 빠르게 움직여서 배경에 잔상이 생기지만 피사체는 선명하게 표현 됩니다.</td><br>
+</tr><br>
+<tr style="height: 25px;"><br>
+<td style="width: 23.5043%; height: 25px; text-align: center;"><strong>Spin Blur</strong></td><br>
+<td style="width: 76.4957%; height: 25px;">배경이 돌아가는 느낌을 줘서 피사체가 회전하는 느낌을 주는 기법.</td><br>
+</tr><br>
+<tr style="height: 25px;"><br>
+<td style="width: 23.5043%; height: 25px; text-align: center;"><strong>Long Exposure</strong></td><br>
+<td style="width: 76.4957%; height: 25px;">야간 도로의 자동차의 테일램프 등을 장 노출로 찍어 빛을 긴 잔상으로 표현하는 기법.</td><br>
+</tr><br>
+<tr style="height: 25px;"><br>
+<td style="width: 23.5043%; height: 25px; text-align: center;"><strong>Time-Lapse</strong></td><br>
+<td style="width: 76.4957%; height: 25px;">밤하늘의 별의 움직임을 찍거나 피사체를 긴 시간 찍기위한 기법.</td><br>
+</tr><br>
+<tr style="height: 25px;"><br>
+<td style="width: 23.5043%; height: 25px; text-align: center;"><strong>Motion Trail</strong></td><br>
+<td style="width: 76.4957%; height: 25px;">뒤에 남겨진 자동차 같은 피사체의 잔상을 표현하는 기법.</td><br>
+</tr><br>
+</tbody><br>
+</table><br>
+&nbsp;</p>
+<p>&nbsp;<br>
+<h3><strong>4. 조명 기법</strong></h3><br>
+같은 이미지라도 조명을 어떻게 쓰느냐에 따라 느낌이 완전히 달라지게 됩니다.<br>
+사진을 찍는 카메라의 시초라 할 수 있는 '카메라 옵스큐라'는 '어두운 방'이라는 뜻으로 빛이 들어오지 않는 상자에 작은 구멍을 뚫어 그 구멍을 통해 들어온 빛으로 그림을 그리는 기계입니다.<br>
+그리고 Photograph 라는 단어 역시 '빛'을 뜻하는 그리스어 'Phos' 와 그리다 라는 의미의 'Graphos'의 합성어로 '빛으로 그리는 그림' 이라는 뜻입니다. 그만큼 사진에서 빛은 중요한 역할을 하지요.<br>
+<table style="border-collapse: collapse; width: 100%;"><br>
+<tbody><br>
+<tr><br>
+<td style="width: 31.9088%; text-align: center;"><strong>Side Lighting</strong></td><br>
+<td style="width: 68.0912%;">측광으로 피사체의 명부와 암부를 명확히 구분해 드라마틱한 이미지를 만들 수 있습니다. 이런경우 실내에서는 자연광이 한쪽에서 들어오는 분위기 있는 이미지 연출이 가능합니다.</td><br>
+</tr><br>
+<tr><br>
+<td style="width: 31.9088%; text-align: center;"><strong>Soft Lighting</strong></td><br>
+<td style="width: 68.0912%;">부드러운 빛으로 피사체를 자연스럽게 표현하는 조명 연출.</td><br>
+</tr><br>
+<tr><br>
+<td style="width: 31.9088%; text-align: center;"><strong>Hard Lighting</strong></td><br>
+<td style="width: 68.0912%;">강한 빛으로 암부를 강조할 수 있습니다.</td><br>
+</tr><br>
+<tr><br>
+<td style="width: 31.9088%; text-align: center;"><strong>Chiaroscuro Lighting</strong></td><br>
+<td style="width: 68.0912%;">명암을 극단적으로 구분해 극적인 감정 묘사를 할 수 있습니다.</td><br>
+</tr><br>
+</tbody><br>
+</table><br>
+&nbsp;</p>
+<p>&nbsp;<br>
+<h3><strong>5. 촬영 장비</strong></h3><br>
+실제 존재하는 카메라와 필름으로 사진의 톤과 질감등을 바꿀 수 있습니다.<br>
+<h4><strong>카메라 종류</strong></h4><br>
+<table style="border-collapse: collapse; width: 100%; height: 100px;"><br>
+<tbody><br>
+<tr style="height: 25px;"><br>
+<td style="width: 25.0712%; height: 25px;">액션캠, 스포츠 촬영</td><br>
+<td style="width: 50%; height: 25px;"><strong>GoPro HERO10 Black</strong><br>
+<strong>Phantom High-Speed Camera</strong></td><br>
+</tr><br>
+<tr style="height: 25px;"><br>
+<td style="width: 25.0712%; height: 25px;">캐논 시네마 라인</td><br>
+<td style="width: 50%; height: 25px;"><strong>Canon EOS C300 Mark III</strong><br>
+<strong>Canon EOS C700</strong></td><br>
+</tr><br>
+<tr style="height: 25px;"><br>
+<td style="width: 25.0712%; height: 25px;">고화질 스튜디오 촬영용</td><br>
+<td style="width: 50%; height: 25px;"><strong>Hasselblad X1D</strong><br>
+<strong>Nikon Z7 II</strong><br>
+<strong>Phase One XF 1Q4</strong><br>
+<strong>Panasonic Varicam LT</strong></td><br>
+</tr><br>
+<tr style="height: 25px;"><br>
+<td style="width: 25.0712%; height: 25px;">풍경및 자연 촬영</td><br>
+<td style="width: 50%; height: 25px;"><strong>Nikon D850</strong><br>
+<strong>Sony A7R IV</strong><br>
+<strong>Sony Alpha A7 III</strong><br>
+<strong>Canon EOS 5D Mark IV</strong><br>
+<strong>Canon EOS R6</strong></td><br>
+</tr><br>
+</tbody><br>
+</table><br>
+&nbsp;<br>
+<h4><strong>필름 종류</strong></h4><br>
+<table style="border-collapse: collapse; width: 100%; height: 250px;"><br>
+<tbody><br>
+<tr style="height: 25px;"><br>
+<td style="width: 30.057%; height: 25px; text-align: center;"><strong>Ilford Delta 3200</strong></td><br>
+<td style="width: 69.943%; height: 25px; text-align: center;"></p>
+<p><img loading="lazy" class="wp-image-633" src="/wp-content/uploads/2024/04/Ilford-Delta-3200-300x200.png" alt="" width="401" height="267" /> Ilford Delta 3200</td><br>
+</tr><br>
+<tr style="height: 25px;"><br>
+<td style="width: 30.057%; height: 25px; text-align: center;"><strong>Ilford HP5+ 400</strong></td><br>
+<td style="width: 69.943%; height: 25px; text-align: center;"></p>
+<p><img loading="lazy" class="wp-image-631" src="/wp-content/uploads/2024/04/Ilford-HP5-400-300x200.png" alt="" width="400" height="267" /> Ilford HP5+ 400</td><br>
+</tr><br>
+<tr style="height: 25px;"><br>
+<td style="width: 30.057%; height: 25px; text-align: center;"><strong>Fujifilm Velvia 50</strong></td><br>
+<td style="width: 69.943%; height: 25px; text-align: center;"></p>
+<p><img loading="lazy" class="wp-image-634" src="/wp-content/uploads/2024/04/Fujifilm-Velvia-50-300x200.png" alt="" width="400" height="267" /> Fujifilm Velvia 50</td><br>
+</tr><br>
+<tr style="height: 25px;"><br>
+<td style="width: 30.057%; height: 25px; text-align: center;"><strong>Fujichrome Provia 100F</strong></td><br>
+<td style="width: 69.943%; height: 25px; text-align: center;"></p>
+<p><img loading="lazy" class="wp-image-635" src="/wp-content/uploads/2024/04/Fujichrome-Provia-100F-300x200.png" alt="" width="400" height="267" /> Fujichrome Provia 100F</td><br>
+</tr><br>
+<tr style="height: 25px;"><br>
+<td style="width: 30.057%; height: 25px; text-align: center;"><strong>Fujifilm Pro 400H</strong></td><br>
+<td style="width: 69.943%; height: 25px; text-align: center;"></p>
+<p><img loading="lazy" class="wp-image-636" src="/wp-content/uploads/2024/04/Fujifilm-Pro-400H-300x200.png" alt="" width="400" height="267" /> Fujifilm Pro 400H</td><br>
+</tr><br>
+<tr style="height: 25px;"><br>
+<td style="width: 30.057%; height: 25px; text-align: center;"><strong>Fujicolor C200</strong></td><br>
+<td style="width: 69.943%; height: 25px; text-align: center;"></p>
+<p><img loading="lazy" class="wp-image-637" src="/wp-content/uploads/2024/04/Fujicolor-C200-300x200.png" alt="" width="400" height="267" /> Fujicolor C200</td><br>
+</tr><br>
+<tr style="height: 25px;"><br>
+<td style="width: 30.057%; height: 25px; text-align: center;"><strong>Anscochrome</strong></td><br>
+<td style="width: 69.943%; height: 25px; text-align: center;"></p>
+<p><img loading="lazy" class="wp-image-638" src="/wp-content/uploads/2024/04/Anscochrome-300x200.png" alt="" width="400" height="267" /> Anscochrome</td><br>
+</tr><br>
+<tr style="height: 25px;"><br>
+<td style="width: 30.057%; height: 25px; text-align: center;"><strong>Cinestill 800T</strong></td><br>
+<td style="width: 69.943%; height: 25px; text-align: center;"></p>
+<p><img loading="lazy" class="wp-image-639" src="/wp-content/uploads/2024/04/Cinestill-800T-300x200.png" alt="" width="400" height="267" /> Cinestill 800T</td><br>
+</tr><br>
+<tr style="height: 25px;"><br>
+<td style="width: 30.057%; height: 25px; text-align: center;"><strong>Kodak Gold 200</strong></td><br>
+<td style="width: 69.943%; height: 25px; text-align: center;"></p>
+<p><img loading="lazy" class="wp-image-640" src="/wp-content/uploads/2024/04/Kodak-Gold-200-300x200.png" alt="" width="400" height="267" /> Kodak Gold 200</td><br>
+</tr><br>
+<tr style="height: 25px;"><br>
+<td style="width: 30.057%; height: 25px; text-align: center;"><strong>Fomapan 400</strong></td><br>
+<td style="width: 69.943%; height: 25px; text-align: center;"></p>
+<p><img loading="lazy" class="wp-image-641" src="/wp-content/uploads/2024/04/Fomapan-400-300x200.png" alt="" width="400" height="267" /> Fomapan 400</td><br>
+</tr><br>
+</tbody><br>
+</table><br>
+&nbsp;</p>
+<p>오늘 말씀드린 프롬프트는 미드저니 이미지 생성의 기초가 되는 프롬프트인 만큼 추후 추가적인 프롬프트나 Parameter를 활용해 무한대에 가까운 다양한 이미지들을 생성해낼 수 있습니다.<br>
+구글링이나 미드저니 채팅창에서 다른 사람들의 프롬프트를 참고해 여러가지 이미지를 직접 만들어 보시길 바랍니다.</p>
+<p>다음 포스팅에서는 <a href="/%eb%af%b8%eb%93%9c%ec%a0%80%eb%8b%88%ec%97%90%ec%84%9c-%ec%a0%84%ec%8b%a0-%ec%9d%b4%eb%af%b8%ec%a7%80/" target="_blank" rel="noopener">미드저니에서 전신컷 쉽게 만드는 방법</a>에 대해서 알아보겠습니다.</p>
+
+<p><span style="font-size: 24pt;"><strong>미드저니 관련 포스팅</strong></span><br>
+<h2 class="entry-title"><span style="font-size: 14pt; color: #2976ba;"><a style="color: #2976ba;" href="/%eb%af%b8%eb%93%9c%ec%a0%80%eb%8b%88-ai-%ed%94%8c%eb%9e%9c/" target="_blank" rel="noopener">미드저니 사용방법 EP1 – 가입 방법, 구독 플랜 추천</a></span></h2><br>
+<h2 class="entry-title"><span style="font-size: 14pt; color: #2976ba;"><a style="color: #2976ba;" href="/%eb%af%b8%eb%93%9c%ec%a0%80%eb%8b%88-%ec%82%ac%ec%9a%a9%eb%b0%a9%eb%b2%95-ep2-%ec%9d%b4%eb%af%b8%ec%a7%80-%ec%83%9d%ec%84%b1%ed%95%98%ea%b8%b0/" target="_blank" rel="noopener">미드저니 사용방법 EP2 – 이미지 생성하기</a></span></h2><br>
+<h2 class="entry-title"><span style="font-size: 14pt; color: #2976ba;"><a style="color: #2976ba;" href="/%eb%af%b8%eb%93%9c%ec%a0%80%eb%8b%88%ec%97%90%ec%84%9c-%ec%a0%84%ec%8b%a0-%ec%9d%b4%eb%af%b8%ec%a7%80/" target="_blank" rel="noopener">미드저니 사용방법 EP4 – 전신컷 쉽게 만들기</a></span></h2><br>
+&nbsp;</p>
+</div><div class="tags"></div></article><nav class="pn"><a href="/mac-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8-%EC%82%AD%EC%A0%9C/"><small>이전 글</small>맥 Mac에서 프로그램 삭제 제거 깨끗하게 하는 방법</a><a class="r" href="/%EB%8B%A4%EB%B9%88%EC%B9%98-%EB%A6%AC%EC%A1%B8%EB%B8%8C-%EC%BB%AC%EB%9F%AC/"><small>다음 글</small>다빈치 리졸브 맥 에서 프리뷰와 영상의 색감이 다를 때 해결 방법</a></nav><section class="rel"><h2>함께 보면 좋은 글</h2><div class="grid g3"><a class="card" href="/%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%86%A1-%EC%82%AC%EC%A7%84-%EC%9B%90%EB%B3%B8-%ED%99%94%EC%A7%88/"><div class="th"><img loading="lazy" src="/wp-content/uploads/2024/05/blvl_포스팅표지38-1.jpg" alt=""></div><div class="cb">
+<span class="cat">LIFE TIPS</span><h3>카카오톡 사진 원본 화질, 동영상 고화질로 보내는 방법</h3><p>카카오톡은 이제 우리 삶에 매우 큰 비중을 차지하고 있습니다. 이미 메신저 이상의 역할을 하고 있을 뿐 아니라 파생된 여러 서비스들을 생각하면 우리의 하루는 카카</p><time>2024-05-27</time></div></a><a class="card" href="/%EC%95%A0%EB%93%9C%EC%84%BC%EC%8A%A4-%EB%AC%B8%EC%A0%9C-%ED%95%B4%EA%B2%B0/"><div class="th"><img loading="lazy" src="/wp-content/uploads/2024/05/blvl_포스팅표지233.jpg" alt=""></div><div class="cb">
+<span class="cat">TECH</span><h3>구글 애드센스 ads.txt 문제 해결 - 워드프레스</h3><p>이번 포스팅에서는 워드프레스 블로그 애드센스 승인 후 &quot;Ads.txt 파일을 찾을 수 없음&quot; 경고가 뜨는 경우 해결법을 알려 드리겠습니다. 아주 간단하게 해결 할</p><time>2024-05-03</time></div></a><a class="card" href="/%EB%AF%B8%EB%93%9C%EC%A0%80%EB%8B%88-%ED%95%9C-%EC%82%AC%EB%9E%8C-%EC%96%BC%EA%B5%B4%EB%A1%9C-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EB%A7%8C%EB%93%A4%EA%B8%B0/"><div class="th"><img loading="lazy" src="/wp-content/uploads/2024/04/blvl_포스팅표지21.jpg" alt=""></div><div class="cb">
+<span class="cat">TECH</span><h3>미드저니 사용방법 EP5 - 한 사람 얼굴로 일관성 있는 이미지 만들기</h3><p>이전 포스팅 에서는 미드저니 사용법 및 미드저니 가입방법 부터 기본적인 개별 이미지 생성과 디테일한 프롬프트 작성방법 까지 가장 기본적인 미드저니 사용법들을 알아</p><time>2024-04-30</time></div></a></div></section></main>
+<footer class="ft"><div class="wrap">© 2026 blvl blog</div></footer>
+</body></html>

@@ -4,20 +4,28 @@
 <link rel="canonical" href="https://blvlblog.com/search/"><meta property="og:type" content="website"><meta property="og:title" content="검색 | blvl blog">
 <meta property="og:description" content="블로그 검색"><meta property="og:url" content="https://blvlblog.com/search/">
 <link rel="alternate" type="application/rss+xml" title="blvl blog" href="/feed.xml">
-<link rel="stylesheet" href="/assets/blog.css">
+<link rel="preload" href="/assets/fonts/NanumGothic-Regular.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="/assets/blog.css?v=2">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4380904134243959" crossorigin="anonymous"></script>
 </head><body>
-<header class="hd"><div class="wrap"><a class="brand" href="/">blvl blog</a>
-<nav><a href="/">HOME</a><a href="/blog/">BLOG</a><a href="/category/art-culture/">ART &amp; CULTURE</a><a href="/category/life-tips/">LIFE TIPS</a><a href="/category/tech/">TECH</a><a href="/category/economy/">ECONOMY</a><a href="/search/" aria-label="검색">검색</a></nav></div></header>
-<main class="wrap"><h1 class="lh">검색</h1><input id="q" class="q" placeholder="검색어를 입력하세요" autofocus><div id="r" class="grid"></div>
+<header class="site-header" id="hd"><div class="inside-header">
+<a class="site-logo" href="/" rel="home">BLVL</a>
+<nav class="main-navigation" aria-label="메뉴"><button class="menu-toggle" type="button" onclick="document.getElementById('hd').classList.toggle('open')">☰ <span>Menu</span></button>
+<ul class="main-nav"><li><a class="" href="/">HOME</a></li><li><a class="" href="/blog/">BLOG</a></li><li><a class="" href="/category/art-culture/">ART &amp; CULTURE</a></li><li><a class="" href="/category/life-tips/">LIFE TIPS</a></li><li><a class="" href="/category/tech/">TECH</a></li><li><a class="" href="/category/economy/">ECONOMY</a></li></ul><a class="nav-search" href="/search/" aria-label="검색"><svg viewBox="0 0 512 512" aria-hidden="true" fill="currentColor"><path d="M208 48c-88.4 0-160 71.6-160 160s71.6 160 160 160 160-71.6 160-160S296.4 48 208 48zM0 208C0 93.1 93.1 0 208 0s208 93.1 208 208c0 48.8-16.8 93.7-45 129.2l135 135-34 34-135-135C301.7 399.2 256.8 416 208 416 93.1 416 0 322.9 0 208z"/></svg></a></nav>
+</div></header>
+<div class="site-content"><main class="content-area"><article class="inside-article"><h1 class="entry-title">검색</h1><input id="q" class="q" placeholder="검색어를 입력하세요" autofocus><div id="r" class="sres"></div></article>
 <script>
 let D=[];fetch('/search.json').then(r=>r.json()).then(j=>{D=j;const q=new URLSearchParams(location.search).get('q');if(q){I.value=q;go()}});
 const I=document.getElementById('q'),R=document.getElementById('r');
 const e=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 function go(){const w=I.value.trim().toLowerCase().split(/\s+/).filter(Boolean);if(!w.length){R.innerHTML='';return}
 const hit=D.filter(p=>w.every(k=>(p.t+' '+p.x).toLowerCase().includes(k)));
-R.innerHTML=hit.length?hit.map(p=>`<a class="card" href="${p.u}"><div class="th">${p.i?`<img src="${e(p.i)}" alt="">`:'<div class="noimg"></div>'}</div><div class="cb"><h3>${e(p.t)}</h3><p>${e(p.x.slice(0,90))}</p><time>${p.d}</time></div></a>`).join(''):'<p class="none">검색 결과가 없어요.</p>'}
+R.innerHTML=hit.length?hit.map(p=>`<article><h2><a href="${p.u}">${e(p.t)}</a></h2><p>${e(p.x.slice(0,120))}…</p></article>`).join(''):'<p>검색 결과가 없어요.</p>'}
 I.addEventListener('input',go);
-</script></main>
-<footer class="ft"><div class="wrap">© 2026 blvl blog</div></footer>
+</script></main><div class="sidebar"><div class="inside-right-sidebar">
+<aside class="widget"><form class="search-form" action="/search/"><input name="q" placeholder="검색 …" aria-label="검색"><button aria-label="검색"><svg width="16" height="16" viewBox="0 0 512 512" aria-hidden="true" fill="currentColor"><path d="M208 48c-88.4 0-160 71.6-160 160s71.6 160 160 160 160-71.6 160-160S296.4 48 208 48zM0 208C0 93.1 93.1 0 208 0s208 93.1 208 208c0 48.8-16.8 93.7-45 129.2l135 135-34 34-135-135C301.7 399.2 256.8 416 208 416 93.1 416 0 322.9 0 208z"/></svg></button></form></aside>
+<aside class="widget widget_recent_entries"><h2 class="widget-title">Recent Posts</h2><ul><li><a href="/%ED%8C%8C%EB%A6%AC-%EC%98%AC%EB%A6%BC%ED%94%BD-%ED%8F%AC%EC%8A%A4%ED%84%B0-%EC%A7%81%EB%B0%B0%EC%86%A1-%EC%A0%95%EA%B0%80-%EA%B5%AC%EC%9E%85/">파리 올림픽 포스터 직배송으로 정가에 구입하기</a></li><li><a href="/2024-%ED%95%98%EB%8D%B0%EC%8A%A4%ED%83%80%EC%9A%B4-%EA%B8%B0%EB%B3%B8%EC%A0%95%EB%B3%B4/">2024 뮤지컬 하데스타운 기본정보 및 캐스팅 알아보기</a></li><li><a href="/%EB%AE%A4%EC%A7%80%EC%BB%AC-%EC%96%B4%EC%A9%8C%EB%A9%B4-%ED%95%B4%ED%94%BC%EC%97%94%EB%94%A9-2024-%EC%BA%90%EC%8A%A4%ED%8C%85-%EA%B3%B5%EC%97%B0-%EC%A0%95%EB%B3%B45th-season/">뮤지컬 어쩌면 해피엔딩 2024 캐스팅 공연 정보(5th Season)</a></li><li><a href="/2024-%EB%AE%A4%EC%A7%80%EC%BB%AC-%EC%8B%9C%EC%B9%B4%EA%B3%A0-%EC%A4%84%EA%B1%B0%EB%A6%AC-%EB%B0%8F-%EC%BA%90%EC%8A%A4%ED%8C%85-%EC%98%88%EB%A7%A4-%ED%8B%B0%EC%BC%93-%EC%98%A4%ED%94%883%EC%B0%A8/">2024 뮤지컬 시카고 줄거리 및 캐스팅, 티켓 예매(추가정보 업데이트)</a></li><li><a href="/2024-%EC%8B%B8%EC%9D%B4-%ED%9D%A0%EB%BB%91%EC%87%BC-%EC%98%B7-%EC%BD%94%EB%94%94-%EB%93%B1-%EC%A4%80%EB%B9%84%EB%AC%BC-%EA%B7%B8%EB%A6%AC%EA%B3%A0-%EA%B3%B5%EC%97%B0-%EA%B4%80%EB%9E%8C-%EA%BF%80/">2024 싸이 흠뻑쇼 옷, 코디 등 준비물 그리고 공연 관람 꿀팁</a></li></ul></aside>
+<aside class="widget"><h2 class="widget-title">Categories</h2><ul><li><a href="/category/art-culture/">ART &amp; CULTURE</a></li><li><a href="/category/economy/">ECONOMY</a></li><li><a href="/category/life-tips/">LIFE TIPS</a></li><li><a href="/category/tech/">TECH</a></li></ul></aside>
+</div></div></div>
+<footer class="site-footer">© 2026 blvl blog</footer>
 </body></html>

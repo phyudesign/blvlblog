@@ -176,7 +176,6 @@ for idx, p in enumerate(posts):
     fimg = f'<div class="single-featured-image"><img src="{esc(p["thumb"])}" alt="{esc(p["title"])}"></div>' if p['thumb'] and p['thumb'] not in p['body'] else ''
     main = f'''<article class="inside-article"><header><h1 class="entry-title">{esc(p["title"])}</h1>
 <div class="entry-meta"><time>{kdate(p["date"])}</time> by {AUTHOR}</div></header>{fimg}
-<div class="ad"><ins class="adsbygoogle" style="display:block" data-ad-client="{ADSENSE}" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({{}});</script></div>
 <div class="entry-content">{p["body"]}</div>
 <footer><div class="entry-meta">카테고리: {cl}</div><div class="gp-custom-tag-section">{tag_html}</div>{nav}</footer></article>'''
     write(url(p['path']), page(p['title'], with_sidebar(main), p['desc'], url(p['path']), p['thumb'], f'<script type="application/ld+json">{ld}</script>'))

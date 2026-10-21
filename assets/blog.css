@@ -1,7 +1,8 @@
 /* blvl blog — 예전 워드프레스(GeneratePress + GenerateBlocks) 모양 그대로 */
 @font-face{font-family:"Nanum Gothic";src:url(fonts/NanumGothic-Regular.woff) format("woff");font-weight:400;font-display:swap}
 @font-face{font-family:"Nanum Gothic";src:url(fonts/NanumGothic-Bold.woff) format("woff");font-weight:700;font-display:swap}
-@font-face{font-family:"Gmarket Sans";src:url(fonts/GmarketSansMedium.woff) format("woff");font-weight:400 700;font-display:swap}
+@font-face{font-family:"Gmarket Sans";src:url(fonts/GmarketSansMedium.woff) format("woff");font-weight:400 600;font-display:swap}
+@font-face{font-family:"Gmarket Sans";src:url(fonts/GmarketSansBold.woff) format("woff");font-weight:700 900;font-display:swap}
 @font-face{font-family:"Bebas Kai";src:url(fonts/BebasNeue-Regular.woff) format("woff");font-display:swap}
 @font-face{font-family:"Bebas Neue";src:url(fonts/BebasNeue-Regular.woff) format("woff");font-display:swap}
 :root{--contrast:#222222;--contrast-2:#575760;--contrast-3:#b2b2be;--base:#f0f0f0;--base-2:#f7f8f9;--base-3:#ffffff;--accent:#1e73be;--gw:1200px}
@@ -17,7 +18,8 @@ h1,h2,h3,h4{font-weight:700;line-height:1.2;margin:0 0 20px}
 /* 헤더 */
 .site-header{background:var(--base-3)}
 .inside-header{display:flex;align-items:center;justify-content:space-between;padding:20px 40px;max-width:var(--gw);margin:0 auto}
-.site-logo{display:flex;align-items:center;gap:10px;color:var(--contrast);font-family:"Bebas Neue",sans-serif;font-size:42px;letter-spacing:1px;line-height:1}
+.site-logo{display:flex;align-items:center;color:#111;font-family:"Gmarket Sans",sans-serif;font-weight:700;font-size:64px;letter-spacing:-3px;line-height:1}
+.site-logo:hover{color:#111}
 .site-logo img{height:44px;width:auto}
 .main-navigation{display:flex;align-items:center;margin-right:50px}
 .main-nav{display:flex;list-style:none;margin:0;padding:0}
@@ -36,7 +38,7 @@ h1,h2,h3,h4{font-weight:700;line-height:1.2;margin:0 0 20px}
 .feat .big{width:45%}.feat .small{width:55%;padding-top:10px;display:flex;flex-wrap:wrap}
 .feat .small .gbc{width:50%;padding:10px}
 .gbc{padding:20px;display:block}
-.gbc .gimg{display:block;border-radius:5px;overflow:hidden;margin-bottom:20px;aspect-ratio:16/10;background:var(--base)}
+.gbc .gimg{display:block;border-radius:5px;overflow:hidden;margin-bottom:20px;aspect-ratio:1/1;background:var(--base)}
 .feat .small .gimg{margin-bottom:10px}
 .latest .gimg{margin-bottom:30px}
 .gimg img{width:100%;height:100%;object-fit:cover;display:block}
@@ -64,8 +66,8 @@ h1,h2,h3,h4{font-weight:700;line-height:1.2;margin:0 0 20px}
 .entry-title a{color:#000}.entry-title a:hover{color:var(--accent)}
 .entry-meta{font-size:85%;margin-top:.5em;line-height:1.5;color:var(--contrast-2)}
 .entry-meta a{color:var(--contrast-2)}
-.post-image{margin:2em 0 0}.post-image img{width:100%}
-.single-featured-image{margin-top:25px}
+.post-image{margin:2em 0 0;max-width:600px}.post-image img{width:100%;aspect-ratio:1/1;object-fit:cover}
+.single-featured-image{margin-top:25px}.single-featured-image img{width:100%;max-width:800px;aspect-ratio:1/1;object-fit:cover;display:block}
 .entry-summary{margin-top:2em}
 .entry-summary p{font-size:20px;overflow:hidden;text-overflow:ellipsis;height:90px;margin:0}
 .read-more{display:inline-block;margin-top:1em;font-size:17px}
@@ -130,7 +132,7 @@ h1,h2,h3,h4{font-weight:700;line-height:1.2;margin:0 0 20px}
 }
 @media (max-width:768px){
   .inside-header{padding:10px 20px;flex-wrap:wrap}
-  .site-logo{font-size:36px}
+  .site-logo{font-size:48px}
   .main-navigation{margin-right:0}
   .menu-toggle{display:flex}
   .main-nav{display:none;width:100%;flex-direction:column;order:3}

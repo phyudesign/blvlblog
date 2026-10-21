@@ -96,11 +96,11 @@ def page(title, content, desc=DESC, canon='/', og_img='', head_extra='', active=
 <meta property="og:description" content="{esc(desc)}"><meta property="og:url" content="{SITE}{canon}">{ogi}
 <link rel="alternate" type="application/rss+xml" title="{TITLE}" href="/feed.xml">
 <link rel="preload" href="/assets/fonts/NanumGothic-Regular.woff" as="font" type="font/woff" crossorigin>
-<link rel="stylesheet" href="/assets/blog.css?v=2">
+<link rel="stylesheet" href="/assets/blog.css?v=3">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={ADSENSE}" crossorigin="anonymous"></script>
 {head_extra}</head><body>
 <header class="site-header" id="hd"><div class="inside-header">
-<a class="site-logo" href="/" rel="home">BLVL</a>
+<a class="site-logo" href="/" rel="home" aria-label="blvl blog">bv.</a>
 <nav class="main-navigation" aria-label="메뉴"><button class="menu-toggle" type="button" onclick="document.getElementById('hd').classList.toggle('open')">☰ <span>Menu</span></button>
 <ul class="main-nav">{nav}</ul><a class="nav-search" href="/search/" aria-label="검색">{SEARCH_SVG}</a></nav>
 </div></header>

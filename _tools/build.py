@@ -96,11 +96,12 @@ def page(title, content, desc=DESC, canon='/', og_img='', head_extra='', active=
 <meta property="og:description" content="{esc(desc)}"><meta property="og:url" content="{SITE}{canon}">{ogi}
 <link rel="alternate" type="application/rss+xml" title="{TITLE}" href="/feed.xml">
 <link rel="preload" href="/assets/fonts/NanumGothic-Regular.woff" as="font" type="font/woff" crossorigin>
-<link rel="stylesheet" href="/assets/blog.css?v=3">
+<link rel="icon" href="/assets/favicon-32.png" sizes="32x32"><link rel="icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/blog.css?v=4">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={ADSENSE}" crossorigin="anonymous"></script>
 {head_extra}</head><body>
 <header class="site-header" id="hd"><div class="inside-header">
-<a class="site-logo" href="/" rel="home" aria-label="blvl blog">bv.</a>
+<a class="site-logo" href="/" rel="home"><img src="/assets/logo.png" alt="blvl blog" width="80" height="51"></a>
 <nav class="main-navigation" aria-label="메뉴"><button class="menu-toggle" type="button" onclick="document.getElementById('hd').classList.toggle('open')">☰ <span>Menu</span></button>
 <ul class="main-nav">{nav}</ul><a class="nav-search" href="/search/" aria-label="검색">{SEARCH_SVG}</a></nav>
 </div></header>
@@ -221,6 +222,7 @@ rss = ''.join(f'<item><title>{esc(p["title"])}</title><link>{SITE}{url(p["path"]
 (OUT / 'feed.xml').write_text(f'<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><title>{TITLE}</title><link>{SITE}</link><description>{DESC}</description>{rss}</channel></rss>', encoding='utf-8')
 write('/feed/', '<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0;url=/feed.xml">')
 (OUT / '.nojekyll').write_text('')
+shutil.copy(OUT / 'assets' / 'favicon.ico', OUT / 'favicon.ico')
 
 imgs = set()
 for p in posts:

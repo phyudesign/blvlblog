@@ -20,7 +20,7 @@ h1,h2,h3,h4{font-weight:700;line-height:1.2;margin:0 0 20px}
 .inside-header{display:flex;align-items:center;justify-content:space-between;padding:20px 40px;max-width:var(--gw);margin:0 auto}
 .site-logo{display:flex;align-items:center;color:#111;font-family:"Gmarket Sans",sans-serif;font-weight:700;font-size:64px;letter-spacing:-3px;line-height:1}
 .site-logo:hover{color:#111}
-.site-logo img{height:44px;width:auto}
+.site-logo img{height:56px;width:auto;display:block}
 .main-navigation{display:flex;align-items:center;margin-right:50px}
 .main-nav{display:flex;list-style:none;margin:0;padding:0}
 .main-nav a{display:block;padding:0 20px;line-height:60px;color:var(--contrast);font-family:"Gmarket Sans",sans-serif;font-size:16px;letter-spacing:0}
@@ -132,7 +132,7 @@ h1,h2,h3,h4{font-weight:700;line-height:1.2;margin:0 0 20px}
 }
 @media (max-width:768px){
   .inside-header{padding:10px 20px;flex-wrap:wrap}
-  .site-logo{font-size:48px}
+  .site-logo img{height:42px}
   .main-navigation{margin-right:0}
   .menu-toggle{display:flex}
   .main-nav{display:none;width:100%;flex-direction:column;order:3}

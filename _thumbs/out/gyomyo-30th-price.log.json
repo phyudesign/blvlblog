@@ -1,0 +1,27 @@
+{
+ "model": "gpt-image-2",
+ "prompt": "Gyomyo the crazy card cat hugs a big sealed trading card booster box (a plain box with only a big golden '30' ribbon sticker, no other markings) with sparkling starry eyes and his tongue out. Shiny blank holographic cards fly around him. Behind him a small crayon line chart on a little sign zigzags up and down, with a few gold coins. Character in the lower half, centered.",
+ "refs": [
+  "_character/gyomyo/front.png",
+  "_character/gyomyo/turnaround.png"
+ ],
+ "outputs": [
+  "_thumbs/out/gyomyo-30th-price-1.png",
+  "_thumbs/out/gyomyo-30th-price-2.png"
+ ],
+ "usage": {
+  "input_tokens": 4178,
+  "input_tokens_details": {
+   "image_tokens": 3584,
+   "text_tokens": 594
+  },
+  "output_tokens": 14048,
+  "output_tokens_details": {
+   "image_tokens": 14048,
+   "text_tokens": 0
+  },
+  "total_tokens": 18226
+ },
+ "est_cost_usd": 0.4531,
+ "created": "2026-10-28 06:28:02"
+}

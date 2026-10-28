@@ -17,7 +17,7 @@ DESC = "포켓몬카드·미니카·피규어·게임 — 직접 모으고 즐�
 ADSENSE = "ca-pub-4380904134243959"
 AUTHOR = "blvl."
 PER_PAGE = 10
-CSS_VER = 6
+CSS_VER = 7
 
 # 카테고리: (슬러그, 메뉴명, 설명)
 CATS = [
@@ -208,6 +208,7 @@ for p in posts:
     if p["thumb"].startswith("/wp-content/"): used.add(urllib.parse.unquote(p["thumb"]))
 removed = 0
 for f in (ROOT / "wp-content").rglob("*"):
+    if "emoticons" in f.parts: continue  # 캐릭터 이모티콘 라이브러리는 보존
     if f.is_file() and "/" + str(f.relative_to(ROOT)) not in used:
         f.unlink(); removed += 1
 for d in sorted((ROOT / "wp-content").rglob("*"), reverse=True):

@@ -1,0 +1,46 @@
+name: 캐릭터 썸네일 생성
+
+on:
+  push:
+    branches: [main]
+    paths: ["_thumbs/*.json"]
+  workflow_dispatch:
+    inputs:
+      names:
+        description: "만들 요청 이름(공백으로 구분, 비우면 새 요청 전부)"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+concurrency:
+  group: thumbnail
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests
+      - name: 썸네일 생성
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_IMAGE_MODEL: ${{ vars.OPENAI_IMAGE_MODEL }}
+          NAMES: ${{ github.event.inputs.names }}
+        run: python _tools/thumb_gen.py $NAMES
+      - name: 결과 저장
+        if: always()
+        run: |
+          git config user.name "blvl-thumbnail-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add _thumbs/out
+          if git diff --cached --quiet; then echo "변경 없음"; exit 0; fi
+          git commit -m "썸네일 생성: $(ls _thumbs/out/*.log.json -t | head -1 | xargs -n1 basename | sed 's/.log.json//')"
+          git pull --rebase origin main
+          git push origin HEAD:main

@@ -1,0 +1,45 @@
+<!--
+{
+ "title": "다빈치 리졸브 맥 에서 프리뷰와 영상의 색감이 다를 때 해결 방법",
+ "slug": "다빈치-리졸브-컬러",
+ "date": "2024-04-03 16:53:33",
+ "mod": "2024-04-23 22:44:20",
+ "desc": "맥에서 다빈치 리졸브(DaVinci Resolve)를 사용하다 보면 프리뷰로 보던 영상과 결과물의 컬러가 달라서 당황했던 기억이 있을 텐데요. 오늘은 맥에서 다빈치 리졸브를 사용할 때 반드시 알아야 하는 컬러 출력 세팅에 대해 알아보겠습니다. \"내 영상은 왜 프리뷰랑 ",
+ "thumb": "/wp-content/uploads/2024/04/blvl_포스팅표지6.jpg",
+ "category": "tech",
+ "tags": []
+}
+-->
+<p>맥에서 다빈치 리졸브(DaVinci Resolve)를 사용하다 보면 프리뷰로 보던 영상과 결과물의 컬러가 달라서 당황했던 기억이 있을 텐데요. 오늘은 맥에서 다빈치 리졸브를 사용할 때 반드시 알아야 하는 컬러 출력 세팅에 대해 알아보겠습니다. "내 영상은 왜 프리뷰랑 컬러가 다르지?" 하셨던 분들이라면 꼭 따라 해 보시기 바랍니다.<br>
+<h2><strong>다빈치 리졸브 색상 관리 옵션 및 출력 설정</strong></h2><br>
+프리미어만 사용하다가 최근 Di에 관심이 생기면서 다빈치 리졸브(충격적이게도 무료 프로그램)로 갈아탔는데 출력 컬러 때문에 며칠을 헤매다가 해외 유튜브를 보고 해결 방법을 발견하게 되어 여러분들은 저와 같은 고생을 하지 않기를 바라며 방법을 공유하고자 합니다.</p>
+<p><strong><a href="https://www.blackmagicdesign.com/kr/products/davinciresolve" target="_blank" rel="noopener">다빈치 리졸브 다운로드</a>(스탠다드 버전은 무료입니다. 왠만한 영상은 스탠다드 버전 만으로도 충분합니다)</strong></p>
+<p>&nbsp;<br>
+<h3><strong>1. Project Settings에서 컬러 세팅하기</strong></h3><br>
+<ul><br>
+ 	<li>상단 메뉴 'File' 에서 Project Settings 선택 or 화면 우하단 톱니바퀴 클릭 (단축키 Shift + 9)</li><br>
+ 	<li>세팅 창에서 Color Management 선택</li><br>
+ 	<li>우측 옵션 Color Space &amp; Transforms 안에 Timeline color space 와 Output color space를 둘 다 Rec.709-A로 바꿔줍니다.</li><br>
+</ul><br>
+<img loading="lazy" class="aligncenter wp-image-690 size-large" src="/wp-content/uploads/2024/04/스크린샷-2024-04-03-오후-3.37.02-846x1024.png" alt="다빈치 리졸브" width="846" height="1024" /></p>
+<p><img loading="lazy" class="aligncenter size-large wp-image-691" src="/wp-content/uploads/2024/04/스크린샷-2024-04-03-오후-3.47.47-1024x676.jpg" alt="" width="1024" height="676" /></p>
+<p>&nbsp;<br>
+<h3><strong>2. 사용자 설정에서 맥 디스프레이 컬러 프로필 설정 해주기</strong></h3><br>
+<ul><br>
+ 	<li>상단 메뉴 'Davinci Resolve' 에서 Preferences 선택, (단축키 command + ,)</li><br>
+ 	<li>설정 창이 뜨면 General 탭에서 'Use Mac display color profiles for viewers' , 'Automatically tag Rec.709 Scene clips as Rec.709-A' 두 항목을 체크 해줍니다.</li><br>
+</ul><br>
+<img loading="lazy" class="aligncenter size-large wp-image-692" src="/wp-content/uploads/2024/04/스크린샷-2024-04-03-오후-3.52.17-1-1024x883.png" alt="" width="1024" height="883" /></p>
+<p><img loading="lazy" class="aligncenter size-large wp-image-693" src="/wp-content/uploads/2024/04/스크린샷-2024-04-03-오후-3.52.29-1024x867.jpg" alt="" width="1024" height="867" /></p>
+<p>&nbsp;<br>
+<h3><strong>3. 출력 옵션 컬러 세팅으로 마무리</strong></h3><br>
+<ul><br>
+ 	<li>Deliver 페이지로 이동합니다.</li><br>
+ 	<li>Render Settings에서 Video 탭에 Advanceed Settings 를 열어줍니다.</li><br>
+ 	<li>조금 아래 Color Space Tag를 Rec.709로 바꿔줍니다.(Rec.709-A가 아닙니다.)</li><br>
+ 	<li>바로 아래에 있는 Gamma Tag는 Rec.709-A로 바꿔줍니다.</li><br>
+</ul><br>
+<img loading="lazy" class="aligncenter wp-image-695 size-full" src="/wp-content/uploads/2024/04/스크린샷-2024-04-03-오후-4.04.07.jpg" alt="" width="447" height="551" /></p>
+<p><img loading="lazy" class="aligncenter wp-image-694" src="/wp-content/uploads/2024/04/스크린샷-2024-04-03-오후-4.04.24.jpg" alt="" width="447" height="286" /></p>
+
+<p>이렇게 하면 출력 컬러세팅 완료입니다. 테스트 하실때는 가능하면 Quicktime 코덱으로 출력하시고 플레이어도 QuickTime Player로 실행하시는 것이 가장 정확합니다. 그리고 유튜브에 업로드 하시면 컬러가 또 달라지니 그 점 유의하시기 바랍니다.</p>

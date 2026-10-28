@@ -56,7 +56,10 @@ def generate(name, req):
         r = requests.post("https://api.openai.com/v1/images/generations", headers=headers, json=data, timeout=600)
     if r.status_code != 200:
         raise RuntimeError(f"{name}: OpenAI {r.status_code} {r.text[:500]}")
-    imgs = r.json()["data"]
+    res = r.json(); imgs = res["data"]; usage = res.get("usage") or {}
+    det = usage.get("input_tokens_details") or {}
+    # gpt-image-2 공시 단가(1M 토큰당): 텍스트 입력 $5, 이미지 입력 $8, 이미지 출력 $30
+    cost = (det.get("text_tokens", 0) * 5 + det.get("image_tokens", 0) * 8 + usage.get("output_tokens", 0) * 30) / 1e6
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     outs = []
     for i, d in enumerate(imgs, 1):
@@ -64,9 +67,9 @@ def generate(name, req):
         p.write_bytes(base64.b64decode(d["b64_json"]))
         outs.append(str(p.relative_to(ROOT)))
     log = {"model": MODEL, "prompt": req["prompt"], "refs": [str(p.relative_to(ROOT)) for p in refs],
-           "outputs": outs, "created": time.strftime("%Y-%m-%d %H:%M:%S")}
+           "outputs": outs, "usage": usage, "est_cost_usd": round(cost, 4), "created": time.strftime("%Y-%m-%d %H:%M:%S")}
     (OUT_DIR / f"{name}.log.json").write_text(json.dumps(log, ensure_ascii=False, indent=1), encoding="utf-8")
-    print(f"{name}: {len(outs)}장 생성 → {', '.join(outs)}")
+    print(f"{name}: {len(outs)}장 생성 → {', '.join(outs)} · 예상 비용 ${cost:.4f}")
 
 if __name__ == "__main__":
     if not KEY:

@@ -97,7 +97,7 @@ def page(title, content, desc=DESC, canon='/', og_img='', head_extra='', active=
 <link rel="alternate" type="application/rss+xml" title="{TITLE}" href="/feed.xml">
 <link rel="preload" href="/assets/fonts/NanumGothic-Regular.woff" as="font" type="font/woff" crossorigin>
 <link rel="icon" href="/assets/favicon-32.png" sizes="32x32"><link rel="icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-<link rel="stylesheet" href="/assets/blog.css?v=4">
+<link rel="stylesheet" href="/assets/blog.css?v=5">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={ADSENSE}" crossorigin="anonymous"></script>
 {head_extra}</head><body>
 <header class="site-header" id="hd"><div class="inside-header">
@@ -106,7 +106,7 @@ def page(title, content, desc=DESC, canon='/', og_img='', head_extra='', active=
 <ul class="main-nav">{nav}</ul><a class="nav-search" href="/search/" aria-label="검색">{SEARCH_SVG}</a></nav>
 </div></header>
 {content}
-<footer class="site-footer">© {datetime.date.today().year} {TITLE}</footer>
+<footer class="site-footer"><nav class="footer-links" aria-label="사이트 정보"><a href="/about/">소개</a> · <a href="/privacy/">개인정보처리방침</a> · <a href="/contact/">문의</a></nav>© {datetime.date.today().year} {TITLE}</footer>
 </body></html>'''
 
 def catlink(p):

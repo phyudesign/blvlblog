@@ -7,7 +7,9 @@
     "n": 2,                            # 시안 개수 (기본 2)
     "size": "1024x1024",               # 기본 정사각형
     "quality": "high",                 # low | medium | high
-    "refs": ["_character/front.png"],  # 생략하면 _character/ 안의 이미지 전부 사용
+    "character": "gyomyo",             # gyomyo | jangnan | pengson (참고 이미지 = _character/<id>/)
+    "mode": "thumbnail",               # thumbnail | emoticon
+    "refs": ["_character/front.png"],  # 직접 지정할 때만
     "regenerate": false                # true면 이미 만든 결과가 있어도 다시 생성
   }
 결과: _thumbs/out/<이름>-1.png, -2.png …  (요청 파일 옆 기록: _thumbs/out/<이름>.log.json)
@@ -23,7 +25,27 @@ MODEL = os.environ.get("OPENAI_IMAGE_MODEL") or "gpt-image-2"
 KEY = os.environ.get("OPENAI_API_KEY")
 IMG_EXT = {".png", ".jpg", ".jpeg", ".webp"}
 
-STYLE = (
+CHARS = json.loads((CHAR_DIR / "characters.json").read_text(encoding="utf-8")) if (CHAR_DIR / "characters.json").exists() else {}
+
+LOOK = ("Keep the exact hand-drawn look of the references: rough black crayon/pencil line art with grainy texture, "
+        "simple shapes, minimal detail, the same face and proportions. ")
+MODES = {
+    "thumbnail": ("Square blog thumbnail. The character keeps its black crayon line art; the background is a soft pastel colored-paper "
+                  "texture with a few simple crayon doodles. Bright, cute and funny. Keep the top 35% of the image empty and calm for a title "
+                  "that will be added later. Do not write any text or letters. "),
+    "emoticon": ("A sticker sheet of the character's emoticons on a pure white background, arranged in an even grid with generous spacing, "
+                 "each sticker fully separated with no overlap and nothing touching the edges. Same crayon line style for every sticker, "
+                 "black lines only with at most a tiny touch of pink on the cheeks. Do not write any text or letters. "),
+}
+SAFE = "Do not include any existing franchise characters, brand logos, trademarks or real product packaging artwork. "
+
+def build_prompt(req):
+    c = CHARS.get(req.get("character", ""), {})
+    who = (f"The attached reference images show {c['name']}, an original mascot of the blvl blog: {c['desc']} " if c else
+           "The attached reference image(s) show an original mascot character of the blvl blog. ")
+    return who + LOOK + MODES.get(req.get("mode", "thumbnail"), "") + SAFE + "Scene: " + req["prompt"]
+
+STYLE_LEGACY = (
     "The attached reference image(s) show 'blvl', the original mascot character of the blvl blog. "
     "Draw this exact character: keep its face, proportions, colors, outfit and line style identical to the references. "
     "Square blog thumbnail, bright and cute, clean composition, leave clear empty space for a title. "
@@ -40,12 +62,13 @@ def todo(only):
         yield f.stem, req
 
 def refs_for(req):
-    paths = [ROOT / p for p in req.get("refs", [])] or sorted(p for p in CHAR_DIR.iterdir() if p.suffix.lower() in IMG_EXT)
+    folder = CHAR_DIR / req["character"] if req.get("character") else CHAR_DIR
+    paths = [ROOT / p for p in req.get("refs", [])] or sorted(p for p in folder.iterdir() if p.suffix.lower() in IMG_EXT)
     return [p for p in paths if p.exists()][:16]
 
 def generate(name, req):
     refs = refs_for(req)
-    data = {"model": MODEL, "prompt": STYLE + req["prompt"], "n": str(req.get("n", 2)),
+    data = {"model": MODEL, "prompt": build_prompt(req), "n": str(req.get("n", 2)),
             "size": req.get("size", "1024x1024"), "quality": req.get("quality", "high")}
     headers = {"Authorization": f"Bearer {KEY}"}
     if refs:

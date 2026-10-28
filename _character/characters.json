@@ -1,0 +1,17 @@
+{
+ "gyomyo": {
+  "name": "교묘 (Gyomyo, 'the crazy cat')",
+  "role": "TCG",
+  "desc": "A chubby tabby cat with three stripes on the forehead, big oval eyes, tongue poking out of a cat smile, an x-shaped belly button, short legs and a curly tail. Obsessed with trading cards — crazy about opening packs and checking card prices."
+ },
+ "jangnan": {
+  "name": "장난이곰 (Jangnani Bear)",
+  "role": "MINICAR, FIGURE",
+  "desc": "A big round sitting bear with small round ears, a sleepy deadpan face, tiny eyes and a small nose, a huge soft belly and big feet. Loves toys, die-cast minicars and figures."
+ },
+ "pengson": {
+  "name": "펭슨 황 (Pengson Hwang)",
+  "role": "TECH",
+  "desc": "An egg-shaped penguin with a solid black crayon-shaded body, a big white face, curly eyelashes on round eyes, a small diamond-shaped beak outlined in black, and tiny white feet. A tech geek whose motto is 'You don't buy a graphics card, you serve it.'"
+ }
+}

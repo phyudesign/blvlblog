@@ -66,7 +66,7 @@ def build_prompt(req):
     who = (f"The attached reference images show {c['name']}, an original mascot of the blvl blog: {c['desc']} " if c else
            "The attached reference image(s) show an original mascot character of the blvl blog. ")
     text = ""
-    if req.get("mode") == "magazine":
+    if req.get("mode", "magazine") == "magazine":
         text = (f'Text to write — top label: "{req.get("badge", "")}"; title line 1 (black): "{req.get("title", "")}"; '
                 f'title line 2 (red): "{req.get("title2", "")}". ')
         mode = MODES["magazine"].format(bg=req.get("bg", "warm yellow"), eyes=req.get("eyes", "sparkling yellow stars"))
@@ -95,7 +95,8 @@ def todo(only):
 def refs_for(req):
     folder = CHAR_DIR / req["character"] if req.get("character") else CHAR_DIR
     paths = [ROOT / p for p in req.get("refs", [])] or sorted(p for p in folder.iterdir() if p.suffix.lower() in IMG_EXT)
-    paths += [ROOT / p for p in req.get("style_refs", [])]
+    style = req.get("style_refs") or (["_character/style/magazine-1.png"] if req.get("mode", "magazine") == "magazine" else [])
+    paths += [ROOT / p for p in style]
     return [p for p in paths if p.exists()][:16]
 
 def generate(name, req):

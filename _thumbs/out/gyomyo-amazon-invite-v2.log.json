@@ -1,0 +1,27 @@
+{
+ "model": "gpt-image-2",
+ "prompt": "Gyomyo the crazy card cat holds up a big golden prize envelope with a wax seal and a ticket stub that reads nothing, eyes sparkling and tongue out, overjoyed like he won a lottery. Around him: plain brown cardboard shipping boxes with no markings at all, sealed blank trading card booster boxes, flying blank holographic cards, a small lottery drum with colorful balls, a little calendar with a circled date. Two tiny doodled flags: a red circle on white and a stars-and-stripes shape.",
+ "refs": [
+  "_character/gyomyo/front.png",
+  "_character/gyomyo/turnaround.png",
+  "_character/style/thumb-style-1.png"
+ ],
+ "outputs": [
+  "_thumbs/out/gyomyo-amazon-invite-v2-1.png"
+ ],
+ "usage": {
+  "input_tokens": 3255,
+  "input_tokens_details": {
+   "image_tokens": 2816,
+   "text_tokens": 439
+  },
+  "output_tokens": 7024,
+  "output_tokens_details": {
+   "image_tokens": 7024,
+   "text_tokens": 0
+  },
+  "total_tokens": 10279
+ },
+ "est_cost_usd": 0.2354,
+ "created": "2026-10-31 02:09:06"
+}

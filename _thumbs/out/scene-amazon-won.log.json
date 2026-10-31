@@ -1,0 +1,27 @@
+{
+ "model": "gpt-image-2",
+ "prompt": "Gyomyo jumps for joy holding an opened golden envelope with a red wax seal over his head, while a plain cardboard delivery box with a heart sticker arrives on a little cart. Confetti and sparkles.",
+ "refs": [
+  "_character/gyomyo/front.png",
+  "_character/gyomyo/turnaround.png",
+  "_character/style/magazine-1.png"
+ ],
+ "outputs": [
+  "_thumbs/out/scene-amazon-won-1.png"
+ ],
+ "usage": {
+  "input_tokens": 3125,
+  "input_tokens_details": {
+   "image_tokens": 2816,
+   "text_tokens": 309
+  },
+  "output_tokens": 1372,
+  "output_tokens_details": {
+   "image_tokens": 1372,
+   "text_tokens": 0
+  },
+  "total_tokens": 4497
+ },
+ "est_cost_usd": 0.0652,
+ "created": "2026-10-31 03:24:49"
+}

@@ -1,0 +1,27 @@
+{
+ "model": "gpt-image-2",
+ "prompt": "Gyomyo sits glued to a smartphone held in both paws, waiting for a prize email. A little pop-up envelope icon with a gold star seal floats above the phone screen. Beside him a desk calendar with days crossed off and a small hourglass. Plain sealed booster boxes stacked behind him.",
+ "refs": [
+  "_character/gyomyo/front.png",
+  "_character/gyomyo/turnaround.png",
+  "_character/style/magazine-1.png"
+ ],
+ "outputs": [
+  "_thumbs/out/scene-amazon-wait-1.png"
+ ],
+ "usage": {
+  "input_tokens": 3143,
+  "input_tokens_details": {
+   "image_tokens": 2816,
+   "text_tokens": 327
+  },
+  "output_tokens": 1372,
+  "output_tokens_details": {
+   "image_tokens": 1372,
+   "text_tokens": 0
+  },
+  "total_tokens": 4515
+ },
+ "est_cost_usd": 0.0653,
+ "created": "2026-10-31 03:24:24"
+}

@@ -1,0 +1,27 @@
+{
+ "model": "gpt-image-2",
+ "prompt": "Gyomyo stands in front of a tiny simplified outline map of Japan, pointing at several red pins with a pointer stick like a general planning an attack. Small plain shopping bags, lottery ticket stubs and a parcel with a shipping label float around. A paper airplane flies from a small 'Korea' side to Japan (no text).",
+ "refs": [
+  "_character/gyomyo/front.png",
+  "_character/gyomyo/turnaround.png",
+  "_character/style/magazine-1.png"
+ ],
+ "outputs": [
+  "_thumbs/out/scene-japan-trip-1.png"
+ ],
+ "usage": {
+  "input_tokens": 3152,
+  "input_tokens_details": {
+   "image_tokens": 2816,
+   "text_tokens": 336
+  },
+  "output_tokens": 1372,
+  "output_tokens_details": {
+   "image_tokens": 1372,
+   "text_tokens": 0
+  },
+  "total_tokens": 4524
+ },
+ "est_cost_usd": 0.0654,
+ "created": "2026-10-31 03:25:14"
+}

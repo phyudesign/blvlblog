@@ -1,0 +1,27 @@
+{
+ "model": "gpt-image-2",
+ "prompt": "Gyomyo shouts with his mouth wide open, holding a red siren light on his head with one paw and pointing forward with the other, as if announcing breaking news. A few plain sealed booster boxes and blank cards fly around, motion lines and exclamation sparks.",
+ "refs": [
+  "_character/gyomyo/front.png",
+  "_character/gyomyo/turnaround.png",
+  "_character/style/magazine-1.png"
+ ],
+ "outputs": [
+  "_thumbs/out/stock-alert-generic-1.png"
+ ],
+ "usage": {
+  "input_tokens": 3319,
+  "input_tokens_details": {
+   "image_tokens": 2816,
+   "text_tokens": 503
+  },
+  "output_tokens": 7024,
+  "output_tokens_details": {
+   "image_tokens": 7024,
+   "text_tokens": 0
+  },
+  "total_tokens": 10343
+ },
+ "est_cost_usd": 0.2358,
+ "created": "2026-10-31 05:33:15"
+}

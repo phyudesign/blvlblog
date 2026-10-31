@@ -1,0 +1,28 @@
+{
+ "model": "gpt-image-2",
+ "prompt": "Pengson Hwang, the egg-shaped penguin, peeking out from behind a straight vertical wall on the RIGHT side of the image: only the left half of his body is visible, the right side of the drawing is cut perfectly straight along the right edge of the image. He holds a tiny open laptop with one flipper and looks out with round curious eyes with curly eyelashes. Black crayon-shaded body, white face, small diamond beak.",
+ "refs": [
+  "_character/pengson/front.png",
+  "_character/pengson/turnaround.png",
+  "_character/style/magazine-1.png"
+ ],
+ "outputs": [
+  "_thumbs/out/sprite-pengson-peek-1.png",
+  "_thumbs/out/sprite-pengson-peek-2.png"
+ ],
+ "usage": {
+  "input_tokens": 5320,
+  "input_tokens_details": {
+   "image_tokens": 4688,
+   "text_tokens": 632
+  },
+  "output_tokens": 3512,
+  "output_tokens_details": {
+   "image_tokens": 3512,
+   "text_tokens": 0
+  },
+  "total_tokens": 8832
+ },
+ "est_cost_usd": 0.146,
+ "created": "2026-10-31 03:42:18"
+}

@@ -1,0 +1,28 @@
+{
+ "model": "gpt-image-2",
+ "prompt": "Only the upper half of Gyomyo's head and his two front paws, peeking up from behind a straight horizontal edge at the very bottom of the image, as if hiding behind a table and sneaking a look. The bottom of the drawing is cut perfectly straight and flat along the bottom edge of the image. Curious crazy eyes with slightly sharp outer corners and small black pupils looking sideways, tongue slightly out. Centered, filling about 70% of the width.",
+ "refs": [
+  "_character/gyomyo/front.png",
+  "_character/gyomyo/turnaround.png",
+  "_character/style/magazine-1.png"
+ ],
+ "outputs": [
+  "_thumbs/out/sprite-gyomyo-peek-1.png",
+  "_thumbs/out/sprite-gyomyo-peek-2.png"
+ ],
+ "usage": {
+  "input_tokens": 6322,
+  "input_tokens_details": {
+   "image_tokens": 5632,
+   "text_tokens": 690
+  },
+  "output_tokens": 3512,
+  "output_tokens_details": {
+   "image_tokens": 3512,
+   "text_tokens": 0
+  },
+  "total_tokens": 9834
+ },
+ "est_cost_usd": 0.1539,
+ "created": "2026-10-31 03:41:22"
+}

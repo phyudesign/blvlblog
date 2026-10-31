@@ -1,0 +1,28 @@
+{
+ "model": "gpt-image-2",
+ "prompt": "Jangnani Bear, the big round sleepy bear, sitting relaxed on the floor with legs stretched out, holding a small handheld electric fan up to his face with one paw, fur blowing slightly, eyes half closed and blissful, a few small wind lines. Full body visible, sitting pose, facing three-quarters to the right.",
+ "refs": [
+  "_character/jangnan/front.png",
+  "_character/jangnan/turnaround.png",
+  "_character/style/magazine-1.png"
+ ],
+ "outputs": [
+  "_thumbs/out/sprite-jangnan-fan-1.png",
+  "_thumbs/out/sprite-jangnan-fan-2.png"
+ ],
+ "usage": {
+  "input_tokens": 5242,
+  "input_tokens_details": {
+   "image_tokens": 4688,
+   "text_tokens": 554
+  },
+  "output_tokens": 3512,
+  "output_tokens_details": {
+   "image_tokens": 3512,
+   "text_tokens": 0
+  },
+  "total_tokens": 8754
+ },
+ "est_cost_usd": 0.1456,
+ "created": "2026-10-31 03:41:50"
+}

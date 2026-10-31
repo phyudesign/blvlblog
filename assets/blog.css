@@ -194,3 +194,11 @@ h1,h2,h3,h4{font-weight:700;line-height:1.2;margin:0 0 20px}
 }
 @media(prefers-reduced-motion:reduce){.content-area>.inside-article:first-of-type::before,.site-footer::before,.sidebar .widget::after{animation:none}}
 @media print{.content-area>.inside-article::before,.lgrid::before,.site-footer::before,.sidebar .widget::after{display:none}}
+/* 홈 첫 화면 캐릭터 */
+.feat{position:relative}.feat .big{position:relative}
+.feat .big::before{content:"";position:absolute;right:40px;top:-47px;width:120px;height:66px;background:url(/assets/chars/gyomyo-peek.webp) center bottom/contain no-repeat;pointer-events:none;z-index:-1;animation:blvl-peek 9s ease-in-out infinite}
+@media(min-width:1320px){
+ .feat::after{content:"";position:absolute;left:100%;top:150px;width:66px;height:129px;background:url(/assets/chars/pengson-peek.webp) center/contain no-repeat;transform:scaleX(-1);pointer-events:none;z-index:-1;animation:blvl-slide 11s ease-in-out infinite}
+}
+@media(max-width:768px){.feat .big::before{right:20px;width:100px;height:55px;top:-34px}}
+@media(prefers-reduced-motion:reduce){.feat .big::before,.feat::after{animation:none}}

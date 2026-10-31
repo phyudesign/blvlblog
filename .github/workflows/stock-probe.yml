@@ -1,5 +1,6 @@
 name: 재고 감시 접속 시험
 on: { workflow_dispatch: {} }
+permissions: { contents: write }
 jobs:
   probe:
     runs-on: ubuntu-latest
@@ -8,4 +9,8 @@ jobs:
       - uses: actions/setup-python@v5
         with: { python-version: "3.12" }
       - run: pip install requests
-      - run: python _tools/probe.py
+      - run: python _tools/probe.py | tee _monitor/probe.txt
+      - run: |
+          git config user.name "blvl-stock-bot"; git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add _monitor/probe.txt; git commit -m "접속 시험 결과" || exit 0
+          git pull --rebase origin main; git push origin HEAD:main

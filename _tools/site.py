@@ -228,7 +228,7 @@ for p in posts:
     if p["thumb"].startswith("/wp-content/"): used.add(urllib.parse.unquote(p["thumb"]))
 removed = 0
 for f in (ROOT / "wp-content").rglob("*"):
-    if "emoticons" in f.parts: continue  # 캐릭터 이모티콘 라이브러리는 보존
+    if "emoticons" in f.parts or f.name.startswith("blvl-stock-alert"): continue  # 이모티콘·속보용 공용 썸네일은 보존
     if f.is_file() and "/" + str(f.relative_to(ROOT)) not in used:
         f.unlink(); removed += 1
 for d in sorted((ROOT / "wp-content").rglob("*"), reverse=True):

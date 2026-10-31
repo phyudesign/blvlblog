@@ -96,7 +96,17 @@ def telegram(msg):
                       json={"chat_id": chat, "text": msg, "disable_web_page_preview": True}, timeout=20)
     except Exception as e: print("텔레그램 실패", e)
 
-STATUS_KR = {"instock": "구매 가능", "preorder": "예약 접수 중", "out": "주문 불가", "unknown": "확인 필요", "new": "새 공지"}
+KR_NAMES = [("ポケモンカードゲーム", "포켓몬카드"), ("ONE PIECEカードゲーム", "원피스카드"), ("ハドウシーカー", "파동시커"), ("30th CELEBRATION", "30주년"),
+    ("ストームエメラルダ", "스톰 에메랄드"), ("ムニキスゼロ", "니힐제로"), ("インフェルノX", "인페르노X"), ("メガブレイブ", "메가브레이브"),
+    ("メガシンフォニア", "메가심포니아"), ("アビスアイ", "어비스아이"), ("ニンジャスピナー", "닌자스피너"), ("MEGAドリームex", "메가드림EX"),
+    ("エーフィ・ブラッキー", "에브이·블래키"), ("拡張パック", "확장팩"), ("ハイクラスパック", "하이클래스팩"), ("ブースターパック", "부스터팩"),
+    ("プレミアムデッキセット", "프리미엄 덱 세트"), ("カードセット", "카드 세트"), ("スタートデッキ", "스타트 덱"), ("【セット商品】", ""),
+    ("【クレジットカード決済限定】", ""), ("神の支配", "신의 지배"), ("世界最強の戦士", "세계 최강의 전사"), ("パック", "팩")]
+def kr(t):
+    for a, b in KR_NAMES: t = t.replace(a, b)
+    return re.sub(r"\s+", " ", t).strip()
+
+STATUS_KR = {"instock": "구매 가능", "preorder": "예약 접수 중", "out": "주문 불가", "unknown": "판매 대기(추첨 전용)", "new": "새 공지"}
 
 def slugify(s): return re.sub(r"[^0-9A-Za-z가-힣ぁ-んァ-ヶ一-龠ー]+", "-", s)[:40].strip("-")
 
@@ -118,21 +128,21 @@ def write_alert_post(ev, state):
             s = re.sub(r'"mod": "[^"]+"', f'"mod": "{NOW.strftime("%Y-%m-%d %H:%M:%S")}"', s, 1)
             p.write_text(s, encoding="utf-8"); return prev["file"]
     is_lottery = ev["kind"] == "page"
-    name = ev["title"]
-    title = (f'[입고 속보] {name[:60]} — {ev["shop_kr"]} {STATUS_KR.get(ev["status"], "")}' if not is_lottery
-             else f'[추첨·판매 속보] {ev["shop_kr"]} — {name[:60]}')
+    name = ev["title"]; kname = kr(name)
+    title = (f'[입고 속보] {kname[:60]} — {ev["shop_kr"]} {STATUS_KR.get(ev["status"], "")}' if not is_lottery
+             else f'[추첨·판매 속보] {ev["shop_kr"]} — {kname[:60]}')
     slug = f'속보-{NOW.strftime("%Y%m%d-%H%M")}-{slugify(ev["shop_kr"])}-{hashlib.md5(key.encode()).hexdigest()[:6]}'
     korea = {"라쿠텐북스": "라쿠텐북스는 일본 배송지가 필요해요. 배송대행지 주소로 주문하는 방법은 아래 가이드 글을 참고하세요.",
              "세븐넷": "세븐넷은 일본 배송지가 필요해요.", "요도바시": "요도바시는 일본 배송지가 필요해요.",
              "트레카플라자55": "일본 카드 전문점이라 일본 배송지가 필요해요.", "옐로서브마린": "일본 카드 전문점이라 일본 배송지가 필요해요."}.get(ev["shop_kr"], "")
     fm = {"title": title, "slug": slug, "date": NOW.strftime("%Y-%m-%d %H:%M:%S"), "mod": NOW.strftime("%Y-%m-%d %H:%M:%S"),
-          "desc": f'{ev["shop_kr"]}에서 {name[:50]} 상태가 바뀌었어요({STATUS_KR.get(ev["status"], "")}). 감지 시각 {stamp} (한국 시간).',
+          "desc": f'{ev["shop_kr"]}에서 {kname[:50]} 상태가 바뀌었어요({STATUS_KR.get(ev["status"], "")}). 감지 시각 {stamp} (한국 시간).',
           "thumb": "/wp-content/uploads/2026/10/blvl-stock-alert.jpg", "category": "tcg",
           "tags": ["입고 속보", "일본 쇼핑몰", ev["shop_kr"]]}
     body = f'''<p><strong>{html.escape(ev["shop_kr"])}</strong>에서 아래 상품의 상태가 바뀐 걸 blvl 재고 감시기가 잡았어요. 재고는 몇 분 만에 끝나는 경우가 많으니 <strong>링크에서 바로 확인</strong>하세요.</p>
 {emo("rare", "떴다냥! 지금 바로 확인하라냥!!!", "레어다")}
 <table><tbody>
-<tr><th>상품</th><td>{html.escape(name)}</td></tr>
+<tr><th>상품</th><td><strong>{html.escape(kname)}</strong><br><small style="color:#8a8f99">{html.escape(name)}</small></td></tr>
 <tr><th>쇼핑몰</th><td>{html.escape(ev["shop_kr"])}</td></tr>
 <tr><th>상태</th><td><strong>{html.escape(STATUS_KR.get(ev["status"], ""))}</strong></td></tr>
 {f'<tr><th>가격</th><td>{html.escape(ev["price"])}</td></tr>' if ev.get("price") else ''}
@@ -154,10 +164,10 @@ def write_alert_post(ev, state):
 def write_board(state):
     rows = []
     for k, v in sorted(state.get("items", {}).items(), key=lambda kv: (kv[1]["status"] not in ("instock", "preorder"), kv[1]["title"])):
-        if v["status"] == "out": continue
-        rows.append(f'<tr><td><a href="{html.escape(v["url"])}" target="_blank" rel="nofollow noopener">{html.escape(v["title"][:70])}</a></td>'
+        if v["status"] not in ("instock", "preorder"): continue
+        rows.append(f'<tr><td><a href="{html.escape(v["url"])}" target="_blank" rel="nofollow noopener">{html.escape(kr(v["title"])[:70])}</a></td>'
                     f'<td>{SHOP_KR.get(v["shop"], v["shop"])}</td><td><strong>{STATUS_KR.get(v["status"], v["status"])}</strong></td><td>{html.escape(v.get("price", ""))}</td><td>{v.get("since", "")}</td></tr>')
-    ev_rows = "".join(f'<li><b>{e["at"]}</b> · {html.escape(e["shop_kr"])} · {html.escape(e["title"][:70])} → {STATUS_KR.get(e["status"], e["status"])}</li>' for e in state.get("events", [])[:30])
+    ev_rows = "".join(f'<li><b>{e["at"]}</b> · {html.escape(e["shop_kr"])} · {html.escape(kr(e["title"])[:70])} → {STATUS_KR.get(e["status"], e["status"])}</li>' for e in state.get("events", [])[:30])
     body = f'''<p>blvl 재고 감시기가 일본 쇼핑몰 공개 페이지를 <strong>약 10분 간격</strong>으로 확인해서, 포켓몬카드·원피스카드 상품을 <strong>지금 살 수 있거나 예약할 수 있는 곳</strong>을 모아 보여 줘요. 마지막으로 바뀐 시각: <strong>{NOW.strftime("%Y-%m-%d %H:%M")}</strong> (한국 시간)</p>
 <h2>지금 구매·예약 가능</h2>
 {('<table><thead><tr><th>상품</th><th>쇼핑몰</th><th>상태</th><th>가격</th><th>감지</th></tr></thead><tbody>' + "".join(rows) + '</tbody></table>') if rows else '<p>지금은 감시 중인 쇼핑몰에 구매 가능한 상품이 없어요. 들어오면 이곳과 속보 글로 바로 알려 드릴게요.</p>'}
@@ -205,7 +215,7 @@ def main():
     for ev in new_events[:8]:  # 한 번에 너무 많이 쓰지 않도록
         f = write_alert_post(ev, state)
         events.insert(0, {"at": NOW.strftime("%m/%d %H:%M"), "shop_kr": ev["shop_kr"], "title": ev["title"], "status": ev["status"]})
-        telegram(f'🐱 blvl 재고 속보\n{ev["shop_kr"]} · {STATUS_KR.get(ev["status"], "")}\n{ev["title"][:80]}\n{ev.get("price","")}\n{ev["url"]}\n블로그: https://blvlblog.com/{urllib.parse.quote(f[:-5])}/')
+        telegram(f'🐱 blvl 재고 속보\n{ev["shop_kr"]} · {STATUS_KR.get(ev["status"], "")}\n{kr(ev["title"])[:80]}\n{ev.get("price","")}\n{ev["url"]}\n블로그: https://blvlblog.com/{urllib.parse.quote(f[:-5])}/')
         print("EVENT", ev["shop_kr"], ev["status"], ev["title"][:60])
     state["events"] = events[:100]
     if changed:

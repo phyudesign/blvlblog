@@ -1,0 +1,28 @@
+{
+ "model": "gpt-image-2",
+ "prompt": "Gyomyo hugs a big sealed plain trading card booster box (no logos, only a round gold '30' ribbon sticker) tightly with both arms, tongue out, drooling a little. A small hand-drawn zigzag price line chart on a tiny sign pokes up beside him, with a few gold coins and blank holographic cards flying around.",
+ "refs": [
+  "_character/gyomyo/front.png",
+  "_character/gyomyo/turnaround.png",
+  "_character/style/magazine-1.png"
+ ],
+ "outputs": [
+  "_thumbs/out/gyomyo-30th-price-mag-1.png",
+  "_thumbs/out/gyomyo-30th-price-mag-2.png"
+ ],
+ "usage": {
+  "input_tokens": 6690,
+  "input_tokens_details": {
+   "image_tokens": 5632,
+   "text_tokens": 1058
+  },
+  "output_tokens": 14048,
+  "output_tokens_details": {
+   "image_tokens": 14048,
+   "text_tokens": 0
+  },
+  "total_tokens": 20738
+ },
+ "est_cost_usd": 0.4718,
+ "created": "2026-10-31 03:10:12"
+}

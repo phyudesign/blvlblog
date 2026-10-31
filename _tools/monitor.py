@@ -55,10 +55,11 @@ def relevant(t):
 # ── 라쿠텐북스: 상품 블록 단위 파싱
 def scan_rakuten(h):
     items = {}
-    for blk in re.split(r'<div class="rbcomp__item-list__item(?:\s|")', h)[1:]:
-        m = re.search(r'<a[^>]+href="(https://books\.rakuten\.co\.jp/rb/(\d+)/)[^"]*"[^>]*>(.*?)</a>', blk, re.S)
-        if not m: continue
-        url, rid, title = m.group(1), m.group(2), text_of(m.group(3))
+    for blk in re.split(r'<div class="rbcomp__item-list__item"', h)[1:]:
+        tm = re.search(r'class="rbcomp__item-list__item__title[^"]*">(.*?)</span>', blk, re.S)
+        lm = re.search(r'href="(https://books\.rakuten\.co\.jp/rb/(\d+)/)', blk)
+        if not tm or not lm: continue
+        title = text_of(tm.group(1)); url, rid = lm.group(1), lm.group(2)
         if not title or not relevant(title): continue
         body = text_of(blk)
         if "ご注文できない商品" in body: st = "out"
@@ -172,7 +173,7 @@ def write_board(state):
 
 def main():
     state = json.loads(STATE.read_text(encoding="utf-8")) if STATE.exists() else {}
-    first_run = not state
+    first_run = not state or not state.get("items")
     items = state.setdefault("items", {}); lines = state.setdefault("lines", {}); events = state.setdefault("events", [])
     new_events = []
     # 라쿠텐

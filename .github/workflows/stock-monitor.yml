@@ -1,0 +1,29 @@
+name: 재고 감시기
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch: {}
+permissions: { contents: write }
+concurrency: { group: stock-monitor, cancel-in-progress: false }
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install requests
+      - name: 감시
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python _tools/monitor.py
+      - name: 바뀐 게 있으면 블로그 다시 만들고 저장
+        run: |
+          if [ "$(cat _monitor/changed)" != "1" ]; then echo "변화 없음"; exit 0; fi
+          python _tools/site.py
+          git config user.name "blvl-stock-bot"; git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A; git reset -q _monitor/changed
+          git commit -m "재고 감시: $(date -u +%Y-%m-%dT%H:%MZ)" || exit 0
+          for i in 1 2 3; do git pull --rebase -q origin main && git push -q origin HEAD:main && break; sleep 5; done

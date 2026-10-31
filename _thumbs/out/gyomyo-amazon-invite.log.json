@@ -1,0 +1,28 @@
+{
+ "model": "gpt-image-2",
+ "prompt": "Gyomyo the crazy card cat holds up a big golden invitation envelope with a wax seal, eyes sparkling and tongue out, overjoyed. Around him: plain cardboard shipping boxes with a simple smile-shaped arrow doodle (not a logo), sealed blank trading card booster boxes, flying blank holographic cards, a little calendar with a circled date and a small hourglass timer. Two tiny flags doodled as simple red circle on white and stars-and-stripes shapes to hint Japan and USA.",
+ "refs": [
+  "_character/gyomyo/front.png",
+  "_character/gyomyo/turnaround.png",
+  "_character/style/thumb-style-1.png"
+ ],
+ "outputs": [
+  "_thumbs/out/gyomyo-amazon-invite-1.png",
+  "_thumbs/out/gyomyo-amazon-invite-2.png"
+ ],
+ "usage": {
+  "input_tokens": 6504,
+  "input_tokens_details": {
+   "image_tokens": 5632,
+   "text_tokens": 872
+  },
+  "output_tokens": 14048,
+  "output_tokens_details": {
+   "image_tokens": 14048,
+   "text_tokens": 0
+  },
+  "total_tokens": 20552
+ },
+ "est_cost_usd": 0.4709,
+ "created": "2026-10-31 01:58:40"
+}

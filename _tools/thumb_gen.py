@@ -8,7 +8,10 @@
     "size": "1024x1024",               # 기본 정사각형
     "quality": "high",                 # low | medium | high
     "character": "gyomyo",             # gyomyo | jangnan | pengson (참고 이미지 = _character/<id>/)
-    "mode": "thumbnail",               # thumbnail | emoticon
+    "mode": "magazine",                # magazine(기본) | thumbnail | poster | emoticon
+    "bg": "mint green",                # magazine: 단색 배경 색 (글마다 다르게)
+    "eyes": "spiral pupils",           # magazine: 상황별 눈동자
+    "title2": "...",                   # magazine: 둘째 줄(빨강) 제목
     "refs": ["_character/front.png"],  # 직접 지정할 때만
     "style_refs": ["_character/style/thumb-style-1.png"],  # 스타일 참고(캐릭터 참고에 추가)
     "title": "...", "subtitle": "...", "badge": "...",     # poster 모드: 이미지 안에 그릴 문구
@@ -41,6 +44,17 @@ MODES = {
                "near the top, with a black scribbled badge above it and a yellow highlighter ribbon for the subtitle. The character in "
                "the lower half, same face and proportions as its references, drawn in the same crayon style. Write the given Korean text "
                "exactly, letter for letter, with no extra words. "),
+    # 기본 썸네일 스타일 (2026-10-31 슨생 확정): 잡지 표지형
+    "magazine": ("Square blog thumbnail designed like a bold magazine cover. Match the attached STYLE reference closely. "
+                 "Rules: (1) a single flat solid background color: {bg}, with only a few small flying props and sparkles; "
+                 "(2) the character drawn very large in the lower two thirds, rough sketchy pencil lines with grainy texture and "
+                 "light hand-colored fills, cropped by the frame edges; (3) the character's signature CRAZY EYES: big wide eyes whose "
+                 "outer corners are slightly sharp and pointed; the pupils change with the mood of the scene: {eyes}; "
+                 "(4) a tiny top label between two thin horizontal rules; (5) a huge title in two lines in the SAME typeface as the "
+                 "reference: ultra-heavy, chunky, slightly rough-edged hand-cut bold Korean letters, line 1 in black, line 2 in red; "
+                 "(6) the character's head and body overlap IN FRONT of the lower part of the title so some letters are partly hidden, "
+                 "like a magazine cover, but every letter must stay readable. Write the given Korean text exactly, letter for letter, "
+                 "with no extra words. "),
     "emoticon": ("A sticker sheet of the character's emoticons on a pure white background, arranged in an even grid with generous spacing, "
                  "each sticker fully separated with no overlap and nothing touching the edges. Same crayon line style for every sticker, "
                  "black lines only with at most a tiny touch of pink on the cheeks. Do not write any text or letters. "),
@@ -52,6 +66,11 @@ def build_prompt(req):
     who = (f"The attached reference images show {c['name']}, an original mascot of the blvl blog: {c['desc']} " if c else
            "The attached reference image(s) show an original mascot character of the blvl blog. ")
     text = ""
+    if req.get("mode") == "magazine":
+        text = (f'Text to write — top label: "{req.get("badge", "")}"; title line 1 (black): "{req.get("title", "")}"; '
+                f'title line 2 (red): "{req.get("title2", "")}". ')
+        mode = MODES["magazine"].format(bg=req.get("bg", "warm yellow"), eyes=req.get("eyes", "sparkling yellow stars"))
+        return who + LOOK + mode + text + SAFE + "Scene: " + req["prompt"]
     if req.get("mode") == "poster":
         text = (f'Text to write — badge: "{req.get("badge", "")}"; title line(s): "{req.get("title", "")}"; '
                 f'subtitle ribbon: "{req.get("subtitle", "")}". ')

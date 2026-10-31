@@ -1,0 +1,11 @@
+yodobashi_search	ERR	ReadTimeout
+yodobashi_limited	200	7148		https://limited.yodobashi.com/
+amiami_search	403	6106		https://slist.amiami.jp/top/search/list?s_keywords=%E3%83%8F%E3%83%89%E3%82%A6%E3%82%B7%E3
+hobbysearch_search	403	6054		https://www.1999.co.jp/search?searchkey=%E3%83%8F%E3%83%89%E3%82%A6%E3%82%B7%E3%83%BC%E3%8
+rakutenbooks_search	200	160932	在庫あり,予約受付中,ハドウシーカー	https://books.rakuten.co.jp/search?sitem=%E3%83%8F%E3%83%89%E3%82%A6%E3%82%B7%E3%83%BC%E3%
+aeon_lottery	403	48649		https://aeonretail.com/Page/k-lottery_sale.aspx
+pco_lottery	403	10265		https://wr.pokemoncenter-online.com/?c=pol&e=wr20261027ltr&ver=javascript-4.4.3&cver=245&m
+yellowsub	200	91187		https://yellowsubmarine.co.jp/
+torecaplaza55	200	280878	カートに入れる,抽選	https://torecaplaza55.com/
+7net	200	45965	ハドウシーカー	https://7net.omni7.jp/search?q=%E3%83%8F%E3%83%89%E3%82%A6%E3%82%B7%E3%83%BC%E3%82%AB%E3%8
+pbandai	200	10830		https://p-bandai.jp/global_newpc.html

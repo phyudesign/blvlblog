@@ -60,6 +60,11 @@ MODES = {
               "grainy texture and light hand-colored fills, on a single flat solid background color: {bg}. The character is the star "
               "of the scene with its signature CRAZY EYES (big wide eyes with slightly sharp pointed outer corners; pupils: {eyes}). "
               "Simple, readable composition with few props. Do not write any text, letters, numbers or logos anywhere. "),
+    # 배경 장식용 캐릭터 스티커: 흰 배경 위 캐릭터 하나 (배경은 나중에 제거)
+    "sprite": ("A single character sticker for a website decoration, drawn in the same style as the attached STYLE reference: rough "
+               "sketchy pencil lines with grainy texture and light hand-colored fills. Pure plain white background, no shadow, no ground, "
+               "no frame, no other objects except the props mentioned. Keep the character's face and proportions identical to its "
+               "references. Do not write any text, letters or numbers. "),
     "emoticon": ("A sticker sheet of the character's emoticons on a pure white background, arranged in an even grid with generous spacing, "
                  "each sticker fully separated with no overlap and nothing touching the edges. Same crayon line style for every sticker, "
                  "black lines only with at most a tiny touch of pink on the cheeks. Do not write any text or letters. "),
@@ -79,6 +84,8 @@ def build_prompt(req):
     if req.get("mode") == "scene":
         mode = MODES["scene"].format(bg=req.get("bg", "soft cream"), eyes=req.get("eyes", "simple black dots"))
         return who + LOOK + mode + SAFE + "Scene: " + req["prompt"]
+    if req.get("mode") == "sprite":
+        return who + LOOK + MODES["sprite"] + SAFE + "Pose: " + req["prompt"]
     if req.get("mode") == "poster":
         text = (f'Text to write — badge: "{req.get("badge", "")}"; title line(s): "{req.get("title", "")}"; '
                 f'subtitle ribbon: "{req.get("subtitle", "")}". ')
@@ -103,7 +110,7 @@ def todo(only):
 def refs_for(req):
     folder = CHAR_DIR / req["character"] if req.get("character") else CHAR_DIR
     paths = [ROOT / p for p in req.get("refs", [])] or sorted(p for p in folder.iterdir() if p.suffix.lower() in IMG_EXT)
-    style = req.get("style_refs") or (["_character/style/magazine-1.png"] if req.get("mode", "magazine") in ("magazine", "scene") else [])
+    style = req.get("style_refs") or (["_character/style/magazine-1.png"] if req.get("mode", "magazine") in ("magazine", "scene", "sprite") else [])
     paths += [ROOT / p for p in style]
     return [p for p in paths if p.exists()][:16]
 

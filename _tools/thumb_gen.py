@@ -10,6 +10,8 @@
     "character": "gyomyo",             # gyomyo | jangnan | pengson (참고 이미지 = _character/<id>/)
     "mode": "thumbnail",               # thumbnail | emoticon
     "refs": ["_character/front.png"],  # 직접 지정할 때만
+    "style_refs": ["_character/style/thumb-style-1.png"],  # 스타일 참고(캐릭터 참고에 추가)
+    "title": "...", "subtitle": "...", "badge": "...",     # poster 모드: 이미지 안에 그릴 문구
     "regenerate": false                # true면 이미 만든 결과가 있어도 다시 생성
   }
 결과: _thumbs/out/<이름>-1.png, -2.png …  (요청 파일 옆 기록: _thumbs/out/<이름>.log.json)
@@ -33,6 +35,12 @@ MODES = {
     "thumbnail": ("Square blog thumbnail. The character keeps its black crayon line art; the background is a soft pastel colored-paper "
                   "texture with a few simple crayon doodles. Bright, cute and funny. Keep the top 35% of the image empty and calm for a title "
                   "that will be added later. Do not write any text or letters. "),
+    "poster": ("Square blog thumbnail poster. Match the overall style of the last attached STYLE reference: a dense, energetic "
+               "hand-drawn crayon illustration on cream paper, thick black crayon outlines, scribbly pastel crayon fills (pink, yellow, "
+               "sky blue, lilac), sparkles and motion lines, the whole frame filled edge to edge. Big hand-lettered crayon title text "
+               "near the top, with a black scribbled badge above it and a yellow highlighter ribbon for the subtitle. The character in "
+               "the lower half, same face and proportions as its references, drawn in the same crayon style. Write the given Korean text "
+               "exactly, letter for letter, with no extra words. "),
     "emoticon": ("A sticker sheet of the character's emoticons on a pure white background, arranged in an even grid with generous spacing, "
                  "each sticker fully separated with no overlap and nothing touching the edges. Same crayon line style for every sticker, "
                  "black lines only with at most a tiny touch of pink on the cheeks. Do not write any text or letters. "),
@@ -43,7 +51,11 @@ def build_prompt(req):
     c = CHARS.get(req.get("character", ""), {})
     who = (f"The attached reference images show {c['name']}, an original mascot of the blvl blog: {c['desc']} " if c else
            "The attached reference image(s) show an original mascot character of the blvl blog. ")
-    return who + LOOK + MODES.get(req.get("mode", "thumbnail"), "") + SAFE + "Scene: " + req["prompt"]
+    text = ""
+    if req.get("mode") == "poster":
+        text = (f'Text to write — badge: "{req.get("badge", "")}"; title line(s): "{req.get("title", "")}"; '
+                f'subtitle ribbon: "{req.get("subtitle", "")}". ')
+    return who + LOOK + MODES.get(req.get("mode", "thumbnail"), "") + text + SAFE + "Scene: " + req["prompt"]
 
 STYLE_LEGACY = (
     "The attached reference image(s) show 'blvl', the original mascot character of the blvl blog. "
@@ -64,6 +76,7 @@ def todo(only):
 def refs_for(req):
     folder = CHAR_DIR / req["character"] if req.get("character") else CHAR_DIR
     paths = [ROOT / p for p in req.get("refs", [])] or sorted(p for p in folder.iterdir() if p.suffix.lower() in IMG_EXT)
+    paths += [ROOT / p for p in req.get("style_refs", [])]
     return [p for p in paths if p.exists()][:16]
 
 def generate(name, req):

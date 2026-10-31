@@ -8,7 +8,7 @@
     "size": "1024x1024",               # 기본 정사각형
     "quality": "high",                 # low | medium | high
     "character": "gyomyo",             # gyomyo | jangnan | pengson (참고 이미지 = _character/<id>/)
-    "mode": "magazine",                # magazine(기본) | thumbnail | poster | emoticon
+    "mode": "magazine",                # magazine(기본) | scene(본문 삽화, 글자 없음) | thumbnail | poster | emoticon
     "bg": "mint green",                # magazine: 단색 배경 색 (글마다 다르게)
     "eyes": "spiral pupils",           # magazine: 상황별 눈동자
     "title2": "...",                   # magazine: 둘째 줄(빨강) 제목
@@ -55,6 +55,11 @@ MODES = {
                  "(6) the character's head and body overlap IN FRONT of the lower part of the title so some letters are partly hidden, "
                  "like a magazine cover, but every letter must stay readable. Write the given Korean text exactly, letter for letter, "
                  "with no extra words. "),
+    # 본문 삽화: 썸네일과 같은 그림체, 글자 없음, 가로형
+    "scene": ("A wide blog illustration in the same drawing style as the attached STYLE reference: rough sketchy pencil lines with "
+              "grainy texture and light hand-colored fills, on a single flat solid background color: {bg}. The character is the star "
+              "of the scene with its signature CRAZY EYES (big wide eyes with slightly sharp pointed outer corners; pupils: {eyes}). "
+              "Simple, readable composition with few props. Do not write any text, letters, numbers or logos anywhere. "),
     "emoticon": ("A sticker sheet of the character's emoticons on a pure white background, arranged in an even grid with generous spacing, "
                  "each sticker fully separated with no overlap and nothing touching the edges. Same crayon line style for every sticker, "
                  "black lines only with at most a tiny touch of pink on the cheeks. Do not write any text or letters. "),
@@ -71,6 +76,9 @@ def build_prompt(req):
                 f'title line 2 (red): "{req.get("title2", "")}". ')
         mode = MODES["magazine"].format(bg=req.get("bg", "warm yellow"), eyes=req.get("eyes", "sparkling yellow stars"))
         return who + LOOK + mode + text + SAFE + "Scene: " + req["prompt"]
+    if req.get("mode") == "scene":
+        mode = MODES["scene"].format(bg=req.get("bg", "soft cream"), eyes=req.get("eyes", "simple black dots"))
+        return who + LOOK + mode + SAFE + "Scene: " + req["prompt"]
     if req.get("mode") == "poster":
         text = (f'Text to write — badge: "{req.get("badge", "")}"; title line(s): "{req.get("title", "")}"; '
                 f'subtitle ribbon: "{req.get("subtitle", "")}". ')
@@ -95,7 +103,7 @@ def todo(only):
 def refs_for(req):
     folder = CHAR_DIR / req["character"] if req.get("character") else CHAR_DIR
     paths = [ROOT / p for p in req.get("refs", [])] or sorted(p for p in folder.iterdir() if p.suffix.lower() in IMG_EXT)
-    style = req.get("style_refs") or (["_character/style/magazine-1.png"] if req.get("mode", "magazine") == "magazine" else [])
+    style = req.get("style_refs") or (["_character/style/magazine-1.png"] if req.get("mode", "magazine") in ("magazine", "scene") else [])
     paths += [ROOT / p for p in style]
     return [p for p in paths if p.exists()][:16]
 

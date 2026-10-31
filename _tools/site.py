@@ -17,7 +17,8 @@ DESC = "포켓몬카드·미니카·피규어·게임 — 직접 모으고 즐�
 ADSENSE = "ca-pub-4380904134243959"
 AUTHOR = "blvl."
 PER_PAGE = 10
-CSS_VER = 8
+CSS_VER = 10
+JS_VER = 1
 
 # 카테고리: (슬러그, 메뉴명, 설명)
 CATS = [
@@ -78,8 +79,26 @@ def page(title, content, desc=DESC, canon="/", og_img="", head_extra="", active=
 <ul class="main-nav">{nav}</ul><a class="nav-search" href="/search/" aria-label="검색">{SEARCH_SVG}</a></nav>
 </div></header>
 {content}
+<script defer src="/assets/blvl-stats.js?v={JS_VER}"></script>
 <footer class="site-footer"><nav class="footer-links" aria-label="사이트 정보"><a href="/about/">소개</a> · <a href="/privacy/">개인정보처리방침</a> · <a href="/contact/">문의</a></nav>© {YEAR} {TITLE}</footer>
 </body></html>'''
+
+def pstat(p, hit=False):
+    # 조회수·댓글 수 자리 (assets/blvl-stats.js가 채움)
+    return f'<span class="pstat"{" data-hit" if hit else ""} data-slug="{esc(p["slug"])}"></span>'
+
+def comments_box(p):
+    return f'''<section id="comments" class="comments" data-slug="{esc(p["slug"])}">
+<h2 class="cm-title">댓글 <span class="cm-count">0</span></h2>
+<p class="cm-empty">아직 댓글이 없어요. 첫 댓글을 남겨 주세요!</p>
+<ol class="cm-list"></ol>
+<form class="cm-form" autocomplete="off">
+<div class="cm-row"><input name="nick" maxlength="20" placeholder="닉네임" aria-label="닉네임" required><input name="pw" type="password" maxlength="30" placeholder="비밀번호 (삭제용)" aria-label="비밀번호" required></div>
+<input name="website" class="cm-trap" tabindex="-1" aria-hidden="true" autocomplete="off">
+<textarea name="body" maxlength="1000" rows="4" placeholder="로그인 없이 자유롭게 남겨 주세요. 링크는 넣을 수 없어요." aria-label="댓글 내용" required></textarea>
+<div class="cm-actions"><span class="cm-note" role="status"></span><button type="submit">댓글 등록</button></div>
+<p class="cm-policy">댓글을 남기면 닉네임과 내용이 공개되며, 스팸 방지를 위해 <a href="/privacy/">개인정보처리방침</a>에 따라 처리돼요.</p>
+</form></section>'''
 
 def catlink(k): return f'<a href="/category/{k}/">{esc(CAT_NAME[k])}</a>'
 
@@ -88,7 +107,7 @@ def gcard(p, exc=False):
     ex = f'<p class="gexc">{esc(p["desc"][:110])}…</p>' if exc else ""
     return f'''<div class="gbc"><a class="gimg" href="{url(p["slug"])}">{img}</a>
 <div class="gcat">{catlink(p["category"])}</div><h2 class="gtitle"><a href="{url(p["slug"])}">{esc(p["title"])}</a></h2>
-<div class="gmeta"><span>Written by:</span><b>{AUTHOR}</b><span>/</span><time>{kdate(p["date"])}</time></div>{ex}</div>'''
+<div class="gmeta"><span>Written by:</span><b>{AUTHOR}</b><span>/</span><time>{kdate(p["date"])}</time>{pstat(p)}</div>{ex}</div>'''
 
 def sidebar():
     rec = "".join(f'<li><a href="{url(q["slug"])}">{esc(q["title"])}</a></li>' for q in posts[:5])
@@ -104,7 +123,7 @@ def with_sidebar(main): return f'<div class="site-content"><main class="content-
 def arch_item(p):
     img = f'<div class="post-image"><a href="{url(p["slug"])}"><img loading="lazy" src="{esc(p["thumb"])}" alt="{esc(p["title"])}"></a></div>' if p["thumb"] else ""
     return f'''<article class="inside-article"><header><h2 class="entry-title"><a href="{url(p["slug"])}">{esc(p["title"])}</a></h2>
-<div class="entry-meta"><time>{kdate(p["date"])}</time> by {AUTHOR}</div></header>{img}
+<div class="entry-meta"><time>{kdate(p["date"])}</time> by {AUTHOR}{pstat(p)}</div></header>{img}
 <div class="entry-summary"><p>{esc(p["desc"])}</p></div><a class="read-more" href="{url(p["slug"])}">더 보기</a></article>'''
 
 def write(path, s):
@@ -144,9 +163,10 @@ for idx, p in enumerate(posts):
     fimg = f'<div class="single-featured-image"><img src="{esc(p["thumb"])}" alt="{esc(p["title"])}"></div>' if p["thumb"] and p["thumb"] not in p["body"] else ""
     upd = f' · 수정 {kdate(p["mod"])}' if p["mod"][:10] != p["date"][:10] else ""
     main = f'''<article class="inside-article"><header><h1 class="entry-title">{esc(p["title"])}</h1>
-<div class="entry-meta"><time>{kdate(p["date"])}</time>{upd} by {AUTHOR}</div></header>{fimg}
+<div class="entry-meta"><time>{kdate(p["date"])}</time>{upd} by {AUTHOR}{pstat(p, hit=True)}</div></header>{fimg}
 <div class="entry-content">{p["body"]}</div>
-<footer><div class="entry-meta">카테고리: {catlink(p["category"])}</div><div class="gp-custom-tag-section">{tag_html}</div>{nav}</footer></article>'''
+<footer><div class="entry-meta">카테고리: {catlink(p["category"])}</div><div class="gp-custom-tag-section">{tag_html}</div>{nav}</footer></article>
+{comments_box(p)}'''
     write(url(p["slug"]), page(p["title"], with_sidebar(main), p["desc"], url(p["slug"]), p["thumb"], f'<script type="application/ld+json">{ld}</script>'))
 
 # ── 고정 페이지

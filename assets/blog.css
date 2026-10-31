@@ -168,4 +168,4 @@ h1,h2,h3,h4{font-weight:700;line-height:1.2;margin:0 0 20px}
 .cm-delform[hidden]{display:none!important}
 .gmeta .pstat{min-width:0;margin-left:10px;gap:8px;font-size:13.5px}.gmeta .pstat span{margin-right:0}
 @media(max-width:768px){.gmeta .pstat{margin-left:10px}}
-.gmeta{column-gap:10px}.gmeta .pstat,@media(max-width:768px){}.gmeta .pstat{margin-left:0!important}
+.gmeta{column-gap:10px}.gmeta .pstat{margin-left:0!important}

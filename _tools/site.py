@@ -17,7 +17,7 @@ DESC = "포켓몬카드·미니카·피규어·게임 — 직접 모으고 즐�
 ADSENSE = "ca-pub-4380904134243959"
 AUTHOR = "blvl."
 PER_PAGE = 10
-CSS_VER = 10
+CSS_VER = 11
 JS_VER = 1
 
 # 카테고리: (슬러그, 메뉴명, 설명)

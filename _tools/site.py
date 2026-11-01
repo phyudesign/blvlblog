@@ -17,7 +17,7 @@ DESC = "포켓몬카드·미니카·피규어·게임 — 직접 모으고 즐�
 ADSENSE = "ca-pub-4380904134243959"
 AUTHOR = "blvl."
 PER_PAGE = 10
-CSS_VER = 17
+CSS_VER = 18
 JS_VER = 1
 
 # 카테고리: (슬러그, 메뉴명, 설명)
@@ -222,7 +222,8 @@ def ticker():
     return f'''<section class="ticker" aria-label="STOCK LIVE 실시간 재고 속보">
 <a class="tk-label" href="/category/news/"><i aria-hidden="true"></i>STOCK LIVE</a>
 <div class="tk-view"><div class="tk-track" style="--dur:{dur}s"><div class="tk-run">{track}</div><div class="tk-run" aria-hidden="true">{track}</div></div></div>
-<a class="tk-more" href="/stock/">현황판 →</a></section>'''
+<a class="tk-more" href="/stock/">현황판 →</a></section>
+<script defer src="/assets/blvl-ticker.js?v=1"></script>'''
 
 feat = [p for p in articles if p.get("featured")]
 feat = (feat + [p for p in articles if p not in feat])[:5]

@@ -223,8 +223,12 @@ a.tk-item:hover{color:#ffd84d}
 .tk-tag.idle{background:#3a3c44;color:#cfd1d8}
 .tk-more{flex:none;display:flex;align-items:center;padding:0 16px;border-left:1px solid #2c2e35;font-size:13px;font-weight:700;color:#cfd1d8!important}
 .tk-more:hover{color:#fff!important}
+.ticker.js .tk-track{animation:none;will-change:transform}
+.ticker.js .tk-view{touch-action:pan-y;cursor:grab;-webkit-user-select:none;user-select:none}
+.ticker.js.dragging .tk-view{cursor:grabbing}
+.ticker.js.dragging a.tk-item{pointer-events:none}
 @keyframes tk-roll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @keyframes tk-blink{0%,100%{opacity:1}50%{opacity:.25}}
 @media(max-width:768px){.ticker{margin:18px auto 8px;height:42px;border-radius:10px;font-size:13.5px}.tk-label{padding:0 12px;font-size:19px}.tk-label span,.tk-more{display:none}.tk-item{padding:0 20px}}
-@media(prefers-reduced-motion:reduce){.tk-track{animation:none}.tk-view{overflow-x:auto}.tk-run[aria-hidden]{display:none}}
+@media(prefers-reduced-motion:reduce){.ticker:not(.js) .tk-track{animation:none}.ticker:not(.js) .tk-view{overflow-x:auto}.ticker:not(.js) .tk-run[aria-hidden]{display:none}}
 @media print{.ticker{display:none}}

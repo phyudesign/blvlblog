@@ -1,20 +1,100 @@
-gp_pokeca_feed	200	1699499	Amazon,ポケモンセンター,駿河屋,抽選,品切れ,ハドウシーカー	https://premium.gamepedia.jp/pokeca/feed
-gp_toreca_feed	200	1457827	Amazon,駿河屋,抽選	https://premium.gamepedia.jp/toreca/feed
-gp_shopping_feed	200	1356218	Amazon,抽選	https://premium.gamepedia.jp/shopping/feed
-gp_pokeca_156	200	163082	Amazon,ポケモンセンター,駿河屋,抽選,ハドウシーカー	https://premium.gamepedia.jp/pokeca/archives/156
-snkrdunk_32581	200	414512	Amazon,ポケモンセンター,駿河屋,抽選,ハドウシーカー	https://snkrdunk.com/articles/32581/
-altema_op	403	389		https://altema.jp/onepiececard/soukaityuusen
-     Access Denied Access Denied You don't have permission to access "http&#58;&#47;&#47;altema&#46;jp&#47;onepiececard&#47;soukaityuusen" on this server. Reference&#32;&#35;18&#46;8a1c1602&#46;1793505517&#46;625f3f9c https&#58;&#47;&#47;errors&#46;edgesuite&#46;net&#47;18&#46;8a1c1602&#46;1793505517&#4
-   server: None  
-altema_pk	403	375		https://altema.jp/pokemoncard/
-     Access Denied Access Denied You don't have permission to access "http&#58;&#47;&#47;altema&#46;jp&#47;pokemoncard&#47;" on this server. Reference&#32;&#35;18&#46;8a1c1602&#46;1793505519&#46;625f610a https&#58;&#47;&#47;errors&#46;edgesuite&#46;net&#47;18&#46;8a1c1602&#46;1793505519&#46;625f610a 
-   server: None  
-pokemoncard_info	200	242838	ポケモンセンター,抽選,ハドウシーカー	https://www.pokemon-card.com/info/
-pco_news	403	10002		https://wr.pokemoncenter-online.com/?c=pol&e=wr20261030ec&ver=v3-javascript-3.7.10&cver=24
-     Restricted access We are sorry, your access has been restricted Time: 2026-11-01T03:58:43.8569361Z UTC Original URL: wr.pokemoncenter-online.com/?c=pol&amp;e=wr20261030ec&amp;ver=v3-javascript-3.7.10&amp;cver=245&amp;man=pol-prd-rule-sfcc&amp;t=https%3A%2F%2Fwww.pokemoncenter-online.com%2Fon%2Fdema
-   server: Kestrel  
-pco_top	403	9982		https://wr.pokemoncenter-online.com/?c=pol&e=wr20261030ec&ver=v3-javascript-3.7.10&cver=24
-     Restricted access We are sorry, your access has been restricted Time: 2026-11-01T03:58:46.4076204Z UTC Original URL: wr.pokemoncenter-online.com/?c=pol&amp;e=wr20261030ec&amp;ver=v3-javascript-3.7.10&amp;cver=245&amp;man=pol-prd-rule-sfcc&amp;t=https%3A%2F%2Fwww.pokemoncenter-online.com%2Fon%2Fdema
-   server: Kestrel  
-onepiece_news	200	42556		https://www.onepiece-cardgame.com/news/
-amazon_asin	200	526348	Amazon,カートに入れる,ハドウシーカー	https://www.amazon.co.jp/dp/B0H4PQ6LR5
+== B0H4PQ6LR5 200 3869 captcha=True
+ title: None
+ [招待] -
+ [invitation] -
+ [inviteButton] -
+ [add-to-cart-button] -
+ [buy-now-button] -
+ [現在在庫切れ] -
+ [在庫あり] -
+ [一時的に在庫切れ] -
+ [予約] -
+ [出荷元] -
+ [販売元] -
+ [merchant-info] -
+ [priceToPay] -
+ [a-price-whole] -
+ [landingImage] -
+ [outOfStock] -
+ [availability] -
+ img: None
+== B0GXCRBL5J 200 3869 captcha=True
+ title: None
+ [招待] -
+ [invitation] -
+ [inviteButton] -
+ [add-to-cart-button] -
+ [buy-now-button] -
+ [現在在庫切れ] -
+ [在庫あり] -
+ [一時的に在庫切れ] -
+ [予約] -
+ [出荷元] -
+ [販売元] -
+ [merchant-info] -
+ [priceToPay] -
+ [a-price-whole] -
+ [landingImage] -
+ [outOfStock] -
+ [availability] -
+ img: None
+== B0HFVPJF4Q 200 3869 captcha=True
+ title: None
+ [招待] -
+ [invitation] -
+ [inviteButton] -
+ [add-to-cart-button] -
+ [buy-now-button] -
+ [現在在庫切れ] -
+ [在庫あり] -
+ [一時的に在庫切れ] -
+ [予約] -
+ [出荷元] -
+ [販売元] -
+ [merchant-info] -
+ [priceToPay] -
+ [a-price-whole] -
+ [landingImage] -
+ [outOfStock] -
+ [availability] -
+ img: None
+== B0FSJXSPPX 200 3869 captcha=True
+ title: None
+ [招待] -
+ [invitation] -
+ [inviteButton] -
+ [add-to-cart-button] -
+ [buy-now-button] -
+ [現在在庫切れ] -
+ [在庫あり] -
+ [一時的に在庫切れ] -
+ [予約] -
+ [出荷元] -
+ [販売元] -
+ [merchant-info] -
+ [priceToPay] -
+ [a-price-whole] -
+ [landingImage] -
+ [outOfStock] -
+ [availability] -
+ img: None
+== B0H43ZX8LK 200 3869 captcha=True
+ title: None
+ [招待] -
+ [invitation] -
+ [inviteButton] -
+ [add-to-cart-button] -
+ [buy-now-button] -
+ [現在在庫切れ] -
+ [在庫あり] -
+ [一時的に在庫切れ] -
+ [予約] -
+ [出荷元] -
+ [販売元] -
+ [merchant-info] -
+ [priceToPay] -
+ [a-price-whole] -
+ [landingImage] -
+ [outOfStock] -
+ [availability] -
+ img: None

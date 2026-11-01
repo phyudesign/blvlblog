@@ -17,7 +17,7 @@ DESC = "포켓몬카드·미니카·피규어·게임 — 직접 모으고 즐�
 ADSENSE = "ca-pub-4380904134243959"
 AUTHOR = "blvl."
 PER_PAGE = 10
-CSS_VER = 19
+CSS_VER = 20
 JS_VER = 1
 
 # 카테고리: (슬러그, 메뉴명, 설명)
@@ -205,7 +205,7 @@ def ticker():
         name = q["title"].replace("[추첨·판매 속보] ", "").replace("[입고 속보] ", "")
         sub = " · ".join(x for x in (q.get("shop_kr", ""), q.get("status_kr", ""), q.get("price", "")) if x)
         rows.append(("hot", "속보", name, url(q["slug"]), q["date"][5:16].replace("-", "/"), False,
-                     {"img": re.sub(r"downsize=\d+", "downsize=400", q.get("pimg") or "") or q["thumb"], "name": name, "sub": sub or "STOCK LIVE 속보", "cta": "속보 글 보기"}))
+                     {"img": re.sub(r"downsize=\d+", "downsize=400", q.get("pimg") or ""), "name": name, "sub": sub or "STOCK LIVE 속보", "cta": "속보 글 보기"}))
     for v in st.get("items", {}).values():
         if v.get("status") not in ("instock", "preorder"): continue
         name = re.sub(r"^\s+|\s+$", "", kr(v["title"]))[:48]
@@ -228,7 +228,7 @@ def ticker():
 <a class="tk-label" href="/category/news/"><i aria-hidden="true"></i>LIVE</a>
 <div class="tk-view"><div class="tk-track" style="--dur:{dur}s"><div class="tk-run">{track}</div><div class="tk-run" aria-hidden="true">{track}</div></div></div>
 <a class="tk-more" href="/stock/">현황판 →</a></section>
-<script defer src="/assets/blvl-ticker.js?v=2"></script>'''
+<script defer src="/assets/blvl-ticker.js?v=3"></script>'''
 
 feat = [p for p in articles if p.get("featured")]
 feat = (feat + [p for p in articles if p not in feat])[:5]

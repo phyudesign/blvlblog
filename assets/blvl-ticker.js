@@ -49,8 +49,9 @@
   card.innerHTML = '<div class="tp-img"><img alt="" referrerpolicy="no-referrer"></div><div class="tp-txt"><b></b><span></span><em></em></div>';
   document.body.appendChild(card);
   var cImg = card.querySelector("img"), cName = card.querySelector("b"), cSub = card.querySelector("span"), cCta = card.querySelector("em");
-  var FALLBACK = "/wp-content/uploads/2026/10/blvl-stock-alert.jpg";
-  cImg.onerror = function () { if (cImg.getAttribute("src") !== FALLBACK) cImg.src = FALLBACK; };
+  var cBox = card.querySelector(".tp-img");
+  // 상품 사진이 없거나 못 불러오면 사진 칸 없이 글자만 보여 줌 (속보 그림으로 대신하지 않음)
+  cImg.onerror = function () { cBox.hidden = true; };
   var shownItem = null, armed = null;
 
   function itemAt(cx, cy) {
@@ -61,7 +62,8 @@
     if (!item) return;
     if (item !== shownItem) {
       shownItem = item;
-      cImg.src = item.dataset.img || FALLBACK;
+      if (item.dataset.img) { cBox.hidden = false; cImg.src = item.dataset.img; }
+      else { cBox.hidden = true; cImg.removeAttribute("src"); }
       cName.textContent = item.dataset.name || "";
       cSub.textContent = item.dataset.sub || "";
       cCta.textContent = (ptype === "touch" ? "짧게 탭하면 " : "클릭하면 ") + (item.dataset.cta || "열기");

@@ -204,9 +204,9 @@ h1,h2,h3,h4{font-weight:700;line-height:1.2;margin:0 0 20px}
 @media(prefers-reduced-motion:reduce){.feat .big::before,.feat::after{animation:none}}
 
 /* ── 홈 상단 TCG 속보 전광판 */
-.ticker{display:flex;align-items:stretch;height:46px;width:calc(100% - 40px);max-width:calc(var(--gw) - 40px);margin:30px auto 14px;background:#16171b;color:#f2f2f2;border-radius:12px;overflow:hidden;box-shadow:0 6px 18px rgba(20,20,30,.12);font-size:14.5px}
+.ticker{display:flex;align-items:stretch;height:46px;width:calc(100% - 40px);max-width:calc(var(--gw) - 40px);margin:30px auto 14px;background:#16171b;color:#f2f2f2;border-radius:12px;overflow:hidden;box-shadow:0 6px 18px rgba(20,20,30,.12);font-size:13.5px}
 .ticker a{color:inherit;text-decoration:none}
-.tk-label{flex:none;display:flex;align-items:center;gap:8px;padding:0 16px 0 18px;background:#e8362d;color:#fff!important;font-family:"Bebas Kai","Bebas Neue",sans-serif;font-size:22px;letter-spacing:.5px;line-height:1}
+.tk-label{flex:none;display:flex;align-items:center;gap:8px;padding:0 16px 0 18px;background:#e8362d;color:#fff!important;font-family:"Bebas Kai","Bebas Neue",sans-serif;font-size:20px;letter-spacing:.5px;line-height:1}
 .tk-label span{font-family:inherit;font-size:15px;font-weight:700;letter-spacing:0;opacity:.95;font-family:system-ui,sans-serif}
 .tk-label i{width:9px;height:9px;border-radius:50%;background:#fff;animation:tk-blink 1.2s ease-in-out infinite}
 .tk-view{flex:1;min-width:0;overflow:hidden;position:relative;-webkit-mask-image:linear-gradient(90deg,transparent,#000 28px,#000 calc(100% - 28px),transparent);mask-image:linear-gradient(90deg,transparent,#000 28px,#000 calc(100% - 28px),transparent)}
@@ -217,7 +217,7 @@ h1,h2,h3,h4{font-weight:700;line-height:1.2;margin:0 0 20px}
 .tk-item::after{content:"";position:absolute;right:0;top:50%;width:4px;height:4px;margin-top:-2px;border-radius:50%;background:#55575f}
 a.tk-item:hover{color:#ffd84d}
 .tk-item time{color:#8d909a;font-size:12.5px}
-.tk-tag{flex:none;padding:3px 8px;border-radius:999px;font-size:11.5px;font-weight:800;line-height:1.2}
+.tk-tag{flex:none;padding:3px 8px;border-radius:999px;font-size:11px;font-weight:800;line-height:1.2}
 .tk-tag.hot{background:#e8362d;color:#fff}
 .tk-tag.on{background:#2fbf71;color:#0b2416}
 .tk-tag.idle{background:#3a3c44;color:#cfd1d8}
@@ -229,7 +229,7 @@ a.tk-item:hover{color:#ffd84d}
 .ticker.js.dragging a.tk-item{pointer-events:none}
 @keyframes tk-roll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @keyframes tk-blink{0%,100%{opacity:1}50%{opacity:.25}}
-@media(max-width:768px){.ticker{margin:18px auto 8px;height:42px;border-radius:10px;font-size:13.5px}.tk-label{padding:0 12px;font-size:19px}.tk-label span,.tk-more{display:none}.tk-item{padding:0 20px}}
+@media(max-width:768px){.ticker{margin:18px auto 8px;height:40px;border-radius:10px;font-size:12.5px}.tk-label{padding:0 12px;font-size:18px}.tk-label span,.tk-more{display:none}.tk-item{padding:0 20px}}
 @media(prefers-reduced-motion:reduce){.ticker:not(.js) .tk-track{animation:none}.ticker:not(.js) .tk-view{overflow-x:auto}.ticker:not(.js) .tk-run[aria-hidden]{display:none}}
 @media print{.ticker{display:none}}
 .ticker.js .tk-view{-webkit-touch-callout:none}
@@ -246,3 +246,9 @@ a.tk-item:hover{color:#ffd84d}
 .tp-txt em{font-style:normal;font-size:11.5px;color:#8d909a}
 @media(max-width:768px){.tk-peek{width:200px}}
 @media print{.tk-peek{display:none}}
+
+.tp-img[hidden]{display:none}
+/* 메뉴·홈 화면 글자는 손가락이 닿아도 선택되지 않게 (글 본문은 복사할 수 있게 그대로) */
+.site-header,.main-nav,.custom-title,.gb-section,.ticker,.gcat,.gmeta,.widget-title,.page-header,.site-footer{-webkit-user-select:none;user-select:none}
+.gb-section a,.site-header a{-webkit-user-drag:none}
+input,textarea,select{-webkit-user-select:text;user-select:text}

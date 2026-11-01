@@ -66,10 +66,10 @@ def scan_rakuten(h):
         elif re.search(r"買い物\s*かごに入れる|かごに入れる", body): st = "instock"
         else: st = "unknown"
         pm = re.search(r"([\d,]{3,})円", body)
-        im = (re.search(r'<img[^>]+?(?:data-src|src)="(https://[^"]*(?:thumbnail\.image\.rakuten|r10s)[^"]*)"', blk)
-              or re.search(r'<img[^>]+?src="(https://[^"]+\.(?:jpe?g|png|webp|gif)[^"]*)"', blk))
+        im = (re.search(r'<img[^>]+?(?:data-src|data-original|src)="((?:https:)?//[^"]*(?:thumbnail\.image\.rakuten|r10s)[^"]*)"', blk)
+              or re.search(r'(?:data-src|data-original|src)="((?:https:)?//[^"]+\.(?:jpe?g|png|webp|gif)[^"]*)"', blk))
         items["rakuten:" + rid] = {"shop": "rakuten", "title": title, "url": url, "status": st, "price": pm.group(1) + "엔" if pm else "",
-                                  "img": html.unescape(im.group(1)) if im else ""}
+                                  "img": ("https:" + html.unescape(im.group(1)) if im.group(1).startswith("//") else html.unescape(im.group(1))) if im else ""}
     return items
 
 # ── 추첨·공지 페이지: 관련 키워드가 들어간 짧은 줄 목록

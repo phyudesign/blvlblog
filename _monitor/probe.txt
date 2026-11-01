@@ -1,100 +1,14 @@
-== B0H4PQ6LR5 200 3869 captcha=True
- title: None
- [招待] -
- [invitation] -
- [inviteButton] -
- [add-to-cart-button] -
- [buy-now-button] -
- [現在在庫切れ] -
- [在庫あり] -
- [一時的に在庫切れ] -
- [予約] -
- [出荷元] -
- [販売元] -
- [merchant-info] -
- [priceToPay] -
- [a-price-whole] -
- [landingImage] -
- [outOfStock] -
- [availability] -
- img: None
-== B0GXCRBL5J 200 3869 captcha=True
- title: None
- [招待] -
- [invitation] -
- [inviteButton] -
- [add-to-cart-button] -
- [buy-now-button] -
- [現在在庫切れ] -
- [在庫あり] -
- [一時的に在庫切れ] -
- [予約] -
- [出荷元] -
- [販売元] -
- [merchant-info] -
- [priceToPay] -
- [a-price-whole] -
- [landingImage] -
- [outOfStock] -
- [availability] -
- img: None
-== B0HFVPJF4Q 200 3869 captcha=True
- title: None
- [招待] -
- [invitation] -
- [inviteButton] -
- [add-to-cart-button] -
- [buy-now-button] -
- [現在在庫切れ] -
- [在庫あり] -
- [一時的に在庫切れ] -
- [予約] -
- [出荷元] -
- [販売元] -
- [merchant-info] -
- [priceToPay] -
- [a-price-whole] -
- [landingImage] -
- [outOfStock] -
- [availability] -
- img: None
-== B0FSJXSPPX 200 3869 captcha=True
- title: None
- [招待] -
- [invitation] -
- [inviteButton] -
- [add-to-cart-button] -
- [buy-now-button] -
- [現在在庫切れ] -
- [在庫あり] -
- [一時的に在庫切れ] -
- [予約] -
- [出荷元] -
- [販売元] -
- [merchant-info] -
- [priceToPay] -
- [a-price-whole] -
- [landingImage] -
- [outOfStock] -
- [availability] -
- img: None
-== B0H43ZX8LK 200 3869 captcha=True
- title: None
- [招待] -
- [invitation] -
- [inviteButton] -
- [add-to-cart-button] -
- [buy-now-button] -
- [現在在庫切れ] -
- [在庫あり] -
- [一時的に在庫切れ] -
- [予約] -
- [出荷元] -
- [販売元] -
- [merchant-info] -
- [priceToPay] -
- [a-price-whole] -
- [landingImage] -
- [outOfStock] -
- [availability] -
- img: None
+dengeki_rss	404	23796	items=0	招待=0	asins=0 []	https://dengekionline.com/rss
+dengeki_feed	404	23796	items=0	招待=0	asins=0 []	https://dengekionline.com/feed
+dengeki_art	200	450944	items=0	招待=160	asins=21 ['B00JMD3R0G', 'B06XYD4NYH', 'B074CFYR11', 'B0F189YH8W', 'B0F18J2CJF', 'B0F9KJGGZ5', 'B0FLCWJ1VK', 'B0FLD7HMRP']	https://dengekionline.com/article/202608/83452
+famitsu_rss	404	27447	items=0	招待=0	asins=0 []	https://www.famitsu.com/rss/fcom_all.rdf
+famitsu_art	200	266271	items=0	招待=54	asins=31 ['4045002766', '4088944496', '409227467X', '4092274785', '4301004246', '4301007830', 'B009PL86TM', 'B09997WD23']	https://www.famitsu.com/article/202606/77986
+usedoor_feed	200	12373	items=10	招待=0	asins=0 []	https://usedoor.jp/feed/
+usedoor_art	200	135856	items=0	招待=35	asins=2 ['B0C6PGDBMC', 'B0C6PKQPVM']	https://usedoor.jp/news/2023-09-12-amazon-pokemon-card-game-kodai-no-houkou-mira
+torecamap_feed	404	16148	items=0	招待=0	asins=0 []	https://torecamap.co.jp/feed
+torecamap_col	200	220851	items=0	招待=125	asins=0 []	https://torecamap.co.jp/column/amazon-lottery/
+gp_pokeca_feed	200	1699889	items=10	招待=0	asins=7 ['B0CMZQ7ZVN', 'B0CMZRM9RJ', 'B0CMZS84KP', 'B0CMZT5PV4', 'B0GP9QHQ3Y', 'B0GXCRBL5J', 'B0H4PQ6LR5']	https://premium.gamepedia.jp/pokeca/feed
+gp_toreca_feed	200	1457680	items=10	招待=7	asins=7 ['B0DNB14TNN', 'B0DNB1MMM9', 'B0H4YHHZ2D', 'B0HC9K4J32', 'B0HDRMYYH5', 'B0HFVDNHBM', 'B0HGCSZ3ZM']	https://premium.gamepedia.jp/toreca/feed
+snkrdunk_32581	200	414444	items=0	招待=2	asins=1 ['B0GP928YDZ']	https://snkrdunk.com/articles/32581/
+pokemoncard_info	200	242838	items=0	招待=12	asins=0 []	https://www.pokemon-card.com/info/
+onepiece_news	200	42556	items=0	招待=0	asins=0 []	https://www.onepiece-cardgame.com/news/

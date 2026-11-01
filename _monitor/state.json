@@ -469,6 +469,8 @@
   }
  },
  "anews": [
+  "85ba75898d1e",
+  "d2fb3e4dcf13",
   "ffbaa5e9971b",
   "16c1d3b33c32",
   "1b0e505a065f",
@@ -511,5 +513,127 @@
   "682759385b98",
   "28887fa1f0a7",
   "460d09521079"
- ]
+ ],
+ "amazon": {
+  "B0H4PQ6LR5": {
+   "name": "포켓몬카드 확장팩 파동시커 BOX",
+   "price": "6,006엔",
+   "first": "2026-10-31",
+   "last": "2026-11-02",
+   "src": "blvl 확인",
+   "srcurl": ""
+  },
+  "B0GXCRBL5J": {
+   "name": "포켓몬카드 30th CELEBRATION BOX",
+   "price": "7,216엔",
+   "first": "2026-10-31",
+   "last": "2026-11-02",
+   "src": "blvl 확인",
+   "srcurl": ""
+  },
+  "B0GXCYMRGL": {
+   "name": "포켓몬카드 30th 스타팅 세트",
+   "price": "1,200엔",
+   "first": "2026-10-31",
+   "last": "2026-11-02",
+   "src": "blvl 확인",
+   "srcurl": ""
+  },
+  "B0GXCM4BCZ": {
+   "name": "포켓몬카드 에브이·블래키 덱 세트",
+   "price": "6,201엔",
+   "first": "2026-10-31",
+   "last": "2026-11-02",
+   "src": "blvl 확인",
+   "srcurl": ""
+  },
+  "B0GP928YDZ": {
+   "name": "포켓몬카드 스톰 에메랄드 BOX",
+   "price": "6,006엔",
+   "first": "2026-10-31",
+   "last": "2026-11-02",
+   "src": "blvl 확인",
+   "srcurl": ""
+  },
+  "B0FLCWJ1VK": {
+   "name": "포켓몬카드 메가드림EX BOX",
+   "price": "5,500엔",
+   "first": "2026-10-31",
+   "last": "2026-11-02",
+   "src": "blvl 확인",
+   "srcurl": ""
+  },
+  "B0FSJXSPPX": {
+   "name": "포켓몬카드 니힐제로 BOX",
+   "price": "5,412엔",
+   "first": "2026-10-31",
+   "last": "2026-11-02",
+   "src": "blvl 확인",
+   "srcurl": ""
+  },
+  "B0F9KJGGZ5": {
+   "name": "포켓몬카드 인페르노X BOX",
+   "price": "5,412엔",
+   "first": "2026-10-31",
+   "last": "2026-11-02",
+   "src": "blvl 확인",
+   "srcurl": ""
+  },
+  "B0F18J2CJF": {
+   "name": "포켓몬카드 메가브레이브 BOX",
+   "price": "5,412엔",
+   "first": "2026-10-31",
+   "last": "2026-11-02",
+   "src": "blvl 확인",
+   "srcurl": ""
+  },
+  "B0F189YH8W": {
+   "name": "포켓몬카드 메가심포니아 BOX",
+   "price": "5,412엔",
+   "first": "2026-10-31",
+   "last": "2026-11-02",
+   "src": "blvl 확인",
+   "srcurl": ""
+  },
+  "B0HFVPJF4Q": {
+   "name": "원피스카드 OP-18 BOX",
+   "price": "5,782엔",
+   "first": "2026-10-31",
+   "last": "2026-11-02",
+   "src": "blvl 확인",
+   "srcurl": ""
+  },
+  "B0HB3JQ6P4": {
+   "name": "원피스카드 EB-05 BOX",
+   "price": "5,782엔",
+   "first": "2026-10-31",
+   "last": "2026-11-02",
+   "src": "blvl 확인",
+   "srcurl": ""
+  },
+  "B0GP9QHQ3Y": {
+   "name": "ポケモンカードゲーム MEGA 拡張パック アビスアイ BOX",
+   "price": "6,006엔",
+   "first": "2026-11-02",
+   "last": "2026-11-02",
+   "src": "전격온라인",
+   "srcurl": "https://dengekionline.com/article/202608/83452"
+  },
+  "B0G1XB2STM": {
+   "name": "ポケモンカードゲーム MEGA 拡張パック ニンジャスピナー BOX",
+   "price": "5,412엔",
+   "first": "2026-11-02",
+   "last": "2026-11-02",
+   "src": "전격온라인",
+   "srcurl": "https://dengekionline.com/article/202608/83452"
+  },
+  "B0FLD7HMRP": {
+   "name": "ポケモンカードゲーム MEGA スタートデッキ100 バトルコレクション",
+   "price": "891엔",
+   "first": "2026-11-02",
+   "last": "2026-11-02",
+   "src": "전격온라인",
+   "srcurl": "https://dengekionline.com/article/202608/83452"
+  }
+ }
 }

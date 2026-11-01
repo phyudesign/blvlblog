@@ -27,9 +27,12 @@ CATS = [
     ("figure",  "FIGURE",  "피규어 개봉기, 디테일 리뷰, 진열 이야기"),
     ("game",    "GAME",    "직접 플레이하는 게임의 공략과 플레이 기록"),
     ("tech",    "TECH",    "작업에 쓰는 툴과 앱 사용법"),
+    ("news",    "TCG 속보", "일본 쇼핑몰 포켓몬카드·원피스카드 재고와 추첨 소식을 감시기가 잡는 즉시 올리는 짧은 속보"),
 ]
+NEWS = "news"  # 자동 속보: 홈·최근 글·검색엔진 색인에서 빼고 이 메뉴에만 모음
 CAT_NAME = {k: n for k, n, _ in CATS}
 NAV = [("HOME", "/")] + [(n, f"/category/{k}/") for k, n, _ in CATS]
+NAV.insert(2, NAV.pop())  # TCG 바로 옆에 TCG 속보
 KEEP = {".git", ".github", "CNAME", "_tools", "_posts", "_pages", "_character", "_thumbs", "_monitor", "assets", "wp-content", "ads.txt", ".nojekyll", "favicon.ico", ".gitignore", "README.md"}
 SEARCH_SVG = '<svg viewBox="0 0 512 512" aria-hidden="true" fill="currentColor"><path d="M208 48c-88.4 0-160 71.6-160 160s71.6 160 160 160 160-71.6 160-160S296.4 48 208 48zM0 208C0 93.1 93.1 0 208 0s208 93.1 208 208c0 48.8-16.8 93.7-45 129.2l135 135-34 34-135-135C301.7 399.2 256.8 416 208 416 93.1 416 0 322.9 0 208z"/></svg>'
 
@@ -50,10 +53,13 @@ def load(folder):
 
 posts = [p for p in load("_posts") if not p.get("draft")]
 for p in posts:
+    if p["slug"].startswith("속보-"): p["category"] = NEWS  # 예전 속보 글도 속보 메뉴로
+for p in posts:
     p.setdefault("mod", p["date"]); p.setdefault("tags", []); p.setdefault("thumb", "")
     p.setdefault("desc", strip_tags(p["body"])[:150])
     assert p["category"] in CAT_NAME, f'{p["slug"]}: 알 수 없는 카테고리 {p["category"]}'
 posts.sort(key=lambda p: p["date"], reverse=True)
+articles = [p for p in posts if p["category"] != NEWS]  # 사람이 쓴 정식 글
 pages = load("_pages")
 YEAR = datetime.date.today().year
 
@@ -110,11 +116,15 @@ def gcard(p, exc=False):
 <div class="gmeta"><span>Written by:</span><b>{AUTHOR}</b><span>/</span><time>{kdate(p["date"])}</time>{pstat(p)}</div>{ex}</div>'''
 
 def sidebar():
-    rec = "".join(f'<li><a href="{url(q["slug"])}">{esc(q["title"])}</a></li>' for q in posts[:5])
+    rec = "".join(f'<li><a href="{url(q["slug"])}">{esc(q["title"])}</a></li>' for q in articles[:5])
+    nw = [q for q in posts if q["category"] == NEWS][:5]
+    news = (f'<aside class="widget widget_recent_entries"><h2 class="widget-title">TCG 속보</h2><ul>' +
+            "".join(f'<li><a href="{url(q["slug"])}">{esc(q["title"].replace("[추첨·판매 속보] ", ""))}</a> <small>{q["date"][5:16]}</small></li>' for q in nw) +
+            '<li><a href="/category/news/">속보 전체 보기 →</a></li></ul></aside>') if nw else ""
     cl = "".join(f'<li><a href="/category/{k}/">{esc(n)}</a></li>' for k, n, _ in CATS)
     return f'''<div class="sidebar"><div class="inside-right-sidebar">
 <aside class="widget"><form class="search-form" action="/search/"><input name="q" placeholder="검색 …" aria-label="검색"><button aria-label="검색">{SEARCH_SVG.replace("<svg", '<svg width="16" height="16"')}</button></form></aside>
-<aside class="widget widget_recent_entries"><h2 class="widget-title">Recent Posts</h2><ul>{rec}</ul></aside>
+<aside class="widget widget_recent_entries"><h2 class="widget-title">Recent Posts</h2><ul>{rec}</ul></aside>{news}
 <aside class="widget"><h2 class="widget-title">Categories</h2><ul>{cl}</ul></aside>
 </div></div>'''
 
@@ -141,7 +151,7 @@ def listing(base, plist, heading, desc=DESC, head_html="", empty_msg=""):
             pg = '<nav class="paging-navigation">' + (f'<a href="{href(n-1)}">« 이전</a>' if n > 1 else "") + "".join(
                 (f'<span class="current">{k}</span>' if k == n else f'<a href="{href(k)}">{k}</a>') for k in range(1, pages_n+1)) + \
                 (f'<a href="{href(n+1)}">다음 »</a>' if n < pages_n else "") + "</nav>"
-        body = "".join(arch_item(p) for p in chunk) or f'<article class="inside-article"><div class="entry-content"><p>{esc(empty_msg)}</p></div></article>'
+        body = "".join(arch_item(p) for p in chunk) or f'<article class="inside-article"><div class="entry-content"><p>{empty_msg}</p></div></article>'
         canon = base if n == 1 else f"{base}page/{n}/"
         write(canon, page(heading, with_sidebar(head_html + body + pg), desc, canon, active=base, noindex=not plist))
 
@@ -167,7 +177,7 @@ for idx, p in enumerate(posts):
 <div class="entry-content">{p["body"]}</div>
 <footer><div class="entry-meta">카테고리: {catlink(p["category"])}</div><div class="gp-custom-tag-section">{tag_html}</div>{nav}</footer></article>
 {comments_box(p)}'''
-    write(url(p["slug"]), page(p["title"], with_sidebar(main), p["desc"], url(p["slug"]), p["thumb"], f'<script type="application/ld+json">{ld}</script>'))
+    write(url(p["slug"]), page(p["title"], with_sidebar(main), p["desc"], url(p["slug"]), p["thumb"], f'<script type="application/ld+json">{ld}</script>', noindex=p["category"] == NEWS))
 
 # ── 고정 페이지
 for pg in pages:
@@ -177,22 +187,22 @@ for pg in pages:
     write(url(pg["slug"]), page(pg["title"], with_sidebar(main), pg["desc"], url(pg["slug"])))
 
 # ── 홈
-feat = [p for p in posts if p.get("featured")]
-feat = (feat + [p for p in posts if p not in feat])[:5]
+feat = [p for p in articles if p.get("featured")]
+feat = (feat + [p for p in articles if p not in feat])[:5]
 featured = ""
 if feat:
     featured = f'''<section class="gb-section"><h2 class="custom-title">Featured Posts</h2>
 <div class="feat"><div class="big">{gcard(feat[0], True)}</div><div class="small">{"".join(gcard(p) for p in feat[1:5])}</div></div></section>'''
 home = f'''<div style="height:30px"></div>{featured}
 <section class="gb-section latest"><h2 class="custom-title">Latest Posts</h2>
-<div class="lgrid">{"".join(gcard(p) for p in posts[:9])}</div>
+<div class="lgrid">{"".join(gcard(p) for p in articles[:9])}</div>
 <div class="gbtn-wrap"><a class="gbtn" href="/blog/">Read All Article</a></div></section>'''
 write("/", page(TITLE, home, DESC, "/", active="/"))
-listing("/blog/", posts, "BLOG")
+listing("/blog/", articles, "BLOG")
 for k, name, cdesc in CATS:
     pl = [p for p in posts if p["category"] == k]
     listing(f"/category/{k}/", pl, name, cdesc, f'<header class="page-header"><h1>{esc(name)}</h1><p>{esc(cdesc)}</p></header>',
-            "첫 글을 준비하고 있어요. 곧 올라올 예정이에요.")
+            "아직 잡힌 속보가 없어요. 감시기가 10분마다 일본 쇼핑몰을 확인하고 있으니, 재고가 뜨면 여기에 바로 올라와요. 지금 판매 중인 상품은 <a href='/stock/'>재고 현황판</a>에서 볼 수 있어요." if k == NEWS else "첫 글을 준비하고 있어요. 곧 올라올 예정이에요.")
 
 # ── 검색
 (ROOT / "search.json").write_text(json.dumps([{"t": p["title"], "u": url(p["slug"]), "d": p["date"][:10], "x": strip_tags(p["body"])[:600], "i": p["thumb"]} for p in posts], ensure_ascii=False), encoding="utf-8")
@@ -211,12 +221,12 @@ I.addEventListener('input',go);
 (ROOT / "404.html").write_text(page("페이지를 찾을 수 없어요", with_sidebar('<article class="inside-article"><h1 class="entry-title">페이지를 찾을 수 없어요</h1><div class="entry-content"><p>요청한 페이지가 없거나 블로그 개편으로 정리된 글이에요. <a href="/">홈으로 가기</a></p></div></article>'), canon="/404.html", noindex=True), encoding="utf-8")
 (ROOT / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {SITE}/sitemap.xml\n", encoding="utf-8")
 sm = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">', f"<url><loc>{SITE}/</loc></url>"]
-sm += [f'<url><loc>{SITE}{url(p["slug"])}</loc><lastmod>{p["mod"][:10]}</lastmod></url>' for p in posts]
-sm += [f"<url><loc>{SITE}/category/{k}/</loc></url>" for k, _, _ in CATS if any(p["category"] == k for p in posts)]
+sm += [f'<url><loc>{SITE}{url(p["slug"])}</loc><lastmod>{p["mod"][:10]}</lastmod></url>' for p in articles]
+sm += [f"<url><loc>{SITE}/category/{k}/</loc></url>" for k, _, _ in CATS if k != NEWS and any(p["category"] == k for p in posts)]
 sm += [f'<url><loc>{SITE}{url(pg["slug"])}</loc></url>' for pg in pages]
 (ROOT / "sitemap.xml").write_text("\n".join(sm + ["</urlset>"]), encoding="utf-8")
 def rfc(d): return datetime.datetime.strptime(d, "%Y-%m-%d %H:%M:%S").strftime("%a, %d %b %Y %H:%M:%S +0900")
-rss = "".join(f'<item><title>{esc(p["title"])}</title><link>{SITE}{url(p["slug"])}</link><guid>{SITE}{url(p["slug"])}</guid><pubDate>{rfc(p["date"])}</pubDate><description>{esc(p["desc"])}</description></item>' for p in posts[:20])
+rss = "".join(f'<item><title>{esc(p["title"])}</title><link>{SITE}{url(p["slug"])}</link><guid>{SITE}{url(p["slug"])}</guid><pubDate>{rfc(p["date"])}</pubDate><description>{esc(p["desc"])}</description></item>' for p in articles[:20])
 (ROOT / "feed.xml").write_text(f'<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><title>{TITLE}</title><link>{SITE}</link><description>{DESC}</description>{rss}</channel></rss>', encoding="utf-8")
 write("/feed/", '<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0;url=/feed.xml">')
 (ROOT / ".nojekyll").write_text("")

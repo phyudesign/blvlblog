@@ -32,8 +32,7 @@ PAGES = [  # 추첨·공지 페이지: 관련 '새 줄' 감지
     ("yodobashi", "요도바시 추첨", "https://limited.yodobashi.com/"),
     ("torecaplaza55", "트레카플라자55", "https://torecaplaza55.com/"),
     ("yellowsub", "옐로서브마린", "https://yellowsubmarine.co.jp/"),
-    ("7net_pk", "세븐넷", "https://7net.omni7.jp/search/?keyword=" + urllib.parse.quote("ポケモンカードゲーム")),
-    ("7net_op", "세븐넷", "https://7net.omni7.jp/search/?keyword=" + urllib.parse.quote("ONE PIECEカードゲーム")),
+    # 세븐넷 검색 결과는 진열 순서가 바뀔 때마다 옛 상품이 '새 줄'로 잡혀서 제외 (2026-11-01)
 ]
 SHOP_KR = {"rakuten": "라쿠텐북스", "yodobashi": "요도바시", "torecaplaza55": "트레카플라자55", "yellowsub": "옐로서브마린", "7net_pk": "세븐넷", "7net_op": "세븐넷"}
 
@@ -77,7 +76,7 @@ def scan_lines(h):
     out = {}
     for p in parts:
         t = text_of(p)
-        if 6 <= len(t) <= 160 and any(w in t for w in WATCH_WORDS) and not any(w in t for w in SKIP_WORDS):
+        if 6 <= len(t) <= 160 and relevant(t):
             out[hashlib.md5(t.encode()).hexdigest()[:12]] = t
     return out
 
@@ -149,7 +148,7 @@ def write_alert_post(ev, state):
              "트레카플라자55": "일본 카드 전문점이라 일본 배송지가 필요해요.", "옐로서브마린": "일본 카드 전문점이라 일본 배송지가 필요해요."}.get(ev["shop_kr"], "")
     fm = {"title": title, "slug": slug, "date": NOW.strftime("%Y-%m-%d %H:%M:%S"), "mod": NOW.strftime("%Y-%m-%d %H:%M:%S"),
           "desc": f'{ev["shop_kr"]}에서 {kname[:50]} 상태가 바뀌었어요({STATUS_KR.get(ev["status"], "")}). 감지 시각 {stamp} (한국 시간).',
-          "thumb": "/wp-content/uploads/2026/10/blvl-stock-alert.jpg", "category": "tcg",
+          "thumb": "/wp-content/uploads/2026/10/blvl-stock-alert.jpg", "category": "news",
           "tags": ["입고 속보", "일본 쇼핑몰", ev["shop_kr"]]}
     body = f'''<p><strong>{html.escape(ev["shop_kr"])}</strong>에서 아래 상품의 상태가 바뀐 걸 blvl 재고 감시기가 잡았어요. 재고는 몇 분 만에 끝나는 경우가 많으니 <strong>링크에서 바로 확인</strong>하세요.</p>
 {emo("rare", "떴다냥! 지금 바로 확인하라냥!!!", "레어다")}
@@ -231,7 +230,8 @@ def main():
             for hid, t in cur.items():
                 if hid not in prev:
                     new_events.append({"key": f"{sid}:{hid}", "kind": "page", "shop_kr": name, "title": t, "url": url, "status": "new", "price": ""})
-        lines[sid] = list(cur.keys())
+        # 한 번이라도 본 줄은 계속 기억 (진열 순서가 돌아도 옛 상품을 새 소식으로 착각하지 않게)
+        lines[sid] = (list(cur.keys()) + [x for x in (prev or []) if x not in cur])[:3000]
     # 알림 + 글
     changed = bool(new_events) or bool(status_changed) or first_run or TG_NEW or os.environ.get("TG_TEST") == "1"
     for ev in new_events[:8]:  # 한 번에 너무 많이 쓰지 않도록

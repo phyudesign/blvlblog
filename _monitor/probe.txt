@@ -1,25 +1,20 @@
-hobbysearch_pk_instock	403	5819		https://www.1999.co.jp/list/3352/7/1?soldout=0
-     Just a moment... Enable JavaScript and cookies to continue 
-   server: cloudflare  a537f7bc3d2d05f2-IAD
-hobbysearch_eng_list	403	5831		https://www.1999.co.jp/eng/list/3352/7/1?soldout=0
-     Just a moment... Enable JavaScript and cookies to continue 
-   server: cloudflare  a537f7c94880a5b8-IAD
-hobbysearch_eng_top	403	5704		https://www.1999.co.jp/eng/
-     Just a moment... Enable JavaScript and cookies to continue 
-   server: cloudflare  a537f7d61d936e25-IAD
-hobbysearch_rss	403	5683		https://www.1999.co.jp/rss/
-     Just a moment... Enable JavaScript and cookies to continue 
-   server: cloudflare  a537f7e2c9888215-IAD
-yodobashi_search	ERR	ReadTimeout
-yodobashi_limited	200	7145		https://limited.yodobashi.com/
-amiami_search	403	6106		https://slist.amiami.jp/top/search/list?s_keywords=%E3%83%8F%E3%83%89%E3%82%A6%E3%82%B7%E3
-hobbysearch_search	403	6033		https://www.1999.co.jp/search?searchkey=%E3%83%8F%E3%83%89%E3%82%A6%E3%82%B7%E3%83%BC%E3%8
-     Just a moment... Enable JavaScript and cookies to continue 
-   server: cloudflare  a537f8b91fa805f2-IAD
-rakutenbooks_search	200	160932	在庫あり,予約受付中,ハドウシーカー	https://books.rakuten.co.jp/search?sitem=%E3%83%8F%E3%83%89%E3%82%A6%E3%82%B7%E3%83%BC%E3%
-aeon_lottery	403	48649		https://aeonretail.com/Page/k-lottery_sale.aspx
-pco_lottery	403	10264		https://wr.pokemoncenter-online.com/?c=pol&e=wr20261027ltr&ver=javascript-4.4.3&cver=245&m
-yellowsub	200	91187		https://yellowsubmarine.co.jp/
-torecaplaza55	503	6294		https://torecaplaza55.com/
-7net	200	45965	ハドウシーカー	https://7net.omni7.jp/search?q=%E3%83%8F%E3%83%89%E3%82%A6%E3%82%B7%E3%83%BC%E3%82%AB%E3%8
-pbandai	200	10830		https://p-bandai.jp/global_newpc.html
+gp_pokeca_feed	200	1699499	Amazon,ポケモンセンター,駿河屋,抽選,品切れ,ハドウシーカー	https://premium.gamepedia.jp/pokeca/feed
+gp_toreca_feed	200	1457827	Amazon,駿河屋,抽選	https://premium.gamepedia.jp/toreca/feed
+gp_shopping_feed	200	1356218	Amazon,抽選	https://premium.gamepedia.jp/shopping/feed
+gp_pokeca_156	200	163082	Amazon,ポケモンセンター,駿河屋,抽選,ハドウシーカー	https://premium.gamepedia.jp/pokeca/archives/156
+snkrdunk_32581	200	414512	Amazon,ポケモンセンター,駿河屋,抽選,ハドウシーカー	https://snkrdunk.com/articles/32581/
+altema_op	403	389		https://altema.jp/onepiececard/soukaityuusen
+     Access Denied Access Denied You don't have permission to access "http&#58;&#47;&#47;altema&#46;jp&#47;onepiececard&#47;soukaityuusen" on this server. Reference&#32;&#35;18&#46;8a1c1602&#46;1793505517&#46;625f3f9c https&#58;&#47;&#47;errors&#46;edgesuite&#46;net&#47;18&#46;8a1c1602&#46;1793505517&#4
+   server: None  
+altema_pk	403	375		https://altema.jp/pokemoncard/
+     Access Denied Access Denied You don't have permission to access "http&#58;&#47;&#47;altema&#46;jp&#47;pokemoncard&#47;" on this server. Reference&#32;&#35;18&#46;8a1c1602&#46;1793505519&#46;625f610a https&#58;&#47;&#47;errors&#46;edgesuite&#46;net&#47;18&#46;8a1c1602&#46;1793505519&#46;625f610a 
+   server: None  
+pokemoncard_info	200	242838	ポケモンセンター,抽選,ハドウシーカー	https://www.pokemon-card.com/info/
+pco_news	403	10002		https://wr.pokemoncenter-online.com/?c=pol&e=wr20261030ec&ver=v3-javascript-3.7.10&cver=24
+     Restricted access We are sorry, your access has been restricted Time: 2026-11-01T03:58:43.8569361Z UTC Original URL: wr.pokemoncenter-online.com/?c=pol&amp;e=wr20261030ec&amp;ver=v3-javascript-3.7.10&amp;cver=245&amp;man=pol-prd-rule-sfcc&amp;t=https%3A%2F%2Fwww.pokemoncenter-online.com%2Fon%2Fdema
+   server: Kestrel  
+pco_top	403	9982		https://wr.pokemoncenter-online.com/?c=pol&e=wr20261030ec&ver=v3-javascript-3.7.10&cver=24
+     Restricted access We are sorry, your access has been restricted Time: 2026-11-01T03:58:46.4076204Z UTC Original URL: wr.pokemoncenter-online.com/?c=pol&amp;e=wr20261030ec&amp;ver=v3-javascript-3.7.10&amp;cver=245&amp;man=pol-prd-rule-sfcc&amp;t=https%3A%2F%2Fwww.pokemoncenter-online.com%2Fon%2Fdema
+   server: Kestrel  
+onepiece_news	200	42556		https://www.onepiece-cardgame.com/news/
+amazon_asin	200	526348	Amazon,カートに入れる,ハドウシーカー	https://www.amazon.co.jp/dp/B0H4PQ6LR5

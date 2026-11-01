@@ -66,7 +66,10 @@ def scan_rakuten(h):
         elif re.search(r"買い物\s*かごに入れる|かごに入れる", body): st = "instock"
         else: st = "unknown"
         pm = re.search(r"([\d,]{3,})円", body)
-        items["rakuten:" + rid] = {"shop": "rakuten", "title": title, "url": url, "status": st, "price": pm.group(1) + "엔" if pm else ""}
+        im = (re.search(r'<img[^>]+?(?:data-src|src)="(https://[^"]*(?:thumbnail\.image\.rakuten|r10s)[^"]*)"', blk)
+              or re.search(r'<img[^>]+?src="(https://[^"]+\.(?:jpe?g|png|webp|gif)[^"]*)"', blk))
+        items["rakuten:" + rid] = {"shop": "rakuten", "title": title, "url": url, "status": st, "price": pm.group(1) + "엔" if pm else "",
+                                  "img": html.unescape(im.group(1)) if im else ""}
     return items
 
 # ── 추첨·공지 페이지: 관련 키워드가 들어간 짧은 줄 목록
@@ -151,7 +154,8 @@ def write_alert_post(ev, state):
     fm = {"title": title, "slug": slug, "date": NOW.strftime("%Y-%m-%d %H:%M:%S"), "mod": NOW.strftime("%Y-%m-%d %H:%M:%S"),
           "desc": f'{ev["shop_kr"]}에서 {kname[:50]} 상태가 바뀌었어요({STATUS_KR.get(ev["status"], "")}). 감지 시각 {stamp} (한국 시간).',
           "thumb": "/wp-content/uploads/2026/10/blvl-stock-alert.jpg", "category": "news",
-          "tags": ["입고 속보", "일본 쇼핑몰", ev["shop_kr"]]}
+          "tags": ["입고 속보", "일본 쇼핑몰", ev["shop_kr"]], "pimg": ev.get("img", ""), "shop_url": ev["url"],
+          "shop_kr": ev["shop_kr"], "status_kr": STATUS_KR.get(ev["status"], ""), "price": ev.get("price", "")}
     body = f'''<p><strong>{html.escape(ev["shop_kr"])}</strong>에서 아래 상품의 상태가 바뀐 걸 blvl 재고 감시기가 잡았어요. 재고는 몇 분 만에 끝나는 경우가 많으니 <strong>링크에서 바로 확인</strong>하세요.</p>
 {emo("rare", "떴다냥! 지금 바로 확인하라냥!!!", "레어다")}
 <table><tbody>
@@ -219,9 +223,9 @@ def main():
         avail = v["status"] in ("instock", "preorder")
         was = old and old["status"] in ("instock", "preorder")
         v["since"] = old.get("since", "") if (old and old["status"] == v["status"]) else NOW.strftime("%m/%d %H:%M")
-        if (not old) or old["status"] != v["status"]: status_changed.append(k)
+        if (not old) or old["status"] != v["status"] or old.get("img", "") != v.get("img", ""): status_changed.append(k)
         if avail and not was and not first_run:
-            new_events.append({"key": k, "kind": "item", "shop_kr": "라쿠텐북스", "title": v["title"], "url": v["url"], "status": v["status"], "price": v.get("price", "")})
+            new_events.append({"key": k, "kind": "item", "shop_kr": "라쿠텐북스", "title": v["title"], "url": v["url"], "status": v["status"], "price": v.get("price", ""), "img": v.get("img", "")})
         items[k] = v
     # 추첨·공지 페이지
     for sid, name, url in PAGES:

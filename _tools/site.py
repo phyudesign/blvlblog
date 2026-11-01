@@ -17,7 +17,7 @@ DESC = "포켓몬카드·미니카·피규어·게임 — 직접 모으고 즐�
 ADSENSE = "ca-pub-4380904134243959"
 AUTHOR = "blvl."
 PER_PAGE = 10
-CSS_VER = 18
+CSS_VER = 19
 JS_VER = 1
 
 # 카테고리: (슬러그, 메뉴명, 설명)
@@ -202,28 +202,33 @@ def ticker():
         try: t = datetime.datetime.strptime(q["date"], "%Y-%m-%d %H:%M:%S")
         except ValueError: continue
         if (now - t).total_seconds() > 48 * 3600: break
-        rows.append(("hot", "속보", q["title"].replace("[추첨·판매 속보] ", "").replace("[입고 속보] ", ""), url(q["slug"]), q["date"][5:16].replace("-", "/"), False))
+        name = q["title"].replace("[추첨·판매 속보] ", "").replace("[입고 속보] ", "")
+        sub = " · ".join(x for x in (q.get("shop_kr", ""), q.get("status_kr", ""), q.get("price", "")) if x)
+        rows.append(("hot", "속보", name, url(q["slug"]), q["date"][5:16].replace("-", "/"), False,
+                     {"img": q.get("pimg") or q["thumb"], "name": name, "sub": sub or "STOCK LIVE 속보", "cta": "속보 글 보기"}))
     for v in st.get("items", {}).values():
         if v.get("status") not in ("instock", "preorder"): continue
         name = re.sub(r"^\s+|\s+$", "", kr(v["title"]))[:48]
         extra = " · ".join(x for x in (SHOP_KR.get(v.get("shop"), ""), STATUS_KR.get(v["status"], ""), v.get("price", "")) if x)
-        rows.append(("on", "판매 중" if v["status"] == "instock" else "예약 중", f"{name} — {extra}", v["url"], "", True))
+        rows.append(("on", "판매 중" if v["status"] == "instock" else "예약 중", f"{name} — {extra}", v["url"], "", True,
+                     {"img": v.get("img", ""), "name": re.sub(r"^\s+|\s+$", "", kr(v["title"])), "sub": extra, "cta": "쇼핑몰에서 보기"}))
     rows = rows[:14]
     if not rows:
         track = '<span class="tk-item"><span class="tk-tag idle">감시 중</span>지금은 새로 풀린 재고가 없어요 · 10분마다 일본 쇼핑몰을 확인하고 있어요</span>'
     else:
         def one(r):
-            kind, tag, text, href, when, ext = r
+            kind, tag, text, href, when, ext, pv = r
             attrs = ' target="_blank" rel="nofollow noopener"' if ext else ""
             w = f'<time>{esc(when)}</time>' if when else ""
-            return f'<a class="tk-item" href="{esc(href)}"{attrs}><span class="tk-tag {kind}">{tag}</span>{esc(text)}{w}</a>'
+            data = "".join(f' data-{k}="{esc(v)}"' for k, v in pv.items())
+            return f'<a class="tk-item" href="{esc(href)}"{attrs}{data}><span class="tk-tag {kind}">{tag}</span>{esc(text)}{w}</a>'
         track = "".join(one(r) for r in rows)
     dur = max(28, min(120, len(re.sub(r"<[^>]+>", "", track)) // 5))
     return f'''<section class="ticker" aria-label="STOCK LIVE 실시간 재고 속보">
-<a class="tk-label" href="/category/news/"><i aria-hidden="true"></i>STOCK LIVE</a>
+<a class="tk-label" href="/category/news/"><i aria-hidden="true"></i>LIVE</a>
 <div class="tk-view"><div class="tk-track" style="--dur:{dur}s"><div class="tk-run">{track}</div><div class="tk-run" aria-hidden="true">{track}</div></div></div>
 <a class="tk-more" href="/stock/">현황판 →</a></section>
-<script defer src="/assets/blvl-ticker.js?v=1"></script>'''
+<script defer src="/assets/blvl-ticker.js?v=2"></script>'''
 
 feat = [p for p in articles if p.get("featured")]
 feat = (feat + [p for p in articles if p not in feat])[:5]

@@ -27,12 +27,12 @@ CATS = [
     ("figure",  "FIGURE",  "피규어 개봉기, 디테일 리뷰, 진열 이야기"),
     ("game",    "GAME",    "직접 플레이하는 게임의 공략과 플레이 기록"),
     ("tech",    "TECH",    "작업에 쓰는 툴과 앱 사용법"),
-    ("news",    "TCG 속보", "일본 쇼핑몰 포켓몬카드·원피스카드 재고와 추첨 소식을 감시기가 잡는 즉시 올리는 짧은 속보"),
+    ("news",    "STOCK LIVE", "일본 쇼핑몰 포켓몬카드·원피스카드 재고와 추첨 소식을 감시기가 잡는 즉시 올리는 짧은 속보"),
 ]
 NEWS = "news"  # 자동 속보: 홈·최근 글·검색엔진 색인에서 빼고 이 메뉴에만 모음
 CAT_NAME = {k: n for k, n, _ in CATS}
 NAV = [("HOME", "/")] + [(n, f"/category/{k}/") for k, n, _ in CATS]
-NAV.insert(2, NAV.pop())  # TCG 바로 옆에 TCG 속보
+NAV.insert(2, NAV.pop())  # TCG 바로 옆에 STOCK LIVE
 KEEP = {".git", ".github", "CNAME", "_tools", "_posts", "_pages", "_character", "_thumbs", "_monitor", "assets", "wp-content", "ads.txt", ".nojekyll", "favicon.ico", ".gitignore", "README.md"}
 SEARCH_SVG = '<svg viewBox="0 0 512 512" aria-hidden="true" fill="currentColor"><path d="M208 48c-88.4 0-160 71.6-160 160s71.6 160 160 160 160-71.6 160-160S296.4 48 208 48zM0 208C0 93.1 93.1 0 208 0s208 93.1 208 208c0 48.8-16.8 93.7-45 129.2l135 135-34 34-135-135C301.7 399.2 256.8 416 208 416 93.1 416 0 322.9 0 208z"/></svg>'
 
@@ -118,7 +118,7 @@ def gcard(p, exc=False):
 def sidebar():
     rec = "".join(f'<li><a href="{url(q["slug"])}">{esc(q["title"])}</a></li>' for q in articles[:5])
     nw = [q for q in posts if q["category"] == NEWS][:5]
-    news = (f'<aside class="widget widget_recent_entries"><h2 class="widget-title">TCG 속보</h2><ul>' +
+    news = (f'<aside class="widget widget_recent_entries"><h2 class="widget-title">STOCK LIVE</h2><ul>' +
             "".join(f'<li><a href="{url(q["slug"])}">{esc(q["title"].replace("[추첨·판매 속보] ", ""))}</a> <small>{q["date"][5:16]}</small></li>' for q in nw) +
             '<li><a href="/category/news/">속보 전체 보기 →</a></li></ul></aside>') if nw else ""
     cl = "".join(f'<li><a href="/category/{k}/">{esc(n)}</a></li>' for k, n, _ in CATS)
@@ -219,8 +219,8 @@ def ticker():
             return f'<a class="tk-item" href="{esc(href)}"{attrs}><span class="tk-tag {kind}">{tag}</span>{esc(text)}{w}</a>'
         track = "".join(one(r) for r in rows)
     dur = max(28, min(120, len(re.sub(r"<[^>]+>", "", track)) // 5))
-    return f'''<section class="ticker" aria-label="TCG 실시간 속보">
-<a class="tk-label" href="/category/news/"><i aria-hidden="true"></i>LIVE<span>TCG 속보</span></a>
+    return f'''<section class="ticker" aria-label="STOCK LIVE 실시간 재고 속보">
+<a class="tk-label" href="/category/news/"><i aria-hidden="true"></i>STOCK LIVE</a>
 <div class="tk-view"><div class="tk-track" style="--dur:{dur}s"><div class="tk-run">{track}</div><div class="tk-run" aria-hidden="true">{track}</div></div></div>
 <a class="tk-more" href="/stock/">현황판 →</a></section>'''
 

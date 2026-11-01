@@ -196,7 +196,13 @@ def write_board(state):
 def main():
     if os.environ.get("TG_TEST") == "1":
         res = telegram("🐱 blvl 재고 알림 연결 완료!\n이제 일본 쇼핑몰에 포켓몬·원피스 카드 재고가 뜨면 여기로 바로 알려 드릴게요.\n현황판: https://blvlblog.com/stock/")
-        (MON / "tg_test.txt").write_text(f"{NOW.isoformat()} {res}\n")
+        diag = ""
+        try:
+            me = requests.get(f"https://api.telegram.org/bot{TG_TOKEN}/getMe", timeout=20).json()
+            up = requests.get(f"https://api.telegram.org/bot{TG_TOKEN}/getUpdates", timeout=20).json()
+            diag = f" token_ok={me.get('ok')} bot=@{(me.get('result') or {}).get('username','?')} updates={len(up.get('result', []))} {up.get('description','')}"
+        except Exception as e: diag = f" diag_error {e}"
+        (MON / "tg_test.txt").write_text(f"{NOW.isoformat()} {res}{diag}\n")
         print("TG_TEST", res)
     state = json.loads(STATE.read_text(encoding="utf-8")) if STATE.exists() else {}
     first_run = not state or not state.get("items")

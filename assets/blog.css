@@ -204,7 +204,7 @@ h1,h2,h3,h4{font-weight:700;line-height:1.2;margin:0 0 20px}
 @media(prefers-reduced-motion:reduce){.feat .big::before,.feat::after{animation:none}}
 
 /* ── 홈 상단 TCG 속보 전광판 */
-.ticker{display:flex;align-items:stretch;height:46px;width:calc(100% - 40px);max-width:calc(var(--gw) - 40px);margin:30px auto 14px;background:#16171b;color:#f2f2f2;border-radius:12px;overflow:hidden;box-shadow:0 6px 18px rgba(20,20,30,.12);font-size:12px}
+.ticker{display:flex;align-items:stretch;height:46px;width:calc(100% - 40px);max-width:calc(var(--gw) - 40px);margin:30px auto 14px;background:#16171b;color:#f2f2f2;border-radius:12px;overflow:hidden;box-shadow:0 6px 18px rgba(20,20,30,.12);font-size:13.5px}
 .ticker a{color:inherit;text-decoration:none}
 .tk-label{flex:none;display:flex;align-items:center;gap:8px;padding:0 16px 0 18px;background:#e8362d;color:#fff!important;font-family:"Bebas Kai","Bebas Neue",sans-serif;font-size:20px;letter-spacing:.5px;line-height:1}
 .tk-label span{font-family:inherit;font-size:15px;font-weight:700;letter-spacing:0;opacity:.95;font-family:system-ui,sans-serif}
@@ -216,8 +216,8 @@ h1,h2,h3,h4{font-weight:700;line-height:1.2;margin:0 0 20px}
 .tk-item{display:inline-flex;align-items:center;gap:9px;padding:0 26px;white-space:nowrap;position:relative}
 .tk-item::after{content:"";position:absolute;right:0;top:50%;width:4px;height:4px;margin-top:-2px;border-radius:50%;background:#55575f}
 a.tk-item:hover{color:#ffd84d}
-.tk-item time{color:#8d909a;font-size:11px}
-.tk-tag{flex:none;padding:3px 8px;border-radius:999px;font-size:10px;font-weight:800;line-height:1.2}
+.tk-item time{color:#8d909a;font-size:12px}
+.tk-tag{flex:none;padding:3px 8px;border-radius:999px;font-size:11px;font-weight:800;line-height:1.2}
 .tk-tag.hot{background:#e8362d;color:#fff}
 .tk-tag.on{background:#2fbf71;color:#0b2416}
 .tk-tag.idle{background:#3a3c44;color:#cfd1d8}
@@ -229,7 +229,7 @@ a.tk-item:hover{color:#ffd84d}
 .ticker.js.dragging a.tk-item{pointer-events:none}
 @keyframes tk-roll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @keyframes tk-blink{0%,100%{opacity:1}50%{opacity:.25}}
-@media(max-width:768px){.ticker{margin:18px auto 8px;height:40px;border-radius:10px;font-size:11px}.tk-label{padding:0 12px;font-size:18px}.tk-label span,.tk-more{display:none}.tk-item{padding:0 20px}}
+@media(max-width:768px){.ticker{margin:18px auto 8px;height:40px;border-radius:10px;font-size:13.5px}.tk-label{padding:0 12px;font-size:18px}.tk-label span,.tk-more{display:none}.tk-item{padding:0 20px}}
 @media(prefers-reduced-motion:reduce){.ticker:not(.js) .tk-track{animation:none}.ticker:not(.js) .tk-view{overflow-x:auto}.ticker:not(.js) .tk-run[aria-hidden]{display:none}}
 @media print{.ticker{display:none}}
 .ticker.js .tk-view{-webkit-touch-callout:none}

@@ -3,7 +3,9 @@ import requests, urllib.parse as u, re, time
 H={"User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 blvlblog-stock-check","Accept-Language":"ja,en;q=0.8"}
 q=u.quote
 T=[("hobbysearch_pk_instock","https://www.1999.co.jp/list/3352/7/1?soldout=0"),
-   ("hobbysearch_pk_instock_en","https://www.hlj.com/"),
+   ("hobbysearch_eng_list","https://www.1999.co.jp/eng/list/3352/7/1?soldout=0"),
+   ("hobbysearch_eng_top","https://www.1999.co.jp/eng/"),
+   ("hobbysearch_rss","https://www.1999.co.jp/rss/"),
    ("yodobashi_search","https://www.yodobashi.com/?word="+q("ハドウシーカー")),
    ("yodobashi_limited","https://limited.yodobashi.com/"),
    ("amiami_search","https://slist.amiami.jp/top/search/list?s_keywords="+q("ハドウシーカー")),
@@ -21,6 +23,9 @@ for name,url in T:
         r=requests.get(url,headers=H,timeout=25); t=r.text
         hits=[k for k in KW if k in t]
         print(f"{name}\t{r.status_code}\t{len(t)}\t{','.join(hits)}\t{r.url[:90]}")
+        if name.startswith("hobbysearch"):
+            print("   ", re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", re.sub(r"<(script|style)[^>]*>.*?</\1>", " ", t, flags=re.S)))[:300])
+            print("   server:", r.headers.get("server"), r.headers.get("x-cache", ""), r.headers.get("cf-ray", ""))
     except Exception as e:
         print(f"{name}\tERR\t{type(e).__name__}")
     time.sleep(2)

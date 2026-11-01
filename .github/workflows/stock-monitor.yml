@@ -2,7 +2,9 @@ name: 재고 감시기
 on:
   schedule:
     - cron: "*/10 * * * *"
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      test: { description: "텔레그램 시험 메시지 보내기", required: false, default: "0" }
 permissions: { contents: write }
 concurrency: { group: stock-monitor, cancel-in-progress: false }
 jobs:
@@ -18,6 +20,7 @@ jobs:
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          TG_TEST: ${{ github.event.inputs.test }}
         run: python _tools/monitor.py
       - name: 바뀐 게 있으면 블로그 다시 만들고 저장
         run: |

@@ -81,20 +81,32 @@ def scan_lines(h):
             out[hashlib.md5(t.encode()).hexdigest()[:12]] = t
     return out
 
-def telegram(msg):
-    if not TG_TOKEN: return
-    chat = TG_CHAT
-    if not chat:
-        try:
-            ups = requests.get(f"https://api.telegram.org/bot{TG_TOKEN}/getUpdates", timeout=20).json().get("result", [])
-            chats = [u.get("message", {}).get("chat", {}).get("id") for u in ups if u.get("message")]
-            chat = str(chats[-1]) if chats else ""
-        except Exception: chat = ""
-    if not chat: print("텔레그램: 채팅방을 찾지 못했어요. 봇에게 /start 를 보내 주세요."); return
+TG_FILE = MON / "tg_chat"   # 한 번 찾은 대화방 번호를 저장 (토큰 없이는 쓸모없는 숫자)
+TG_NEW = False
+
+def tg_chat():
+    global TG_NEW
+    if TG_CHAT: return TG_CHAT
+    if TG_FILE.exists() and TG_FILE.read_text().strip(): return TG_FILE.read_text().strip()
     try:
-        requests.post(f"https://api.telegram.org/bot{TG_TOKEN}/sendMessage",
-                      json={"chat_id": chat, "text": msg, "disable_web_page_preview": True}, timeout=20)
-    except Exception as e: print("텔레그램 실패", e)
+        ups = requests.get(f"https://api.telegram.org/bot{TG_TOKEN}/getUpdates", timeout=20).json().get("result", [])
+        chats = [u.get("message", {}).get("chat", {}).get("id") for u in ups if u.get("message")]
+        if chats:
+            TG_FILE.write_text(str(chats[-1])); TG_NEW = True
+            return str(chats[-1])
+    except Exception: pass
+    return ""
+
+def telegram(msg):
+    """보낸 결과를 문자열로 돌려줌: ok / no_token / no_chat / 오류"""
+    if not TG_TOKEN: return "no_token"
+    chat = tg_chat()
+    if not chat: print("텔레그램: 채팅방을 찾지 못했어요. 봇에게 /start 를 보내 주세요."); return "no_chat"
+    try:
+        r = requests.post(f"https://api.telegram.org/bot{TG_TOKEN}/sendMessage",
+                          json={"chat_id": chat, "text": msg, "disable_web_page_preview": True}, timeout=20)
+        return "ok" if r.ok else f"error {r.status_code} {r.json().get('description','')}"
+    except Exception as e: print("텔레그램 실패", e); return f"error {e}"
 
 KR_NAMES = [("ポケモンカードゲーム", "포켓몬카드"), ("ONE PIECEカードゲーム", "원피스카드"), ("ハドウシーカー", "파동시커"), ("30th CELEBRATION", "30주년"),
     ("ストームエメラルダ", "스톰 에메랄드"), ("ムニキスゼロ", "니힐제로"), ("インフェルノX", "인페르노X"), ("メガブレイブ", "메가브레이브"),
@@ -182,6 +194,10 @@ def write_board(state):
     (ROOT / "_pages" / "stock.html").write_text("<!--\n" + json.dumps(fm, ensure_ascii=False, indent=1) + "\n-->\n" + body, encoding="utf-8")
 
 def main():
+    if os.environ.get("TG_TEST") == "1":
+        res = telegram("🐱 blvl 재고 알림 연결 완료!\n이제 일본 쇼핑몰에 포켓몬·원피스 카드 재고가 뜨면 여기로 바로 알려 드릴게요.\n현황판: https://blvlblog.com/stock/")
+        (MON / "tg_test.txt").write_text(f"{NOW.isoformat()} {res}\n")
+        print("TG_TEST", res)
     state = json.loads(STATE.read_text(encoding="utf-8")) if STATE.exists() else {}
     first_run = not state or not state.get("items")
     items = state.setdefault("items", {}); lines = state.setdefault("lines", {}); events = state.setdefault("events", [])
@@ -211,7 +227,7 @@ def main():
                     new_events.append({"key": f"{sid}:{hid}", "kind": "page", "shop_kr": name, "title": t, "url": url, "status": "new", "price": ""})
         lines[sid] = list(cur.keys())
     # 알림 + 글
-    changed = bool(new_events) or bool(status_changed) or first_run
+    changed = bool(new_events) or bool(status_changed) or first_run or TG_NEW or os.environ.get("TG_TEST") == "1"
     for ev in new_events[:8]:  # 한 번에 너무 많이 쓰지 않도록
         f = write_alert_post(ev, state)
         events.insert(0, {"at": NOW.strftime("%m/%d %H:%M"), "shop_kr": ev["shop_kr"], "title": ev["title"], "status": ev["status"]})

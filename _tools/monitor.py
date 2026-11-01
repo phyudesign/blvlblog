@@ -112,7 +112,8 @@ def telegram(msg):
 
 KR_NAMES = [("ポケモンカードゲーム", "포켓몬카드"), ("スカーレット＆バイオレット", "스칼렛&바이올렛"), ("スカーレット&バイオレット", "스칼렛&바이올렛"),
     ("スターターデッキ＆ビルドセット", "스타터 덱&빌드 세트"), ("スターターデッキ", "스타터 덱"), ("古代のコライドン", "고대의 코라이돈"), ("未来のミライドン", "미래의 미라이돈"),
-    ("強化拡張パック", "강화 확장팩"), ("「", ""), ("」", ""), ("ONE PIECEカードゲーム", "원피스카드"), ("ハドウシーカー", "파동시커"), ("30th CELEBRATION", "30주년"),
+    ("強化拡張パック", "강화 확장팩"),
+    ("キモリ", "나무지기"), ("アチャモ", "아차모"), ("ミズゴロウ", "물짱이"), ("ツタージャ", "주리비얀"), ("ポカブ", "뚜꾸리"), ("ミジュマル", "수댕이"), ("ハリマロン", "도치마론"), ("フォッコ", "푸호꼬"), ("ケロマツ", "개구마르"), ("モクロー", "나몰빼미"), ("ニャビー", "냐오불"), ("アシマリ", "누리공"), ("サルノリ", "흥나숭"), ("ヒバニー", "염버니"), ("メッソン", "울머기"), ("ニャオハ", "나오하"), ("ホゲータ", "뜨아거"), ("クワッス", "꾸왁스"), ("フシギダネ", "이상해씨"), ("ヒトカゲ", "파이리"), ("ゼニガメ", "꼬부기"), ("チコリータ", "치코리타"), ("ヒノアラシ", "브케인"), ("ワニノコ", "리아코"), ("バトルコレクション", "배틀 컬렉션"), ("スタートデッキ100", "스타트 덱 100"), ("「", ""), ("」", ""), ("ONE PIECEカードゲーム", "원피스카드"), ("ハドウシーカー", "파동시커"), ("30th CELEBRATION", "30주년"),
     ("ストームエメラルダ", "스톰 에메랄드"), ("ムニキスゼロ", "니힐제로"), ("インフェルノX", "인페르노X"), ("メガブレイブ", "메가브레이브"),
     ("メガシンフォニア", "메가심포니아"), ("アビスアイ", "어비스아이"), ("ニンジャスピナー", "닌자스피너"), ("MEGAドリームex", "메가드림EX"),
     ("エーフィ・ブラッキー", "에브이·블래키"), ("拡張パック", "확장팩"), ("ハイクラスパック", "하이클래스팩"), ("ブースターパック", "부스터팩"),
@@ -237,8 +238,8 @@ def scan_amazon(state, first_run):
     inv = state.setdefault("amazon", {}); news = state.setdefault("anews", [])
     seed = not inv
     if seed:
-        for a, (n, pr) in INVITE_SEED.items():
-            inv[a] = {"name": n, "price": pr, "first": "2026-10-31", "last": NOW.strftime("%Y-%m-%d"), "src": "blvl 확인", "srcurl": ""}
+        for i, (a, (n, pr)) in enumerate(INVITE_SEED.items()):
+            inv[a] = {"name": n, "price": pr, "first": "2026-10-31", "last": NOW.strftime("%Y-%m-%d"), "src": "blvl 확인", "srcurl": "", "ord": i}
     found = {}
     for sid, sname, url, kind in INVITE_SOURCES:
         h = get(url)
@@ -258,7 +259,8 @@ def scan_amazon(state, first_run):
             inv[a]["last"] = NOW.strftime("%Y-%m-%d")
             if price and not inv[a].get("price"): inv[a]["price"] = price
             continue
-        inv[a] = {"name": name, "price": price, "first": NOW.strftime("%Y-%m-%d"), "last": NOW.strftime("%Y-%m-%d"), "src": sname, "srcurl": surl}
+        inv[a] = {"name": name, "price": price, "first": "2026-10-31" if seed else NOW.strftime("%Y-%m-%d"),   # 처음 모을 때 찾은 건 '새 응모'가 아님
+                  "last": NOW.strftime("%Y-%m-%d"), "src": sname, "srcurl": surl, "ord": 100 + len(inv)}
         if not seed:
             events.append({"key": "amazon:" + a, "kind": "amazon", "shop_kr": "아마존 재팬", "title": name, "url": f"https://www.amazon.co.jp/dp/{a}",
                            "status": "invite", "price": price, "src": sname, "srcurl": surl})
@@ -286,7 +288,7 @@ def scan_amazon(state, first_run):
     return events, seed or bool(found)
 
 def amazon_table(state):
-    inv = sorted(state.get("amazon", {}).items(), key=lambda kv: (kv[1]["first"], kv[0]), reverse=True)
+    inv = sorted(state.get("amazon", {}).items(), key=lambda kv: (kv[1]["first"], -kv[1].get("ord", 999)), reverse=True)
     if not inv: return "<p>아직 모은 상품이 없어요.</p>"
     rows = "".join(f'<tr><td>{html.escape(kr(v["name"])[:70])}</td><td>{html.escape(v.get("price", ""))}</td><td>{v["first"][5:].replace("-", "/")}</td>'
                    f'<td><a href="https://www.amazon.co.jp/dp/{a}" target="_blank" rel="nofollow noopener">초대 요청하기</a></td></tr>' for a, v in inv)

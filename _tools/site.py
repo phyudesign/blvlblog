@@ -207,9 +207,9 @@ def ticker():
         sub = " · ".join(x for x in (q.get("shop_kr", ""), q.get("status_kr", ""), q.get("price", "")) if x)
         rows.append(("hot", "속보", name, url(q["slug"]), q["date"][5:16].replace("-", "/"), False,
                      {"img": re.sub(r"downsize=\d+", "downsize=400", q.get("pimg") or ""), "name": name, "sub": sub or "STOCK LIVE 속보", "cta": "속보 글 보기"}))
-    inv = sorted(st.get("amazon", {}).items(), key=lambda kv: (kv[1]["first"], kv[0]), reverse=True)[:6]
+    inv = sorted(st.get("amazon", {}).items(), key=lambda kv: (kv[1]["first"], -kv[1].get("ord", 999)), reverse=True)[:6]
     for a, v in inv:
-        fresh = (now.date() - datetime.date.fromisoformat(v["first"])).days <= 2
+        fresh = v["first"] > "2026-10-31" and (now.date() - datetime.date.fromisoformat(v["first"])).days <= 2  # 처음 모은 목록은 응모 중으로
         name = re.sub(r"^\s+|\s+$", "", kr(v["name"]))[:48]
         sub = " · ".join(x for x in ("아마존 재팬", "초대 요청 접수 중", v.get("price", "")) if x)
         rows.append(("inv", "새 응모" if fresh else "응모 중", f"{name} — 아마존 초대 요청", f"https://www.amazon.co.jp/dp/{a}", "", True,

@@ -1,17 +1,18 @@
-# 아마존 상품 페이지 구조 확인: 버튼·재고·판매자 관련 부분만 짧게 출력 (내용 전체는 저장하지 않음)
+# 아마존 응모 소식을 전하는 뉴스·정보 사이트 피드 접속 시험 (상태·크기·관련 글 수만 출력)
 import requests, re, time
-H={"User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36","Accept-Language":"ja-JP,ja;q=0.9"}
-def txt(s): return re.sub(r"\s+"," ",re.sub(r"<[^>]+>"," ",s)).strip()
-for asin in ["B0H4PQ6LR5","B0GXCRBL5J","B0HFVPJF4Q","B0FSJXSPPX","B0H43ZX8LK"]:
+H={"User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 blvlblog-stock-check","Accept-Language":"ja,en;q=0.8"}
+T=[("dengeki_rss","https://dengekionline.com/rss"),("dengeki_feed","https://dengekionline.com/feed"),("dengeki_art","https://dengekionline.com/article/202608/83452"),
+   ("famitsu_rss","https://www.famitsu.com/rss/fcom_all.rdf"),("famitsu_art","https://www.famitsu.com/article/202606/77986"),
+   ("usedoor_feed","https://usedoor.jp/feed/"),("usedoor_art","https://usedoor.jp/news/2023-09-12-amazon-pokemon-card-game-kodai-no-houkou-mirai-no-issen-shoutai-request/"),
+   ("torecamap_feed","https://torecamap.co.jp/feed/"),("torecamap_col","https://torecamap.co.jp/column/amazon-lottery/"),
+   ("gp_pokeca_feed","https://premium.gamepedia.jp/pokeca/feed/"),("gp_toreca_feed","https://premium.gamepedia.jp/toreca/feed/"),
+   ("snkrdunk_32581","https://snkrdunk.com/articles/32581/"),("pokemoncard_info","https://www.pokemon-card.com/info/"),("onepiece_news","https://www.onepiece-cardgame.com/news/")]
+for n,u in T:
     try:
-        r=requests.get(f"https://www.amazon.co.jp/dp/{asin}",headers=H,timeout=25); h=r.text
-        print(f"== {asin} {r.status_code} {len(h)} captcha={'captcha' in h.lower() or 'validateCaptcha' in h}")
-        m=re.search(r'id="productTitle"[^>]*>(.*?)</span>',h,re.S); print(" title:",txt(m.group(1))[:80] if m else None)
-        for key in ["招待","invitation","inviteButton","add-to-cart-button","buy-now-button","現在在庫切れ","在庫あり","一時的に在庫切れ","予約","出荷元","販売元","merchant-info","priceToPay","a-price-whole","landingImage","outOfStock","availability"]:
-            i=h.find(key)
-            if i>=0: print(f" [{key}]", txt(h[max(0,i-150):i+250])[:220])
-            else: print(f" [{key}] -")
-        for m in re.finditer(r'id="(availability|merchantInfoFeature_feature_div|offerDisplayFeatures_desktop|invitation[^"]*|[^"]*[Ii]nvit[^"]*)"',h): print(" id:",m.group(1))
-        im=re.search(r'"hiRes":"(https://[^"]+)"',h) or re.search(r'id="landingImage"[^>]+src="([^"]+)"',h); print(" img:",im.group(1) if im else None)
-    except Exception as e: print(asin,"ERR",e)
-    time.sleep(4)
+        r=requests.get(u,headers=H,timeout=25); t=r.text
+        asins=sorted(set(re.findall(r"amazon\.co\.jp/(?:[^\"'\s<>]*/)?(?:dp|gp/product)/([A-Z0-9]{10})",t)))
+        inv=t.count("招待")
+        items=len(re.findall(r"<item[ >]",t)) or len(re.findall(r"<entry[ >]",t))
+        print(f"{n}\t{r.status_code}\t{len(t)}\titems={items}\t招待={inv}\tasins={len(asins)} {asins[:8]}\t{r.url[:80]}")
+    except Exception as e: print(n,"ERR",type(e).__name__)
+    time.sleep(2)

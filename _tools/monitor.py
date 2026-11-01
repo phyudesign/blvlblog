@@ -221,10 +221,14 @@ def find_invites(h, fallback_title=""):
         last_end, last_asin = m.end(), asin
         start = max(seg, m.start() - 1500)
         if asin[0].isdigit() or asin in out: continue          # 숫자로 시작하는 건 책
-        ctx = text_of(h[start:m.start()])
+        raw = h[start:m.start()]
+        raw = raw[:raw.rfind("<")] if raw.rfind("<") > raw.rfind(">") else raw   # 링크 태그 앞부분(속성)은 버림
+        ctx = text_of(raw)
         if "招待" not in ctx and not ("抽選" in ctx and "当選メール" in ctx): continue
         name = _heading_before(h, m.start()) or fallback_title
-        if not any(w in (name + ctx[-300:] + fallback_title) for w in CARD_WORDS): continue
+        if not name:
+            pt = re.search(r"<title>(.*?)</title>", h, re.S); name = text_of(pt.group(1)) if pt else ""
+        if not any(w in (name + ctx + fallback_title) for w in CARD_WORDS): continue
         pm = re.findall(r"招待販売価格】\s*([\d,]+)円", ctx)
         out[asin] = (re.sub(r"\s+", " ", name).strip()[:90], pm[-1] + "엔" if pm else "")
     return out

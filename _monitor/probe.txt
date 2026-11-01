@@ -1,14 +1,67 @@
-dengeki_rss	404	23796	items=0	招待=0	asins=0 []	https://dengekionline.com/rss
-dengeki_feed	404	23796	items=0	招待=0	asins=0 []	https://dengekionline.com/feed
-dengeki_art	200	450944	items=0	招待=160	asins=21 ['B00JMD3R0G', 'B06XYD4NYH', 'B074CFYR11', 'B0F189YH8W', 'B0F18J2CJF', 'B0F9KJGGZ5', 'B0FLCWJ1VK', 'B0FLD7HMRP']	https://dengekionline.com/article/202608/83452
-famitsu_rss	404	27447	items=0	招待=0	asins=0 []	https://www.famitsu.com/rss/fcom_all.rdf
-famitsu_art	200	266271	items=0	招待=54	asins=31 ['4045002766', '4088944496', '409227467X', '4092274785', '4301004246', '4301007830', 'B009PL86TM', 'B09997WD23']	https://www.famitsu.com/article/202606/77986
-usedoor_feed	200	12373	items=10	招待=0	asins=0 []	https://usedoor.jp/feed/
-usedoor_art	200	135856	items=0	招待=35	asins=2 ['B0C6PGDBMC', 'B0C6PKQPVM']	https://usedoor.jp/news/2023-09-12-amazon-pokemon-card-game-kodai-no-houkou-mira
-torecamap_feed	404	16148	items=0	招待=0	asins=0 []	https://torecamap.co.jp/feed
-torecamap_col	200	220851	items=0	招待=125	asins=0 []	https://torecamap.co.jp/column/amazon-lottery/
-gp_pokeca_feed	200	1699889	items=10	招待=0	asins=7 ['B0CMZQ7ZVN', 'B0CMZRM9RJ', 'B0CMZS84KP', 'B0CMZT5PV4', 'B0GP9QHQ3Y', 'B0GXCRBL5J', 'B0H4PQ6LR5']	https://premium.gamepedia.jp/pokeca/feed
-gp_toreca_feed	200	1457680	items=10	招待=7	asins=7 ['B0DNB14TNN', 'B0DNB1MMM9', 'B0H4YHHZ2D', 'B0HC9K4J32', 'B0HDRMYYH5', 'B0HFVDNHBM', 'B0HGCSZ3ZM']	https://premium.gamepedia.jp/toreca/feed
-snkrdunk_32581	200	414444	items=0	招待=2	asins=1 ['B0GP928YDZ']	https://snkrdunk.com/articles/32581/
-pokemoncard_info	200	242838	items=0	招待=12	asins=0 []	https://www.pokemon-card.com/info/
-onepiece_news	200	42556	items=0	招待=0	asins=0 []	https://www.onepiece-cardgame.com/news/
+===== dengeki_art
+ B0GXCRBL5J | link='' | before='ク「30th CELEBRATION」BOX』をはじめとする各種関連商品の招待販売が実施中です。 ※販売状況は記事公開時点のものです。販売は予告なく価格変更・終了することがあります。詳しくは販売ページにてご確認ください。'
+ B0GXCM4BCZ | link='.css-vubbuv{-webkit-user-select:none;-moz-user-select:none;-' | before='"> 「エーフィex」デッキ（カード60枚）、「ブラッキーex」デッキ（カード60枚）各1個 スライド式ダブルデッキケース（缶）1個 ポケモンコイン、はじめてガイド 他 【Amazon招待販売価格】 6,201円（税込）'
+ B0GXCYMRGL | link='.css-vubbuv{-webkit-user-select:none;-moz-user-select:none;-' | before='Link"> プロモカード（キラ）「フシギダネ」「ヒトカゲ」「ゼニガメ」各1枚 拡張パック「30th CELEBRATION」2パック 紙製カードスタンド（3枚用）1個 【Amazon招待販売価格】 1,200円（税込）'
+ B0GXCX36HP | link='.css-vubbuv{-webkit-user-select:none;-moz-user-select:none;-' | before='oLink"> プロモカード（キラ）「キモリ」「アチャモ」「ミズゴロウ」各1枚 拡張パック「30th CELEBRATION」2パック 紙製カードスタンド（3枚用）1個 【Amazon招待販売価格】 1,200円（税込）'
+ B0GXCZ1VDC | link='.css-vubbuv{-webkit-user-select:none;-moz-user-select:none;-' | before='Link"> プロモカード（キラ）「ツタージャ」「ポカブ」「ミジュマル」各1枚 拡張パック「30th CELEBRATION」2パック 紙製カードスタンド（3枚用）1個 【Amazon招待販売価格】 1,200円（税込）'
+ B0GXCSGX8Y | link='.css-vubbuv{-webkit-user-select:none;-moz-user-select:none;-' | before='Link"> プロモカード（キラ）「ハリマロン」「フォッコ」「ケロマツ」各1枚 拡張パック「30th CELEBRATION」2パック 紙製カードスタンド（3枚用）1個 【Amazon招待販売価格】 1,200円（税込）'
+ B0GXCPF84C | link='.css-vubbuv{-webkit-user-select:none;-moz-user-select:none;-' | before='oLink"> プロモカード（キラ）「モクロー」「ニャビー」「アシマリ」各1枚 拡張パック「30th CELEBRATION」2パック 紙製カードスタンド（3枚用）1個 【Amazon招待販売価格】 1,200円（税込）'
+ B0GXCTRZ8L | link='.css-vubbuv{-webkit-user-select:none;-moz-user-select:none;-' | before='oLink"> プロモカード（キラ）「サルノリ」「ヒバニー」「メッソン」各1枚 拡張パック「30th CELEBRATION」2パック 紙製カードスタンド（3枚用）1個 【Amazon招待販売価格】 1,200円（税込）'
+ B0GXCT83HB | link='.css-vubbuv{-webkit-user-select:none;-moz-user-select:none;-' | before='Link"> プロモカード（キラ）「ニャオハ」「ホゲータ」「クワックス」各1枚 拡張パック「30th CELEBRATION」2パック 紙製カードスタンド（3枚用）1個 【Amazon招待販売価格】 1,200円（税込）'
+ B0F9KJGGZ5 | link='.css-vubbuv{-webkit-user-select:none;-moz-user-select:none;-' | before='odule-scss-module__ptIMRW__strongText">【1パック】 カード5枚入り 【Amazon招待販売価格】 5,412円（税込）'
+ B0GP928YDZ | link='.css-vubbuv{-webkit-user-select:none;-moz-user-select:none;-' | before='odule-scss-module__ptIMRW__strongText">【1パック】 カード5枚入り 【Amazon招待販売価格】 6,006円（税込）'
+ B0FSJXSPPX | link='.css-vubbuv{-webkit-user-select:none;-moz-user-select:none;-' | before='odule-scss-module__ptIMRW__strongText">【1パック】 カード5枚入り 【Amazon招待販売価格】 5,412円（税込）'
+ B0GP9QHQ3Y | link='.css-vubbuv{-webkit-user-select:none;-moz-user-select:none;-' | before='odule-scss-module__ptIMRW__strongText">【1パック】 カード5枚入り 【Amazon招待販売価格】 6,006円（税込）'
+ B0F189YH8W | link='.css-vubbuv{-webkit-user-select:none;-moz-user-select:none;-' | before='odule-scss-module__ptIMRW__strongText">【1パック】 カード5枚入り 【Amazon招待販売価格】 5,412円（税込）'
+ B0F18J2CJF | link='.css-vubbuv{-webkit-user-select:none;-moz-user-select:none;-' | before='odule-scss-module__ptIMRW__strongText">【1パック】 カード5枚入り 【Amazon招待販売価格】 5,412円（税込）'
+ B0G1XB2STM | link='.css-vubbuv{-webkit-user-select:none;-moz-user-select:none;-' | before='odule-scss-module__ptIMRW__strongText">【1パック】 カード5枚入り 【Amazon招待販売価格】 5,412円（税込）'
+ B0FLCWJ1VK | link='.css-vubbuv{-webkit-user-select:none;-moz-user-select:none;-' | before='dule-scss-module__ptIMRW__strongText">【1パック】 カード10枚入り 【Amazon招待販売価格】 5,500円（税込）'
+ B0FLD7HMRP | link='.css-vubbuv{-webkit-user-select:none;-moz-user-select:none;-' | before='ngText">【商品内容】 デッキ（カード60枚）×1個 ダメカン/マーカー×1シート 【Amazon招待販売価格】 891円（税込）'
+===== gp_pokeca_feed
+ ITEM 【ポケカ】新弾？「マグマの鼓動」「イナズマの衝撃」「オーロラの波紋」などが商標登録｜収録カード予想【ポケモンカード】 Thu, 29 Oct 2026 01:28:14 +0000 asins: []
+ ITEM 【ポケカ】ハドウシーカーの収録カードリストや抽選・予約情報まとめ(10月23日更新)｜20種判明【拡張パック】【BOX】【ポケモンカード】 Fri, 23 Oct 2026 06:38:55 +0000 asins: ['B0H4PQ6LR5']
+ ITEM 【ポケカ】新弾発売予定スケジュールまとめ｜次のパックの発売日はいつ？【2026年10月更新】【ポケモンカード】 Fri, 23 Oct 2026 01:49:59 +0000 asins: ['B0CMZQ7ZVN', 'B0CMZRM9RJ', 'B0CMZS84KP', 'B0CMZT5PV4']
+ ITEM 【ポケカ】スペシャルデッキセットMEGA メガオーダイル・メガカイリュー・メガゲンガーの収録カードと抽選・予約情報まとめ【ポケモンカード】 Fri, 16 Oct 2026 13:36:44 +0000 asins: []
+ ITEM 【ポケカ】Yahoo!フリマ・ヤフオクでカートン、空箱の出品禁止｜対象と期間【ポケモンカード】 Thu, 15 Oct 2026 05:43:21 +0000 asins: []
+ ITEM 【ポケカ】MUR高額カードランキング｜買取価格・収録パックまとめ【ポケモンカード】 Fri, 02 Oct 2026 05:50:57 +0000 asins: []
+ ITEM 【ポケカ】30th CELEBRATIONがメルカリ出品禁止に｜対象商品・期間まとめ【ポケモンカード】 Tue, 15 Sep 2026 11:33:30 +0000 asins: []
+ ITEM 【ポケカ】30周年記念のサプライ一覧まとめ｜3種のプレイマットやショッピングバッグなどが登場【9月16日発売】【ポケモンカード】 Wed, 09 Sep 2026 07:48:36 +0000 asins: []
+ ITEM 【ポケカ30周年】30th セレブレーションの当たりカードランキング｜買取価格・封入率まとめ【ポケモンカード】 Mon, 07 Sep 2026 04:15:19 +0000 asins: ['B0GP9QHQ3Y', 'B0GXCRBL5J']
+ ITEM 【ポケカ】ポケモン映画「ポケモン：ワイルドカード」が2027年に公開決定！来場者特典のカードはある？過去のプロモ相場も紹介【ポケモンカード】 Mon, 31 Aug 2026 07:45:20 +0000 asins: []
+ B0H4PQ6LR5 | link='抽選詳細ページ' | before='始日時 10/26(月) 14:00 抽選終了日時 不明 抽選結果発表 当選発表日は人によって異なる【メール】 購入期間 当選メール到着後48時間以内 購入制限等 ・1人1BOXまで'
+ B0CMZRM9RJ | link='www.amazon.co.jp' | before='ca%2Farchives%2F604" border="0" width="0" height="1" /> バトルアカデミーの詳細はこちら ワイルドフォース 出典：'
+ B0CMZS84KP | link='www.amazon.co.jp' | before='p>【当たりの種類】 SAR:5枚、UR:3枚、SR:9枚、ACE:3枚、AR:12枚、RR:6枚 【開封期待値】約5,000円 サイバージャッジ 出典：'
+ B0CMZQ7ZVN | link='www.amazon.co.jp' | before='>【当たりの種類】 SAR:5枚、UR:3枚、SR:9枚、ACE:3枚、AR:12枚、RR:6枚 【開封期待値】約3,000円 古代のコライドンex 出典：'
+ B0CMZT5PV4 | link='www.amazon.co.jp' | before='rchives%2F128" border="0" width="0" height="1" /> 古代のコライドンexの抽選情報はこちら 未来のミライドンex 出典：'
+ B0GP9QHQ3Y | link='www.amazon.co.jp' | before='/sites/3/2026/09/16154253/2026y09m16d_154246161.jpg 697w" sizes="auto, (max-width: 412px) 100vw, 412px" /> 出典：'
+ B0GXCRBL5J | link='Amazonで商品を確認する' | before='3>30th セレブレーション BOX ネットショップの最安値価格比較 商品情報を読み込み中です...'
+===== gp_toreca_feed
+ ITEM DOPA!オリパ攻略大百科限定クーポン！最大18万円相当または92%OFF 初回購入限定【2026年11月最新】 Sat, 31 Oct 2026 15:00:53 +0000 asins: []
+ ITEM 【ガンダムカード】Stardust Trailsの当たりカードと買取価格・封入率まとめ【GGG】【ブースターパック第6弾】 Sat, 31 Oct 2026 07:21:45 +0000 asins: []
+ ITEM 【パルワールドカード】目覚めし伝説の当たりカードと買取価格・封入率まとめ【パルカ】【ブースターパック2弾】 Fri, 30 Oct 2026 20:24:03 +0000 asins: ['B0DNB1MMM9']
+ ITEM 【ユニオンアリーナ】リゼロ Vol.2の当たりカードと買取価格・封入率まとめ【ユニアリ】【Re:ゼロから始める異世界生活】 Fri, 30 Oct 2026 07:43:02 +0000 asins: ['B0H4YHHZ2D']
+ ITEM 【ワンピースカード】ヒロインズエディションVol.2の当たりカードと買取価格・封入率まとめ【エクストラブースター】 Fri, 30 Oct 2026 02:04:41 +0000 asins: []
+ ITEM 【ディヴァインクロス】ローゼンメイデンの当たりカードと販売価格・封入率まとめ【RZMD】 Wed, 28 Oct 2026 14:08:02 +0000 asins: ['B0HFVDNHBM']
+ ITEM 【ウルトラマンカードゲーム】「きたぞ！われらの」の当たりカードと買取価格・封入率まとめ【BP09】【ブースターパック9弾】 Wed, 28 Oct 2026 05:10:28 +0000 asins: ['B0HC9K4J32']
+ ITEM 【バボカ】才能とセンスの当たりカードと買取価格・封入率まとめ【ハイキュー!!】 Wed, 28 Oct 2026 00:32:16 +0000 asins: ['B0HDRMYYH5']
+ ITEM 【ヴァイスシュヴァルツロゼ】オーガストの当たりカードと買取価格・封入率まとめ【ブースターパック】 Tue, 27 Oct 2026 08:38:53 +0000 asins: ['B0DNB14TNN']
+ ITEM 【ハリー・ポッターカード】秘密の部屋Part.1の当たりカードと買取価格・封入率まとめ【ハリポカ】 Mon, 26 Oct 2026 07:44:08 +0000 asins: ['B0HGCSZ3ZM']
+ B0DNB1MMM9 | link='Amazonで商品を確認する' | before='伝説の予約・販売情報 ネットショップの最安値価格比較 商品情報を読み込み中です...'
+ B0H4YHHZ2D | link='Amazonで商品を確認する' | before='.2の予約・販売情報 ネットショップの最安値価格比較 商品情報を読み込み中です...'
+ B0HFVDNHBM | link='Amazonで商品を確認する' | before='デンの予約・販売情報 ネットショップの最安値価格比較 商品情報を読み込み中です...'
+ B0HC9K4J32 | link='Amazonで商品を確認する' | before='らのの予約・販売情報 ネットショップの最安値価格比較 商品情報を読み込み中です...'
+ B0HDRMYYH5 | link='Amazonで商品を確認する' | before='考程度にご覧ください。 ネットショップの最安値価格比較 商品情報を読み込み中です...'
+ B0DNB14TNN | link='Amazonで商品を確認する' | before='ストの予約・販売情報 ネットショップの最安値価格比較 商品情報を読み込み中です...'
+ B0HGCSZ3ZM | link='Amazonで商品を確認する' | before='.1の予約・販売情報 ネットショップの最安値価格比較 商品情報を読み込み中です...'
+===== famitsu_art
+ B0GXCRBL5J | link='.css-vubbuv{-webkit-user-select:none;-moz-user-select:none;-' | before='ス セレブレーション）”の招待リクエストを受付中。 広告'
+ B0FLCWJ1VK | link='.css-vubbuv{-webkit-user-select:none;-moz-user-select:none;-' | before='77986/754043">'
+ B0GP9QHQ3Y | link='.css-vubbuv{-webkit-user-select:none;-moz-user-select:none;-' | before='77986/754044">'
+ B0G1XB2STM | link='.css-vubbuv{-webkit-user-select:none;-moz-user-select:none;-' | before='77986/754045">'
+ B0FSJXSPPX | link='.css-vubbuv{-webkit-user-select:none;-moz-user-select:none;-' | before='77986/754046">'
+ B0GXCYMRGL | link='.css-vubbuv{-webkit-user-select:none;-moz-user-select:none;-' | before='77986/755565">'
+ B0HMBF2WNZ | link='' | before='0&q=75 3840w" src="/_next/image?url=/_next/static/media/ebten-logo-no-bgColor.1i4js11pfz5fu.png&w=3840&q=75"/>'
+ B0HJ888PK1 | link='1 ゲームソフト ゼルダの伝説 時のオカリナ -Switch2 【パッケージ版早期購入特典】オリジナルアートカードセット' | before='ve">ゲーム ゲーム攻略・ゲームブック コミック アニメ アニメ・ゲーム音楽'
+ B09999M8HV | link='2 ゲームソフト ニンテンドープリペイド番号 1000円|オンラインコード版 発売日： 2021年07月13日 小売希望' | before='ton ButtonLink-module-scss-module__HPbLqq__amazonCart ButtonLink-module-scss-module__HPbLqq__small ">Amazonで購入'
+ B0H3C9GPSZ | link='3 ゲームソフト ファイナルファンタジー レゾナンス -PS5 発売日： 2026年10月22日 小売希望価格： 6,4' | before='ton ButtonLink-module-scss-module__HPbLqq__amazonCart ButtonLink-module-scss-module__HPbLqq__small ">Amazonで購入'
+ B0H9XJ3V8K | link='4 ゲームソフト 【PS5】グランド・セフト・オートVI(コードインボックス版、配送日：2026年11月12日、プレイ開' | before='ton ButtonLink-module-scss-module__HPbLqq__amazonCart ButtonLink-module-scss-module__HPbLqq__small ">Amazonで購入'

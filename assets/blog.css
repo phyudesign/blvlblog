@@ -252,3 +252,7 @@ a.tk-item:hover{color:#ffd84d}
 .site-header,.main-nav,.custom-title,.gb-section,.ticker,.gcat,.gmeta,.widget-title,.page-header,.site-footer{-webkit-user-select:none;user-select:none}
 .gb-section a,.site-header a{-webkit-user-drag:none}
 input,textarea,select{-webkit-user-select:text;user-select:text}
+
+/* 아이폰 브라우저가 전광판 글자를 제멋대로 키우지 않게 */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+.ticker,.ticker *{-webkit-text-size-adjust:none;text-size-adjust:none}

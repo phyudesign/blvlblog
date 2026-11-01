@@ -1,29 +1,17 @@
-# 쇼핑몰 접속 시험: 상태 코드, 크기, 판매 관련 키워드 포함 여부만 출력 (내용은 저장하지 않음)
-import requests, urllib.parse as u, re, time
-H={"User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 blvlblog-stock-check","Accept-Language":"ja,en;q=0.8"}
-q=u.quote
-T=[("gp_pokeca_feed","https://premium.gamepedia.jp/pokeca/feed/"),
-   ("gp_toreca_feed","https://premium.gamepedia.jp/toreca/feed/"),
-   ("gp_shopping_feed","https://premium.gamepedia.jp/shopping/feed/"),
-   ("gp_pokeca_156","https://premium.gamepedia.jp/pokeca/archives/156"),
-   ("snkrdunk_32581","https://snkrdunk.com/articles/32581/"),
-   ("altema_op","https://altema.jp/onepiececard/soukaityuusen"),
-   ("altema_pk","https://altema.jp/pokemoncard/"),
-   ("pokemoncard_info","https://www.pokemon-card.com/info/"),
-   ("pco_news","https://www.pokemoncenter-online.com/news/"),
-   ("pco_top","https://www.pokemoncenter-online.com/"),
-   ("onepiece_news","https://www.onepiece-cardgame.com/news/"),
-   ("amazon_asin","https://www.amazon.co.jp/dp/B0H4PQ6LR5"),
-]
-KW=["Amazon","ポケモンセンター","ホビーサーチ","駿河屋","在庫あり","カートに入れる","予約受付中","抽選","品切れ","販売終了","在庫なし","ハドウシーカー"]
-for name,url in T:
+# 아마존 상품 페이지 구조 확인: 버튼·재고·판매자 관련 부분만 짧게 출력 (내용 전체는 저장하지 않음)
+import requests, re, time
+H={"User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36","Accept-Language":"ja-JP,ja;q=0.9"}
+def txt(s): return re.sub(r"\s+"," ",re.sub(r"<[^>]+>"," ",s)).strip()
+for asin in ["B0H4PQ6LR5","B0GXCRBL5J","B0HFVPJF4Q","B0FSJXSPPX","B0H43ZX8LK"]:
     try:
-        r=requests.get(url,headers=H,timeout=25); t=r.text
-        hits=[k for k in KW if k in t]
-        print(f"{name}\t{r.status_code}\t{len(t)}\t{','.join(hits)}\t{r.url[:90]}")
-        if r.status_code != 200:
-            print("   ", re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", re.sub(r"<(script|style)[^>]*>.*?</\1>", " ", t, flags=re.S)))[:300])
-            print("   server:", r.headers.get("server"), r.headers.get("x-cache", ""), r.headers.get("cf-ray", ""))
-    except Exception as e:
-        print(f"{name}\tERR\t{type(e).__name__}")
-    time.sleep(2)
+        r=requests.get(f"https://www.amazon.co.jp/dp/{asin}",headers=H,timeout=25); h=r.text
+        print(f"== {asin} {r.status_code} {len(h)} captcha={'captcha' in h.lower() or 'validateCaptcha' in h}")
+        m=re.search(r'id="productTitle"[^>]*>(.*?)</span>',h,re.S); print(" title:",txt(m.group(1))[:80] if m else None)
+        for key in ["招待","invitation","inviteButton","add-to-cart-button","buy-now-button","現在在庫切れ","在庫あり","一時的に在庫切れ","予約","出荷元","販売元","merchant-info","priceToPay","a-price-whole","landingImage","outOfStock","availability"]:
+            i=h.find(key)
+            if i>=0: print(f" [{key}]", txt(h[max(0,i-150):i+250])[:220])
+            else: print(f" [{key}] -")
+        for m in re.finditer(r'id="(availability|merchantInfoFeature_feature_div|offerDisplayFeatures_desktop|invitation[^"]*|[^"]*[Ii]nvit[^"]*)"',h): print(" id:",m.group(1))
+        im=re.search(r'"hiRes":"(https://[^"]+)"',h) or re.search(r'id="landingImage"[^>]+src="([^"]+)"',h); print(" img:",im.group(1) if im else None)
+    except Exception as e: print(asin,"ERR",e)
+    time.sleep(4)

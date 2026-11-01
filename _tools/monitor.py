@@ -214,10 +214,12 @@ def _heading_before(h, pos):
 
 def find_invites(h, fallback_title=""):
     """페이지(또는 피드 글) 안에서 '초대 판매'로 소개된 아마존 상품 링크를 찾아 {ASIN: (이름, 가격)}"""
-    out = {}; prev_end = 0
+    out = {}; seg = 0; last_end = 0; last_asin = ""
     for m in re.finditer(r'href="[^"]*amazon\.co\.jp[^"]*?/(?:dp|gp/product)/([A-Z0-9]{10})', h):
         asin = m.group(1)
-        start = max(prev_end, m.start() - 700); prev_end = m.end()   # 앞 상품 설명이 섞이지 않게 바로 앞 링크 이후만 봄
+        if asin != last_asin: seg = last_end          # 다른 상품 링크가 끝난 뒤부터만 봄 (같은 상품의 사진·버튼 링크는 이어서)
+        last_end, last_asin = m.end(), asin
+        start = max(seg, m.start() - 1500)
         if asin[0].isdigit() or asin in out: continue          # 숫자로 시작하는 건 책
         ctx = text_of(h[start:m.start()])
         if "招待" not in ctx and not ("抽選" in ctx and "当選メール" in ctx): continue

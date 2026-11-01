@@ -17,7 +17,7 @@ DESC = "포켓몬카드·미니카·피규어·게임 — 직접 모으고 즐�
 ADSENSE = "ca-pub-4380904134243959"
 AUTHOR = "blvl."
 PER_PAGE = 10
-CSS_VER = 16
+CSS_VER = 17
 JS_VER = 1
 
 # 카테고리: (슬러그, 메뉴명, 설명)
@@ -186,14 +186,51 @@ for pg in pages:
 <div class="entry-content">{pg["body"]}</div></article>'''
     write(url(pg["slug"]), page(pg["title"], with_sidebar(main), pg["desc"], url(pg["slug"])))
 
-# ── 홈
+# ── 홈 상단 속보 전광판: 최근 48시간 속보 글 + 지금 구매·예약 가능한 상품
+def ticker():
+    try:
+        import sys; sys.path.insert(0, str(ROOT / "_tools"))
+        from monitor import kr, STATUS_KR, SHOP_KR
+    except Exception:
+        kr = lambda t: t; STATUS_KR = {}; SHOP_KR = {}
+    try: st = json.loads((ROOT / "_monitor" / "state.json").read_text(encoding="utf-8"))
+    except Exception: st = {}
+    now = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9))).replace(tzinfo=None)
+    rows = []
+    for q in posts:
+        if q["category"] != NEWS: continue
+        try: t = datetime.datetime.strptime(q["date"], "%Y-%m-%d %H:%M:%S")
+        except ValueError: continue
+        if (now - t).total_seconds() > 48 * 3600: break
+        rows.append(("hot", "속보", q["title"].replace("[추첨·판매 속보] ", "").replace("[입고 속보] ", ""), url(q["slug"]), q["date"][5:16].replace("-", "/"), False))
+    for v in st.get("items", {}).values():
+        if v.get("status") not in ("instock", "preorder"): continue
+        name = re.sub(r"^\s+|\s+$", "", kr(v["title"]))[:48]
+        extra = " · ".join(x for x in (SHOP_KR.get(v.get("shop"), ""), STATUS_KR.get(v["status"], ""), v.get("price", "")) if x)
+        rows.append(("on", "판매 중" if v["status"] == "instock" else "예약 중", f"{name} — {extra}", v["url"], "", True))
+    rows = rows[:14]
+    if not rows:
+        track = '<span class="tk-item"><span class="tk-tag idle">감시 중</span>지금은 새로 풀린 재고가 없어요 · 10분마다 일본 쇼핑몰을 확인하고 있어요</span>'
+    else:
+        def one(r):
+            kind, tag, text, href, when, ext = r
+            attrs = ' target="_blank" rel="nofollow noopener"' if ext else ""
+            w = f'<time>{esc(when)}</time>' if when else ""
+            return f'<a class="tk-item" href="{esc(href)}"{attrs}><span class="tk-tag {kind}">{tag}</span>{esc(text)}{w}</a>'
+        track = "".join(one(r) for r in rows)
+    dur = max(28, min(120, len(re.sub(r"<[^>]+>", "", track)) // 5))
+    return f'''<section class="ticker" aria-label="TCG 실시간 속보">
+<a class="tk-label" href="/category/news/"><i aria-hidden="true"></i>LIVE<span>TCG 속보</span></a>
+<div class="tk-view"><div class="tk-track" style="--dur:{dur}s"><div class="tk-run">{track}</div><div class="tk-run" aria-hidden="true">{track}</div></div></div>
+<a class="tk-more" href="/stock/">현황판 →</a></section>'''
+
 feat = [p for p in articles if p.get("featured")]
 feat = (feat + [p for p in articles if p not in feat])[:5]
 featured = ""
 if feat:
     featured = f'''<section class="gb-section"><h2 class="custom-title">Featured Posts</h2>
 <div class="feat"><div class="big">{gcard(feat[0], True)}</div><div class="small">{"".join(gcard(p) for p in feat[1:5])}</div></div></section>'''
-home = f'''<div style="height:30px"></div>{featured}
+home = f'''{ticker()}{featured}
 <section class="gb-section latest"><h2 class="custom-title">Latest Posts</h2>
 <div class="lgrid">{"".join(gcard(p) for p in articles[:9])}</div>
 <div class="gbtn-wrap"><a class="gbtn" href="/blog/">Read All Article</a></div></section>'''

@@ -2,7 +2,9 @@
 import requests, urllib.parse as u, re, time
 H={"User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 blvlblog-stock-check","Accept-Language":"ja,en;q=0.8"}
 q=u.quote
-T=[("yodobashi_search","https://www.yodobashi.com/?word="+q("ハドウシーカー")),
+T=[("hobbysearch_pk_instock","https://www.1999.co.jp/list/3352/7/1?soldout=0"),
+   ("hobbysearch_pk_instock_en","https://www.hlj.com/"),
+   ("yodobashi_search","https://www.yodobashi.com/?word="+q("ハドウシーカー")),
    ("yodobashi_limited","https://limited.yodobashi.com/"),
    ("amiami_search","https://slist.amiami.jp/top/search/list?s_keywords="+q("ハドウシーカー")),
    ("hobbysearch_search","https://www.1999.co.jp/search?searchkey="+q("ハドウシーカー")),

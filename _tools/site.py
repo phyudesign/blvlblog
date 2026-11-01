@@ -17,7 +17,7 @@ DESC = "포켓몬카드·미니카·피규어·게임 — 직접 모으고 즐�
 ADSENSE = "ca-pub-4380904134243959"
 AUTHOR = "blvl."
 PER_PAGE = 10
-CSS_VER = 26
+CSS_VER = 27
 JS_VER = 1
 
 # 카테고리: (슬러그, 메뉴명, 설명)
@@ -202,10 +202,18 @@ def ticker():
         try: t = datetime.datetime.strptime(q["date"], "%Y-%m-%d %H:%M:%S")
         except ValueError: continue
         if (now - t).total_seconds() > 48 * 3600: break
+        if "amazon.co.jp/dp/" in q.get("shop_url", ""): continue   # 아마존 응모 상품은 아래 '응모 중' 줄로 보여 줌
         name = q["title"].replace("[추첨·판매 속보] ", "").replace("[입고 속보] ", "")
         sub = " · ".join(x for x in (q.get("shop_kr", ""), q.get("status_kr", ""), q.get("price", "")) if x)
         rows.append(("hot", "속보", name, url(q["slug"]), q["date"][5:16].replace("-", "/"), False,
                      {"img": re.sub(r"downsize=\d+", "downsize=400", q.get("pimg") or ""), "name": name, "sub": sub or "STOCK LIVE 속보", "cta": "속보 글 보기"}))
+    inv = sorted(st.get("amazon", {}).items(), key=lambda kv: (kv[1]["first"], kv[0]), reverse=True)[:6]
+    for a, v in inv:
+        fresh = (now.date() - datetime.date.fromisoformat(v["first"])).days <= 2
+        name = re.sub(r"^\s+|\s+$", "", kr(v["name"]))[:48]
+        sub = " · ".join(x for x in ("아마존 재팬", "초대 요청 접수 중", v.get("price", "")) if x)
+        rows.append(("inv", "새 응모" if fresh else "응모 중", f"{name} — 아마존 초대 요청", f"https://www.amazon.co.jp/dp/{a}", "", True,
+                     {"img": "", "name": kr(v["name"]), "sub": sub, "cta": "아마존에서 초대 요청하기"}))
     for v in st.get("items", {}).values():
         if v.get("status") not in ("instock", "preorder"): continue
         name = re.sub(r"^\s+|\s+$", "", kr(v["title"]))[:48]

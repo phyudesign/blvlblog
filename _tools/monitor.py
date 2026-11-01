@@ -122,7 +122,7 @@ def kr(t):
     for a, b in KR_NAMES: t = t.replace(a, b)
     return re.sub(r"\s+", " ", t).strip()
 
-STATUS_KR = {"instock": "구매 가능", "preorder": "예약 접수 중", "out": "주문 불가", "unknown": "판매 대기(추첨 전용)", "new": "새 공지"}
+STATUS_KR = {"invite": "아마존 응모(초대 요청) 접수 중", "instock": "구매 가능", "preorder": "예약 접수 중", "out": "주문 불가", "unknown": "판매 대기(추첨 전용)", "new": "새 공지"}
 
 def slugify(s): return re.sub(r"[^0-9A-Za-z가-힣ぁ-んァ-ヶ一-龠ー]+", "-", s)[:40].strip("-")
 
@@ -144,19 +144,25 @@ def write_alert_post(ev, state):
             s = re.sub(r'"mod": "[^"]+"', f'"mod": "{NOW.strftime("%Y-%m-%d %H:%M:%S")}"', s, 1)
             p.write_text(s, encoding="utf-8"); return prev["file"]
     is_lottery = ev["kind"] == "page"
+    is_amazon = ev["status"] == "invite"
     name = ev["title"]; kname = kr(name)
-    title = (f'[입고 속보] {kname[:60]} — {ev["shop_kr"]} {STATUS_KR.get(ev["status"], "")}' if not is_lottery
+    title = (f'[아마존 응모] {kname[:60]} — 초대 요청 접수 중' if is_amazon and not is_lottery
+             else f'[아마존 응모 소식] {kname[:70]}' if is_amazon
+             else f'[입고 속보] {kname[:60]} — {ev["shop_kr"]} {STATUS_KR.get(ev["status"], "")}' if not is_lottery
              else f'[추첨·판매 속보] {ev["shop_kr"]} — {kname[:60]}')
     slug = f'속보-{NOW.strftime("%Y%m%d-%H%M")}-{slugify(ev["shop_kr"])}-{hashlib.md5(key.encode()).hexdigest()[:6]}'
     korea = {"라쿠텐북스": "라쿠텐북스는 일본 배송지가 필요해요. 배송대행지 주소로 주문하는 방법은 아래 가이드 글을 참고하세요.",
              "세븐넷": "세븐넷은 일본 배송지가 필요해요.", "요도바시": "요도바시는 일본 배송지가 필요해요.",
-             "트레카플라자55": "일본 카드 전문점이라 일본 배송지가 필요해요.", "옐로서브마린": "일본 카드 전문점이라 일본 배송지가 필요해요."}.get(ev["shop_kr"], "")
+             "트레카플라자55": "일본 카드 전문점이라 일본 배송지가 필요해요.", "옐로서브마린": "일본 카드 전문점이라 일본 배송지가 필요해요.",
+             "아마존 재팬": "아마존 재팬 초대 판매는 상품 페이지에서 '초대 요청'을 눌러 두면, 재고가 풀릴 때 추첨으로 초대 메일이 와요. 메일을 받은 사람만 정해진 시간 안에 정가로 살 수 있어요. 일본 배송지가 필요해요."}.get(ev["shop_kr"], "")
     fm = {"title": title, "slug": slug, "date": NOW.strftime("%Y-%m-%d %H:%M:%S"), "mod": NOW.strftime("%Y-%m-%d %H:%M:%S"),
           "desc": f'{ev["shop_kr"]}에서 {kname[:50]} 상태가 바뀌었어요({STATUS_KR.get(ev["status"], "")}). 감지 시각 {stamp} (한국 시간).',
           "thumb": "/wp-content/uploads/2026/10/blvl-stock-alert.jpg", "category": "news",
           "tags": ["입고 속보", "일본 쇼핑몰", ev["shop_kr"]], "pimg": ev.get("img", ""), "shop_url": ev["url"],
           "shop_kr": ev["shop_kr"], "status_kr": STATUS_KR.get(ev["status"], ""), "price": ev.get("price", "")}
-    body = f'''<p><strong>{html.escape(ev["shop_kr"])}</strong>에서 아래 상품의 상태가 바뀐 걸 blvl 재고 감시기가 잡았어요. 재고는 몇 분 만에 끝나는 경우가 많으니 <strong>링크에서 바로 확인</strong>하세요.</p>
+    lead = (f'<strong>아마존 재팬</strong>에서 아래 상품의 <strong>초대 요청(응모)</strong>이 열린 걸 blvl 감시기가 잡았어요. 초대 요청은 빨리 눌러 둘수록 좋으니 <strong>링크에서 바로 눌러 두세요.</strong>' if is_amazon else
+            f'<strong>{html.escape(ev["shop_kr"])}</strong>에서 아래 상품의 상태가 바뀐 걸 blvl 재고 감시기가 잡았어요. 재고는 몇 분 만에 끝나는 경우가 많으니 <strong>링크에서 바로 확인</strong>하세요.')
+    body = f'''<p>{lead}</p>
 {emo("rare", "떴다냥! 지금 바로 확인하라냥!!!", "레어다")}
 <table><tbody>
 <tr><th>상품</th><td><strong>{html.escape(kname)}</strong><br><small style="color:#8a8f99">{html.escape(name)}</small></td></tr>
@@ -164,7 +170,8 @@ def write_alert_post(ev, state):
 <tr><th>상태</th><td><strong>{html.escape(STATUS_KR.get(ev["status"], ""))}</strong></td></tr>
 {f'<tr><th>가격</th><td>{html.escape(ev["price"])}</td></tr>' if ev.get("price") else ''}
 <tr><th>감지 시각</th><td>{stamp} (한국 시간)</td></tr>
-<tr><th>바로가기</th><td><a href="{html.escape(ev["url"])}" target="_blank" rel="nofollow noopener">{html.escape(ev["shop_kr"])} 페이지 열기</a></td></tr>
+<tr><th>바로가기</th><td><a href="{html.escape(ev["url"])}" target="_blank" rel="nofollow noopener">{"아마존에서 초대 요청하기" if is_amazon and not is_lottery else html.escape(ev["shop_kr"]) + " 페이지 열기" if not is_lottery or not is_amazon else "기사 열기"}</a></td></tr>
+{f'<tr><th>소식 출처</th><td><a href="{html.escape(ev["srcurl"])}" target="_blank" rel="nofollow noopener">{html.escape(ev["src"])}</a></td></tr>' if ev.get("srcurl") else ''}
 </tbody></table>
 <h2>한국에서 살 수 있을까?</h2>
 <p>{korea} 쇼핑몰별 응모·구매 조건은 <a href="/일본-카드-쇼핑몰-추첨-총정리/">일본 카드 쇼핑몰 추첨 총정리</a>, 아마존 응모는 <a href="/아마존-응모-포켓몬카드-원피스카드/">아마존 응모 총정리</a>를 참고하세요.</p>
@@ -178,6 +185,108 @@ def write_alert_post(ev, state):
     posts[key] = {"file": f"{slug}.html", "at": NOW.isoformat()}
     return f"{slug}.html"
 
+# ── 아마존 응모(초대 요청) 상품 찾기
+# 아마존은 직접 열면 로봇 확인 화면이 떠서, 일본 정보·뉴스 사이트가 소개한 '아마존 초대 판매' 링크를 모아요.
+INVITE_SOURCES = [  # (id, 출처 이름, 주소, 종류)
+    ("gp_pokeca", "게임피디아", "https://premium.gamepedia.jp/pokeca/feed/", "feed"),
+    ("gp_toreca", "게임피디아", "https://premium.gamepedia.jp/toreca/feed/", "feed"),
+    ("dengeki_pk", "전격온라인", "https://dengekionline.com/article/202608/83452", "page"),
+    ("famitsu_pk", "패미통", "https://www.famitsu.com/article/202606/77986", "page"),
+]
+NEWS_FEEDS = [  # 새 '아마존 초대 판매' 기사 제목 감지 (구글 뉴스 검색 RSS)
+    ("gnews_pk", "https://news.google.com/rss/search?q=" + urllib.parse.quote("Amazon 招待 ポケモンカード") + "&hl=ja&gl=JP&ceid=JP:ja"),
+    ("gnews_op", "https://news.google.com/rss/search?q=" + urllib.parse.quote("Amazon 招待 ワンピースカード") + "&hl=ja&gl=JP&ceid=JP:ja"),
+]
+CARD_WORDS = ["ポケモン", "ポケカ", "ワンピース", "ONE PIECE", "30th", "MEGA"]
+# 이미 확인해 둔 응모 상품 (2026-10-31 아마존에서 직접 확인)
+INVITE_SEED = {
+    "B0H4PQ6LR5": ("포켓몬카드 확장팩 파동시커 BOX", "6,006엔"), "B0GXCRBL5J": ("포켓몬카드 30th CELEBRATION BOX", "7,216엔"),
+    "B0GXCYMRGL": ("포켓몬카드 30th 스타팅 세트", "1,200엔"), "B0GXCM4BCZ": ("포켓몬카드 에브이·블래키 덱 세트", "6,201엔"),
+    "B0GP928YDZ": ("포켓몬카드 스톰 에메랄드 BOX", "6,006엔"), "B0FLCWJ1VK": ("포켓몬카드 메가드림EX BOX", "5,500엔"),
+    "B0FSJXSPPX": ("포켓몬카드 니힐제로 BOX", "5,412엔"), "B0F9KJGGZ5": ("포켓몬카드 인페르노X BOX", "5,412엔"),
+    "B0F18J2CJF": ("포켓몬카드 메가브레이브 BOX", "5,412엔"), "B0F189YH8W": ("포켓몬카드 메가심포니아 BOX", "5,412엔"),
+    "B0HFVPJF4Q": ("원피스카드 OP-18 BOX", "5,782엔"), "B0HB3JQ6P4": ("원피스카드 EB-05 BOX", "5,782엔"),
+}
+
+def _heading_before(h, pos):
+    hs = list(re.finditer(r"<h[2-4][^>]*>(.*?)</h[2-4]>", h[max(0, pos - 6000):pos], re.S))
+    return text_of(hs[-1].group(1)) if hs else ""
+
+def find_invites(h, fallback_title=""):
+    """페이지(또는 피드 글) 안에서 '초대 판매'로 소개된 아마존 상품 링크를 찾아 {ASIN: (이름, 가격)}"""
+    out = {}; prev_end = 0
+    for m in re.finditer(r'href="[^"]*amazon\.co\.jp[^"]*?/(?:dp|gp/product)/([A-Z0-9]{10})', h):
+        asin = m.group(1)
+        start = max(prev_end, m.start() - 700); prev_end = m.end()   # 앞 상품 설명이 섞이지 않게 바로 앞 링크 이후만 봄
+        if asin[0].isdigit() or asin in out: continue          # 숫자로 시작하는 건 책
+        ctx = text_of(h[start:m.start()])
+        if "招待" not in ctx and not ("抽選" in ctx and "当選メール" in ctx): continue
+        name = _heading_before(h, m.start()) or fallback_title
+        if not any(w in (name + ctx[-300:] + fallback_title) for w in CARD_WORDS): continue
+        pm = re.findall(r"招待販売価格】\s*([\d,]+)円", ctx)
+        out[asin] = (re.sub(r"\s+", " ", name).strip()[:90], pm[-1] + "엔" if pm else "")
+    return out
+
+def scan_amazon(state, first_run):
+    inv = state.setdefault("amazon", {}); news = state.setdefault("anews", [])
+    seed = not inv
+    if seed:
+        for a, (n, pr) in INVITE_SEED.items():
+            inv[a] = {"name": n, "price": pr, "first": "2026-10-31", "last": NOW.strftime("%Y-%m-%d"), "src": "blvl 확인", "srcurl": ""}
+    found = {}
+    for sid, sname, url, kind in INVITE_SOURCES:
+        h = get(url)
+        if not h: continue
+        if kind == "feed":
+            for it in re.findall(r"<item>(.*?)</item>", h, re.S):
+                ti = re.search(r"<title>(.*?)</title>", it, re.S); ln = re.search(r"<link>(.*?)</link>", it, re.S)
+                body = html.unescape(it)
+                for a, v in find_invites(body, text_of(html.unescape(ti.group(1))) if ti else "").items():
+                    found.setdefault(a, (v, sname, ln.group(1).strip() if ln else url))
+        else:
+            for a, v in find_invites(h).items():
+                found.setdefault(a, (v, sname, url))
+    events = []
+    for a, ((name, price), sname, surl) in found.items():
+        if a in inv:
+            inv[a]["last"] = NOW.strftime("%Y-%m-%d")
+            if price and not inv[a].get("price"): inv[a]["price"] = price
+            continue
+        inv[a] = {"name": name, "price": price, "first": NOW.strftime("%Y-%m-%d"), "last": NOW.strftime("%Y-%m-%d"), "src": sname, "srcurl": surl}
+        if not seed:
+            events.append({"key": "amazon:" + a, "kind": "amazon", "shop_kr": "아마존 재팬", "title": name, "url": f"https://www.amazon.co.jp/dp/{a}",
+                           "status": "invite", "price": price, "src": sname, "srcurl": surl})
+    # 새 기사 제목: 상품 링크를 못 찾았어도 '아마존 초대 판매' 새 기사는 알림
+    fresh_news = not news
+    for nid, url in NEWS_FEEDS:
+        h = get(url)
+        if not h: continue
+        for it in re.findall(r"<item>(.*?)</item>", h, re.S)[:20]:
+            ti = text_of(html.unescape((re.search(r"<title>(.*?)</title>", it, re.S) or [None, ""])[1] or ""))
+            ln = (re.search(r"<link>(.*?)</link>", it, re.S) or [None, ""])[1].strip()
+            gid = hashlib.md5(ti.encode()).hexdigest()[:12]
+            if gid in news: continue
+            news.insert(0, gid)
+            if fresh_news or "招待" not in ti or not any(w in ti for w in CARD_WORDS): continue
+            pub = (re.search(r"<pubDate>(.*?)</pubDate>", it) or [None, ""])[1]
+            try:
+                if (NOW - datetime.datetime.strptime(pub[:25], "%a, %d %b %Y %H:%M:%S").replace(tzinfo=datetime.timezone.utc)).total_seconds() > 3 * 86400: continue
+            except Exception: pass
+            events.append({"key": "anews:" + gid, "kind": "page", "shop_kr": "아마존 재팬", "title": ti, "url": ln, "status": "invite", "price": ""})
+    state["anews"] = news[:500]
+    # 60일 동안 어디에도 다시 안 나온 상품은 목록에서 정리
+    for a in [a for a, v in inv.items() if (NOW.date() - datetime.date.fromisoformat(v["last"])).days > 60]:
+        inv.pop(a)
+    return events, seed or bool(found)
+
+def amazon_table(state):
+    inv = sorted(state.get("amazon", {}).items(), key=lambda kv: (kv[1]["first"], kv[0]), reverse=True)
+    if not inv: return "<p>아직 모은 상품이 없어요.</p>"
+    rows = "".join(f'<tr><td>{html.escape(kr(v["name"])[:70])}</td><td>{html.escape(v.get("price", ""))}</td><td>{v["first"][5:].replace("-", "/")}</td>'
+                   f'<td><a href="https://www.amazon.co.jp/dp/{a}" target="_blank" rel="nofollow noopener">초대 요청하기</a></td></tr>' for a, v in inv)
+    return ('<table><thead><tr><th>상품</th><th>초대 판매가</th><th>처음 확인</th><th>응모</th></tr></thead><tbody>' + rows + '</tbody></table>'
+            '<p style="font-size:14px;color:#666">※ 아마존은 자동 확인이 막혀 있어 응모가 이미 끝난 상품이 섞여 있을 수 있어요. 60일 동안 새 소식이 없으면 목록에서 빠져요.</p>')
+
 def write_board(state):
     rows = []
     for k, v in sorted(state.get("items", {}).items(), key=lambda kv: (kv[1]["status"] not in ("instock", "preorder"), kv[1]["title"])):
@@ -188,11 +297,14 @@ def write_board(state):
     body = f'''<p>blvl 재고 감시기가 일본 쇼핑몰 공개 페이지를 <strong>약 10분 간격</strong>으로 확인해서, 포켓몬카드·원피스카드 상품을 <strong>지금 살 수 있거나 예약할 수 있는 곳</strong>을 모아 보여 줘요. 마지막으로 바뀐 시각: <strong>{NOW.strftime("%Y-%m-%d %H:%M")}</strong> (한국 시간)</p>
 <h2>지금 구매·예약 가능</h2>
 {('<table><thead><tr><th>상품</th><th>쇼핑몰</th><th>상태</th><th>가격</th><th>감지</th></tr></thead><tbody>' + "".join(rows) + '</tbody></table>') if rows else '<p>지금은 감시 중인 쇼핑몰에 구매 가능한 상품이 없어요. 들어오면 이곳과 속보 글로 바로 알려 드릴게요.</p>'}
+<h2>아마존 재팬 응모(초대 요청) 상품</h2>
+<p>아마존 재팬의 포켓몬카드·원피스카드는 <strong>초대 판매</strong>예요. 상품 페이지에서 '초대 요청'을 눌러 두면 재고가 풀릴 때 추첨으로 초대 메일이 오고, 메일을 받은 사람만 정가로 살 수 있어요. 일본 정보·뉴스 사이트에 소개된 초대 판매 링크를 모았어요.</p>
+{amazon_table(state)}
 <h2>최근 감지 기록</h2>
 <ol>{ev_rows or "<li>아직 기록이 없어요.</li>"}</ol>
 <h2>감시 중인 곳</h2>
-<ul><li>라쿠텐북스 (상품별 재고·예약 상태)</li><li>요도바시 추첨 페이지 · 세븐넷 · 트레카플라자55 · 옐로서브마린 (새 판매·추첨 공지)</li></ul>
-<p>포켓몬센터 온라인과 아마존은 자동 확인이 막혀 있어서 여기엔 나오지 않아요. 아마존 응모는 <a href="/아마존-응모-포켓몬카드-원피스카드/">아마존 응모 총정리</a>를 참고하세요.</p>
+<ul><li>라쿠텐북스 (상품별 재고·예약 상태)</li><li>트레카플라자55 · 옐로서브마린 · 요도바시 추첨 페이지 (새 판매·추첨 공지)</li><li>아마존 재팬 초대 판매 (정보·뉴스 사이트 경유)</li></ul>
+<p>포켓몬센터 온라인과 아마존은 직접 확인이 막혀 있어서, 아마존 응모는 일본 정보·뉴스 사이트(게임피디아, 전격온라인, 패미통, 구글 뉴스)에 올라온 초대 판매 소식으로 모아요. 응모 방법은 <a href="/아마존-응모-포켓몬카드-원피스카드/">아마존 응모 총정리</a>를 참고하세요.</p>
 <p style="font-size:14px;color:#666">※ 자동 감시 결과라 실제 재고·가격은 각 쇼핑몰 페이지가 기준이에요.</p>
 '''
     fm = {"title": "일본 쇼핑몰 재고 현황판", "slug": "stock", "desc": "포켓몬카드·원피스카드를 지금 살 수 있는 일본 쇼핑몰을 약 10분 간격으로 확인해 보여 주는 재고 현황판이에요.", "updated": NOW.strftime("%Y년 %m월 %d일 %H:%M")}
@@ -238,12 +350,18 @@ def main():
                     new_events.append({"key": f"{sid}:{hid}", "kind": "page", "shop_kr": name, "title": t, "url": url, "status": "new", "price": ""})
         # 한 번이라도 본 줄은 계속 기억 (진열 순서가 돌아도 옛 상품을 새 소식으로 착각하지 않게)
         lines[sid] = (list(cur.keys()) + [x for x in (prev or []) if x not in cur])[:3000]
+    # 아마존 응모
+    try:
+        a_events, a_changed = scan_amazon(state, first_run)
+    except Exception as e:
+        print("아마존 응모 확인 실패", e); a_events, a_changed = [], False
+    new_events = a_events + new_events
     # 알림 + 글
-    changed = bool(new_events) or bool(status_changed) or first_run or TG_NEW or os.environ.get("TG_TEST") == "1"
+    changed = bool(new_events) or bool(status_changed) or first_run or a_changed or TG_NEW or os.environ.get("TG_TEST") == "1"
     for ev in new_events[:8]:  # 한 번에 너무 많이 쓰지 않도록
         f = write_alert_post(ev, state)
         events.insert(0, {"at": NOW.strftime("%m/%d %H:%M"), "shop_kr": ev["shop_kr"], "title": ev["title"], "status": ev["status"]})
-        telegram(f'🐱 blvl 재고 속보\n{ev["shop_kr"]} · {STATUS_KR.get(ev["status"], "")}\n{kr(ev["title"])[:80]}\n{ev.get("price","")}\n{ev["url"]}\n블로그: https://blvlblog.com/{urllib.parse.quote(f[:-5])}/')
+        telegram(f'🐱 blvl {"아마존 응모 속보" if ev["status"] == "invite" else "재고 속보"}\n{ev["shop_kr"]} · {STATUS_KR.get(ev["status"], "")}\n{kr(ev["title"])[:80]}\n{ev.get("price","")}\n{ev["url"]}\n블로그: https://blvlblog.com/{urllib.parse.quote(f[:-5])}/')
         print("EVENT", ev["shop_kr"], ev["status"], ev["title"][:60])
     state["events"] = events[:100]
     if changed:

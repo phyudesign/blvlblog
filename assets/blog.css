@@ -256,3 +256,4 @@ input,textarea,select{-webkit-user-select:text;user-select:text}
 /* 아이폰 브라우저가 전광판 글자를 제멋대로 키우지 않게 */
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 .ticker,.ticker *{-webkit-text-size-adjust:none;text-size-adjust:none}
+.tk-tag.inv{background:#ff9f1c;color:#2a1600}

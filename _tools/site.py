@@ -205,13 +205,13 @@ def ticker():
         name = q["title"].replace("[추첨·판매 속보] ", "").replace("[입고 속보] ", "")
         sub = " · ".join(x for x in (q.get("shop_kr", ""), q.get("status_kr", ""), q.get("price", "")) if x)
         rows.append(("hot", "속보", name, url(q["slug"]), q["date"][5:16].replace("-", "/"), False,
-                     {"img": q.get("pimg") or q["thumb"], "name": name, "sub": sub or "STOCK LIVE 속보", "cta": "속보 글 보기"}))
+                     {"img": re.sub(r"downsize=\d+", "downsize=400", q.get("pimg") or "") or q["thumb"], "name": name, "sub": sub or "STOCK LIVE 속보", "cta": "속보 글 보기"}))
     for v in st.get("items", {}).values():
         if v.get("status") not in ("instock", "preorder"): continue
         name = re.sub(r"^\s+|\s+$", "", kr(v["title"]))[:48]
         extra = " · ".join(x for x in (SHOP_KR.get(v.get("shop"), ""), STATUS_KR.get(v["status"], ""), v.get("price", "")) if x)
         rows.append(("on", "판매 중" if v["status"] == "instock" else "예약 중", f"{name} — {extra}", v["url"], "", True,
-                     {"img": v.get("img", ""), "name": re.sub(r"^\s+|\s+$", "", kr(v["title"])), "sub": extra, "cta": "쇼핑몰에서 보기"}))
+                     {"img": re.sub(r"downsize=\d+", "downsize=400", v.get("img") or ""), "name": re.sub(r"^\s+|\s+$", "", kr(v["title"])), "sub": extra, "cta": "쇼핑몰에서 보기"}))
     rows = rows[:14]
     if not rows:
         track = '<span class="tk-item"><span class="tk-tag idle">감시 중</span>지금은 새로 풀린 재고가 없어요 · 10분마다 일본 쇼핑몰을 확인하고 있어요</span>'

@@ -69,7 +69,12 @@
       cCta.textContent = (ptype === "touch" ? "짧게 탭하면 " : "클릭하면 ") + (item.dataset.cta || "열기");
     }
     var r = t.getBoundingClientRect(), cw = card.offsetWidth || 240;
-    var left = clamp(cx - cw / 2 + (ptype === "touch" ? 70 : 0), 10, window.innerWidth - cw - 10);
+    var left;
+    if (ptype === "touch") {   // 손가락에 가리지 않게 손가락 오른쪽에, 자리가 없으면 왼쪽에
+      left = cx + 44;
+      if (left + cw > window.innerWidth - 8) left = cx - 44 - cw;
+      left = clamp(left, 8, window.innerWidth - cw - 8);
+    } else left = clamp(cx - cw / 2, 10, window.innerWidth - cw - 10);
     card.style.left = left + "px";
     card.style.top = (r.bottom + 10) + "px";
     card.classList.add("on");

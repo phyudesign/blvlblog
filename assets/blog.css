@@ -616,3 +616,7 @@ body{letter-spacing:-.3px}
 @media(max-width:768px){.custom-title{margin-bottom:14px}}
 /* 화살표: 슬라이드 위쪽 여백(30px)만큼 내려서 카드 세로 중앙에 */
 .live-hero .lh-nav{top:240px}
+/* 상단바와 슬라이드 띠 사이 틈(가는 선) 메우기 */
+.live-hero::before{top:-2px!important}
+.site-header{position:relative;z-index:2}
+.site-header:not(.open){box-shadow:0 1px 0 #17181d}

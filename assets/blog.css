@@ -314,4 +314,4 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
   body:has(.sidebar) .inv-float{display:none!important}
 }
 .sidebar .ip-list{max-height:min(38vh,340px);overflow-y:auto;overscroll-behavior:contain;padding-right:4px}
-.sidebar .side-search{padding:24px 40px}
+.sidebar .side-search{margin-top:22px}

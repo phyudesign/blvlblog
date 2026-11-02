@@ -17,7 +17,7 @@ DESC = "포켓몬카드·미니카·피규어·게임 — 직접 모으고 즐�
 ADSENSE = "ca-pub-4380904134243959"
 AUTHOR = "blvl."
 PER_PAGE = 10
-CSS_VER = 27
+CSS_VER = 28
 JS_VER = 1
 
 # 카테고리: (슬러그, 메뉴명, 설명)
@@ -125,8 +125,41 @@ def sidebar():
     return f'''<div class="sidebar"><div class="inside-right-sidebar">
 <aside class="widget"><form class="search-form" action="/search/"><input name="q" placeholder="검색 …" aria-label="검색"><button aria-label="검색">{SEARCH_SVG.replace("<svg", '<svg width="16" height="16"')}</button></form></aside>
 <aside class="widget widget_recent_entries"><h2 class="widget-title">Recent Posts</h2><ul>{rec}</ul></aside>{news}
-<aside class="widget"><h2 class="widget-title">Categories</h2><ul>{cl}</ul></aside>
+<aside class="widget"><h2 class="widget-title">Categories</h2><ul>{cl}</ul></aside>{invite_panel("widget")}
 </div></div>'''
+
+# ── 아마존 응모 중 목록 (사이드바 아래·홈 오른쪽 여백)
+def invite_panel(cls):
+    try:
+        import sys; sys.path.insert(0, str(ROOT / "_tools"))
+        from monitor import invite_list
+        rows = invite_list(json.loads((ROOT / "_monitor" / "state.json").read_text(encoding="utf-8")))
+    except Exception:
+        return ""
+    if not rows: return ""
+    md = lambda d: f"{int(d[5:7])}/{int(d[8:10])}"
+    li, groups = [], {}
+    for i, (a, name, price, rel, grp, new) in enumerate(rows):
+        link = f"https://www.amazon.co.jp/dp/{a}"
+        if grp:
+            if grp not in groups:
+                groups[grp] = {"rel": rel, "price": price, "items": []}
+                li.append(("group", grp))
+            groups[grp]["items"].append((name, link))
+            continue
+        badge = '<em class="ip-new">NEW</em>' if (i == 0 or new) else ""
+        brand = "원피스" if name.startswith("원피스") else "포켓몬"
+        nm = name.replace("원피스 ", "")
+        li.append(("one", f'<li><a href="{link}" target="_blank" rel="nofollow noopener"><span class="ip-name"><i>{brand}</i>{esc(nm)}{badge}</span>'
+                          f'<span class="ip-meta">{md(rel)} 발매{(" · " + esc(price)) if price else ""}</span></a></li>'))
+    out = []
+    for kind, v in li:
+        if kind == "one": out.append(v); continue
+        g = groups[v]
+        chips = "".join(f'<a href="{l}" target="_blank" rel="nofollow noopener">{esc(n)}</a>' for n, l in g["items"])
+        out.append(f'<li class="ip-group"><span class="ip-name"><i>포켓몬</i>{esc(v)}</span><span class="ip-meta">{md(g["rel"])} 발매 · {esc(g["price"])} · {len(g["items"])}종</span><div class="ip-chips">{chips}</div></li>')
+    return (f'<aside class="inv-panel {cls}" aria-label="아마존 응모 중인 상품"><div class="ip-head"><b>아마존 응모 중</b><span>초대 요청 받는 상품 · 최신순</span></div>'
+            f'<ol>{"".join(out)}</ol><a class="ip-all" href="/stock/">전체 목록 · 응모 방법 →</a></aside>')
 
 def with_sidebar(main): return f'<div class="site-content"><main class="content-area">{main}</main>{sidebar()}</div>'
 
@@ -244,7 +277,7 @@ featured = ""
 if feat:
     featured = f'''<section class="gb-section"><h2 class="custom-title">Featured Posts</h2>
 <div class="feat"><div class="big">{gcard(feat[0], True)}</div><div class="small">{"".join(gcard(p) for p in feat[1:5])}</div></div></section>'''
-home = f'''{ticker()}{featured}
+home = f'''{ticker()}{invite_panel("inv-float")}{featured}
 <section class="gb-section latest"><h2 class="custom-title">Latest Posts</h2>
 <div class="lgrid">{"".join(gcard(p) for p in articles[:9])}</div>
 <div class="gbtn-wrap"><a class="gbtn" href="/blog/">Read All Article</a></div></section>'''

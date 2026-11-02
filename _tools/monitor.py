@@ -209,6 +209,42 @@ INVITE_SEED = {
     "B0HFVPJF4Q": ("원피스카드 OP-18 BOX", "5,782엔"), "B0HB3JQ6P4": ("원피스카드 EB-05 BOX", "5,782엔"),
 }
 
+# 화면에 보여 줄 한글 이름·발매일 (발매일 순서 = 응모가 열린 순서로 정렬). 모르는 새 상품은 처음 찾은 날 기준.
+INVITE_INFO = {  # ASIN: (이름, 발매일, 묶음)
+    "B0H4PQ6LR5": ("파동시커 BOX", "2026-11-27", ""),
+    "B0HFVPJF4Q": ("원피스 OP-18 신의 지배 BOX", "2026-11-21", ""),
+    "B0HB3JQ6P4": ("원피스 EB-05 히로인즈 에디션 vol.2 BOX", "2026-10-31", ""),
+    "B0GXCYMRGL": ("이상해씨·파이리·꼬부기", "2026-10-16", "30주년 카드 세트"),
+    "B0GXCX36HP": ("나무지기·아차모·물짱이", "2026-10-16", "30주년 카드 세트"),
+    "B0GXCZ1VDC": ("주리비얀·뚜꾸리·수댕이", "2026-10-16", "30주년 카드 세트"),
+    "B0GXCSGX8Y": ("도치마론·푸호꼬·개구마르", "2026-10-16", "30주년 카드 세트"),
+    "B0GXCPF84C": ("나몰빼미·냐오불·누리공", "2026-10-16", "30주년 카드 세트"),
+    "B0GXCTRZ8L": ("흥나숭·염버니·울머기", "2026-10-16", "30주년 카드 세트"),
+    "B0GXCT83HB": ("나오하·뜨아거·꾸왁스", "2026-10-16", "30주년 카드 세트"),
+    "B0GXCRBL5J": ("30th CELEBRATION BOX", "2026-09-16", ""),
+    "B0GXCM4BCZ": ("에브이·블래키 프리미엄 덱 세트", "2026-09-16", ""),
+    "B0GP928YDZ": ("스톰 에메랄드 BOX", "2026-07-31", ""),
+    "B0GP9QHQ3Y": ("어비스아이 BOX", "2026-05-22", ""),
+    "B0G1XB2STM": ("닌자스피너 BOX", "2026-03-13", ""),
+    "B0FSJXSPPX": ("니힐제로 BOX", "2026-01-23", ""),
+    "B0FLD7HMRP": ("스타트 덱 100 배틀 컬렉션", "2025-12-19", ""),
+    "B0F9KJGGZ5": ("인페르노X BOX", "2025-11-28", ""),
+    "B0FLCWJ1VK": ("메가드림EX BOX", "2025-11-28", ""),
+    "B0F18J2CJF": ("메가브레이브 BOX", "2025-08-01", ""),
+    "B0F189YH8W": ("메가심포니아 BOX", "2025-08-01", ""),
+}
+
+def invite_list(state):
+    """응모 중 상품을 최신(발매일·발견일)순으로: [(asin, 이름, 가격, 기준일, 묶음, 새로찾음)]"""
+    out = []
+    for a, v in state.get("amazon", {}).items():
+        name, rel, grp = INVITE_INFO.get(a, (kr(v["name"]), v["first"], ""))
+        found_new = v["first"] > "2026-10-31" and a not in INVITE_INFO
+        out.append((a, name, v.get("price", ""), max(rel, v["first"]) if found_new else rel, grp, found_new))
+    order = list(INVITE_INFO)
+    out.sort(key=lambda r: order.index(r[0]) if r[0] in order else -1)   # 같은 날짜면 정해 둔 순서
+    return sorted(out, key=lambda r: r[3], reverse=True)
+
 def _heading_before(h, pos):
     hs = list(re.finditer(r"<h[2-4][^>]*>(.*?)</h[2-4]>", h[max(0, pos - 6000):pos], re.S))
     return text_of(hs[-1].group(1)) if hs else ""

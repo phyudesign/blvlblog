@@ -511,3 +511,9 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 .lh-slide .st-cta,.lh-slide .lh-cta{background:#222327!important;color:#fff!important;box-shadow:0 6px 14px rgba(0,0,0,.18)!important;transform:none!important}
 .lh-slide.on:hover .st-cta,.lh-slide.on:hover .lh-cta,.lh-slide.on:focus-visible .st-cta,.lh-slide.on:focus-visible .lh-cta{background:linear-gradient(180deg,#ec4339,#c0141c)!important;box-shadow:0 10px 20px rgba(192,20,28,.32)!important}
 .lh-slide.on:active .st-cta,.lh-slide.on:active .lh-cta{background:linear-gradient(180deg,#ec4339,#c0141c)!important}
+/* 화살표: 동그라미 정중앙, 동그라미는 가운데 카드 세로 중앙 */
+.lh-nav{display:flex;align-items:center;justify-content:center;padding:0;top:210px;transform:translateY(-50%)}
+.lh-nav svg{display:block}
+.lh-prev svg{margin-left:-2px}.lh-next svg{margin-right:-2px}
+/* 브랜드 띠: 금색을 왼쪽 비스듬한 면을 따라 가는 줄로 */
+.st-rib{box-shadow:none;padding:5px 14px 5px 16px;background:linear-gradient(107deg,#d7b56d 0 11px,var(--ac) 11px)}

@@ -588,3 +588,9 @@ html,body{overflow-x:clip}
 @media(max-width:768px){.inside-header{padding-top:10px;padding-bottom:10px}.site-logo img{height:30px!important}}
 .inside-header{padding-top:26px!important;padding-bottom:14px!important}
 @media(max-width:768px){.inside-header{padding-top:20px!important;padding-bottom:12px!important}}
+/* 'LIVE 현황판 전체 보기' 버튼 */
+.live-hero .lh-dots{margin-top:14px}
+.live-hero .lh-all{display:flex;align-items:center;gap:8px;width:max-content;margin:16px auto 0;padding:9px 18px 9px 14px;border:1px solid rgba(255,255,255,.18);border-radius:999px;background:rgba(255,255,255,.06);color:#e9eaee;font-size:13px;font-weight:700;letter-spacing:-.2px;transition:background .2s,border-color .2s,color .2s}
+.live-hero .lh-all::before{content:"";width:7px;height:7px;border-radius:50%;background:#e8362d;box-shadow:0 0 0 3px rgba(232,54,45,.25);animation:tk-blink 1.2s ease-in-out infinite}
+.live-hero .lh-all:hover{background:#fff;border-color:#fff;color:#16171b}
+@media(max-width:768px){.live-hero .lh-all{margin-top:12px;font-size:12.5px;padding:8px 16px 8px 12px}}

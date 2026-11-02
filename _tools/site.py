@@ -17,7 +17,7 @@ DESC = "포켓몬카드·미니카·피규어·게임 — 직접 모으고 즐�
 ADSENSE = "ca-pub-4380904134243959"
 AUTHOR = "blvl."
 PER_PAGE = 10
-CSS_VER = 67
+CSS_VER = 68
 JS_VER = 1
 
 # 카테고리: (슬러그, 메뉴명, 설명)
@@ -289,7 +289,7 @@ def live_hero():
     dots = "".join(f'<button type="button" aria-label="{i+1}번째"></button>' for i in range(len(slides)))
     return (f'<section class="live-hero" aria-label="TCG LIVE 응모·재고 슬라이드"><div class="lh-stage">{"".join(slides)}</div>'
             f'<button type="button" class="lh-nav lh-prev" aria-label="이전"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button type="button" class="lh-nav lh-next" aria-label="다음"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>'
-            f'<div class="lh-dots">{dots}</div><a class="lh-all" href="/stock/">LIVE 현황판 전체 보기 →</a></section>'
+            f'<div class="lh-dots">{dots}</div><a class="lh-all" href="/stock/">LIVE 현황판 전체 보기 <span aria-hidden="true">→</span></a></section>'
             '<script defer src="/assets/blvl-hero.js?v=1"></script><script defer src="/assets/blvl-ticker.js?v=8"></script>')
 
 # ── 아마존 응모 판 (일본·미국 탭) — 모든 페이지 오른쪽 여백 / 좁은 화면은 글 사이드바

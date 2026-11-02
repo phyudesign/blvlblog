@@ -17,7 +17,7 @@ DESC = "포켓몬카드·미니카·피규어·게임 — 직접 모으고 즐�
 ADSENSE = "ca-pub-4380904134243959"
 AUTHOR = "blvl."
 PER_PAGE = 10
-CSS_VER = 78
+CSS_VER = 79
 JS_VER = 1
 
 # 카테고리: (슬러그, 메뉴명, 설명)
@@ -104,14 +104,35 @@ def page(title, content, desc=DESC, canon="/", og_img="", head_extra="", active=
 {head_extra}</head><body>
 <header class="site-header" id="hd"><div class="inside-header">
 <a class="site-logo" href="/" rel="home"><img src="/assets/logo-blvl.png?v=2" alt="blvl." width="513" height="201"></a>
-<nav class="main-navigation" aria-label="메뉴"><button class="menu-toggle" type="button" onclick="document.getElementById('hd').classList.toggle('open')">☰ <span>Menu</span></button>
+<nav class="main-navigation" aria-label="메뉴"><button class="menu-toggle" type="button" aria-label="메뉴 열기" aria-controls="mnav" aria-expanded="false"><span class="mt-bars" aria-hidden="true"><i></i><i></i></span></button>
 <ul class="main-nav">{nav}</ul><a class="nav-search" href="/search/" aria-label="검색">{SEARCH_SVG}</a></nav>
 </div></header>
+{MNAV}
 {f'<div class="tk-sticky">{CHROME["ticker"]}</div>' if ticker else ""}{CHROME["float"]}
 {content}
 <script defer src="/assets/blvl-stats.js?v={JS_VER}"></script>
 <footer class="site-footer"><nav class="footer-links" aria-label="사이트 정보"><a href="/stock/">재고 현황판</a> · <a href="/about/">소개</a> · <a href="/privacy/">개인정보처리방침</a> · <a href="/contact/">문의</a></nav>© {YEAR} {TITLE}</footer>
 </body></html>'''
+
+# 모바일 전체화면 메뉴 (애플 홈페이지 방식: 1단계 큰 메뉴 → 누르면 하위 메뉴, 위에 뒤로가기)
+def _mnav():
+    chev = '<svg viewBox="0 0 12 16" width="10" height="14" aria-hidden="true"><path d="M3 2l5.5 6-5.5 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+    top, subs = [], []
+    for i, (n, h, kids) in enumerate(NAV):
+        if kids:
+            top.append(f'<li><button type="button" data-go="m{i}">{esc(n)}{chev}</button></li>')
+            items = f'<li><a href="{h}">{esc(n)} 전체</a></li>' + "".join(f'<li><a href="{ch}">{esc(cn)}</a></li>' for cn, ch in kids)
+            subs.append(f'<div class="mn-panel mn-sub" data-p="m{i}" hidden><p class="mn-cap">{esc(n)}</p><ul class="mn-list">{items}</ul></div>')
+        else:
+            top.append(f'<li><a href="{h}">{esc(n)}</a></li>')
+    top.append('<li><a href="/stock/">LIVE 현황판</a></li>')
+    return (f'''<div class="mnav" id="mnav" hidden aria-label="메뉴">
+<div class="mn-bar"><button type="button" class="mn-back" aria-label="뒤로" hidden><svg viewBox="0 0 12 16" width="11" height="15" aria-hidden="true"><path d="M9 2L3.5 8 9 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+<button type="button" class="mn-close" aria-label="메뉴 닫기"><span aria-hidden="true"></span></button></div>
+<div class="mn-stage"><div class="mn-panel mn-root" data-p="root"><ul class="mn-list mn-big">{"".join(top)}</ul>
+<form class="mn-search" action="/search/"><input name="q" placeholder="블로그 검색" aria-label="검색"></form></div>{"".join(subs)}</div></div>
+<script defer src="/assets/blvl-mnav.js?v=1"></script>''')
+MNAV = _mnav()
 
 CHROME = {"ticker": "", "float": ""}   # 모든 페이지 공통: 상단 LIVE 전광판, 오른쪽 아마존 응모 판 (아래에서 채움)
 

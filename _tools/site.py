@@ -103,7 +103,7 @@ def page(title, content, desc=DESC, canon="/", og_img="", head_extra="", active=
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={ADSENSE}" crossorigin="anonymous"></script>
 {head_extra}</head><body>
 <header class="site-header" id="hd"><div class="inside-header">
-<a class="site-logo" href="/" rel="home"><img src="/assets/logo-blvl.png" alt="blvl." width="403" height="180"></a>
+<a class="site-logo" href="/" rel="home"><img src="/assets/logo-blvl.png?v=2" alt="blvl." width="513" height="201"></a>
 <nav class="main-navigation" aria-label="메뉴"><button class="menu-toggle" type="button" onclick="document.getElementById('hd').classList.toggle('open')">☰ <span>Menu</span></button>
 <ul class="main-nav">{nav}</ul><a class="nav-search" href="/search/" aria-label="검색">{SEARCH_SVG}</a></nav>
 </div></header>

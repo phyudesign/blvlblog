@@ -406,3 +406,49 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 .lh-slide.has-img .lh-bg{top:12%;left:50%;width:56%;height:auto;aspect-ratio:1/1;transform:translateX(-50%) rotate(-3deg);object-fit:cover;mix-blend-mode:normal;background:#fff;border-radius:14px;padding:6px;box-sizing:border-box;filter:none;box-shadow:0 14px 28px rgba(0,0,0,.22)}
 .lh-slide.has-img::before{background:linear-gradient(180deg,rgba(14,15,19,0) 55%,rgba(14,15,19,.55) 75%,rgba(14,15,19,.85) 100%)}
 @media(max-width:768px){.lh-slide.has-img .lh-bg{top:14%;width:52%}}
+
+/* ── 슬라이드 카드 구성 5가지 (카드마다 돌아가며) */
+.lh-emo2{display:none;position:absolute;z-index:3;pointer-events:none;object-fit:contain}
+/* 1 tilt: 기울인 사진 카드 (기본) */
+/* 2 split: 사진이 오른쪽 위로 크게 삐져나가고, 글자는 어두운 색으로 왼쪽 아래 */
+.lay-split{background:var(--c) radial-gradient(circle at 85% 20%,rgba(255,255,255,.45) 0 30%,transparent 31%)}
+.lay-split::before{display:none}
+.lh-slide.lay-split .lh-bg{left:auto;right:-14%;top:4%;width:74%;transform:rotate(8deg)}
+.lay-split .lh-foot{color:#16171b;padding-right:40%}
+.lh-slide.lay-split .lh-brand{color:rgba(22,23,27,.55)}
+.lh-slide.lay-split .lh-title{color:#16171b;text-shadow:none;font-size:30px;-webkit-line-clamp:3}
+.lh-slide.lay-split .lh-sub{color:rgba(22,23,27,.72)}
+.lh-slide.lay-split .lh-cta{background:#16171b;color:#fff}
+/* 3 bleed: 사진이 카드를 꽉 채우고 아래가 카드 색으로 물듦 */
+.lh-slide.lay-bleed .lh-bg{inset:0;top:0;left:0;width:100%;height:100%;transform:none;border-radius:0;padding:0;box-shadow:none;aspect-ratio:auto;object-fit:cover}
+.lay-bleed::before{background:linear-gradient(180deg,transparent 38%,var(--c) 70%)!important}
+.lay-bleed .lh-foot{color:#16171b}
+.lh-slide.lay-bleed .lh-brand{color:rgba(22,23,27,.55)}
+.lh-slide.lay-bleed .lh-title{color:#16171b;text-shadow:none}
+.lh-slide.lay-bleed .lh-sub{color:rgba(22,23,27,.72)}
+.lh-slide.lay-bleed .lh-cta{background:#16171b;color:#fff}
+/* 4 stamp: 물방울 무늬 배경, 작은 사진은 오른쪽 위 스티커처럼, 큰 제목 + 교묘 */
+.lay-stamp{background:var(--c) radial-gradient(rgba(22,23,27,.13) 2px,transparent 2.5px) 0 0/18px 18px}
+.lay-stamp::before{display:none}
+.lh-slide.lay-stamp .lh-bg{left:auto;right:7%;top:15%;width:42%;transform:rotate(9deg);border-radius:10px}
+.lay-stamp .lh-foot{color:#16171b;top:34%;bottom:auto;padding-right:24px}
+.lh-slide.lay-stamp .lh-brand{color:rgba(22,23,27,.55)}
+.lh-slide.lay-stamp .lh-title{color:#16171b;text-shadow:none;font-size:34px;max-width:62%}
+.lh-slide.lay-stamp .lh-sub{color:rgba(22,23,27,.72);max-width:58%}
+.lh-slide.lay-stamp .lh-cta{position:absolute;left:24px;top:calc(100% + 30px);background:#16171b;color:#fff;white-space:nowrap}
+.lay-stamp .lh-emo2{display:block;right:-4px;bottom:-6px;width:44%;height:44%;transform:rotate(-6deg)}
+/* 5 burst: 햇살 무늬 배경, 사진은 가운데 크게, 아래는 검은 띠 + 교묘가 띠 위로 빼꼼 */
+.lay-burst{background:repeating-conic-gradient(from 0deg at 50% 40%,rgba(255,255,255,.28) 0 9deg,transparent 9deg 18deg),var(--c)}
+.lay-burst::before{background:linear-gradient(180deg,transparent 64%,#16171b 64%)!important}
+.lh-slide.lay-burst .lh-bg{top:8%;width:60%;transform:translateX(-50%) rotate(0deg);border-radius:12px}
+.lay-burst .lh-foot{padding-bottom:18px}
+.lh-slide.lay-burst .lh-brand{display:none}
+.lh-slide.lay-burst .lh-title{font-size:24px;-webkit-line-clamp:1;max-width:62%}
+.lh-slide.lay-burst .lh-sub{max-width:62%;font-size:13px}
+.lh-slide.lay-burst .lh-cta{margin-top:10px;padding:9px 15px;font-size:13px}
+.lay-burst .lh-emo2{display:block;right:6px;bottom:22px;width:32%;height:32%;transform:rotate(4deg)}
+@media(max-width:768px){
+  .lh-slide.lay-split .lh-title{font-size:23px}.lay-split .lh-foot{padding-right:34%}
+  .lh-slide.lay-stamp .lh-title{font-size:25px}.lh-slide.lay-stamp .lh-cta{left:18px}
+  .lh-slide.lay-burst .lh-title{font-size:19px}
+}

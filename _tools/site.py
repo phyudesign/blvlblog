@@ -17,7 +17,7 @@ DESC = "포켓몬카드·미니카·피규어·게임 — 직접 모으고 즐�
 ADSENSE = "ca-pub-4380904134243959"
 AUTHOR = "blvl."
 PER_PAGE = 10
-CSS_VER = 47
+CSS_VER = 48
 JS_VER = 1
 
 # 카테고리: (슬러그, 메뉴명, 설명)
@@ -214,6 +214,7 @@ def ticker():
 # ── 홈 LIVE 슬라이드 (포켓몬센터 온라인 홈처럼 가운데 큰 카드 + 양옆이 살짝 보이는 슬라이드)
 LH_COLORS = ["#FFD54A", "#7FE0B0", "#FF8A80", "#8FD0FF", "#C9B2FF", "#FFAE5C", "#C8F060"]
 LH_EMO = {"inv": ["lets-go", "kyaa", "happy-cards", "great", "hoho", "best"], "hot": ["rare", "heok"], "on": ["good", "mine"]}
+LH_LAYOUTS = ["tilt", "split", "bleed", "stamp", "burst"]
 LH_LABEL = {"inv": "아마존 응모", "hot": "TCG 속보", "on": "지금 구매 가능"}
 def live_hero():
     rows = live_rows()
@@ -231,7 +232,9 @@ def live_hero():
         new = '<em>NEW</em>' if tag in ("새 응모", "속보") else ""
         img = pv.get("img", "")
         if img:   # 상품 사진을 카드 배경으로
-            slides.append(f'''<a class="lh-slide has-img" href="{esc(href)}"{attrs} style="--c:{LH_COLORS[i % len(LH_COLORS)]}" draggable="false">
+            lay = LH_LAYOUTS[i % len(LH_LAYOUTS)]   # 카드마다 다른 구성
+            slides.append(f'''<a class="lh-slide has-img lay-{lay}" href="{esc(href)}"{attrs} style="--c:{LH_COLORS[i % len(LH_COLORS)]}" draggable="false">
+<img class="lh-emo2" src="/wp-content/uploads/emoticons/gyomyo/{emo}.webp" alt="" loading="lazy" draggable="false">
 <img class="lh-bg" src="{esc(img)}" alt="{esc(name)} 상품 사진" loading="{"eager" if i < 3 else "lazy"}" referrerpolicy="no-referrer" draggable="false">
 <span class="lh-top"><i></i>LIVE · {LH_LABEL.get(kind, "TCG LIVE")}{new}</span>
 <span class="lh-foot"><span class="lh-brand">{esc(brand or "TCG")}</span><b class="lh-title">{esc(name)}</b>

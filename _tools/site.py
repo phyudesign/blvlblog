@@ -17,7 +17,7 @@ DESC = "포켓몬카드·미니카·피규어·게임 — 직접 모으고 즐�
 ADSENSE = "ca-pub-4380904134243959"
 AUTHOR = "blvl."
 PER_PAGE = 10
-CSS_VER = 38
+CSS_VER = 39
 JS_VER = 1
 
 # 카테고리: (슬러그, 메뉴명, 설명)
@@ -49,7 +49,7 @@ SUBMENU = {
 }
 SUBS = SUBMENU["tcg"]   # 예전 코드 호환
 EXTRA = {"tcg": [("TCG LIVE", "/category/news/")]}
-NAV = [("HOME", "/", [])] + [(n, f"/category/{k}/", [(sn, f"/category/{k}/{sk}/") for sk, sn, _, _ in SUBMENU.get(k, [])] + EXTRA.get(k, []))
+NAV = [(n, f"/category/{k}/", [(sn, f"/category/{k}/{sk}/") for sk, sn, _, _ in SUBMENU.get(k, [])] + EXTRA.get(k, []))
                               for k, n, _ in CATS if k != "news"]
 KEEP = {".git", ".github", "CNAME", "_tools", "_posts", "_pages", "_character", "_thumbs", "_monitor", "assets", "wp-content", "ads.txt", ".nojekyll", "favicon.ico", ".gitignore", "README.md"}
 SEARCH_SVG = '<svg viewBox="0 0 512 512" aria-hidden="true" fill="currentColor"><path d="M208 48c-88.4 0-160 71.6-160 160s71.6 160 160 160 160-71.6 160-160S296.4 48 208 48zM0 208C0 93.1 93.1 0 208 0s208 93.1 208 208c0 48.8-16.8 93.7-45 129.2l135 135-34 34-135-135C301.7 399.2 256.8 416 208 416 93.1 416 0 322.9 0 208z"/></svg>'
@@ -267,7 +267,7 @@ def listing(base, plist, heading, desc=DESC, head_html="", empty_msg=""):
                 (f'<a href="{href(n+1)}">다음 »</a>' if n < pages_n else "") + "</nav>"
         body = "".join(arch_item(p) for p in chunk) or f'<article class="inside-article"><div class="entry-content"><p>{empty_msg}</p></div></article>'
         canon = base if n == 1 else f"{base}page/{n}/"
-        write(canon, page(heading, with_sidebar(head_html + body + pg), desc, canon, active=base, noindex=not plist))
+        write(canon, page(heading, head_html.replace('class="page-header"', 'class="page-header cat-head"') + with_sidebar(body + pg), desc, canon, active=base, noindex=not plist))
 
 # ── 이전 결과물 정리 (원본·자산은 보존)
 for x in ROOT.iterdir():

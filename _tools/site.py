@@ -17,7 +17,7 @@ DESC = "포켓몬카드·미니카·피규어·게임 — 직접 모으고 즐�
 ADSENSE = "ca-pub-4380904134243959"
 AUTHOR = "blvl."
 PER_PAGE = 10
-CSS_VER = 58
+CSS_VER = 59
 JS_VER = 1
 
 # 카테고리: (슬러그, 메뉴명, 설명)
@@ -185,7 +185,7 @@ def live_rows():
                          {"img": amz_img(a), "name": f"{brand} {name}", "sub": sub, "cta": "아마존에서 초대 요청하기", "asin": a}))
     except Exception: pass
     for u, v in sorted(st.get("kr", {}).items(), key=lambda kv: kv[1].get("posted", kv[1]["first"]), reverse=True)[:4]:
-        rows.append(("kr", "국내판", v["title"], u, "", True, {"img": "", "name": v["title"], "sub": v["src"] + " 공지", "cta": "공지 보기"}))
+        rows.append(("kr", "국내판", v["title"], u, "", True, {"img": v.get("img", ""), "name": v["title"], "sub": v["src"] + " 공지", "cta": "공지 보기", "kr": "1"}))
     for v in st.get("items", {}).values():
         if v.get("status") not in ("instock", "preorder"): continue
         name = re.sub(r"^\s+|\s+$", "", kr(v["title"]))[:48]
@@ -260,17 +260,27 @@ def live_hero():
             px, py, pw = LH_BG[bgk]
             cut = ROOT / "assets" / "products" / f'{pv.get("asin", "")}.webp'
             prod_src, prod_cls = (f"/assets/products/{cut.name}", "st-prod cut") if pv.get("asin") and cut.exists() else (img, "st-prod")
+            if pv.get("kr"): prod_src, prod_cls = "", ""
             art = ROOT / "assets" / "art" / f'{pv.get("asin", "")}.jpg'
             use_art = bool(pv.get("asin")) and art.exists() and "cut" in prod_cls   # 박스 아트 크롭 배경
             back = f"/assets/art/{art.name}" if use_art else f"/assets/studio/{bgk}.webp"
+            if pv.get("kr"): use_art, back = True, img
             title = re.sub(r"\s*BOX$", "", name)
             slides.append(f'''<a class="lh-slide studio st-bg{" st-art" if use_art else ""}" href="{esc(href)}"{attrs} style="--b1:{th[0]};--b2:{th[1]};--ac:{th[2]};--px:{px}%;--py:{py}%;--pw:{pw}%" draggable="false">
-<img class="st-back" src="{back}" alt="" loading="{"eager" if i < 3 else "lazy"}" draggable="false">
-<img class="{prod_cls}" src="{esc(prod_src)}" alt="{esc(name)} 상품 사진" loading="{"eager" if i < 3 else "lazy"}" referrerpolicy="no-referrer" draggable="false">
+<img class="st-back" src="{esc(back)}" referrerpolicy="no-referrer" alt="" loading="{"eager" if i < 3 else "lazy"}" draggable="false">
+{f'<img class="{prod_cls}" src="{esc(prod_src)}" alt="{esc(name)} 상품 사진" loading="{"eager" if i < 3 else "lazy"}" referrerpolicy="no-referrer" draggable="false">' if prod_src else ""}
 <span class="st-text"><span class="st-pill"><i></i><b>LIVE</b>· {LH_LABEL.get(kind, "TCG LIVE")}{new}</span>
 <span class="st-rib">{esc(brand or "TCG")}</span><b class="st-title">{esc(title)}</b><span class="st-line"></span>
 <span class="st-sub">{esc(pv.get("sub", ""))}</span><span class="st-cta">{esc(pv.get("cta", "자세히 보기"))} →</span></span></a>''')
             continue
+        th = LH_THEME_ROT[i % len(LH_THEME_ROT)]; bgk = f"default{i % 3 + 1}"; px, py, pw = LH_BG[bgk]
+        slides.append(f'''<a class="lh-slide studio st-bg st-noimg" href="{esc(href)}"{attrs} style="--b1:{th[0]};--b2:{th[1]};--ac:{th[2]};--px:{px}%;--py:{py}%;--pw:{pw}%" draggable="false">
+<img class="st-back" src="/assets/studio/{bgk}.webp" alt="" loading="lazy" draggable="false">
+<img class="st-prod cut" src="/wp-content/uploads/emoticons/gyomyo/{emo}.webp" alt="" loading="lazy" draggable="false">
+<span class="st-text"><span class="st-pill"><i></i><b>LIVE</b>· {LH_LABEL.get(kind, "TCG LIVE")}{new}</span>
+<span class="st-rib">{esc(brand or "TCG")}</span><b class="st-title">{esc(name)}</b><span class="st-line"></span>
+<span class="st-sub">{esc(pv.get("sub", ""))}</span><span class="st-cta">{esc(pv.get("cta", "자세히 보기"))} →</span></span></a>''')
+        continue
         slides.append(f'''<a class="lh-slide" href="{esc(href)}"{attrs} style="--c:{LH_COLORS[i % len(LH_COLORS)]}" draggable="false">
 <span class="lh-top"><i></i>LIVE · {LH_LABEL.get(kind, "TCG LIVE")}{new}</span>
 <span class="lh-brand">{esc(brand or "TCG")}</span><b class="lh-title">{esc(name)}</b>

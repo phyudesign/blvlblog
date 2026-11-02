@@ -400,6 +400,12 @@ def scan_kr(state):
             kr_s[link] = {"title": title, "src": sname, "first": NOW.strftime("%Y-%m-%d"), "posted": posted, "last": NOW.strftime("%Y-%m-%d")}
             if not seed:
                 events.append({"key": "kr:" + link, "kind": "page", "shop_kr": sname, "title": title, "url": link, "status": "krnews", "price": ""})
+    for link, v in kr_s.items():   # 공지 대표 이미지 (공지 페이지의 og:image)
+        if "img" in v: continue
+        ph = get(link)
+        im = re.search(r'<meta[^>]+property="og:image"[^>]+content="([^"]+)"', ph or "") or re.search(r'<meta[^>]+content="([^"]+)"[^>]+property="og:image"', ph or "")
+        v["img"] = html.unescape(im.group(1)) if im else ""
+        if v["img"].startswith("/"): v["img"] = re.match(r"https://[^/]+", link).group(0) + v["img"]
     for k in [k for k, v in kr_s.items() if (NOW.date() - datetime.date.fromisoformat(v["last"])).days > 45]: kr_s.pop(k)
     return events, seed
 

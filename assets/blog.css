@@ -519,3 +519,8 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 .st-rib{box-shadow:none;padding:5px 14px 5px 16px;background:linear-gradient(107deg,#d7b56d 0 11px,var(--ac) 11px)}
 .tk-tag.kr{background:#2f6fde;color:#fff}
 .ip-tabs button{font-size:12.5px}
+/* 국내판 공지·사진 없는 카드 */
+.st-noimg .st-prod.cut{filter:drop-shadow(0 10px 10px rgba(20,25,40,.18))!important;height:44%}
+.st-title{-webkit-line-clamp:4}
+.lh-slide.studio .st-title{font-size:clamp(20px,6.4cqi,29px)}
+.lh-slide.studio{container-type:inline-size}

@@ -570,3 +570,15 @@ html,body{overflow-x:clip}
   .sub-menu{background:transparent;box-shadow:none}
   .sub-menu a{color:#b9bdc6!important}
 }
+
+/* 상단바 얇게 (기존의 약 1/3), 새 로고 blvl., 슬라이드 띠 단색 통일 */
+.inside-header{padding:3px 40px}
+.main-nav a,.nav-search{line-height:38px}
+.menu-toggle{line-height:38px;font-size:14px}
+.site-logo img{height:20px!important;width:auto}
+.live-hero::before{background:#17181d!important}
+.sub-menu a{line-height:36px!important}
+@media(max-width:1024px){.inside-header{padding:3px 20px}}
+@media(max-width:768px){.site-logo img{height:18px!important}.main-nav a{line-height:44px}}
+.site-logo img{height:22px!important}
+@media(max-width:768px){.site-logo img{height:20px!important}}

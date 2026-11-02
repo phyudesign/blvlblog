@@ -17,7 +17,7 @@ DESC = "포켓몬카드·미니카·피규어·게임 — 직접 모으고 즐�
 ADSENSE = "ca-pub-4380904134243959"
 AUTHOR = "blvl."
 PER_PAGE = 10
-CSS_VER = 51
+CSS_VER = 52
 JS_VER = 1
 
 # 카테고리: (슬러그, 메뉴명, 설명)
@@ -229,6 +229,12 @@ LH_THEME = {
 }
 LH_THEME_ROT = [("#e9f0f8", "#c3d3e8", "#16294d"), ("#fbefe6", "#f0cfb4", "#6b2e0c"), ("#eef7e9", "#c9e6bb", "#20501a"), ("#f6ecf8", "#dec7ea", "#4a1f5c")]
 LH_STAGES = ["podium", "block", "arch"]
+# OpenAI로 만든 스튜디오 배경 (assets/studio/<키>.webp)과 그 안의 무대 위치: (가로 중심 %, 상품 바닥 %, 상품 폭 %)
+LH_BG = {
+    "B0FJ7Z6RML": (70, 73, 48), "B0FX7X71KK": (72, 63, 44), "B0GP928YDZ": (72, 70, 46), "B0GXCM4BCZ": (77, 72, 44),
+    "B0GXCRBL5J": (70, 65, 46), "B0H43ZX8LK": (67, 63, 46), "B0H4PQ6LR5": (70, 61, 50), "B0HB3JQ6P4": (69, 80, 44),
+    "B0HFVPJF4Q": (66, 72, 46), "default1": (72, 67, 46), "default2": (70, 59, 42), "default3": (69, 80, 44),
+}
 LH_LABEL = {"inv": "아마존 응모", "hot": "TCG 속보", "on": "지금 구매 가능"}
 def live_hero():
     rows = live_rows()
@@ -248,9 +254,11 @@ def live_hero():
         if img:   # 상품 사진 + 스튜디오 연출 (상품마다 색·무대가 다름)
             th = LH_THEME.get(pv.get("asin", ""), LH_THEME_ROT[i % len(LH_THEME_ROT)])
             stage = LH_STAGES[i % len(LH_STAGES)]
+            bgk = pv.get("asin", "") if pv.get("asin", "") in LH_BG else f"default{i % 3 + 1}"
+            px, py, pw = LH_BG[bgk]
             title = re.sub(r"\s*BOX$", "", name)
-            slides.append(f'''<a class="lh-slide studio st-{stage}" href="{esc(href)}"{attrs} style="--b1:{th[0]};--b2:{th[1]};--ac:{th[2]}" draggable="false">
-<span class="st-light" aria-hidden="true"></span><span class="st-stage" aria-hidden="true"></span>
+            slides.append(f'''<a class="lh-slide studio st-bg" href="{esc(href)}"{attrs} style="--b1:{th[0]};--b2:{th[1]};--ac:{th[2]};--px:{px}%;--py:{py}%;--pw:{pw}%" draggable="false">
+<img class="st-back" src="/assets/studio/{bgk}.webp" alt="" loading="{"eager" if i < 3 else "lazy"}" draggable="false">
 <img class="st-prod" src="{esc(img)}" alt="{esc(name)} 상품 사진" loading="{"eager" if i < 3 else "lazy"}" referrerpolicy="no-referrer" draggable="false">
 <span class="st-text"><span class="st-pill"><i></i><b>LIVE</b>· {LH_LABEL.get(kind, "TCG LIVE")}{new}</span>
 <span class="st-rib">{esc(brand or "TCG")}</span><b class="st-title">{esc(title)}</b><span class="st-line"></span>

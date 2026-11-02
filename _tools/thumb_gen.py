@@ -65,6 +65,13 @@ MODES = {
                "sketchy pencil lines with grainy texture and light hand-colored fills. Pure plain white background, no shadow, no ground, "
                "no frame, no other objects except the props mentioned. Keep the character's face and proportions identical to its "
                "references. Do not write any text, letters or numbers. "),
+    # 홈 슬라이드 배경: 상품·글자 없는 스튜디오 사진 (상품 사진과 글자는 블로그에서 위에 올림)
+    "studio": ("Square premium product-photography studio background, photorealistic 3D render, soft studio lighting. "
+               "Completely EMPTY: no product, no box, no cards, no characters, no text, no letters, no logos. "
+               "Composition rules: (1) the left 45% of the frame is a calm, smooth, uncluttered backdrop for text that will be added later; "
+               "(2) on the right side there is {stage}, its empty top surface centered at about 70% from the left and 76% from the top, "
+               "about 50% of the image wide, ready for a product to be placed on it; (3) soft gentle shadows, subtle diagonal light beams. "
+               "Color mood: {bg}. Decorative accent, subtle and only around the edges: {deco}. "),
     "emoticon": ("A sticker sheet of the character's emoticons on a pure white background, arranged in an even grid with generous spacing, "
                  "each sticker fully separated with no overlap and nothing touching the edges. Same crayon line style for every sticker, "
                  "black lines only with at most a tiny touch of pink on the cheeks. Do not write any text or letters. "),
@@ -72,6 +79,9 @@ MODES = {
 SAFE = "Do not include any existing franchise characters, brand logos, trademarks or real product packaging artwork. "
 
 def build_prompt(req):
+    if req.get("mode") == "studio":
+        return MODES["studio"].format(stage=req.get("stage", "a round white podium"), bg=req.get("bg", "soft pastel"),
+                                      deco=req.get("deco", "a few soft bokeh lights")) + "Extra: " + req.get("prompt", "")
     c = CHARS.get(req.get("character", ""), {})
     who = (f"The attached reference images show {c['name']}, an original mascot of the blvl blog: {c['desc']} " if c else
            "The attached reference image(s) show an original mascot character of the blvl blog. ")
@@ -108,6 +118,7 @@ def todo(only):
         yield f.stem, req
 
 def refs_for(req):
+    if req.get("mode") == "studio": return []
     folder = CHAR_DIR / req["character"] if req.get("character") else CHAR_DIR
     paths = [ROOT / p for p in req.get("refs", [])] or sorted(p for p in folder.iterdir() if p.suffix.lower() in IMG_EXT)
     style = req.get("style_refs") or (["_character/style/magazine-1.png"] if req.get("mode", "magazine") in ("magazine", "scene", "sprite") else [])

@@ -1,17 +1,2 @@
-===== https://pokemonkorea.co.kr/news/2/21508 8971
-  /img/main_logo.png | pokemon
-  /img/icon/icon_poke.png | 
-  /img/icon/icon_poke.png | 
-  /img/main_logo.png | 
-  /s3.php?key=home%2Fdata%2Fdata1_www%2Fnewdata%2F2026%2F10%2F2026-10-16_09-51-11-86092-1792111871.png | 
-  /s3.php?key=home%2Fdata%2Fdata1_www%2Fnewdata%2F2026%2F10%2F2026-10-16_09-51-17-28327-1792111877.png | 
-===== https://pokemoncard.co.kr/card/976 26458
-  https://www.facebook.com/tr?id=2037312413208523&ev=PageView&noscript=1 | 
-  /v3/img/card_main_logo.png | pokemon 포켓몬 카드 게임
-  /v3/img/modal_alet.jpg | 
-  /v3/img/icon/icon_poke.png | 
-  /v3/img/special/btn_top.png | 
-  /s3.php?key=home%2Fdata%2Fdata1_www%2F2026%2F10%2F2026-10-16_16-48-59-96868-1792136939.png | 
-  /s3.php?key=home%2Fdata%2Fdata1_www%2F2026%2F10%2F2026-10-16_16-49-12-79762-1792136952.png | 
-  /s3.php?key=home%2Fdata%2Fdata1_www%2F2026%2F10%2F2026-10-16_16-49-17-23218-1792136957.png | 
-  /v3/img/ft_logo.png | pokemon korea, inc.
+monitor UA 500 8971 https://pokemonkorea.co.kr/news/2/21508
+['/img/main_logo.png', '/img/icon/icon_poke.png', '/img/icon/icon_poke.png', '/img/main_logo.png', '/s3.php?key=home%2Fdata%2Fdata1_www%2Fnewdata%2F2026%2F10%2F2026-10-16_09-51-11-86092-1792111871.png', '/s3.php?key=home%2Fdata%2Fdata1_www%2Fnewdata%2F2026%2F10%2F2026-10-16_09-51-17-28327-1792111877.png']

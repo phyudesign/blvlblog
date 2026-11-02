@@ -17,7 +17,7 @@ DESC = "포켓몬카드·미니카·피규어·게임 — 직접 모으고 즐�
 ADSENSE = "ca-pub-4380904134243959"
 AUTHOR = "blvl."
 PER_PAGE = 10
-CSS_VER = 39
+CSS_VER = 40
 JS_VER = 1
 
 # 카테고리: (슬러그, 메뉴명, 설명)
@@ -265,7 +265,8 @@ def listing(base, plist, heading, desc=DESC, head_html="", empty_msg=""):
             pg = '<nav class="paging-navigation">' + (f'<a href="{href(n-1)}">« 이전</a>' if n > 1 else "") + "".join(
                 (f'<span class="current">{k}</span>' if k == n else f'<a href="{href(k)}">{k}</a>') for k in range(1, pages_n+1)) + \
                 (f'<a href="{href(n+1)}">다음 »</a>' if n < pages_n else "") + "</nav>"
-        body = "".join(arch_item(p) for p in chunk) or f'<article class="inside-article"><div class="entry-content"><p>{empty_msg}</p></div></article>'
+        body = (f'<div class="lgrid cat-grid">{"".join(gcard(p) for p in chunk)}</div>' if chunk     # 한 줄에 3개씩 카드
+                else f'<article class="inside-article"><div class="entry-content"><p>{empty_msg}</p></div></article>')
         canon = base if n == 1 else f"{base}page/{n}/"
         write(canon, page(heading, head_html.replace('class="page-header"', 'class="page-header cat-head"') + with_sidebar(body + pg), desc, canon, active=base, noindex=not plist))
 

@@ -346,3 +346,10 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 .inv-float .ip-list{flex:1 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain}
 @media(max-width:1659px){.inv-float.open{display:flex!important;flex-direction:column;overflow:hidden!important}}
 .tk-sticky{max-width:var(--gw);margin:0 auto}
+/* 카테고리 글 목록: 한 줄에 3개 카드 (윗선은 사이드바와 맞춤) */
+.cat-grid{margin-top:38px}
+.cat-grid .gbc{width:33.33%}
+.cat-grid .gtitle{font-size:18px}
+.page-header.cat-head{padding-left:20px;padding-right:20px}
+@media(max-width:1024px){.cat-grid .gbc{width:50%}}
+@media(max-width:768px){.cat-grid{margin-top:20px}.cat-grid .gbc{width:100%}.page-header.cat-head{padding-left:20px}}

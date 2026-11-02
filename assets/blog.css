@@ -553,3 +553,20 @@ html,body{overflow-x:clip}
 .live-hero .lh-all:hover{color:#fff}
 .live-hero + .gb-section{padding-top:36px}
 @media(max-width:768px){.live-hero{padding-top:18px;padding-bottom:16px}.live-hero::before{background:#17181d}}
+
+/* 상단 메뉴바도 어둡게 (홈 슬라이드 띠와 통일) */
+.site-header{background:#17181d}
+.site-logo img{filter:invert(1)}
+.main-nav a{color:#e9eaee}
+.main-nav a:hover,.main-nav a.on{color:#ffd54a}
+.nav-search,.menu-toggle{color:#e9eaee!important}
+.nav-search svg{fill:#e9eaee}
+.menu-toggle{background:transparent;border-color:transparent}
+.sub-menu{background:#23252c;box-shadow:0 14px 34px rgba(0,0,0,.35),0 0 0 1px rgba(255,255,255,.06)}
+.sub-menu a{color:#e9eaee!important}
+.sub-menu a:hover{background:#30333c}
+@media(max-width:768px){
+  .main-nav a{border-top-color:#2a2c33}
+  .sub-menu{background:transparent;box-shadow:none}
+  .sub-menu a{color:#b9bdc6!important}
+}

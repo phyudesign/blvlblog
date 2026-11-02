@@ -1,16 +1,17 @@
-===== https://pokemonkorea.co.kr/news 21326
-포켓몬 공식 사이트 kakaoPixel('327812162506475690').pageView(); (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) })(window,document,'script','https://www.google-analytics.com/analytics.js','ga'); ga('create', 'UA-24945068-1', 'auto'); ga('send', 'pageview'); window.addEventListener('load', function() { var across_adn_contain = new fn_across_adn_contain(); var across_adn_param = []; across_adn_param = {"ut":"Home","ui"
- api? /ajax/member
- api? /ajax/news
- api? /ajax/news
-===== https://pokemonkorea.co.kr/news/2 21335
-  /member/login?next=/news/2 | 로그인
- api? /ajax/member
- api? /ajax/news
- api? /ajax/news
-===== https://pokemoncard.co.kr/news 22821
-포켓몬 카드 게임 $(document).ready(function () { $("#social_rt").sticky({topSpacing: 100}); var cwpc = $("#carousel-indicators-pc").width(); var cwmo = $("#carousel-indicators-mobile").width(); $("#carousel-indicators-pc").css("margin-left","-" + (cwpc / 2) +"px"); $("#carousel-indicators-mobile").css("margin-left","-" + (cwmo / 2) +"px"); var ch = $("#carousel-example-index").height(); $(".carousel-control-right").css("top",( (ch + 76) / 2 * -1 ) ); $(".carousel-control-left").css("top",( (ch + 76) / 2 * -1 ) ); var ww = $(document).width() - 24; var calcH = (ww * 298) / 408; $(".myinfo-box-mobile .
- api? /v3/news_ajax
- api? /ajax/news
-===== https://pokemonstore.co.kr/pages/product/list.html?depth=1&categoryNo=870548 912
-상품 페이지로 이동 중... (function () { // 기존 외부 링크는 ?keyword= (단수) 형태로 들어옴 // ShopBy 실제 검색 페이지는 ?keywords= (복수) 를 사용 var params = new URLSearchParams(window.location.search); var keyword = params.get('keyword') || params.get('keywords') || ''; // 상대경로 사용: list.html 과 같은 폴더의 product-list.html 로 이동 // → PC/모바일 스킨 경로가 달라도 동일하게 동작 var target = 'product-list.html'; if (keyword) { // URLSearchParams.get() 은 이미 디코딩된 값을 돌려주므로 // encodeURIComponent 로 다시 인코딩해서 붙인다. target += '?keywords=' + encodeURIComponent(keyword); } // replace 사용: 뒤로가기 시 이 중간 페이지로 다시 돌아오지 않게 함 window.location.replace(target); })(); 상품 페이지로 
+===== https://pokemonkorea.co.kr/news/2/21508 8971
+  /img/main_logo.png | pokemon
+  /img/icon/icon_poke.png | 
+  /img/icon/icon_poke.png | 
+  /img/main_logo.png | 
+  /s3.php?key=home%2Fdata%2Fdata1_www%2Fnewdata%2F2026%2F10%2F2026-10-16_09-51-11-86092-1792111871.png | 
+  /s3.php?key=home%2Fdata%2Fdata1_www%2Fnewdata%2F2026%2F10%2F2026-10-16_09-51-17-28327-1792111877.png | 
+===== https://pokemoncard.co.kr/card/976 26458
+  https://www.facebook.com/tr?id=2037312413208523&ev=PageView&noscript=1 | 
+  /v3/img/card_main_logo.png | pokemon 포켓몬 카드 게임
+  /v3/img/modal_alet.jpg | 
+  /v3/img/icon/icon_poke.png | 
+  /v3/img/special/btn_top.png | 
+  /s3.php?key=home%2Fdata%2Fdata1_www%2F2026%2F10%2F2026-10-16_16-48-59-96868-1792136939.png | 
+  /s3.php?key=home%2Fdata%2Fdata1_www%2F2026%2F10%2F2026-10-16_16-49-12-79762-1792136952.png | 
+  /s3.php?key=home%2Fdata%2Fdata1_www%2F2026%2F10%2F2026-10-16_16-49-17-23218-1792136957.png | 
+  /v3/img/ft_logo.png | pokemon korea, inc.

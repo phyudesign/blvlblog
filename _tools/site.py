@@ -17,7 +17,7 @@ DESC = "포켓몬카드·미니카·피규어·게임 — 직접 모으고 즐�
 ADSENSE = "ca-pub-4380904134243959"
 AUTHOR = "blvl."
 PER_PAGE = 10
-CSS_VER = 35
+CSS_VER = 36
 JS_VER = 1
 
 # 카테고리: (슬러그, 메뉴명, 설명)
@@ -42,6 +42,10 @@ SUBMENU = {
              ("lego", "LEGO", ["레고", "LEGO"], "레고 조립기와 리뷰"),
              ("warhammer", "WARHAMMER", ["워해머", "WARHAMMER", "Warhammer"], "워해머 미니어처 조립·도색과 게임"),
              ("etc", "ETC", [], "그 밖의 피규어와 장난감")],
+    "game": [("wow", "WOW", ["WOW", "WoW", "와우", "월드 오브 워크래프트", "World of Warcraft"], "월드 오브 워크래프트 공략과 플레이 기록"),
+             ("gta6", "GTA6", ["GTA6", "GTA 6", "GTA VI", "그랜드 테프트 오토"], "GTA6 소식·공략과 플레이 기록"),
+             ("diablo", "디아블로", ["디아블로", "Diablo", "DIABLO"], "디아블로 공략과 플레이 기록"),
+             ("umamusume", "우마무스메", ["우마무스메", "우마 무스메", "ウマ娘"], "우마무스메 육성 공략과 덱 기록")],
 }
 SUBS = SUBMENU["tcg"]   # 예전 코드 호환
 EXTRA = {"tcg": [("TCG LIVE", "/category/news/")]}

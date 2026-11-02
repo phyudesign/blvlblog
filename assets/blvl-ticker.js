@@ -1,13 +1,26 @@
-/* 아마존 응모 판 탭 (일본·미국) */
+/* 응모 판 탭 (일본·미국·국내): 누르면 빠르게 옆으로 밀려 넘어감 */
 (function () {
   document.querySelectorAll(".inv-panel").forEach(function (p) {
-    var tabs = p.querySelectorAll(".ip-tabs button");
-    function pick(t) {
+    var tabs = [].slice.call(p.querySelectorAll(".ip-tabs button")), bar = p.querySelector(".ip-tabs");
+    var order = tabs.map(function (b) { return b.dataset.t; }), cur = order[0];
+    var ind = document.createElement("span"); ind.className = "ip-ind"; bar.insertBefore(ind, bar.firstChild);
+    function moveInd(t) { var i = order.indexOf(t), b = tabs[i]; ind.style.width = b.offsetWidth + "px"; ind.style.transform = "translateX(" + b.offsetLeft + "px)"; }
+    function pick(t, anim) {
+      if (order.indexOf(t) < 0) return;
+      var dir = order.indexOf(t) > order.indexOf(cur) ? 1 : -1, prev = cur; cur = t;
       tabs.forEach(function (b) { var on = b.dataset.t === t; b.classList.toggle("on", on); b.setAttribute("aria-selected", on); });
-      p.querySelectorAll(".ip-list").forEach(function (l) { l.hidden = l.dataset.t !== t; });
+      moveInd(t);
+      p.querySelectorAll(".ip-list").forEach(function (l) {
+        var show = l.dataset.t === t;
+        l.hidden = !show;
+        l.classList.remove("ip-in-l", "ip-in-r");
+        if (show && anim && prev !== t) { void l.offsetWidth; l.classList.add(dir > 0 ? "ip-in-r" : "ip-in-l"); l.scrollTop = 0; }
+      });
     }
-    tabs.forEach(function (b) { b.addEventListener("click", function () { pick(b.dataset.t); try { localStorage.setItem("blvl_ip_tab", b.dataset.t); } catch (e) {} }); });
-    try { var saved = localStorage.getItem("blvl_ip_tab"); if (saved) pick(saved); } catch (e) {}
+    tabs.forEach(function (b) { b.addEventListener("click", function () { pick(b.dataset.t, true); try { localStorage.setItem("blvl_ip_tab", b.dataset.t); } catch (e) {} }); });
+    try { var saved = localStorage.getItem("blvl_ip_tab"); if (saved) pick(saved, false); } catch (e) {}
+    moveInd(cur); requestAnimationFrame(function () { bar.classList.add("ready"); });
+    window.addEventListener("resize", function () { moveInd(cur); });
   });
   // 좁은 화면: 오른쪽 아래 버튼으로 응모 판 열고 닫기
   var fab = document.querySelector(".inv-fab"), sheet = document.querySelector(".inv-float");

@@ -524,3 +524,15 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 .st-title{-webkit-line-clamp:4}
 .lh-slide.studio .st-title{font-size:clamp(20px,6.4cqi,29px)}
 .lh-slide.studio{container-type:inline-size}
+/* 응모 판 탭: 검은 표시가 미끄러지듯 이동, 목록은 방향에 맞춰 빠르게 슬라이드 */
+.ip-tabs{position:relative}
+.ip-tabs button{position:relative;z-index:1;transition:color .2s}
+.ip-tabs button.on{background:transparent!important;border-color:transparent!important;color:#fff}
+.ip-ind{position:absolute;left:0;top:0;bottom:0;border-radius:8px;background:#16171b;z-index:0}
+.ip-tabs.ready .ip-ind{transition:transform .25s cubic-bezier(.3,.9,.3,1),width .25s}
+.ip-list.ip-in-r{animation:ip-slide-r .24s cubic-bezier(.25,.9,.3,1)}
+.ip-list.ip-in-l{animation:ip-slide-l .24s cubic-bezier(.25,.9,.3,1)}
+.inv-panel{overflow-x:hidden}
+@keyframes ip-slide-r{from{transform:translateX(42px);opacity:0}to{transform:none;opacity:1}}
+@keyframes ip-slide-l{from{transform:translateX(-42px);opacity:0}to{transform:none;opacity:1}}
+@media(prefers-reduced-motion:reduce){.ip-list.ip-in-r,.ip-list.ip-in-l{animation:none}.ip-tabs.ready .ip-ind{transition:none}}

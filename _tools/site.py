@@ -17,7 +17,7 @@ DESC = "포켓몬카드·미니카·피규어·게임 — 직접 모으고 즐�
 ADSENSE = "ca-pub-4380904134243959"
 AUTHOR = "blvl."
 PER_PAGE = 10
-CSS_VER = 59
+CSS_VER = 60
 JS_VER = 1
 
 # 카테고리: (슬러그, 메뉴명, 설명)
@@ -211,7 +211,7 @@ def ticker():
 <a class="tk-label" href="/category/news/"><i aria-hidden="true"></i>LIVE</a>
 <div class="tk-view"><div class="tk-track" style="--dur:{dur}s"><div class="tk-run">{track}</div><div class="tk-run" aria-hidden="true">{track}</div></div></div>
 <a class="tk-more" href="/stock/">현황판 →</a></section>
-<script defer src="/assets/blvl-ticker.js?v=7"></script>'''
+<script defer src="/assets/blvl-ticker.js?v=8"></script>'''
 
 # ── 홈 LIVE 슬라이드 (포켓몬센터 온라인 홈처럼 가운데 큰 카드 + 양옆이 살짝 보이는 슬라이드)
 LH_COLORS = ["#FFD54A", "#7FE0B0", "#FF8A80", "#8FD0FF", "#C9B2FF", "#FFAE5C", "#C8F060"]
@@ -290,7 +290,7 @@ def live_hero():
     return (f'<section class="live-hero" aria-label="TCG LIVE 응모·재고 슬라이드"><div class="lh-stage">{"".join(slides)}</div>'
             f'<button type="button" class="lh-nav lh-prev" aria-label="이전"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button type="button" class="lh-nav lh-next" aria-label="다음"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>'
             f'<div class="lh-dots">{dots}</div><a class="lh-all" href="/stock/">LIVE 현황판 전체 보기 →</a></section>'
-            '<script defer src="/assets/blvl-hero.js?v=1"></script><script defer src="/assets/blvl-ticker.js?v=7"></script>')
+            '<script defer src="/assets/blvl-hero.js?v=1"></script><script defer src="/assets/blvl-ticker.js?v=8"></script>')
 
 # ── 아마존 응모 판 (일본·미국 탭) — 모든 페이지 오른쪽 여백 / 좁은 화면은 글 사이드바
 def invite_panel(cls):

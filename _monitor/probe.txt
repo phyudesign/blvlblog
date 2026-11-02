@@ -1,11 +1,16 @@
-https://pokemoncard.co.kr/	200	93467	포켓몬 카드 게임	응모,추첨,확장팩,예약	-> https://pokemoncard.co.kr/main
-https://pokemoncard.co.kr/news	200	22821	포켓몬 카드 게임	예약	-> https://pokemoncard.co.kr/news
-https://www.pokemonkorea.co.kr/	200	68009	포켓몬 공식 사이트	응모,추첨,판매,확장팩,포켓몬센터	-> https://www.pokemonkorea.co.kr/
-https://pokemonkorea.co.kr/news	200	21326	포켓몬 공식 사이트	공지	-> https://pokemonkorea.co.kr/news
-https://www.pokemonstore.co.kr/	200	19735			-> https://www.pokemonstore.co.kr/
-https://pokemonstore.co.kr/	200	19735			-> https://pokemonstore.co.kr/
-https://www.pokemoncenter.co.kr/ ERR ConnectTimeout
-https://pokemoncenter.co.kr/ ERR ConnectTimeout
-https://www.pokemoncenter-online.co.kr/ ERR ConnectionError
-https://store.pokemonkorea.co.kr/ ERR ConnectionError
-https://pokemoncenter-korea.com/ ERR ConnectionError
+===== https://pokemonkorea.co.kr/news 21326
+포켓몬 공식 사이트 kakaoPixel('327812162506475690').pageView(); (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) })(window,document,'script','https://www.google-analytics.com/analytics.js','ga'); ga('create', 'UA-24945068-1', 'auto'); ga('send', 'pageview'); window.addEventListener('load', function() { var across_adn_contain = new fn_across_adn_contain(); var across_adn_param = []; across_adn_param = {"ut":"Home","ui"
+ api? /ajax/member
+ api? /ajax/news
+ api? /ajax/news
+===== https://pokemonkorea.co.kr/news/2 21335
+  /member/login?next=/news/2 | 로그인
+ api? /ajax/member
+ api? /ajax/news
+ api? /ajax/news
+===== https://pokemoncard.co.kr/news 22821
+포켓몬 카드 게임 $(document).ready(function () { $("#social_rt").sticky({topSpacing: 100}); var cwpc = $("#carousel-indicators-pc").width(); var cwmo = $("#carousel-indicators-mobile").width(); $("#carousel-indicators-pc").css("margin-left","-" + (cwpc / 2) +"px"); $("#carousel-indicators-mobile").css("margin-left","-" + (cwmo / 2) +"px"); var ch = $("#carousel-example-index").height(); $(".carousel-control-right").css("top",( (ch + 76) / 2 * -1 ) ); $(".carousel-control-left").css("top",( (ch + 76) / 2 * -1 ) ); var ww = $(document).width() - 24; var calcH = (ww * 298) / 408; $(".myinfo-box-mobile .
+ api? /v3/news_ajax
+ api? /ajax/news
+===== https://pokemonstore.co.kr/pages/product/list.html?depth=1&categoryNo=870548 912
+상품 페이지로 이동 중... (function () { // 기존 외부 링크는 ?keyword= (단수) 형태로 들어옴 // ShopBy 실제 검색 페이지는 ?keywords= (복수) 를 사용 var params = new URLSearchParams(window.location.search); var keyword = params.get('keyword') || params.get('keywords') || ''; // 상대경로 사용: list.html 과 같은 폴더의 product-list.html 로 이동 // → PC/모바일 스킨 경로가 달라도 동일하게 동작 var target = 'product-list.html'; if (keyword) { // URLSearchParams.get() 은 이미 디코딩된 값을 돌려주므로 // encodeURIComponent 로 다시 인코딩해서 붙인다. target += '?keywords=' + encodeURIComponent(keyword); } // replace 사용: 뒤로가기 시 이 중간 페이지로 다시 돌아오지 않게 함 window.location.replace(target); })(); 상품 페이지로 

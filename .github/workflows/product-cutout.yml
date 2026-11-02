@@ -12,5 +12,5 @@ jobs:
       - run: python _tools/cutout.py
       - run: |
           git config user.name "blvl-thumbnail-bot"; git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/products; git commit -m "상품 사진 배경 지우기" || exit 0
+          git add assets/products assets/art; git commit -m "상품 사진 배경 지우기" || exit 0
           for i in 1 2 3; do git pull --rebase -q origin main && git push -q origin HEAD:main && break; sleep 5; done

@@ -676,3 +676,5 @@ html.mn-lock,html.mn-lock body{overflow:hidden}
   .live-hero{padding-bottom:30px}
 }
 @media(max-width:768px){.lh-stage{height:calc(min(76vw,340px) + 16px)}.live-hero .lh-dots{margin-top:12px}.live-hero .lh-all{margin-top:20px}}
+.mn-big a,.mn-big button{font-size:25px;padding:8px 0}
+.mn-sub .mn-list a{font-size:21px}

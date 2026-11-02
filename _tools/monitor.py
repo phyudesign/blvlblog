@@ -378,7 +378,7 @@ def amazon_table(state):
                            '새 응모 상품은 감시기가 일본 정보·뉴스 사이트에서 찾으면 맨 위에 NEW로 추가돼요.</p>')
 
 # ── 국내판: 포켓몬코리아·포켓몬카드 공식 홈 첫 화면의 공지 링크에서 추첨·응모·판매 소식
-KR_SOURCES = [("pokemonkorea", "포켓몬코리아", "https://pokemonkorea.co.kr/", r'href="((?:https://(?:www\.)?pokemonkorea\.co\.kr)?/news/\d+/\d+)"'),
+KR_SOURCES = [("pokemonkorea", "포켓몬코리아", "https://pokemonkorea.co.kr/", r'href="((?:https://(?:www\.)?pokemonkorea\.co\.kr)?/news/2/\d+)"'),
               ("pokemoncard", "포켓몬카드 공식", "https://pokemoncard.co.kr/main", r'href="((?:https://pokemoncard\.co\.kr)?/(?:news|card|event)/\d+[^"]*)"')]
 KR_WORDS = ["추첨", "응모", "판매", "발매", "예약", "입고", "재판매", "한정", "출시", "BOX", "박스", "확장팩"]
 
@@ -391,10 +391,13 @@ def scan_kr(state):
             link = m.group(1); title = text_of(m.group(2))
             if link.startswith("/"): link = re.match(r"https://[^/]+", url).group(0) + link
             if not title or len(title) < 6 or not any(w in title for w in KR_WORDS): continue
-            title = re.sub(r"\s+", " ", title)[:120]
+            dm = re.search(r"(\d{4})년\s*(\d{1,2})월\s*(\d{1,2})일", title)
+            posted = f"{dm.group(1)}-{int(dm.group(2)):02d}-{int(dm.group(3)):02d}" if dm else NOW.strftime("%Y-%m-%d")
+            title = re.sub(r"\s*(카드 게임|게임)?\s*\d{4}년\s*\d{1,2}월\s*\d{1,2}일.*$", "", title)
+            title = re.sub(r"^(NEW|HOT)\s+", "", re.sub(r"\s+", " ", title)).strip()[:120]
             if link in kr_s:
                 kr_s[link]["last"] = NOW.strftime("%Y-%m-%d"); continue
-            kr_s[link] = {"title": title, "src": sname, "first": NOW.strftime("%Y-%m-%d"), "last": NOW.strftime("%Y-%m-%d")}
+            kr_s[link] = {"title": title, "src": sname, "first": NOW.strftime("%Y-%m-%d"), "posted": posted, "last": NOW.strftime("%Y-%m-%d")}
             if not seed:
                 events.append({"key": "kr:" + link, "kind": "page", "shop_kr": sname, "title": title, "url": link, "status": "krnews", "price": ""})
     for k in [k for k, v in kr_s.items() if (NOW.date() - datetime.date.fromisoformat(v["last"])).days > 45]: kr_s.pop(k)

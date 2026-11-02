@@ -184,7 +184,7 @@ def live_rows():
             rows.append(("inv", "새 응모" if new else "응모 중", f"{brand} {name} — 아마존 초대 요청", link, "", True,
                          {"img": amz_img(a), "name": f"{brand} {name}", "sub": sub, "cta": "아마존에서 초대 요청하기", "asin": a}))
     except Exception: pass
-    for u, v in sorted(st.get("kr", {}).items(), key=lambda kv: kv[1]["first"], reverse=True)[:4]:
+    for u, v in sorted(st.get("kr", {}).items(), key=lambda kv: kv[1].get("posted", kv[1]["first"]), reverse=True)[:4]:
         rows.append(("kr", "국내판", v["title"], u, "", True, {"img": "", "name": v["title"], "sub": v["src"] + " 공지", "cta": "공지 보기"}))
     for v in st.get("items", {}).values():
         if v.get("status") not in ("instock", "preorder"): continue
@@ -306,10 +306,10 @@ def invite_panel(cls):
             out.append(f'<li class="ip-group"><span class="ip-name"><i>{v[0]}</i>{esc(v[1])}</span><span class="ip-meta">{len(groups[v])}종</span><div class="ip-chips">{chips}</div></li>')
         return "".join(out)
     jp, us = items("jp"), items("us")
-    krs = sorted(st.get("kr", {}).items(), key=lambda kv: (kv[1]["first"], kv[0]), reverse=True)[:20]
+    krs = sorted(st.get("kr", {}).items(), key=lambda kv: (kv[1].get("posted", kv[1]["first"]), kv[0]), reverse=True)[:20]
     kr_html = "".join(f'<li><a href="{esc(u)}" target="_blank" rel="nofollow noopener"><span class="ip-name"><i>{esc(v["src"].replace("포켓몬카드 공식", "카드 공식"))}</i>{esc(v["title"])}'
                       f'{"<em class=ip-new>NEW</em>" if v["first"] >= (datetime.date.today() - datetime.timedelta(days=3)).isoformat() and v["first"] > "2026-11-02" else ""}</span>'
-                      f'<span class="ip-meta">{int(v["first"][5:7])}/{int(v["first"][8:10])} 확인</span></a></li>' for u, v in krs) or \
+                      f'<span class="ip-meta">{int(v.get("posted", v["first"])[5:7])}/{int(v.get("posted", v["first"])[8:10])} 공지</span></a></li>' for u, v in krs) or \
               '<li class="ip-note">아직 모은 국내판 소식이 없어요. 포켓몬코리아·포켓몬카드 공식 공지를 10분마다 확인하고 있어요.</li>'
     uid = "ip-" + cls.split()[0]
     return (f'<aside class="inv-panel {cls}" aria-label="아마존 응모 중인 상품"><div class="ip-head"><b>응모 중</b><span>아마존 초대 요청 · 국내판 추첨 · 위가 최신</span></div>'

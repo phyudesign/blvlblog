@@ -17,7 +17,7 @@ DESC = "포켓몬카드·미니카·피규어·게임 — 직접 모으고 즐�
 ADSENSE = "ca-pub-4380904134243959"
 AUTHOR = "blvl."
 PER_PAGE = 10
-CSS_VER = 52
+CSS_VER = 53
 JS_VER = 1
 
 # 카테고리: (슬러그, 메뉴명, 설명)
@@ -256,10 +256,12 @@ def live_hero():
             stage = LH_STAGES[i % len(LH_STAGES)]
             bgk = pv.get("asin", "") if pv.get("asin", "") in LH_BG else f"default{i % 3 + 1}"
             px, py, pw = LH_BG[bgk]
+            cut = ROOT / "assets" / "products" / f'{pv.get("asin", "")}.webp'
+            prod_src, prod_cls = (f"/assets/products/{cut.name}", "st-prod cut") if pv.get("asin") and cut.exists() else (img, "st-prod")
             title = re.sub(r"\s*BOX$", "", name)
             slides.append(f'''<a class="lh-slide studio st-bg" href="{esc(href)}"{attrs} style="--b1:{th[0]};--b2:{th[1]};--ac:{th[2]};--px:{px}%;--py:{py}%;--pw:{pw}%" draggable="false">
 <img class="st-back" src="/assets/studio/{bgk}.webp" alt="" loading="{"eager" if i < 3 else "lazy"}" draggable="false">
-<img class="st-prod" src="{esc(img)}" alt="{esc(name)} 상품 사진" loading="{"eager" if i < 3 else "lazy"}" referrerpolicy="no-referrer" draggable="false">
+<img class="{prod_cls}" src="{esc(prod_src)}" alt="{esc(name)} 상품 사진" loading="{"eager" if i < 3 else "lazy"}" referrerpolicy="no-referrer" draggable="false">
 <span class="st-text"><span class="st-pill"><i></i><b>LIVE</b>· {LH_LABEL.get(kind, "TCG LIVE")}{new}</span>
 <span class="st-rib">{esc(brand or "TCG")}</span><b class="st-title">{esc(title)}</b><span class="st-line"></span>
 <span class="st-sub">{esc(pv.get("sub", ""))}</span><span class="st-cta">{esc(pv.get("cta", "자세히 보기"))} →</span></span></a>''')

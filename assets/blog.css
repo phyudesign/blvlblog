@@ -494,3 +494,5 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 .st-back{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
 .st-bg .st-prod{left:calc(var(--px) - var(--pw) / 2);right:auto;width:var(--pw);height:54%;bottom:calc(100% - var(--py));object-fit:contain;object-position:center bottom;mix-blend-mode:multiply}
 .st-bg .st-text{max-width:48%}
+/* 배경을 지운 상품 사진: 색 섞지 않고 그림자만 */
+.st-bg .st-prod.cut{mix-blend-mode:normal!important;filter:drop-shadow(0 14px 14px rgba(20,25,40,.28))!important}

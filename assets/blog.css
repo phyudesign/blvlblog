@@ -582,3 +582,7 @@ html,body{overflow-x:clip}
 @media(max-width:768px){.site-logo img{height:18px!important}.main-nav a{line-height:44px}}
 .site-logo img{height:22px!important}
 @media(max-width:768px){.site-logo img{height:20px!important}}
+/* 상단바 위아래 여백 늘리고 로고 1.5배 */
+.inside-header{padding-top:12px;padding-bottom:12px}
+.site-logo img{height:33px!important}
+@media(max-width:768px){.inside-header{padding-top:10px;padding-bottom:10px}.site-logo img{height:30px!important}}

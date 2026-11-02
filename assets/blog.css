@@ -602,3 +602,7 @@ html,body{overflow-x:clip}
 .lh-live{font-family:"Gmarket Sans",sans-serif;font-weight:500;letter-spacing:0;margin-right:3px}
 .live-hero .lh-all svg{display:block;flex:none;transform:translateY(var(--cy,0px))}
 @media(max-width:768px){.live-hero .lh-all{height:34px;padding:0 14px 0 16px}}.live-hero .lh-all{--ty:.9px;--cy:-.4px}
+/* 슬라이드 카드 꼬리표: LIVE는 메뉴 글꼴, '아마존 응모' 등은 더 굵게 */
+.st-pill b{font-family:"Gmarket Sans",sans-serif;font-weight:500;letter-spacing:0}
+.st-pill{font-weight:700}
+.lh-top{font-family:"Gmarket Sans",sans-serif;font-size:15px;font-weight:700;letter-spacing:0}

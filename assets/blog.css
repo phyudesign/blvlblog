@@ -586,3 +586,5 @@ html,body{overflow-x:clip}
 .inside-header{padding-top:12px;padding-bottom:12px}
 .site-logo img{height:33px!important}
 @media(max-width:768px){.inside-header{padding-top:10px;padding-bottom:10px}.site-logo img{height:30px!important}}
+.inside-header{padding-top:26px!important;padding-bottom:14px!important}
+@media(max-width:768px){.inside-header{padding-top:20px!important;padding-bottom:12px!important}}

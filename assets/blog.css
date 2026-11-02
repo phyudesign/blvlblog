@@ -260,7 +260,8 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 
 /* ── 아마존 응모 중 목록 */
 .inv-panel{background:#fff;border-radius:14px;padding:18px 16px 14px;box-shadow:0 4px 16px rgba(20,22,30,.06);-webkit-user-select:none;user-select:none}
-.sidebar .inv-panel{position:sticky;top:20px;max-height:calc(100vh - 40px);overflow:auto;border-radius:0;box-shadow:none;padding:30px 40px}
+.sidebar .inside-right-sidebar{height:100%}
+.sidebar .inv-panel{position:sticky;top:86px;max-height:calc(100vh - 40px);overflow:auto;border-radius:0;box-shadow:none;padding:30px 40px}
 .sidebar .inv-panel li{margin:0;padding:0}
 .ip-head{display:flex;flex-direction:column;gap:2px;padding-bottom:12px;margin-bottom:6px;border-bottom:2px solid #16171b}
 .ip-head b{font-size:17px;letter-spacing:-.2px}
@@ -280,6 +281,28 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 .ip-all{display:block;margin-top:10px;font-size:13px;font-weight:700;color:#16171b;text-decoration:none}
 .ip-all:hover{color:#e8362d}
 .inv-float{display:none}
-@media(min-width:1660px){.inv-float{display:block;position:fixed;top:120px;left:calc(50% + 620px);width:min(290px,calc(50vw - 660px));max-height:calc(100vh - 150px);overflow:auto;z-index:5}}
+@media(min-width:1660px){.inv-float{display:block;position:fixed;top:120px;left:calc(50% + 620px);width:min(290px,calc(50vw - 660px));max-height:calc(100vh - 140px);overflow:auto;z-index:15}.sidebar .inv-panel{display:none}}
 @media(prefers-reduced-motion:reduce){.ip-new{animation:none}}
 @media print{.inv-panel{display:none}}
+
+/* 상단 LIVE 전광판: 모든 페이지에서 스크롤해도 위에 고정 */
+.tk-sticky{position:sticky;top:0;z-index:20;padding:16px 0 10px;background:var(--base-2)}
+.tk-sticky .ticker{margin:0 auto}
+@media(max-width:768px){.tk-sticky{padding:10px 0 8px}}
+.ip-tabs{display:flex;gap:6px;margin:2px 0 4px}
+.ip-tabs button{flex:1;border:1px solid #e3e5ea;background:#f6f7f9;color:#5b5f69;border-radius:8px;padding:7px 0;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit}
+.ip-tabs button.on{background:#16171b;border-color:#16171b;color:#fff}
+.ip-list[hidden]{display:none}
+.ip-note{font-size:12px;color:#8d909a;padding:10px 2px;border-bottom:0!important}
+
+/* 좁은 화면: 오른쪽 아래 '아마존 응모 중' 버튼 → 응모 판 */
+.inv-fab{display:none;position:fixed;right:14px;bottom:18px;z-index:30;align-items:center;gap:8px;padding:11px 16px;border:0;border-radius:999px;background:#16171b;color:#fff;font:700 14px/1 inherit;font-family:inherit;box-shadow:0 8px 22px rgba(15,18,30,.28);cursor:pointer;letter-spacing:-.3px}
+.inv-fab i{width:8px;height:8px;border-radius:50%;background:#ff9f1c;box-shadow:0 0 0 3px rgba(255,159,28,.3);animation:tk-blink 1.4s ease-in-out infinite}
+.inv-fab.open{background:#e8362d}
+@media(max-width:1659px){
+  .inv-fab{display:flex}
+  .inv-float.open{display:block;position:fixed;right:12px;bottom:72px;width:min(340px,calc(100vw - 24px));max-height:min(70vh,640px);overflow:auto;z-index:29;box-shadow:0 18px 50px rgba(15,18,30,.3);animation:ip-up .2s ease-out}
+}
+@media(min-width:769px) and (max-width:1659px){body:has(.sidebar .inv-panel) .inv-fab{display:none}}
+@keyframes ip-up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@media print{.inv-fab{display:none!important}}

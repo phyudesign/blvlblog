@@ -17,7 +17,7 @@ DESC = "포켓몬카드·미니카·피규어·게임 — 직접 모으고 즐�
 ADSENSE = "ca-pub-4380904134243959"
 AUTHOR = "blvl."
 PER_PAGE = 10
-CSS_VER = 28
+CSS_VER = 30
 JS_VER = 1
 
 # 카테고리: (슬러그, 메뉴명, 설명)
@@ -84,10 +84,13 @@ def page(title, content, desc=DESC, canon="/", og_img="", head_extra="", active=
 <nav class="main-navigation" aria-label="메뉴"><button class="menu-toggle" type="button" onclick="document.getElementById('hd').classList.toggle('open')">☰ <span>Menu</span></button>
 <ul class="main-nav">{nav}</ul><a class="nav-search" href="/search/" aria-label="검색">{SEARCH_SVG}</a></nav>
 </div></header>
+<div class="tk-sticky">{CHROME["ticker"]}</div>{CHROME["float"]}
 {content}
 <script defer src="/assets/blvl-stats.js?v={JS_VER}"></script>
 <footer class="site-footer"><nav class="footer-links" aria-label="사이트 정보"><a href="/stock/">재고 현황판</a> · <a href="/about/">소개</a> · <a href="/privacy/">개인정보처리방침</a> · <a href="/contact/">문의</a></nav>© {YEAR} {TITLE}</footer>
 </body></html>'''
+
+CHROME = {"ticker": "", "float": ""}   # 모든 페이지 공통: 상단 LIVE 전광판, 오른쪽 아마존 응모 판 (아래에서 채움)
 
 def pstat(p, hit=False):
     # 조회수·댓글 수 자리 (assets/blvl-stats.js가 채움)
@@ -128,41 +131,95 @@ def sidebar():
 <aside class="widget"><h2 class="widget-title">Categories</h2><ul>{cl}</ul></aside>{invite_panel("widget")}
 </div></div>'''
 
-# ── 아마존 응모 중 목록 (사이드바 아래·홈 오른쪽 여백)
+# ── 홈 상단 속보 전광판: 최근 48시간 속보 글 + 지금 구매·예약 가능한 상품
+def ticker():
+    try:
+        import sys; sys.path.insert(0, str(ROOT / "_tools"))
+        from monitor import kr, STATUS_KR, SHOP_KR
+    except Exception:
+        kr = lambda t: t; STATUS_KR = {}; SHOP_KR = {}
+    try: st = json.loads((ROOT / "_monitor" / "state.json").read_text(encoding="utf-8"))
+    except Exception: st = {}
+    now = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9))).replace(tzinfo=None)
+    rows = []
+    for q in posts:
+        if q["category"] != NEWS: continue
+        try: t = datetime.datetime.strptime(q["date"], "%Y-%m-%d %H:%M:%S")
+        except ValueError: continue
+        if (now - t).total_seconds() > 48 * 3600: break
+        if "amazon.co.jp/dp/" in q.get("shop_url", ""): continue   # 아마존 응모 상품은 아래 '응모 중' 줄로 보여 줌
+        name = q["title"].replace("[추첨·판매 속보] ", "").replace("[입고 속보] ", "")
+        sub = " · ".join(x for x in (q.get("shop_kr", ""), q.get("status_kr", ""), q.get("price", "")) if x)
+        rows.append(("hot", "속보", name, url(q["slug"]), q["date"][5:16].replace("-", "/"), False,
+                     {"img": re.sub(r"downsize=\d+", "downsize=400", q.get("pimg") or ""), "name": name, "sub": sub or "STOCK LIVE 속보", "cta": "속보 글 보기"}))
+    try:
+        from monitor import invite_list
+        for a, name, price, brand, grp, new, link in [r for r in invite_list(st, "jp") if not r[4]][:6]:
+            sub = " · ".join(x for x in ("아마존 재팬", "초대 요청 접수 중", price) if x)
+            rows.append(("inv", "새 응모" if new else "응모 중", f"{brand} {name} — 아마존 초대 요청", link, "", True,
+                         {"img": "", "name": f"{brand} {name}", "sub": sub, "cta": "아마존에서 초대 요청하기"}))
+    except Exception: pass
+    for v in st.get("items", {}).values():
+        if v.get("status") not in ("instock", "preorder"): continue
+        name = re.sub(r"^\s+|\s+$", "", kr(v["title"]))[:48]
+        extra = " · ".join(x for x in (SHOP_KR.get(v.get("shop"), ""), STATUS_KR.get(v["status"], ""), v.get("price", "")) if x)
+        rows.append(("on", "판매 중" if v["status"] == "instock" else "예약 중", f"{name} — {extra}", v["url"], "", True,
+                     {"img": re.sub(r"downsize=\d+", "downsize=400", v.get("img") or ""), "name": re.sub(r"^\s+|\s+$", "", kr(v["title"])), "sub": extra, "cta": "쇼핑몰에서 보기"}))
+    rows = rows[:14]
+    if not rows:
+        track = '<span class="tk-item"><span class="tk-tag idle">감시 중</span>지금은 새로 풀린 재고가 없어요 · 10분마다 일본 쇼핑몰을 확인하고 있어요</span>'
+    else:
+        def one(r):
+            kind, tag, text, href, when, ext, pv = r
+            attrs = ' target="_blank" rel="nofollow noopener"' if ext else ""
+            w = f'<time>{esc(when)}</time>' if when else ""
+            data = "".join(f' data-{k}="{esc(v)}"' for k, v in pv.items())
+            return f'<a class="tk-item" href="{esc(href)}"{attrs}{data}><span class="tk-tag {kind}">{tag}</span>{esc(text)}{w}</a>'
+        track = "".join(one(r) for r in rows)
+    dur = max(28, min(120, len(re.sub(r"<[^>]+>", "", track)) // 5))
+    return f'''<section class="ticker" aria-label="STOCK LIVE 실시간 재고 속보">
+<a class="tk-label" href="/category/news/"><i aria-hidden="true"></i>LIVE</a>
+<div class="tk-view"><div class="tk-track" style="--dur:{dur}s"><div class="tk-run">{track}</div><div class="tk-run" aria-hidden="true">{track}</div></div></div>
+<a class="tk-more" href="/stock/">현황판 →</a></section>
+<script defer src="/assets/blvl-ticker.js?v=6"></script>'''
+
+# ── 아마존 응모 판 (일본·미국 탭) — 모든 페이지 오른쪽 여백 / 좁은 화면은 글 사이드바
 def invite_panel(cls):
     try:
         import sys; sys.path.insert(0, str(ROOT / "_tools"))
         from monitor import invite_list
-        rows = invite_list(json.loads((ROOT / "_monitor" / "state.json").read_text(encoding="utf-8")))
+        st = json.loads((ROOT / "_monitor" / "state.json").read_text(encoding="utf-8"))
     except Exception:
         return ""
-    if not rows: return ""
-    md = lambda d: f"{int(d[5:7])}/{int(d[8:10])}"
-    li, groups = [], {}
-    for i, (a, name, price, rel, grp, new) in enumerate(rows):
-        link = f"https://www.amazon.co.jp/dp/{a}"
-        if grp:
-            if grp not in groups:
-                groups[grp] = {"rel": rel, "price": price, "items": []}
-                li.append(("group", grp))
-            groups[grp]["items"].append((name, link))
-            continue
-        badge = '<em class="ip-new">NEW</em>' if (i == 0 or new) else ""
-        brand = "원피스" if name.startswith("원피스") else "포켓몬"
-        nm = name.replace("원피스 ", "")
-        li.append(("one", f'<li><a href="{link}" target="_blank" rel="nofollow noopener"><span class="ip-name"><i>{brand}</i>{esc(nm)}{badge}</span>'
-                          f'<span class="ip-meta">{md(rel)} 발매{(" · " + esc(price)) if price else ""}</span></a></li>'))
-    out = []
-    for kind, v in li:
-        if kind == "one": out.append(v); continue
-        g = groups[v]
-        chips = "".join(f'<a href="{l}" target="_blank" rel="nofollow noopener">{esc(n)}</a>' for n, l in g["items"])
-        out.append(f'<li class="ip-group"><span class="ip-name"><i>포켓몬</i>{esc(v)}</span><span class="ip-meta">{md(g["rel"])} 발매 · {esc(g["price"])} · {len(g["items"])}종</span><div class="ip-chips">{chips}</div></li>')
-    return (f'<aside class="inv-panel {cls}" aria-label="아마존 응모 중인 상품"><div class="ip-head"><b>아마존 응모 중</b><span>초대 요청 받는 상품 · 최신순</span></div>'
-            f'<ol>{"".join(out)}</ol><a class="ip-all" href="/stock/">전체 목록 · 응모 방법 →</a></aside>')
+    def items(region):
+        out, groups, order = [], {}, []
+        for a, name, price, brand, grp, new, link in invite_list(st, region):
+            if grp:
+                key = (brand, grp)
+                if key not in groups: groups[key] = []; order.append(("g", key))
+                groups[key].append((name, link)); continue
+            badge = '<em class="ip-new">NEW</em>' if new else ""
+            order.append(("o", f'<li><a href="{link}" target="_blank" rel="nofollow noopener"><span class="ip-name"><i>{brand}</i>{esc(name)}{badge}</span>'
+                               f'{f"<span class=ip-meta>{esc(price)}</span>" if price else ""}</a></li>'))
+        for kind, v in order:
+            if kind == "o": out.append(v); continue
+            chips = "".join(f'<a href="{l}" target="_blank" rel="nofollow noopener">{esc(n)}</a>' for n, l in groups[v])
+            out.append(f'<li class="ip-group"><span class="ip-name"><i>{v[0]}</i>{esc(v[1])}</span><span class="ip-meta">{len(groups[v])}종</span><div class="ip-chips">{chips}</div></li>')
+        return "".join(out)
+    jp, us = items("jp"), items("us")
+    uid = "ip-" + cls.split()[0]
+    return (f'<aside class="inv-panel {cls}" aria-label="아마존 응모 중인 상품"><div class="ip-head"><b>아마존 응모 중</b><span>초대 요청 받는 상품 · 위가 최신</span></div>'
+            f'<div class="ip-tabs" role="tablist"><button type="button" role="tab" class="on" aria-selected="true" data-t="jp">🇯🇵 일본</button>'
+            f'<button type="button" role="tab" aria-selected="false" data-t="us">🇺🇸 미국</button></div>'
+            f'<ol class="ip-list" data-t="jp">{jp}</ol><ol class="ip-list" data-t="us" hidden>{us}'
+            f'<li class="ip-note">미국 아마존은 초대 판매 상품이 적어요. 확인되는 대로 추가할게요.</li></ol>'
+            f'<a class="ip-all" href="/stock/">전체 목록 · 응모 방법 →</a></aside>')
 
 def with_sidebar(main): return f'<div class="site-content"><main class="content-area">{main}</main>{sidebar()}</div>'
 
+CHROME["ticker"] = ticker()
+CHROME["float"] = invite_panel("inv-float") + ('<button type="button" class="inv-fab" aria-expanded="false" aria-label="아마존 응모 중인 상품 보기">'
+                                              '<i aria-hidden="true"></i>아마존 응모 중</button>')
 def arch_item(p):
     img = f'<div class="post-image"><a href="{url(p["slug"])}"><img loading="lazy" src="{esc(p["thumb"])}" alt="{esc(p["title"])}"></a></div>' if p["thumb"] else ""
     return f'''<article class="inside-article"><header><h2 class="entry-title"><a href="{url(p["slug"])}">{esc(p["title"])}</a></h2>
@@ -219,65 +276,13 @@ for pg in pages:
 <div class="entry-content">{pg["body"]}</div></article>'''
     write(url(pg["slug"]), page(pg["title"], with_sidebar(main), pg["desc"], url(pg["slug"])))
 
-# ── 홈 상단 속보 전광판: 최근 48시간 속보 글 + 지금 구매·예약 가능한 상품
-def ticker():
-    try:
-        import sys; sys.path.insert(0, str(ROOT / "_tools"))
-        from monitor import kr, STATUS_KR, SHOP_KR
-    except Exception:
-        kr = lambda t: t; STATUS_KR = {}; SHOP_KR = {}
-    try: st = json.loads((ROOT / "_monitor" / "state.json").read_text(encoding="utf-8"))
-    except Exception: st = {}
-    now = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9))).replace(tzinfo=None)
-    rows = []
-    for q in posts:
-        if q["category"] != NEWS: continue
-        try: t = datetime.datetime.strptime(q["date"], "%Y-%m-%d %H:%M:%S")
-        except ValueError: continue
-        if (now - t).total_seconds() > 48 * 3600: break
-        if "amazon.co.jp/dp/" in q.get("shop_url", ""): continue   # 아마존 응모 상품은 아래 '응모 중' 줄로 보여 줌
-        name = q["title"].replace("[추첨·판매 속보] ", "").replace("[입고 속보] ", "")
-        sub = " · ".join(x for x in (q.get("shop_kr", ""), q.get("status_kr", ""), q.get("price", "")) if x)
-        rows.append(("hot", "속보", name, url(q["slug"]), q["date"][5:16].replace("-", "/"), False,
-                     {"img": re.sub(r"downsize=\d+", "downsize=400", q.get("pimg") or ""), "name": name, "sub": sub or "STOCK LIVE 속보", "cta": "속보 글 보기"}))
-    inv = sorted(st.get("amazon", {}).items(), key=lambda kv: (kv[1]["first"], -kv[1].get("ord", 999)), reverse=True)[:6]
-    for a, v in inv:
-        fresh = v["first"] > "2026-10-31" and (now.date() - datetime.date.fromisoformat(v["first"])).days <= 2  # 처음 모은 목록은 응모 중으로
-        name = re.sub(r"^\s+|\s+$", "", kr(v["name"]))[:48]
-        sub = " · ".join(x for x in ("아마존 재팬", "초대 요청 접수 중", v.get("price", "")) if x)
-        rows.append(("inv", "새 응모" if fresh else "응모 중", f"{name} — 아마존 초대 요청", f"https://www.amazon.co.jp/dp/{a}", "", True,
-                     {"img": "", "name": kr(v["name"]), "sub": sub, "cta": "아마존에서 초대 요청하기"}))
-    for v in st.get("items", {}).values():
-        if v.get("status") not in ("instock", "preorder"): continue
-        name = re.sub(r"^\s+|\s+$", "", kr(v["title"]))[:48]
-        extra = " · ".join(x for x in (SHOP_KR.get(v.get("shop"), ""), STATUS_KR.get(v["status"], ""), v.get("price", "")) if x)
-        rows.append(("on", "판매 중" if v["status"] == "instock" else "예약 중", f"{name} — {extra}", v["url"], "", True,
-                     {"img": re.sub(r"downsize=\d+", "downsize=400", v.get("img") or ""), "name": re.sub(r"^\s+|\s+$", "", kr(v["title"])), "sub": extra, "cta": "쇼핑몰에서 보기"}))
-    rows = rows[:14]
-    if not rows:
-        track = '<span class="tk-item"><span class="tk-tag idle">감시 중</span>지금은 새로 풀린 재고가 없어요 · 10분마다 일본 쇼핑몰을 확인하고 있어요</span>'
-    else:
-        def one(r):
-            kind, tag, text, href, when, ext, pv = r
-            attrs = ' target="_blank" rel="nofollow noopener"' if ext else ""
-            w = f'<time>{esc(when)}</time>' if when else ""
-            data = "".join(f' data-{k}="{esc(v)}"' for k, v in pv.items())
-            return f'<a class="tk-item" href="{esc(href)}"{attrs}{data}><span class="tk-tag {kind}">{tag}</span>{esc(text)}{w}</a>'
-        track = "".join(one(r) for r in rows)
-    dur = max(28, min(120, len(re.sub(r"<[^>]+>", "", track)) // 5))
-    return f'''<section class="ticker" aria-label="STOCK LIVE 실시간 재고 속보">
-<a class="tk-label" href="/category/news/"><i aria-hidden="true"></i>LIVE</a>
-<div class="tk-view"><div class="tk-track" style="--dur:{dur}s"><div class="tk-run">{track}</div><div class="tk-run" aria-hidden="true">{track}</div></div></div>
-<a class="tk-more" href="/stock/">현황판 →</a></section>
-<script defer src="/assets/blvl-ticker.js?v=4"></script>'''
-
 feat = [p for p in articles if p.get("featured")]
 feat = (feat + [p for p in articles if p not in feat])[:5]
 featured = ""
 if feat:
     featured = f'''<section class="gb-section"><h2 class="custom-title">Featured Posts</h2>
 <div class="feat"><div class="big">{gcard(feat[0], True)}</div><div class="small">{"".join(gcard(p) for p in feat[1:5])}</div></div></section>'''
-home = f'''{ticker()}{invite_panel("inv-float")}{featured}
+home = f'''{featured}
 <section class="gb-section latest"><h2 class="custom-title">Latest Posts</h2>
 <div class="lgrid">{"".join(gcard(p) for p in articles[:9])}</div>
 <div class="gbtn-wrap"><a class="gbtn" href="/blog/">Read All Article</a></div></section>'''

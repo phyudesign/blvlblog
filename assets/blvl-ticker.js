@@ -1,3 +1,23 @@
+/* 아마존 응모 판 탭 (일본·미국) */
+(function () {
+  document.querySelectorAll(".inv-panel").forEach(function (p) {
+    var tabs = p.querySelectorAll(".ip-tabs button");
+    function pick(t) {
+      tabs.forEach(function (b) { var on = b.dataset.t === t; b.classList.toggle("on", on); b.setAttribute("aria-selected", on); });
+      p.querySelectorAll(".ip-list").forEach(function (l) { l.hidden = l.dataset.t !== t; });
+    }
+    tabs.forEach(function (b) { b.addEventListener("click", function () { pick(b.dataset.t); try { localStorage.setItem("blvl_ip_tab", b.dataset.t); } catch (e) {} }); });
+    try { var saved = localStorage.getItem("blvl_ip_tab"); if (saved) pick(saved); } catch (e) {}
+  });
+  // 좁은 화면: 오른쪽 아래 버튼으로 응모 판 열고 닫기
+  var fab = document.querySelector(".inv-fab"), sheet = document.querySelector(".inv-float");
+  if (fab && sheet) {
+    function set(open) { sheet.classList.toggle("open", open); fab.classList.toggle("open", open); fab.setAttribute("aria-expanded", open); }
+    fab.addEventListener("click", function (e) { e.stopPropagation(); set(!sheet.classList.contains("open")); });
+    document.addEventListener("click", function (e) { if (sheet.classList.contains("open") && !sheet.contains(e.target)) set(false); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") set(false); });
+  }
+})();
 /* blvl blog — 홈 LIVE 전광판
    · 자동으로 흐름 · 손가락/마우스로 끌기, 휙 밀면 속도만큼 날아가다 감속
    · 0.5초 누르고 있기(모바일) / 0.5초 올려두기(데스크톱) → 상품 미리보기 카드 */

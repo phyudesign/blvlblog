@@ -209,41 +209,68 @@ INVITE_SEED = {
     "B0HFVPJF4Q": ("원피스카드 OP-18 BOX", "5,782엔"), "B0HB3JQ6P4": ("원피스카드 EB-05 BOX", "5,782엔"),
 }
 
-# 화면에 보여 줄 한글 이름·발매일 (발매일 순서 = 응모가 열린 순서로 정렬). 모르는 새 상품은 처음 찾은 날 기준.
-INVITE_INFO = {  # ASIN: (이름, 발매일, 묶음)
-    "B0H4PQ6LR5": ("파동시커 BOX", "2026-11-27", ""),
-    "B0HFVPJF4Q": ("원피스 OP-18 신의 지배 BOX", "2026-11-21", ""),
-    "B0HB3JQ6P4": ("원피스 EB-05 히로인즈 에디션 vol.2 BOX", "2026-10-31", ""),
-    "B0GXCYMRGL": ("이상해씨·파이리·꼬부기", "2026-10-16", "30주년 카드 세트"),
-    "B0GXCX36HP": ("나무지기·아차모·물짱이", "2026-10-16", "30주년 카드 세트"),
-    "B0GXCZ1VDC": ("주리비얀·뚜꾸리·수댕이", "2026-10-16", "30주년 카드 세트"),
-    "B0GXCSGX8Y": ("도치마론·푸호꼬·개구마르", "2026-10-16", "30주년 카드 세트"),
-    "B0GXCPF84C": ("나몰빼미·냐오불·누리공", "2026-10-16", "30주년 카드 세트"),
-    "B0GXCTRZ8L": ("흥나숭·염버니·울머기", "2026-10-16", "30주년 카드 세트"),
-    "B0GXCT83HB": ("나오하·뜨아거·꾸왁스", "2026-10-16", "30주년 카드 세트"),
-    "B0GXCRBL5J": ("30th CELEBRATION BOX", "2026-09-16", ""),
-    "B0GXCM4BCZ": ("에브이·블래키 프리미엄 덱 세트", "2026-09-16", ""),
-    "B0GP928YDZ": ("스톰 에메랄드 BOX", "2026-07-31", ""),
-    "B0GP9QHQ3Y": ("어비스아이 BOX", "2026-05-22", ""),
-    "B0G1XB2STM": ("닌자스피너 BOX", "2026-03-13", ""),
-    "B0FSJXSPPX": ("니힐제로 BOX", "2026-01-23", ""),
-    "B0FLD7HMRP": ("스타트 덱 100 배틀 컬렉션", "2025-12-19", ""),
-    "B0F9KJGGZ5": ("인페르노X BOX", "2025-11-28", ""),
-    "B0FLCWJ1VK": ("메가드림EX BOX", "2025-11-28", ""),
-    "B0F18J2CJF": ("메가브레이브 BOX", "2025-08-01", ""),
-    "B0F189YH8W": ("메가심포니아 BOX", "2025-08-01", ""),
-}
+# 아마존 응모 판에 보여 줄 목록 (위가 최신). 2026-11-02 TCG 브레이커 응모 목록 순서를 참고해 정리.
+# (ASIN, 이름, 브랜드, 묶음)
+INVITE_JP = [
+    ("B0H4PQ6LR5", "파동시커 BOX", "포켓몬", ""),
+    ("B0HFVPJF4Q", "OP-18 신의 지배 BOX", "원피스", ""),
+    ("B0FX7X71KK", "OP-13 이어지는 의지 BOX", "원피스", ""),
+    ("B0FJ7Z6RML", "EB-03 히로인즈 에디션 BOX", "원피스", ""),
+    ("B0HB3JQ6P4", "EB-05 히로인즈 에디션 vol.2 BOX", "원피스", ""),
+    ("B0GP928YDZ", "스톰 에메랄드 BOX", "포켓몬", ""),
+    ("B0H43ZX8LK", "OP-17 세계 최강의 전사 BOX", "원피스", ""),
+    ("B0GXCRBL5J", "30th CELEBRATION BOX", "포켓몬", ""),
+    ("B0GXCM4BCZ", "30주년 에브이·블래키 덱 세트", "포켓몬", ""),
+    ("B0GXCYMRGL", "1세대", "포켓몬", "30주년 스타팅 세트"), ("B0GXCC7W7Q", "2세대", "포켓몬", "30주년 스타팅 세트"),
+    ("B0GXCX36HP", "3세대", "포켓몬", "30주년 스타팅 세트"), ("B0GXCX46KQ", "4세대", "포켓몬", "30주년 스타팅 세트"),
+    ("B0GXCZ1VDC", "5세대", "포켓몬", "30주년 스타팅 세트"), ("B0GXCSGX8Y", "6세대", "포켓몬", "30주년 스타팅 세트"),
+    ("B0GXCPF84C", "7세대", "포켓몬", "30주년 스타팅 세트"), ("B0GXCTRZ8L", "8세대", "포켓몬", "30주년 스타팅 세트"),
+    ("B0GXCT83HB", "9세대", "포켓몬", "30주년 스타팅 세트"),
+    ("B0GP9JJ4B7", "이브이 ex", "포켓몬", "스타터 세트 ex"), ("B0GP9FPZJH", "조로아·조로아크 ex", "포켓몬", "스타터 세트 ex"),
+    ("B0GP9QQ1JG", "나오하·마스카나 ex", "포켓몬", "스타터 세트 ex"),
+    ("B0GTTJ9X7C", "EB01 SD건담 G제네레이션 BOX", "건담", ""),
+    ("B0G6J9VPN2", "ST-30 스타트 덱", "원피스", ""),
+    ("B0G2VKBZML", "OP-15 BOX", "원피스", ""),
+    ("B0GN5JV7JS", "OP-16 결전의 순간 BOX", "원피스", ""),
+    ("B0GP9QHQ3Y", "어비스아이 BOX", "포켓몬", ""),
+    ("B0G1XB2STM", "닌자스피너 BOX", "포켓몬", ""),
+    ("B0FSJXSPPX", "니힐제로 BOX", "포켓몬", ""),
+    ("B0FLCWJ1VK", "메가드림EX BOX", "포켓몬", ""),
+    ("B0FLD7HMRP", "스타트 덱 100 배틀 컬렉션", "포켓몬", ""),
+    ("B0F9KJGGZ5", "인페르노X BOX", "포켓몬", ""),
+    ("B0F18J2CJF", "메가브레이브 BOX", "포켓몬", ""),
+    ("B0F189YH8W", "메가심포니아 BOX", "포켓몬", ""),
+    ("B0DP4586RV", "블랙볼트 BOX", "포켓몬", ""),
+    ("B0D86FVG5R", "테라스탈 페스타 ex BOX", "포켓몬", ""),
+    ("B0DKHFYGQM", "열풍의 아레나 BOX", "포켓몬", ""),
+    ("B0D2WX4CYJ", "초전브레이커 BOX", "포켓몬", ""),
+    ("B0D2WX2M3W", "낙원의 드라고나 BOX", "포켓몬", ""),
+    ("B0DB56CSM6", "마리의 모르페코·오롱털 ex", "포켓몬", "스타터 세트 ex (SV)"),
+    ("B0DB59JY2P", "성호의 덤벨·메타그로스 ex", "포켓몬", "스타터 세트 ex (SV)"),
+    ("B0DB7VC4K5", "릴리에", "포켓몬", "컬렉션 파일 세트"), ("B0DB7KGQ22", "N", "포켓몬", "컬렉션 파일 세트"),
+]
+INVITE_US = [  # 아마존 미국 (amazon.com) — 직접 확인된 초대 판매만
+    ("B0H78BB9TY", "30th Celebration 엘리트 트레이너 박스", "포켓몬", ""),
+]
+US_PRICE = {"B0H78BB9TY": "정가 $49.99"}
+INVITE_INFO = {a: (n, "", g) for a, n, b, g in INVITE_JP}   # 예전 코드 호환
 
-def invite_list(state):
-    """응모 중 상품을 최신(발매일·발견일)순으로: [(asin, 이름, 가격, 기준일, 묶음, 새로찾음)]"""
-    out = []
-    for a, v in state.get("amazon", {}).items():
-        name, rel, grp = INVITE_INFO.get(a, (kr(v["name"]), v["first"], ""))
-        found_new = v["first"] > "2026-10-31" and a not in INVITE_INFO
-        out.append((a, name, v.get("price", ""), max(rel, v["first"]) if found_new else rel, grp, found_new))
-    order = list(INVITE_INFO)
-    out.sort(key=lambda r: order.index(r[0]) if r[0] in order else -1)   # 같은 날짜면 정해 둔 순서
-    return sorted(out, key=lambda r: r[3], reverse=True)
+def invite_list(state, region="jp"):
+    """응모 판 목록: [(asin, 이름, 가격, 브랜드, 묶음, NEW, 링크)] — 감시기가 새로 찾은 상품을 맨 위에"""
+    inv = state.get("amazon", {})
+    base = INVITE_JP if region == "jp" else INVITE_US
+    host = "https://www.amazon.co.jp/dp/" if region == "jp" else "https://www.amazon.com/dp/"
+    known = {a for a, *_ in INVITE_JP + INVITE_US}
+    rows = []
+    if region == "jp":   # 감시기가 새로 찾은 상품 (최근 것부터)
+        for a, v in sorted(inv.items(), key=lambda kv: kv[1]["first"], reverse=True):
+            if a in known or v["first"] <= "2026-11-02": continue
+            nm = kr(v["name"]); brand = "원피스" if "원피스" in nm else "포켓몬"
+            rows.append((a, nm.replace("포켓몬카드 ", "").replace("원피스카드 ", ""), v.get("price", ""), brand, "", True, host + a))
+    for i, (a, n, b, g) in enumerate(base):
+        price = (inv.get(a) or {}).get("price", "") if region == "jp" else US_PRICE.get(a, "")
+        rows.append((a, n, price, b, g, i == 0 and not rows, host + a))
+    return rows
 
 def _heading_before(h, pos):
     hs = list(re.finditer(r"<h[2-4][^>]*>(.*?)</h[2-4]>", h[max(0, pos - 6000):pos], re.S))
@@ -291,6 +318,8 @@ def scan_amazon(state, first_run):
                 found.setdefault(a, (v, sname, url))
     events = []
     for a, ((name, price), sname, surl) in found.items():
+        if a not in inv and (a in INVITE_INFO or any(a == x[0] for x in INVITE_US)):   # 응모 판에 이미 있는 상품은 조용히 기록만
+            inv[a] = {"name": name, "price": price, "first": "2026-10-31", "last": NOW.strftime("%Y-%m-%d"), "src": sname, "srcurl": surl, "ord": 500}
         if a in inv:
             inv[a]["last"] = NOW.strftime("%Y-%m-%d")
             if price and not inv[a].get("price"): inv[a]["price"] = price
@@ -324,12 +353,14 @@ def scan_amazon(state, first_run):
     return events, seed or bool(found)
 
 def amazon_table(state):
-    inv = sorted(state.get("amazon", {}).items(), key=lambda kv: (kv[1]["first"], -kv[1].get("ord", 999)), reverse=True)
-    if not inv: return "<p>아직 모은 상품이 없어요.</p>"
-    rows = "".join(f'<tr><td>{html.escape(kr(v["name"])[:70])}</td><td>{html.escape(v.get("price", ""))}</td><td>{v["first"][5:].replace("-", "/")}</td>'
-                   f'<td><a href="https://www.amazon.co.jp/dp/{a}" target="_blank" rel="nofollow noopener">초대 요청하기</a></td></tr>' for a, v in inv)
-    return ('<table><thead><tr><th>상품</th><th>초대 판매가</th><th>처음 확인</th><th>응모</th></tr></thead><tbody>' + rows + '</tbody></table>'
-            '<p style="font-size:14px;color:#666">※ 아마존은 자동 확인이 막혀 있어 응모가 이미 끝난 상품이 섞여 있을 수 있어요. 60일 동안 새 소식이 없으면 목록에서 빠져요.</p>')
+    out = []
+    for region, label in (("jp", "일본 아마존 (amazon.co.jp)"), ("us", "미국 아마존 (amazon.com)")):
+        rows = "".join(f'<tr><td>{b} · {html.escape((g + " ") if g else "")}{html.escape(n)}{" <strong style=\"color:#e8362d\">NEW</strong>" if new else ""}</td>'
+                       f'<td>{html.escape(pr)}</td><td><a href="{l}" target="_blank" rel="nofollow noopener">초대 요청하기</a></td></tr>'
+                       for a, n, pr, b, g, new, l in invite_list(state, region))
+        out.append(f'<h3>{label}</h3><table><thead><tr><th>상품</th><th>가격</th><th>응모</th></tr></thead><tbody>{rows}</tbody></table>')
+    return "".join(out) + ('<p style="font-size:14px;color:#666">※ 아마존은 자동 확인이 막혀 있어 응모가 이미 끝난 상품이 섞여 있을 수 있어요. '
+                           '새 응모 상품은 감시기가 일본 정보·뉴스 사이트에서 찾으면 맨 위에 NEW로 추가돼요.</p>')
 
 def write_board(state):
     rows = []

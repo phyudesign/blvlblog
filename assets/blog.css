@@ -597,3 +597,5 @@ html,body{overflow-x:clip}
 .live-hero .lh-all::before{display:none}
 .live-hero .lh-all{padding:9px 16px 9px 18px;gap:9px}
 .live-hero .lh-all svg{display:block;margin-top:1px}
+.live-hero .lh-all{line-height:1}
+.live-hero .lh-all svg{margin-top:-1.5px}

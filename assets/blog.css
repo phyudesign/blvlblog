@@ -614,3 +614,5 @@ body{letter-spacing:-.3px}
 .custom-title::after{display:none}
 .custom-title{margin-bottom:22px}
 @media(max-width:768px){.custom-title{margin-bottom:14px}}
+/* 화살표: 슬라이드 위쪽 여백(30px)만큼 내려서 카드 세로 중앙에 */
+.live-hero .lh-nav{top:240px}

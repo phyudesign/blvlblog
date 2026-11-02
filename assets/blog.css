@@ -496,3 +496,8 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 .st-bg .st-text{max-width:48%}
 /* 배경을 지운 상품 사진: 색 섞지 않고 그림자만 */
 .st-bg .st-prod.cut{mix-blend-mode:normal!important;filter:drop-shadow(0 14px 14px rgba(20,25,40,.28))!important}
+/* 박스 아트 크롭 배경: 캐릭터 그림을 오른쪽에 크게, 왼쪽은 상품 색으로 덮어 글자 자리, 박스는 오른쪽 아래 */
+.st-art .st-back{left:22%;width:78%;object-fit:cover;object-position:center 30%}
+.lh-slide.st-art::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,var(--b1) 0%,var(--b1) 30%,color-mix(in srgb,var(--b1) 55%,transparent) 48%,transparent 66%),linear-gradient(0deg,color-mix(in srgb,var(--b2) 70%,transparent) 0%,transparent 34%);pointer-events:none}
+.st-art .st-prod.cut{left:auto;right:5%;bottom:6%;width:40%;height:46%;z-index:2;filter:drop-shadow(0 16px 18px rgba(10,15,30,.4))!important}
+.st-art .st-text{z-index:3}

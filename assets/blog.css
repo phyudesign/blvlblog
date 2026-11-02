@@ -327,14 +327,14 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 .sub-menu a{line-height:40px!important;padding:0 18px!important;font-size:15px!important;white-space:nowrap}
 .sub-menu a:hover{background:#f6f7f9}
 .main-nav .has-sub:hover>.sub-menu,.main-nav .has-sub:focus-within>.sub-menu{opacity:1;visibility:visible;transform:none}
-@media (max-width:1024px){
+@media (max-width:768px){
   .sub-menu{position:static;opacity:1;visibility:visible;transform:none;box-shadow:none;border-radius:0;padding:0;background:transparent;min-width:0}
   .sub-menu a{padding-left:40px!important;font-size:14px!important;color:#5b5f69}
   .main-nav .has-sub>a::after{display:none}
 }
 
 /* 하위 메뉴 마우스오버: 둥근 사각형, 좌우를 위쪽 여백만큼 띄움 */
-@media (min-width:1025px){.sub-menu{padding:8px}.sub-menu a{border-radius:8px;padding:0 12px!important}}
+@media (min-width:769px){.sub-menu{padding:8px}.sub-menu a{border-radius:8px;padding:0 12px!important}}
 
 /* 카테고리 제목: 흰 상자 없이, 사이드바 제목과 같은 글꼴. 제목은 2단 위에 따로 두어 글 상자·사이드바 윗선이 맞게 */
 .page-header.cat-head{background:none;max-width:var(--gw);margin:0 auto;padding:26px 40px 0;box-sizing:border-box}

@@ -501,3 +501,9 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 .lh-slide.st-art::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,var(--b1) 0%,var(--b1) 30%,color-mix(in srgb,var(--b1) 55%,transparent) 48%,transparent 66%),linear-gradient(0deg,color-mix(in srgb,var(--b2) 70%,transparent) 0%,transparent 34%);pointer-events:none}
 .st-art .st-prod.cut{left:auto;right:5%;bottom:6%;width:40%;height:46%;z-index:2;filter:drop-shadow(0 16px 18px rgba(10,15,30,.4))!important}
 .st-art .st-text{z-index:3}
+/* 슬라이드 버튼: 마우스를 올리면 상품 색으로 바뀌고 살짝 떠오름 */
+.st-cta,.lh-cta{transition:background .2s,color .2s,transform .2s,box-shadow .2s}
+.lh-slide.studio.on:hover .st-cta{filter:none}
+.lh-slide .st-cta:hover{background:var(--ac);color:#fff;transform:translateY(-2px);box-shadow:0 10px 20px color-mix(in srgb,var(--ac) 40%,transparent)}
+.lh-slide .lh-cta:hover{background:#e8362d!important;color:#fff!important;transform:translateY(-2px)}
+.lh-slide .st-cta:active,.lh-slide .lh-cta:active{transform:translateY(0) scale(.97)}

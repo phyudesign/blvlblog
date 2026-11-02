@@ -17,7 +17,7 @@ DESC = "포켓몬카드·미니카·피규어·게임 — 직접 모으고 즐�
 ADSENSE = "ca-pub-4380904134243959"
 AUTHOR = "blvl."
 PER_PAGE = 10
-CSS_VER = 42
+CSS_VER = 43
 JS_VER = 1
 
 # 카테고리: (슬러그, 메뉴명, 설명)
@@ -178,11 +178,11 @@ def live_rows():
         rows.append(("hot", "속보", name, url(q["slug"]), q["date"][5:16].replace("-", "/"), False,
                      {"img": re.sub(r"downsize=\d+", "downsize=400", q.get("pimg") or ""), "name": name, "sub": sub or "TCG LIVE 속보", "cta": "속보 글 보기"}))
     try:
-        from monitor import invite_list
+        from monitor import invite_list, amz_img
         for a, name, price, brand, grp, new, link in [r for r in invite_list(st, "jp") if not r[4]][:6]:
             sub = " · ".join(x for x in ("아마존 재팬", "초대 요청 접수 중", price) if x)
             rows.append(("inv", "새 응모" if new else "응모 중", f"{brand} {name} — 아마존 초대 요청", link, "", True,
-                         {"img": "", "name": f"{brand} {name}", "sub": sub, "cta": "아마존에서 초대 요청하기"}))
+                         {"img": amz_img(a), "name": f"{brand} {name}", "sub": sub, "cta": "아마존에서 초대 요청하기"}))
     except Exception: pass
     for v in st.get("items", {}).values():
         if v.get("status") not in ("instock", "preorder"): continue
@@ -229,6 +229,14 @@ def live_hero():
             if name.startswith(b + " "): brand, name = b, name[len(b) + 1:]
         attrs = ' target="_blank" rel="nofollow noopener"' if ext else ""
         new = '<em>NEW</em>' if tag in ("새 응모", "속보") else ""
+        img = pv.get("img", "")
+        if img:   # 상품 사진을 카드 배경으로
+            slides.append(f'''<a class="lh-slide has-img" href="{esc(href)}"{attrs} style="--c:{LH_COLORS[i % len(LH_COLORS)]}" draggable="false">
+<img class="lh-bg" src="{esc(img)}" alt="{esc(name)} 상품 사진" loading="{"eager" if i < 3 else "lazy"}" referrerpolicy="no-referrer" draggable="false">
+<span class="lh-top"><i></i>LIVE · {LH_LABEL.get(kind, "TCG LIVE")}{new}</span>
+<span class="lh-foot"><span class="lh-brand">{esc(brand or "TCG")}</span><b class="lh-title">{esc(name)}</b>
+<span class="lh-sub">{esc(pv.get("sub", ""))}</span><span class="lh-cta">{esc(pv.get("cta", "자세히 보기"))} →</span></span></a>''')
+            continue
         slides.append(f'''<a class="lh-slide" href="{esc(href)}"{attrs} style="--c:{LH_COLORS[i % len(LH_COLORS)]}" draggable="false">
 <span class="lh-top"><i></i>LIVE · {LH_LABEL.get(kind, "TCG LIVE")}{new}</span>
 <span class="lh-brand">{esc(brand or "TCG")}</span><b class="lh-title">{esc(name)}</b>

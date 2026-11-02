@@ -249,6 +249,17 @@ INVITE_JP = [
     ("B0DB59JY2P", "성호의 덤벨·메타그로스 ex", "포켓몬", "스타터 세트 ex (SV)"),
     ("B0DB7VC4K5", "릴리에", "포켓몬", "컬렉션 파일 세트"), ("B0DB7KGQ22", "N", "포켓몬", "컬렉션 파일 세트"),
 ]
+# 상품 사진 (아마존 상품 페이지 대표 이미지 주소, 2026-11-02 확인) — 홈 슬라이드·미리보기 카드 배경
+AMZ_IMG = {
+    "B0H4PQ6LR5": "715oCiYpb-L", "B0HFVPJF4Q": "61FmZOBIZlL", "B0FX7X71KK": "81tO30I8gwL", "B0FJ7Z6RML": "61X1xcYYFCL",
+    "B0HB3JQ6P4": "61UK9XZctYL", "B0GP928YDZ": "715FaccxhwL", "B0H43ZX8LK": "61DEiJm305L", "B0GXCRBL5J": "711dPI8FndL",
+    "B0GXCM4BCZ": "71RQY+K9JzL", "B0GTTJ9X7C": "81t2d6CS0eL", "B0G6J9VPN2": "91LyJj+6BZL", "B0G2VKBZML": "61EvBG8mJ-L",
+    "B0GN5JV7JS": "61-i71CoRtL",
+}
+def amz_img(asin, size=800):
+    k = AMZ_IMG.get(asin)
+    return f"https://m.media-amazon.com/images/I/{k}._AC_SL{size}_.jpg" if k else ""
+
 INVITE_US = [  # 아마존 미국 (amazon.com) — 직접 확인된 초대 판매만
     ("B0H78BB9TY", "30th Celebration 엘리트 트레이너 박스", "포켓몬", ""),
 ]

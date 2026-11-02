@@ -1,13 +1,13 @@
 /* blvl blog — 예전 워드프레스(GeneratePress + GenerateBlocks) 모양 그대로 */
-@font-face{font-family:"Nanum Gothic";src:url(fonts/NanumGothic-Regular.woff) format("woff");font-weight:400;font-display:swap}
-@font-face{font-family:"Nanum Gothic";src:url(fonts/NanumGothic-Bold.woff) format("woff");font-weight:700;font-display:swap}
+@font-face{font-family:"Pretendard Variable",Pretendard,sans-serif;src:url(fonts/NanumGothic-Regular.woff) format("woff");font-weight:400;font-display:swap}
+@font-face{font-family:"Pretendard Variable",Pretendard,sans-serif;src:url(fonts/NanumGothic-Bold.woff) format("woff");font-weight:700;font-display:swap}
 @font-face{font-family:"Gmarket Sans";src:url(fonts/GmarketSansMedium.woff) format("woff");font-weight:400 600;font-display:swap}
 @font-face{font-family:"Gmarket Sans";src:url(fonts/GmarketSansBold.woff) format("woff");font-weight:700 900;font-display:swap}
 @font-face{font-family:"Bebas Kai";src:url(fonts/BebasNeue-Regular.woff) format("woff");font-display:swap}
 @font-face{font-family:"Bebas Neue";src:url(fonts/BebasNeue-Regular.woff) format("woff");font-display:swap}
 :root{--contrast:#222222;--contrast-2:#575760;--contrast-3:#b2b2be;--base:#f0f0f0;--base-2:#f7f8f9;--base-3:#ffffff;--accent:#1e73be;--gw:1200px}
 *{box-sizing:border-box}
-body{margin:0;background:var(--base-2);color:var(--contrast);font-family:"Nanum Gothic",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;font-size:17px;line-height:1.5;letter-spacing:-1px;-webkit-font-smoothing:antialiased}
+body{margin:0;background:var(--base-2);color:var(--contrast);font-family:"Pretendard Variable",Pretendard,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;font-size:17px;line-height:1.5;letter-spacing:-1px;-webkit-font-smoothing:antialiased}
 a{color:var(--accent);text-decoration:none}a:hover{color:var(--contrast)}
 img{max-width:100%;height:auto;vertical-align:middle}
 p{font-size:20px;margin:0 0 1.5em}
@@ -606,3 +606,6 @@ html,body{overflow-x:clip}
 .st-pill b{font-family:"Gmarket Sans",sans-serif;font-weight:500;letter-spacing:0}
 .st-pill{font-weight:700}
 .lh-top{font-family:"Gmarket Sans",sans-serif;font-size:15px;font-weight:700;letter-spacing:0}
+
+/* 한글 기본 서체: 프리텐다드 (나눔고딕보다 자간이 넓어 기본 자간 조정) */
+body{letter-spacing:-.3px}

@@ -17,7 +17,7 @@ DESC = "포켓몬카드·미니카·피규어·게임 — 직접 모으고 즐�
 ADSENSE = "ca-pub-4380904134243959"
 AUTHOR = "blvl."
 PER_PAGE = 10
-CSS_VER = 30
+CSS_VER = 31
 JS_VER = 1
 
 # 카테고리: (슬러그, 메뉴명, 설명)
@@ -125,10 +125,11 @@ def sidebar():
             "".join(f'<li><a href="{url(q["slug"])}">{esc(q["title"].replace("[추첨·판매 속보] ", ""))}</a> <small>{q["date"][5:16]}</small></li>' for q in nw) +
             '<li><a href="/category/news/">속보 전체 보기 →</a></li></ul></aside>') if nw else ""
     cl = "".join(f'<li><a href="/category/{k}/">{esc(n)}</a></li>' for k, n, _ in CATS)
+    # 순서: Recent Posts → 아마존 응모 판 → 검색 (응모 판·검색은 스크롤해도 따라옴)
     return f'''<div class="sidebar"><div class="inside-right-sidebar">
-<aside class="widget"><form class="search-form" action="/search/"><input name="q" placeholder="검색 …" aria-label="검색"><button aria-label="검색">{SEARCH_SVG.replace("<svg", '<svg width="16" height="16"')}</button></form></aside>
-<aside class="widget widget_recent_entries"><h2 class="widget-title">Recent Posts</h2><ul>{rec}</ul></aside>{news}
-<aside class="widget"><h2 class="widget-title">Categories</h2><ul>{cl}</ul></aside>{invite_panel("widget")}
+<aside class="widget widget_recent_entries"><h2 class="widget-title">Recent Posts</h2><ul>{rec}</ul></aside>
+<div class="side-sticky">{invite_panel("widget")}
+<aside class="widget side-search"><form class="search-form" action="/search/"><input name="q" placeholder="검색 …" aria-label="검색"><button aria-label="검색">{SEARCH_SVG.replace("<svg", '<svg width="16" height="16"')}</button></form></aside></div>
 </div></div>'''
 
 # ── 홈 상단 속보 전광판: 최근 48시간 속보 글 + 지금 구매·예약 가능한 상품

@@ -261,7 +261,7 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 /* ── 아마존 응모 중 목록 */
 .inv-panel{background:#fff;border-radius:14px;padding:18px 16px 14px;box-shadow:0 4px 16px rgba(20,22,30,.06);-webkit-user-select:none;user-select:none}
 .sidebar .inside-right-sidebar{height:100%}
-.sidebar .inv-panel{position:sticky;top:86px;max-height:calc(100vh - 40px);overflow:auto;border-radius:0;box-shadow:none;padding:30px 40px}
+.sidebar .inv-panel{border-radius:0;box-shadow:none;padding:30px 40px;margin-bottom:20px}
 .sidebar .inv-panel li{margin:0;padding:0}
 .ip-head{display:flex;flex-direction:column;gap:2px;padding-bottom:12px;margin-bottom:6px;border-bottom:2px solid #16171b}
 .ip-head b{font-size:17px;letter-spacing:-.2px}
@@ -281,7 +281,7 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 .ip-all{display:block;margin-top:10px;font-size:13px;font-weight:700;color:#16171b;text-decoration:none}
 .ip-all:hover{color:#e8362d}
 .inv-float{display:none}
-@media(min-width:1660px){.inv-float{display:block;position:fixed;top:120px;left:calc(50% + 620px);width:min(290px,calc(50vw - 660px));max-height:calc(100vh - 140px);overflow:auto;z-index:15}.sidebar .inv-panel{display:none}}
+@media(min-width:1660px){.inv-float{display:block;position:fixed;top:120px;left:calc(50% + 620px);width:min(290px,calc(50vw - 660px));max-height:calc(100vh - 140px);overflow:auto;z-index:15}}
 @media(prefers-reduced-motion:reduce){.ip-new{animation:none}}
 @media print{.inv-panel{display:none}}
 
@@ -306,3 +306,12 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 @media(min-width:769px) and (max-width:1659px){body:has(.sidebar .inv-panel) .inv-fab{display:none}}
 @keyframes ip-up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 @media print{.inv-fab{display:none!important}}
+
+/* 글 사이드바 정리: 글 상자와 윗선 맞춤, 응모 판은 짧게(목록만 스크롤), 응모 판+검색은 따라오기 */
+@media(min-width:769px){
+  .inside-right-sidebar{padding-top:58px;box-sizing:border-box}
+  .side-sticky{position:sticky;top:86px}
+  body:has(.sidebar) .inv-float{display:none!important}
+}
+.sidebar .ip-list{max-height:min(38vh,340px);overflow-y:auto;overscroll-behavior:contain;padding-right:4px}
+.sidebar .side-search{padding:24px 40px}

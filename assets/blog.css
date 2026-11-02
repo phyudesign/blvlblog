@@ -452,3 +452,6 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
   .lh-slide.lay-stamp .lh-title{font-size:25px}.lh-slide.lay-stamp .lh-cta{left:18px}
   .lh-slide.lay-burst .lh-title{font-size:19px}
 }
+.lay-burst{background:repeating-conic-gradient(from 0deg at 50% 38%,rgba(255,255,255,.38) 0 8deg,transparent 8deg 16deg),var(--c)}
+.lay-burst .lh-emo2{right:4px;bottom:33%;width:26%;height:26%;transform:rotate(8deg)}
+.lh-slide.lay-burst .lh-title,.lh-slide.lay-burst .lh-sub{max-width:100%}

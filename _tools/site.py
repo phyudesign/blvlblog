@@ -17,7 +17,7 @@ DESC = "포켓몬카드·미니카·피규어·게임 — 직접 모으고 즐�
 ADSENSE = "ca-pub-4380904134243959"
 AUTHOR = "blvl."
 PER_PAGE = 10
-CSS_VER = 33
+CSS_VER = 34
 JS_VER = 1
 
 # 카테고리: (슬러그, 메뉴명, 설명)
@@ -27,12 +27,15 @@ CATS = [
     ("figure",  "FIGURE",  "피규어 개봉기, 디테일 리뷰, 진열 이야기"),
     ("game",    "GAME",    "직접 플레이하는 게임의 공략과 플레이 기록"),
     ("tech",    "TECH",    "작업에 쓰는 툴과 앱 사용법"),
-    ("news",    "STOCK LIVE", "일본 쇼핑몰 포켓몬카드·원피스카드 재고와 추첨 소식을 감시기가 잡는 즉시 올리는 짧은 속보"),
+    ("news",    "TCG LIVE", "일본 쇼핑몰 포켓몬카드·원피스카드 재고와 추첨 소식을 감시기가 잡는 즉시 올리는 짧은 속보"),
 ]
 NEWS = "news"  # 자동 속보: 홈·최근 글·검색엔진 색인에서 빼고 이 메뉴에만 모음
 CAT_NAME = {k: n for k, n, _ in CATS}
-NAV = [("HOME", "/")] + [(n, f"/category/{k}/") for k, n, _ in CATS]
-NAV.insert(2, NAV.pop())  # TCG 바로 옆에 STOCK LIVE
+# TCG 하위 메뉴: 포켓몬스터·원피스(제목·태그로 분류) + TCG LIVE(자동 속보)
+SUBS = [("pokemon", "포켓몬스터", ["포켓몬", "ポケモン", "포켓몬카드"], "포켓몬카드 시세, 일본 아마존·쇼핑몰 응모, 신상 발매 소식"),
+        ("onepiece", "원피스", ["원피스", "ワンピース", "ONE PIECE"], "원피스카드 시세, 일본 아마존·쇼핑몰 응모, 신상 발매 소식")]
+NAV = [("HOME", "/", [])] + [(n, f"/category/{k}/", [(sn, f"/category/tcg/{sk}/") for sk, sn, _, _ in SUBS] + [("TCG LIVE", "/category/news/")] if k == "tcg" else [])
+                              for k, n, _ in CATS if k != "news"]
 KEEP = {".git", ".github", "CNAME", "_tools", "_posts", "_pages", "_character", "_thumbs", "_monitor", "assets", "wp-content", "ads.txt", ".nojekyll", "favicon.ico", ".gitignore", "README.md"}
 SEARCH_SVG = '<svg viewBox="0 0 512 512" aria-hidden="true" fill="currentColor"><path d="M208 48c-88.4 0-160 71.6-160 160s71.6 160 160 160 160-71.6 160-160S296.4 48 208 48zM0 208C0 93.1 93.1 0 208 0s208 93.1 208 208c0 48.8-16.8 93.7-45 129.2l135 135-34 34-135-135C301.7 399.2 256.8 416 208 416 93.1 416 0 322.9 0 208z"/></svg>'
 
@@ -64,7 +67,12 @@ pages = load("_pages")
 YEAR = datetime.date.today().year
 
 def page(title, content, desc=DESC, canon="/", og_img="", head_extra="", active="", noindex=False):
-    nav = "".join(f'<li><a class="{"on" if h == active else ""}" href="{h}">{esc(n)}</a></li>' for n, h in NAV)
+    def li(n, h, kids):
+        on = h == active or any(ch == active for _, ch in kids)
+        if not kids: return f'<li><a class="{"on" if on else ""}" href="{h}">{esc(n)}</a></li>'
+        sub = "".join(f'<li><a class="{"on" if ch == active else ""}" href="{ch}">{esc(cn)}</a></li>' for cn, ch in kids)
+        return f'<li class="has-sub"><a class="{"on" if on else ""}" href="{h}" aria-haspopup="true">{esc(n)}</a><ul class="sub-menu">{sub}</ul></li>'
+    nav = "".join(li(*x) for x in NAV)
     full = title if title == TITLE else f"{title} | {TITLE}"
     ogi = f'<meta property="og:image" content="{esc(SITE + og_img if og_img.startswith("/") else og_img)}">' if og_img else ""
     robots = '<meta name="robots" content="noindex,follow">' if noindex else ""
@@ -121,7 +129,7 @@ def gcard(p, exc=False):
 def sidebar():
     rec = "".join(f'<li><a href="{url(q["slug"])}">{esc(q["title"])}</a></li>' for q in articles[:5])
     nw = [q for q in posts if q["category"] == NEWS][:5]
-    news = (f'<aside class="widget widget_recent_entries"><h2 class="widget-title">STOCK LIVE</h2><ul>' +
+    news = (f'<aside class="widget widget_recent_entries"><h2 class="widget-title">TCG LIVE</h2><ul>' +
             "".join(f'<li><a href="{url(q["slug"])}">{esc(q["title"].replace("[추첨·판매 속보] ", ""))}</a> <small>{q["date"][5:16]}</small></li>' for q in nw) +
             '<li><a href="/category/news/">속보 전체 보기 →</a></li></ul></aside>') if nw else ""
     cl = "".join(f'<li><a href="/category/{k}/">{esc(n)}</a></li>' for k, n, _ in CATS)
@@ -152,7 +160,7 @@ def ticker():
         name = q["title"].replace("[추첨·판매 속보] ", "").replace("[입고 속보] ", "")
         sub = " · ".join(x for x in (q.get("shop_kr", ""), q.get("status_kr", ""), q.get("price", "")) if x)
         rows.append(("hot", "속보", name, url(q["slug"]), q["date"][5:16].replace("-", "/"), False,
-                     {"img": re.sub(r"downsize=\d+", "downsize=400", q.get("pimg") or ""), "name": name, "sub": sub or "STOCK LIVE 속보", "cta": "속보 글 보기"}))
+                     {"img": re.sub(r"downsize=\d+", "downsize=400", q.get("pimg") or ""), "name": name, "sub": sub or "TCG LIVE 속보", "cta": "속보 글 보기"}))
     try:
         from monitor import invite_list
         for a, name, price, brand, grp, new, link in [r for r in invite_list(st, "jp") if not r[4]][:6]:
@@ -178,7 +186,7 @@ def ticker():
             return f'<a class="tk-item" href="{esc(href)}"{attrs}{data}><span class="tk-tag {kind}">{tag}</span>{esc(text)}{w}</a>'
         track = "".join(one(r) for r in rows)
     dur = max(28, min(120, len(re.sub(r"<[^>]+>", "", track)) // 5))
-    return f'''<section class="ticker" aria-label="STOCK LIVE 실시간 재고 속보">
+    return f'''<section class="ticker" aria-label="TCG LIVE 실시간 재고 속보">
 <a class="tk-label" href="/category/news/"><i aria-hidden="true"></i>LIVE</a>
 <div class="tk-view"><div class="tk-track" style="--dur:{dur}s"><div class="tk-run">{track}</div><div class="tk-run" aria-hidden="true">{track}</div></div></div>
 <a class="tk-more" href="/stock/">현황판 →</a></section>
@@ -294,6 +302,12 @@ for k, name, cdesc in CATS:
     listing(f"/category/{k}/", pl, name, cdesc, f'<header class="page-header"><h1>{esc(name)}</h1><p>{esc(cdesc)}</p></header>',
             "아직 잡힌 속보가 없어요. 감시기가 10분마다 일본 쇼핑몰을 확인하고 있으니, 재고가 뜨면 여기에 바로 올라와요. 지금 판매 중인 상품은 <a href='/stock/'>재고 현황판</a>에서 볼 수 있어요." if k == NEWS else "첫 글을 준비하고 있어요. 곧 올라올 예정이에요.")
 
+# ── TCG 하위 메뉴 (포켓몬스터·원피스)
+for sk, sn, words, sdesc in SUBS:
+    pl = [p for p in articles if p["category"] == "tcg" and any(w in p["title"] + " ".join(p.get("tags", [])) for w in words)]
+    listing(f"/category/tcg/{sk}/", pl, f"TCG · {sn}", sdesc, f'<header class="page-header"><h1>{esc(sn)}</h1><p>{esc(sdesc)}</p></header>',
+            "첫 글을 준비하고 있어요. 곧 올라올 예정이에요.")
+
 # ── 검색
 (ROOT / "search.json").write_text(json.dumps([{"t": p["title"], "u": url(p["slug"]), "d": p["date"][:10], "x": strip_tags(p["body"])[:600], "i": p["thumb"]} for p in posts], ensure_ascii=False), encoding="utf-8")
 write("/search/", page("검색", with_sidebar('''<article class="inside-article"><h1 class="entry-title">검색</h1><input id="q" class="q" placeholder="검색어를 입력하세요" autofocus><div id="r" class="sres"></div></article>
@@ -313,6 +327,7 @@ I.addEventListener('input',go);
 sm = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">', f"<url><loc>{SITE}/</loc></url>"]
 sm += [f'<url><loc>{SITE}{url(p["slug"])}</loc><lastmod>{p["mod"][:10]}</lastmod></url>' for p in articles]
 sm += [f"<url><loc>{SITE}/category/{k}/</loc></url>" for k, _, _ in CATS if k != NEWS and any(p["category"] == k for p in posts)]
+sm += [f"<url><loc>{SITE}/category/tcg/{sk}/</loc></url>" for sk, _, words, _ in SUBS if any(p["category"] == "tcg" and any(w in p["title"] for w in words) for p in articles)]
 sm += [f'<url><loc>{SITE}{url(pg["slug"])}</loc></url>' for pg in pages]
 (ROOT / "sitemap.xml").write_text("\n".join(sm + ["</urlset>"]), encoding="utf-8")
 def rfc(d): return datetime.datetime.strptime(d, "%Y-%m-%d %H:%M:%S").strftime("%a, %d %b %Y %H:%M:%S +0900")

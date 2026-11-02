@@ -289,7 +289,7 @@ def live_hero():
     dots = "".join(f'<button type="button" aria-label="{i+1}번째"></button>' for i in range(len(slides)))
     return (f'<section class="live-hero" aria-label="TCG LIVE 응모·재고 슬라이드"><div class="lh-stage">{"".join(slides)}</div>'
             f'<button type="button" class="lh-nav lh-prev" aria-label="이전"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button type="button" class="lh-nav lh-next" aria-label="다음"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>'
-            f'<div class="lh-dots">{dots}</div><a class="lh-all" href="/stock/">LIVE 현황판 전체 보기<svg viewBox="0 0 12 16" width="8" height="11" aria-hidden="true"><path d="M2 2l7 6-7 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></section>'
+            f'<div class="lh-dots">{dots}</div><a class="lh-all" href="/stock/">LIVE 현황판 전체 보기<svg viewBox="0 0 12 16" width="8" height="11" aria-hidden="true"><path d="M2.5 2.5l6.5 5.5-6.5 5.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></section>'
             '<script defer src="/assets/blvl-hero.js?v=1"></script><script defer src="/assets/blvl-ticker.js?v=8"></script>')
 
 # ── 아마존 응모 판 (일본·미국 탭) — 모든 페이지 오른쪽 여백 / 좁은 화면은 글 사이드바

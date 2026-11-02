@@ -17,7 +17,7 @@ DESC = "포켓몬카드·미니카·피규어·게임 — 직접 모으고 즐�
 ADSENSE = "ca-pub-4380904134243959"
 AUTHOR = "blvl."
 PER_PAGE = 10
-CSS_VER = 61
+CSS_VER = 62
 JS_VER = 1
 
 # 카테고리: (슬러그, 메뉴명, 설명)
@@ -335,7 +335,7 @@ def with_sidebar(main): return f'<div class="site-content"><main class="content-
 
 CHROME["ticker"] = ticker()
 CHROME["float"] = invite_panel("inv-float") + ('<button type="button" class="inv-fab" aria-expanded="false" aria-label="아마존 응모 중인 상품 보기">'
-                                              '<i aria-hidden="true"></i>아마존 응모 중</button>')
+                                              '<i aria-hidden="true"></i>응모 중</button>')
 def arch_item(p):
     img = f'<div class="post-image"><a href="{url(p["slug"])}"><img loading="lazy" src="{esc(p["thumb"])}" alt="{esc(p["title"])}"></a></div>' if p["thumb"] else ""
     return f'''<article class="inside-article"><header><h2 class="entry-title"><a href="{url(p["slug"])}">{esc(p["title"])}</a></h2>

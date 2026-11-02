@@ -542,3 +542,14 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 .content-area>.inside-article:first-of-type{margin-top:20px}
 @media(min-width:769px){.inside-right-sidebar{padding-top:20px}}
 .cat-grid{margin-top:0}
+
+/* 홈 슬라이드 영역을 어두운 띠로 구분 (화면 가로 끝까지) */
+html,body{overflow-x:clip}
+.live-hero{margin-top:0;padding-top:30px;padding-bottom:22px;isolation:isolate}
+.live-hero::before{content:"";position:absolute;z-index:-1;top:0;bottom:0;left:50%;width:100vw;transform:translateX(-50%);background:radial-gradient(60% 90% at 50% 0%,#2b2f3a 0%,#17181d 70%)}
+.live-hero .lh-dots button{background:#4a4e59}
+.live-hero .lh-dots button.on{background:#fff}
+.live-hero .lh-all{color:#b9bdc6}
+.live-hero .lh-all:hover{color:#fff}
+.live-hero + .gb-section{padding-top:36px}
+@media(max-width:768px){.live-hero{padding-top:18px;padding-bottom:16px}.live-hero::before{background:#17181d}}

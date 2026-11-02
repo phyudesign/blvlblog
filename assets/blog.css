@@ -594,3 +594,6 @@ html,body{overflow-x:clip}
 .live-hero .lh-all::before{content:"";width:7px;height:7px;border-radius:50%;background:#e8362d;box-shadow:0 0 0 3px rgba(232,54,45,.25);animation:tk-blink 1.2s ease-in-out infinite}
 .live-hero .lh-all:hover{background:#fff;border-color:#fff;color:#16171b}
 @media(max-width:768px){.live-hero .lh-all{margin-top:12px;font-size:12.5px;padding:8px 16px 8px 12px}}
+.live-hero .lh-all::before{display:none}
+.live-hero .lh-all{padding:9px 16px 9px 18px;gap:9px}
+.live-hero .lh-all svg{display:block;margin-top:1px}

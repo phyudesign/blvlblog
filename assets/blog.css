@@ -609,3 +609,8 @@ html,body{overflow-x:clip}
 
 /* 한글 기본 서체: 프리텐다드 (나눔고딕보다 자간이 넓어 기본 자간 조정) */
 body{letter-spacing:-.3px}
+
+/* 섹션 제목 아래 짧은 줄 제거, 제목-카드 간격 줄이기 */
+.custom-title::after{display:none}
+.custom-title{margin-bottom:22px}
+@media(max-width:768px){.custom-title{margin-bottom:14px}}

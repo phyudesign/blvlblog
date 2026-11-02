@@ -668,3 +668,11 @@ html.mn-lock,html.mn-lock body{overflow:hidden}
   .menu-toggle{order:2;line-height:44px}
   .nav-search{order:1;padding:0 10px;line-height:44px}
 }
+/* 모바일 슬라이드 아래 균형: 카드-점-버튼-띠 끝 간격을 고르게 */
+@media(max-width:768px){
+  .lh-stage{height:calc(min(76vw,340px) + 22px)}
+  .live-hero .lh-dots{margin-top:14px}
+  .live-hero .lh-all{margin-top:18px}
+  .live-hero{padding-bottom:30px}
+}
+@media(max-width:768px){.lh-stage{height:calc(min(76vw,340px) + 16px)}.live-hero .lh-dots{margin-top:12px}.live-hero .lh-all{margin-top:20px}}

@@ -153,3 +153,21 @@
   t.addEventListener("pointerleave", function (e) { if (e.pointerType === "mouse") { hover = false; clearTimeout(holdTimer); hide(); } });
   window.addEventListener("scroll", function () { if (previewing && !down) hide(); }, { passive: true });
 })();
+
+/* 사이드바 칸을 문서 끝(바닥글 직전)까지 늘려, 스크롤 끝에서도 응모 판 머리가 전광판에 가리지 않게 */
+(function () {
+  var sb = document.querySelector(".sidebar .inside-right-sidebar");
+  if (!sb) return;
+  var busy = false;
+  function fit() {
+    if (busy) return; busy = true;
+    sb.style.setProperty("--sb-ext", "0px");
+    var r = sb.getBoundingClientRect(), f = document.querySelector(".site-footer");
+    var end = f ? f.getBoundingClientRect().top : document.documentElement.scrollHeight - window.scrollY;
+    sb.style.setProperty("--sb-ext", Math.max(0, Math.round(end - r.bottom - 16)) + "px");
+    busy = false;
+  }
+  window.addEventListener("load", fit); window.addEventListener("resize", fit);
+  if (window.ResizeObserver) { var c = document.querySelector(".site-content"); if (c) new ResizeObserver(function () { requestAnimationFrame(fit); }).observe(c); }
+  fit();
+})();

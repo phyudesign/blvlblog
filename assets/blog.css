@@ -311,6 +311,8 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 @media(min-width:769px){
   .inside-right-sidebar{padding-top:58px;box-sizing:border-box}
   .side-sticky{position:sticky;top:86px}
+  /* 페이지 끝에서 응모 판이 전광판 밑으로 말려 올라가지 않게: 사이드바 칸을 바닥글 위까지 늘림(--sb-ext는 JS가 계산) */
+  .sidebar .inside-right-sidebar{height:calc(100% + var(--sb-ext,0px))}
   body:has(.sidebar) .inv-float{display:none!important}
 }
 .sidebar .ip-list{max-height:min(38vh,340px);overflow-y:auto;overscroll-behavior:contain;padding-right:4px}

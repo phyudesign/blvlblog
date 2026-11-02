@@ -401,7 +401,8 @@ def scan_kr(state):
             if not seed:
                 events.append({"key": "kr:" + link, "kind": "page", "shop_kr": sname, "title": title, "url": link, "status": "krnews", "price": ""})
     for link, v in kr_s.items():   # 공지 대표 이미지 (본문 첫 사진)
-        if "img" in v: continue
+        if v.get("img") or v.get("img_try", 0) >= 6: continue
+        v["img_try"] = v.get("img_try", 0) + 1
         ph = get(link)
         im = re.search(r'<img[^>]+src="([^"]*s3\.php\?key=[^"]*(?:newdata|20[2-9]\d)%2F[^"]*)"', ph or "")   # 본문 첫 사진
         v["img"] = html.unescape(im.group(1)) if im else ""

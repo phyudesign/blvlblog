@@ -1,0 +1,23 @@
+{
+ "model": "gpt-image-2",
+ "prompt": "Clean, premium, modern Korean e-commerce banner background.",
+ "refs": [],
+ "outputs": [
+  "_thumbs/out/studio-B0GXCRBL5J-1.png"
+ ],
+ "usage": {
+  "input_tokens": 198,
+  "input_tokens_details": {
+   "image_tokens": 0,
+   "text_tokens": 198
+  },
+  "output_tokens": 1756,
+  "output_tokens_details": {
+   "image_tokens": 1756,
+   "text_tokens": 0
+  },
+  "total_tokens": 1954
+ },
+ "est_cost_usd": 0.0537,
+ "created": "2026-11-02 07:14:48"
+}

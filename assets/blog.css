@@ -536,3 +536,9 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 @keyframes ip-slide-r{from{transform:translateX(42px);opacity:0}to{transform:none;opacity:1}}
 @keyframes ip-slide-l{from{transform:translateX(-42px);opacity:0}to{transform:none;opacity:1}}
 @media(prefers-reduced-motion:reduce){.ip-list.ip-in-r,.ip-list.ip-in-l{animation:none}.ip-tabs.ready .ip-ind{transition:none}}
+
+/* 배경 캐릭터 장식 모두 끄기 (2026-11-02) — 글 속 이모티콘·슬라이드의 교묘는 그대로 */
+.content-area>.inside-article:first-of-type::before,.feat::before,.feat::after,.feat .big::before,.lgrid::before,.site-footer::before,.sidebar .widget::after,.sidebar .widget::before{display:none!important;content:none!important}
+.content-area>.inside-article:first-of-type{margin-top:20px}
+@media(min-width:769px){.inside-right-sidebar{padding-top:20px}}
+.cat-grid{margin-top:0}

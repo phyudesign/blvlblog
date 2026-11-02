@@ -517,3 +517,5 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 .lh-prev svg{margin-left:-2px}.lh-next svg{margin-right:-2px}
 /* 브랜드 띠: 금색을 왼쪽 비스듬한 면을 따라 가는 줄로 */
 .st-rib{box-shadow:none;padding:5px 14px 5px 16px;background:linear-gradient(107deg,#d7b56d 0 11px,var(--ac) 11px)}
+.tk-tag.kr{background:#2f6fde;color:#fff}
+.ip-tabs button{font-size:12.5px}

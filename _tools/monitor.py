@@ -123,7 +123,7 @@ def kr(t):
     for a, b in KR_NAMES: t = t.replace(a, b)
     return re.sub(r"\s+", " ", t).strip()
 
-STATUS_KR = {"invite": "아마존 응모(초대 요청) 접수 중", "instock": "구매 가능", "preorder": "예약 접수 중", "out": "주문 불가", "unknown": "판매 대기(추첨 전용)", "new": "새 공지"}
+STATUS_KR = {"krnews": "국내판 공지", "invite": "아마존 응모(초대 요청) 접수 중", "instock": "구매 가능", "preorder": "예약 접수 중", "out": "주문 불가", "unknown": "판매 대기(추첨 전용)", "new": "새 공지"}
 
 def slugify(s): return re.sub(r"[^0-9A-Za-z가-힣ぁ-んァ-ヶ一-龠ー]+", "-", s)[:40].strip("-")
 
@@ -147,7 +147,9 @@ def write_alert_post(ev, state):
     is_lottery = ev["kind"] == "page"
     is_amazon = ev["status"] == "invite"
     name = ev["title"]; kname = kr(name)
-    title = (f'[아마존 응모] {kname[:60]} — 초대 요청 접수 중' if is_amazon and not is_lottery
+    is_krnews = ev["status"] == "krnews"
+    title = (f'[국내판 속보] {name[:80]}' if is_krnews else
+             f'[아마존 응모] {kname[:60]} — 초대 요청 접수 중' if is_amazon and not is_lottery
              else f'[아마존 응모 소식] {kname[:70]}' if is_amazon
              else f'[입고 속보] {kname[:60]} — {ev["shop_kr"]} {STATUS_KR.get(ev["status"], "")}' if not is_lottery
              else f'[추첨·판매 속보] {ev["shop_kr"]} — {kname[:60]}')
@@ -155,6 +157,8 @@ def write_alert_post(ev, state):
     korea = {"라쿠텐북스": "라쿠텐북스는 일본 배송지가 필요해요. 배송대행지 주소로 주문하는 방법은 아래 가이드 글을 참고하세요.",
              "세븐넷": "세븐넷은 일본 배송지가 필요해요.", "요도바시": "요도바시는 일본 배송지가 필요해요.",
              "트레카플라자55": "일본 카드 전문점이라 일본 배송지가 필요해요.", "옐로서브마린": "일본 카드 전문점이라 일본 배송지가 필요해요.",
+             "포켓몬코리아": "국내판은 포켓몬코리아 공지에 나온 응모 방법과 일정을 따르면 돼요. 한국 주소로 바로 받을 수 있어요.",
+             "포켓몬카드 공식": "국내판은 포켓몬카드 공식 사이트 공지에 나온 방법과 일정을 따르면 돼요. 한국 주소로 바로 받을 수 있어요.",
              "아마존 재팬": "아마존 재팬 초대 판매는 상품 페이지에서 '초대 요청'을 눌러 두면, 재고가 풀릴 때 추첨으로 초대 메일이 와요. 메일을 받은 사람만 정해진 시간 안에 정가로 살 수 있어요. 일본 배송지가 필요해요."}.get(ev["shop_kr"], "")
     fm = {"title": title, "slug": slug, "date": NOW.strftime("%Y-%m-%d %H:%M:%S"), "mod": NOW.strftime("%Y-%m-%d %H:%M:%S"),
           "desc": f'{ev["shop_kr"]}에서 {kname[:50]} 상태가 바뀌었어요({STATUS_KR.get(ev["status"], "")}). 감지 시각 {stamp} (한국 시간).',
@@ -373,6 +377,29 @@ def amazon_table(state):
     return "".join(out) + ('<p style="font-size:14px;color:#666">※ 아마존은 자동 확인이 막혀 있어 응모가 이미 끝난 상품이 섞여 있을 수 있어요. '
                            '새 응모 상품은 감시기가 일본 정보·뉴스 사이트에서 찾으면 맨 위에 NEW로 추가돼요.</p>')
 
+# ── 국내판: 포켓몬코리아·포켓몬카드 공식 홈 첫 화면의 공지 링크에서 추첨·응모·판매 소식
+KR_SOURCES = [("pokemonkorea", "포켓몬코리아", "https://pokemonkorea.co.kr/", r'href="((?:https://(?:www\.)?pokemonkorea\.co\.kr)?/news/\d+/\d+)"'),
+              ("pokemoncard", "포켓몬카드 공식", "https://pokemoncard.co.kr/main", r'href="((?:https://pokemoncard\.co\.kr)?/(?:news|card|event)/\d+[^"]*)"')]
+KR_WORDS = ["추첨", "응모", "판매", "발매", "예약", "입고", "재판매", "한정", "출시", "BOX", "박스", "확장팩"]
+
+def scan_kr(state):
+    kr_s = state.setdefault("kr", {}); seed = not kr_s; events = []
+    for sid, sname, url, pat in KR_SOURCES:
+        h = get(url)
+        if not h: continue
+        for m in re.finditer(r'<a[^>]+' + pat[5:] + r'[^>]*>(.*?)</a>', h, re.S):
+            link = m.group(1); title = text_of(m.group(2))
+            if link.startswith("/"): link = re.match(r"https://[^/]+", url).group(0) + link
+            if not title or len(title) < 6 or not any(w in title for w in KR_WORDS): continue
+            title = re.sub(r"\s+", " ", title)[:120]
+            if link in kr_s:
+                kr_s[link]["last"] = NOW.strftime("%Y-%m-%d"); continue
+            kr_s[link] = {"title": title, "src": sname, "first": NOW.strftime("%Y-%m-%d"), "last": NOW.strftime("%Y-%m-%d")}
+            if not seed:
+                events.append({"key": "kr:" + link, "kind": "page", "shop_kr": sname, "title": title, "url": link, "status": "krnews", "price": ""})
+    for k in [k for k, v in kr_s.items() if (NOW.date() - datetime.date.fromisoformat(v["last"])).days > 45]: kr_s.pop(k)
+    return events, seed
+
 def write_board(state):
     rows = []
     for k, v in sorted(state.get("items", {}).items(), key=lambda kv: (kv[1]["status"] not in ("instock", "preorder"), kv[1]["title"])):
@@ -442,6 +469,12 @@ def main():
     except Exception as e:
         print("아마존 응모 확인 실패", e); a_events, a_changed = [], False
     new_events = a_events + new_events
+    try:
+        k_events, k_seed = scan_kr(state)
+    except Exception as e:
+        print("국내판 확인 실패", e); k_events, k_seed = [], False
+    new_events = k_events + new_events
+    a_changed = a_changed or bool(k_events) or k_seed
     # 알림 + 글
     changed = bool(new_events) or bool(status_changed) or first_run or a_changed or TG_NEW or os.environ.get("TG_TEST") == "1"
     for ev in new_events[:8]:  # 한 번에 너무 많이 쓰지 않도록

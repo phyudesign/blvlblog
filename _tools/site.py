@@ -17,7 +17,7 @@ DESC = "포켓몬카드·미니카·피규어·게임 — 직접 모으고 즐�
 ADSENSE = "ca-pub-4380904134243959"
 AUTHOR = "blvl."
 PER_PAGE = 10
-CSS_VER = 57
+CSS_VER = 58
 JS_VER = 1
 
 # 카테고리: (슬러그, 메뉴명, 설명)
@@ -184,6 +184,8 @@ def live_rows():
             rows.append(("inv", "새 응모" if new else "응모 중", f"{brand} {name} — 아마존 초대 요청", link, "", True,
                          {"img": amz_img(a), "name": f"{brand} {name}", "sub": sub, "cta": "아마존에서 초대 요청하기", "asin": a}))
     except Exception: pass
+    for u, v in sorted(st.get("kr", {}).items(), key=lambda kv: kv[1]["first"], reverse=True)[:4]:
+        rows.append(("kr", "국내판", v["title"], u, "", True, {"img": "", "name": v["title"], "sub": v["src"] + " 공지", "cta": "공지 보기"}))
     for v in st.get("items", {}).values():
         if v.get("status") not in ("instock", "preorder"): continue
         name = re.sub(r"^\s+|\s+$", "", kr(v["title"]))[:48]
@@ -213,7 +215,7 @@ def ticker():
 
 # ── 홈 LIVE 슬라이드 (포켓몬센터 온라인 홈처럼 가운데 큰 카드 + 양옆이 살짝 보이는 슬라이드)
 LH_COLORS = ["#FFD54A", "#7FE0B0", "#FF8A80", "#8FD0FF", "#C9B2FF", "#FFAE5C", "#C8F060"]
-LH_EMO = {"inv": ["lets-go", "kyaa", "happy-cards", "great", "hoho", "best"], "hot": ["rare", "heok"], "on": ["good", "mine"]}
+LH_EMO = {"kr": ["watching", "sounds-good", "best"], "inv": ["lets-go", "kyaa", "happy-cards", "great", "hoho", "best"], "hot": ["rare", "heok"], "on": ["good", "mine"]}
 LH_LAYOUTS = ["tilt", "split", "bleed", "stamp", "burst"]
 # 상품별 스튜디오 색 (밝은 배경 두 색, 글자·띠 색) — 박스 아트 색에 맞춤
 LH_THEME = {
@@ -235,7 +237,7 @@ LH_BG = {
     "B0GXCRBL5J": (70, 65, 46), "B0H43ZX8LK": (67, 63, 46), "B0H4PQ6LR5": (70, 61, 50), "B0HB3JQ6P4": (69, 80, 44),
     "B0HFVPJF4Q": (66, 72, 46), "default1": (72, 67, 46), "default2": (70, 59, 42), "default3": (69, 80, 44),
 }
-LH_LABEL = {"inv": "아마존 응모", "hot": "TCG 속보", "on": "지금 구매 가능"}
+LH_LABEL = {"kr": "국내판 소식", "inv": "아마존 응모", "hot": "TCG 속보", "on": "지금 구매 가능"}
 def live_hero():
     rows = live_rows()
     if not rows: return ""
@@ -304,12 +306,19 @@ def invite_panel(cls):
             out.append(f'<li class="ip-group"><span class="ip-name"><i>{v[0]}</i>{esc(v[1])}</span><span class="ip-meta">{len(groups[v])}종</span><div class="ip-chips">{chips}</div></li>')
         return "".join(out)
     jp, us = items("jp"), items("us")
+    krs = sorted(st.get("kr", {}).items(), key=lambda kv: (kv[1]["first"], kv[0]), reverse=True)[:20]
+    kr_html = "".join(f'<li><a href="{esc(u)}" target="_blank" rel="nofollow noopener"><span class="ip-name"><i>{esc(v["src"].replace("포켓몬카드 공식", "카드 공식"))}</i>{esc(v["title"])}'
+                      f'{"<em class=ip-new>NEW</em>" if v["first"] >= (datetime.date.today() - datetime.timedelta(days=3)).isoformat() and v["first"] > "2026-11-02" else ""}</span>'
+                      f'<span class="ip-meta">{int(v["first"][5:7])}/{int(v["first"][8:10])} 확인</span></a></li>' for u, v in krs) or \
+              '<li class="ip-note">아직 모은 국내판 소식이 없어요. 포켓몬코리아·포켓몬카드 공식 공지를 10분마다 확인하고 있어요.</li>'
     uid = "ip-" + cls.split()[0]
-    return (f'<aside class="inv-panel {cls}" aria-label="아마존 응모 중인 상품"><div class="ip-head"><b>아마존 응모 중</b><span>초대 요청 받는 상품 · 위가 최신</span></div>'
+    return (f'<aside class="inv-panel {cls}" aria-label="아마존 응모 중인 상품"><div class="ip-head"><b>응모 중</b><span>아마존 초대 요청 · 국내판 추첨 · 위가 최신</span></div>'
             f'<div class="ip-tabs" role="tablist"><button type="button" role="tab" class="on" aria-selected="true" data-t="jp">🇯🇵 일본</button>'
-            f'<button type="button" role="tab" aria-selected="false" data-t="us">🇺🇸 미국</button></div>'
+            f'<button type="button" role="tab" aria-selected="false" data-t="us">🇺🇸 미국</button>'
+            f'<button type="button" role="tab" aria-selected="false" data-t="kr">🇰🇷 국내</button></div>'
             f'<ol class="ip-list" data-t="jp">{jp}</ol><ol class="ip-list" data-t="us" hidden>{us}'
             f'<li class="ip-note">미국 아마존은 초대 판매 상품이 적어요. 확인되는 대로 추가할게요.</li></ol>'
+            f'<ol class="ip-list" data-t="kr" hidden>{kr_html}<li class="ip-note">국내판은 포켓몬코리아·포켓몬카드 공식 공지의 추첨·응모·판매 소식이에요.</li></ol>'
             f'<a class="ip-all" href="/stock/">전체 목록 · 응모 방법 →</a></aside>')
 
 def with_sidebar(main): return f'<div class="site-content"><main class="content-area">{main}</main>{sidebar()}</div>'

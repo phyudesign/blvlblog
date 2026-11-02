@@ -398,3 +398,7 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 .lh-slide.has-img.on:hover .lh-cta{background:#e8362d;color:#fff}
 @media(max-width:768px){.lh-slide.has-img .lh-title{font-size:22px}.lh-foot{padding:0 18px 16px}.lh-slide.has-img .lh-top{font-size:15px;top:14px;left:14px}}
 .lh-bg{z-index:0}.lh-slide.has-img::before{z-index:1}
+/* 상품 사진 카드: 흰 배경 대신 카드 색 위에 사진 (사진의 흰 바탕은 카드 색으로 섞임) */
+.lh-slide.has-img{background:var(--c)}
+.lh-slide.has-img .lh-bg{inset:auto;top:9%;left:9%;width:82%;height:70%;object-fit:contain;mix-blend-mode:multiply;filter:drop-shadow(0 10px 14px rgba(0,0,0,.18))}
+.lh-slide.has-img::before{background:linear-gradient(180deg,rgba(14,15,19,0) 46%,rgba(14,15,19,.5) 68%,rgba(14,15,19,.86) 100%)}

@@ -397,3 +397,4 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 .lh-slide.has-img .lh-cta{margin-top:14px;background:#fff;color:#16171b}
 .lh-slide.has-img.on:hover .lh-cta{background:#e8362d;color:#fff}
 @media(max-width:768px){.lh-slide.has-img .lh-title{font-size:22px}.lh-foot{padding:0 18px 16px}.lh-slide.has-img .lh-top{font-size:15px;top:14px;left:14px}}
+.lh-bg{z-index:0}.lh-slide.has-img::before{z-index:1}

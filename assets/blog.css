@@ -600,4 +600,6 @@ html,body{overflow-x:clip}
 .live-hero .lh-all{line-height:1}
 .live-hero .lh-all svg{margin-top:-1.5px}
 .live-hero .lh-all svg{margin-top:-3px}
-.lh-live{font-family:"Gmarket Sans",sans-serif;font-weight:500;letter-spacing:0;margin-right:-3px}
+.lh-live{font-family:"Gmarket Sans",sans-serif;font-weight:500;letter-spacing:0;margin-right:-5px}
+.live-hero .lh-all{padding-top:10.5px;padding-bottom:7.5px}
+.live-hero .lh-all svg{margin-top:-4px}

@@ -1,24 +1,11 @@
-B0GXCRBL5J 19739 True | head:  | tail: GA 拡張パック「30th CELEBRATION」BOX』をはじめとする各種関連商品の招待販売が実施中です。 ※販売状況は記事公開時点のものです。販売は予告なく価格変更・終了することがあります。詳しくは販売ページにてご確認ください。 <a
-B0GXCRBL5J 20743 True | head:  | tail: -scss-module__QRFE3W__horizontalButtonLayout" data-event-click="button_amazon" target="_blank" rel="noopener noreferrer"
-B0GXCRBL5J 27975 False | head: ポケモンカードゲーム MEGA 拡張パック「30th CELEBRATION」BOX | tail: モンカードゲーム MEGA ハイクラスパック MEGAドリームex BOX ポケモンカードゲーム MEGA スタートデッキ100 バトルコレクション ポケモンカードゲーム MEGA 拡張パック「30th CELEBRATION」BOX <a
-B0GXCRBL5J 29458 True | head: ポケモンカードゲーム MEGA 拡張パック「30th CELEBRATION」BOX | tail: -scss-module__QRFE3W__horizontalButtonLayout" data-event-click="button_amazon" target="_blank" rel="noopener noreferrer"
-B0GXCRBL5J 33978 True | head:  | tail: -scss-module__QRFE3W__horizontalButtonLayout" data-event-click="button_amazon" target="_blank" rel="noopener noreferrer"
-B0GXCM4BCZ 38435 True | head: プレミアムデッキセット エーフィ・ブラッキー | tail: -scss-module__QRFE3W__horizontalButtonLayout" data-event-click="button_amazon" target="_blank" rel="noopener noreferrer"
-B0GXCYMRGL 42882 True | head: カードセット フシギダネ・ヒトカゲ・ゼニガメ | tail: -scss-module__QRFE3W__horizontalButtonLayout" data-event-click="button_amazon" target="_blank" rel="noopener noreferrer"
-B0GXCM4BCZ 47336 True | head: カードセット チコリータ・ヒノアラシ・ワニノコ | tail: -scss-module__QRFE3W__horizontalButtonLayout" data-event-click="button_amazon" target="_blank" rel="noopener noreferrer"
-B0GXCX36HP 51787 True | head: カードセット キモリ・アチャモ・ミズゴロウ | tail: -scss-module__QRFE3W__horizontalButtonLayout" data-event-click="button_amazon" target="_blank" rel="noopener noreferrer"
-B0GXCZ1VDC 56238 True | head: カードセット ツタージャ・ポカブ・ミジュマル | tail: -scss-module__QRFE3W__horizontalButtonLayout" data-event-click="button_amazon" target="_blank" rel="noopener noreferrer"
-B0GXCSGX8Y 60690 True | head: カードセット ハリマロン・フォッコ・ケロマツ | tail: -scss-module__QRFE3W__horizontalButtonLayout" data-event-click="button_amazon" target="_blank" rel="noopener noreferrer"
-B0GXCPF84C 65140 True | head: カードセット モクロー・ニャビー・アシマリ | tail: -scss-module__QRFE3W__horizontalButtonLayout" data-event-click="button_amazon" target="_blank" rel="noopener noreferrer"
-B0GXCTRZ8L 69589 True | head: カードセット サルノリ・ヒバニー・メッソン | tail: -scss-module__QRFE3W__horizontalButtonLayout" data-event-click="button_amazon" target="_blank" rel="noopener noreferrer"
-B0GXCT83HB 74039 True | head: カードセット ニャオハ・ホゲータ・クワッス | tail: -scss-module__QRFE3W__horizontalButtonLayout" data-event-click="button_amazon" target="_blank" rel="noopener noreferrer"
-B0F9KJGGZ5 78921 True | head: ポケモンカードゲーム MEGA 拡張パック インフェルノX BOX | tail: -scss-module__QRFE3W__horizontalButtonLayout" data-event-click="button_amazon" target="_blank" rel="noopener noreferrer"
-B0GP928YDZ 83798 True | head: ポケモンカードゲーム MEGA 拡張パック ストームエメラルダ BOX | tail: -scss-module__QRFE3W__horizontalButtonLayout" data-event-click="button_amazon" target="_blank" rel="noopener noreferrer"
-B0FSJXSPPX 88673 True | head: ポケモンカードゲーム MEGA 拡張パック ムニキスゼロ BOX | tail: -scss-module__QRFE3W__horizontalButtonLayout" data-event-click="button_amazon" target="_blank" rel="noopener noreferrer"
-B0GP9QHQ3Y 93545 True | head: ポケモンカードゲーム MEGA 拡張パック アビスアイ BOX | tail: -scss-module__QRFE3W__horizontalButtonLayout" data-event-click="button_amazon" target="_blank" rel="noopener noreferrer"
-B0F189YH8W 98419 True | head: ポケモンカードゲーム MEGA 拡張パック メガシンフォニア BOX | tail: -scss-module__QRFE3W__horizontalButtonLayout" data-event-click="button_amazon" target="_blank" rel="noopener noreferrer"
-B0F18J2CJF 103294 True | head: ポケモンカードゲーム MEGA 拡張パック メガブレイブ BOX | tail: -scss-module__QRFE3W__horizontalButtonLayout" data-event-click="button_amazon" target="_blank" rel="noopener noreferrer"
-B0G1XB2STM 108169 True | head: ポケモンカードゲーム MEGA 拡張パック ニンジャスピナー BOX | tail: -scss-module__QRFE3W__horizontalButtonLayout" data-event-click="button_amazon" target="_blank" rel="noopener noreferrer"
-B0FLCWJ1VK 113052 True | head: ポケモンカードゲーム MEGA ハイクラスパック MEGAドリームex BOX | tail: -scss-module__QRFE3W__horizontalButtonLayout" data-event-click="button_amazon" target="_blank" rel="noopener noreferrer"
-B0FLD7HMRP 117800 True | head: ポケモンカードゲーム MEGA スタートデッキ100 バトルコレクション | tail: -scss-module__QRFE3W__horizontalButtonLayout" data-event-click="button_amazon" target="_blank" rel="noopener noreferrer"
-{'B0GXCRBL5J': ('', ''), 'B0F9KJGGZ5': ('ポケモンカードゲーム MEGA 拡張パック インフェルノX BOX', '5,412엔'), 'B0GP928YDZ': ('ポケモンカードゲーム MEGA 拡張パック ストームエメラルダ BOX', '6,006엔'), 'B0FSJXSPPX': ('ポケモンカードゲーム MEGA 拡張パック ムニキスゼロ BOX', '5,412엔'), 'B0GP9QHQ3Y': ('ポケモンカードゲーム MEGA 拡張パック アビスアイ BOX', '6,006엔'), 'B0F189YH8W': ('ポケモンカードゲーム MEGA 拡張パック メガシンフォニア BOX', '5,412엔'), 'B0F18J2CJF': ('ポケモンカードゲーム MEGA 拡張パック メガブレイブ BOX', '5,412엔'), 'B0G1XB2STM': ('ポケモンカードゲーム MEGA 拡張パック ニンジャスピナー BOX', '5,412엔'), 'B0FLCWJ1VK': ('ポケモンカードゲーム MEGA ハイクラスパック MEGAドリームex BOX', '5,500엔'), 'B0FLD7HMRP': ('ポケモンカードゲーム MEGA スタートデッキ100 バトルコレクション', '891엔')}
+https://pokemoncard.co.kr/	200	93467	포켓몬 카드 게임	응모,추첨,확장팩,예약	-> https://pokemoncard.co.kr/main
+https://pokemoncard.co.kr/news	200	22821	포켓몬 카드 게임	예약	-> https://pokemoncard.co.kr/news
+https://www.pokemonkorea.co.kr/	200	68009	포켓몬 공식 사이트	응모,추첨,판매,확장팩,포켓몬센터	-> https://www.pokemonkorea.co.kr/
+https://pokemonkorea.co.kr/news	200	21326	포켓몬 공식 사이트	공지	-> https://pokemonkorea.co.kr/news
+https://www.pokemonstore.co.kr/	200	19735			-> https://www.pokemonstore.co.kr/
+https://pokemonstore.co.kr/	200	19735			-> https://pokemonstore.co.kr/
+https://www.pokemoncenter.co.kr/ ERR ConnectTimeout
+https://pokemoncenter.co.kr/ ERR ConnectTimeout
+https://www.pokemoncenter-online.co.kr/ ERR ConnectionError
+https://store.pokemonkorea.co.kr/ ERR ConnectionError
+https://pokemoncenter-korea.com/ ERR ConnectionError

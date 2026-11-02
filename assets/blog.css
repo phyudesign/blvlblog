@@ -507,3 +507,7 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 .lh-slide .st-cta:hover{background:var(--ac);color:#fff;transform:translateY(-2px);box-shadow:0 10px 20px color-mix(in srgb,var(--ac) 40%,transparent)}
 .lh-slide .lh-cta:hover{background:#e8362d!important;color:#fff!important;transform:translateY(-2px)}
 .lh-slide .st-cta:active,.lh-slide .lh-cta:active{transform:translateY(0) scale(.97)}
+/* 슬라이드 버튼: 평소 아주 진한 회색 → 카드에 마우스를 올리면 버튼만 빨강 */
+.lh-slide .st-cta,.lh-slide .lh-cta{background:#222327!important;color:#fff!important;box-shadow:0 6px 14px rgba(0,0,0,.18)!important;transform:none!important}
+.lh-slide.on:hover .st-cta,.lh-slide.on:hover .lh-cta,.lh-slide.on:focus-visible .st-cta,.lh-slide.on:focus-visible .lh-cta{background:linear-gradient(180deg,#ec4339,#c0141c)!important;box-shadow:0 10px 20px rgba(192,20,28,.32)!important}
+.lh-slide.on:active .st-cta,.lh-slide.on:active .lh-cta{background:linear-gradient(180deg,#ec4339,#c0141c)!important}

@@ -17,7 +17,7 @@ DESC = "포켓몬카드·미니카·피규어·게임 — 직접 모으고 즐�
 ADSENSE = "ca-pub-4380904134243959"
 AUTHOR = "blvl."
 PER_PAGE = 10
-CSS_VER = 40
+CSS_VER = 42
 JS_VER = 1
 
 # 카테고리: (슬러그, 메뉴명, 설명)
@@ -81,7 +81,7 @@ articles = [p for p in posts if p["category"] != NEWS]  # 사람이 쓴 정식 �
 pages = load("_pages")
 YEAR = datetime.date.today().year
 
-def page(title, content, desc=DESC, canon="/", og_img="", head_extra="", active="", noindex=False):
+def page(title, content, desc=DESC, canon="/", og_img="", head_extra="", active="", noindex=False, ticker=True):
     def li(n, h, kids):
         on = h == active or any(ch == active for _, ch in kids)
         if not kids: return f'<li><a class="{"on" if on else ""}" href="{h}">{esc(n)}</a></li>'
@@ -107,7 +107,7 @@ def page(title, content, desc=DESC, canon="/", og_img="", head_extra="", active=
 <nav class="main-navigation" aria-label="메뉴"><button class="menu-toggle" type="button" onclick="document.getElementById('hd').classList.toggle('open')">☰ <span>Menu</span></button>
 <ul class="main-nav">{nav}</ul><a class="nav-search" href="/search/" aria-label="검색">{SEARCH_SVG}</a></nav>
 </div></header>
-<div class="tk-sticky">{CHROME["ticker"]}</div>{CHROME["float"]}
+{f'<div class="tk-sticky">{CHROME["ticker"]}</div>' if ticker else ""}{CHROME["float"]}
 {content}
 <script defer src="/assets/blvl-stats.js?v={JS_VER}"></script>
 <footer class="site-footer"><nav class="footer-links" aria-label="사이트 정보"><a href="/stock/">재고 현황판</a> · <a href="/about/">소개</a> · <a href="/privacy/">개인정보처리방침</a> · <a href="/contact/">문의</a></nav>© {YEAR} {TITLE}</footer>
@@ -156,7 +156,8 @@ def sidebar():
 </div></div>'''
 
 # ── 홈 상단 속보 전광판: 최근 48시간 속보 글 + 지금 구매·예약 가능한 상품
-def ticker():
+def live_rows():
+    """전광판·홈 슬라이드에 쓰는 줄: (종류, 꼬리표, 문장, 링크, 시각, 외부링크, 미리보기정보)"""
     try:
         import sys; sys.path.insert(0, str(ROOT / "_tools"))
         from monitor import kr, STATUS_KR, SHOP_KR
@@ -189,7 +190,10 @@ def ticker():
         extra = " · ".join(x for x in (SHOP_KR.get(v.get("shop"), ""), STATUS_KR.get(v["status"], ""), v.get("price", "")) if x)
         rows.append(("on", "판매 중" if v["status"] == "instock" else "예약 중", f"{name} — {extra}", v["url"], "", True,
                      {"img": re.sub(r"downsize=\d+", "downsize=400", v.get("img") or ""), "name": re.sub(r"^\s+|\s+$", "", kr(v["title"])), "sub": extra, "cta": "쇼핑몰에서 보기"}))
-    rows = rows[:14]
+    return rows[:14]
+
+def ticker():
+    rows = live_rows()
     if not rows:
         track = '<span class="tk-item"><span class="tk-tag idle">감시 중</span>지금은 새로 풀린 재고가 없어요 · 10분마다 일본 쇼핑몰을 확인하고 있어요</span>'
     else:
@@ -206,6 +210,35 @@ def ticker():
 <div class="tk-view"><div class="tk-track" style="--dur:{dur}s"><div class="tk-run">{track}</div><div class="tk-run" aria-hidden="true">{track}</div></div></div>
 <a class="tk-more" href="/stock/">현황판 →</a></section>
 <script defer src="/assets/blvl-ticker.js?v=7"></script>'''
+
+# ── 홈 LIVE 슬라이드 (포켓몬센터 온라인 홈처럼 가운데 큰 카드 + 양옆이 살짝 보이는 슬라이드)
+LH_COLORS = ["#FFD54A", "#7FE0B0", "#FF8A80", "#8FD0FF", "#C9B2FF", "#FFAE5C", "#C8F060"]
+LH_EMO = {"inv": ["lets-go", "kyaa", "happy-cards", "great", "hoho", "best"], "hot": ["rare", "heok"], "on": ["good", "mine"]}
+LH_LABEL = {"inv": "아마존 응모", "hot": "TCG 속보", "on": "지금 구매 가능"}
+def live_hero():
+    rows = live_rows()
+    if not rows: return ""
+    cnt = {}
+    slides = []
+    for i, (kind, tag, text, href, when, ext, pv) in enumerate(rows[:10]):
+        k = cnt.get(kind, 0); cnt[kind] = k + 1
+        emo = LH_EMO.get(kind, ["great"])[k % len(LH_EMO.get(kind, ["great"]))]
+        name = pv.get("name") or text
+        brand = ""
+        for b in ("포켓몬", "원피스", "건담"):
+            if name.startswith(b + " "): brand, name = b, name[len(b) + 1:]
+        attrs = ' target="_blank" rel="nofollow noopener"' if ext else ""
+        new = '<em>NEW</em>' if tag in ("새 응모", "속보") else ""
+        slides.append(f'''<a class="lh-slide" href="{esc(href)}"{attrs} style="--c:{LH_COLORS[i % len(LH_COLORS)]}" draggable="false">
+<span class="lh-top"><i></i>LIVE · {LH_LABEL.get(kind, "TCG LIVE")}{new}</span>
+<span class="lh-brand">{esc(brand or "TCG")}</span><b class="lh-title">{esc(name)}</b>
+<span class="lh-sub">{esc(pv.get("sub", ""))}</span><span class="lh-cta">{esc(pv.get("cta", "자세히 보기"))} →</span>
+<img class="lh-emo" src="/wp-content/uploads/emoticons/gyomyo/{emo}.webp" alt="" loading="lazy" draggable="false"></a>''')
+    dots = "".join(f'<button type="button" aria-label="{i+1}번째"></button>' for i in range(len(slides)))
+    return (f'<section class="live-hero" aria-label="TCG LIVE 응모·재고 슬라이드"><div class="lh-stage">{"".join(slides)}</div>'
+            f'<button type="button" class="lh-nav lh-prev" aria-label="이전">‹</button><button type="button" class="lh-nav lh-next" aria-label="다음">›</button>'
+            f'<div class="lh-dots">{dots}</div><a class="lh-all" href="/stock/">LIVE 현황판 전체 보기 →</a></section>'
+            '<script defer src="/assets/blvl-hero.js?v=1"></script><script defer src="/assets/blvl-ticker.js?v=7"></script>')
 
 # ── 아마존 응모 판 (일본·미국 탭) — 모든 페이지 오른쪽 여백 / 좁은 화면은 글 사이드바
 def invite_panel(cls):
@@ -307,11 +340,11 @@ featured = ""
 if feat:
     featured = f'''<section class="gb-section"><h2 class="custom-title">Featured Posts</h2>
 <div class="feat"><div class="big">{gcard(feat[0], True)}</div><div class="small">{"".join(gcard(p) for p in feat[1:5])}</div></div></section>'''
-home = f'''{featured}
+home = f'''{live_hero()}{featured}
 <section class="gb-section latest"><h2 class="custom-title">Latest Posts</h2>
 <div class="lgrid">{"".join(gcard(p) for p in articles[:9])}</div>
 <div class="gbtn-wrap"><a class="gbtn" href="/blog/">Read All Article</a></div></section>'''
-write("/", page(TITLE, home, DESC, "/", active="/"))
+write("/", page(TITLE, home, DESC, "/", active="/", ticker=False))
 listing("/blog/", articles, "BLOG")
 for k, name, cdesc in CATS:
     pl = [p for p in posts if p["category"] == k]

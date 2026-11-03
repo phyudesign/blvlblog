@@ -184,3 +184,14 @@
   if (window.ResizeObserver) { var c = document.querySelector(".site-content"); if (c) new ResizeObserver(function () { requestAnimationFrame(fit); }).observe(c); }
   fit();
 })();
+/* 넓은 화면 홈: 응모 판 윗선을 Featured 첫 썸네일과 맞추고, 스크롤하면 위로 따라 올라가 화면 위쪽에 붙음 */
+(function () {
+  var f = document.querySelector(".inv-float"), a = document.querySelector(".feat .gimg") || document.querySelector(".lgrid .gimg");
+  if (!f || !a) return;
+  function place() {
+    if (innerWidth < 1660) { f.style.top = ""; f.style.maxHeight = ""; return; }
+    var t = Math.max(20, a.getBoundingClientRect().top);
+    f.style.top = t + "px"; f.style.maxHeight = (innerHeight - t - 20) + "px";
+  }
+  addEventListener("scroll", place, { passive: true }); addEventListener("resize", place); addEventListener("load", place); place();
+})();

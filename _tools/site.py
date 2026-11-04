@@ -196,7 +196,8 @@ def live_rows():
         if "amazon.co.jp/dp/" in q.get("shop_url", ""): continue   # 아마존 응모 상품은 아래 '응모 중' 줄로 보여 줌
         name = q["title"].replace("[추첨·판매 속보] ", "").replace("[입고 속보] ", "")
         sub = " · ".join(x for x in (q.get("shop_kr", ""), q.get("status_kr", ""), q.get("price", "")) if x)
-        rows.append(("hot", "속보", name, url(q["slug"]), q["date"][5:16].replace("-", "/"), False,
+        direct = q.get("shop_url", "") if q.get("shop_url", "").count("/") > 3 else ""   # 상품 페이지 주소가 있으면 바로 연결
+        rows.append(("hot", "속보", name, direct or url(q["slug"]), q["date"][5:16].replace("-", "/"), bool(direct),
                      {"img": re.sub(r"downsize=\d+", "downsize=400", q.get("pimg") or ""), "name": name, "sub": sub or "TCG LIVE 속보", "cta": "속보 글 보기"}))
     try:
         from monitor import invite_list, amz_img

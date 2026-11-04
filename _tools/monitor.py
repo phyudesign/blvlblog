@@ -21,7 +21,7 @@ TG_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "")
 TG_CHAT = os.environ.get("TELEGRAM_CHAT_ID", "")
 WATCH_WORDS = ["ポケモンカード", "ポケカ", "ONE PIECEカード", "ワンピースカード", "ONE PIECE カード"]
 BOX_WORDS = ["BOX", "ボックス", "パック", "カートン", "デッキ", "セット"]
-SKIP_WORDS = ["スリーブ", "シールド", "ケース", "ラバープレイマット", "プレイマット", "ローダー", "ファイル", "電子書籍"]
+SKIP_WORDS = ["余福", "オリパ", "ブロパ", "福袋", "訳アリ", "スリーブ", "シールド", "ケース", "ラバープレイマット", "プレイマット", "ローダー", "ファイル", "電子書籍"]
 
 RAKUTEN = [
     ("ポケモンカード", "https://books.rakuten.co.jp/search?sitem=" + urllib.parse.quote("ポケモンカードゲーム") + "&g=006"),
@@ -30,7 +30,7 @@ RAKUTEN = [
 ]
 PAGES = [  # 추첨·공지 페이지: 관련 '새 줄' 감지
     ("yodobashi", "요도바시 추첨", "https://limited.yodobashi.com/"),
-    ("torecaplaza55", "트레카플라자55", "https://torecaplaza55.com/"),
+    # 트레카플라자55는 상품 목록이라 아래 scan_shoppro로 상품별 재고를 봄 (2026-11-04)
     ("yellowsub", "옐로서브마린", "https://yellowsubmarine.co.jp/"),
     # 세븐넷 검색 결과는 진열 순서가 바뀔 때마다 옛 상품이 '새 줄'로 잡혀서 제외 (2026-11-01)
 ]
@@ -52,6 +52,22 @@ def relevant(t):
     return any(w in t for w in WATCH_WORDS) and any(w in t for w in BOX_WORDS) and not any(w in t for w in SKIP_WORDS)
 
 # ── 라쿠텐북스: 상품 블록 단위 파싱
+# ── 트레카플라자55 (shop-pro 쇼핑몰): 첫 화면 새 상품 목록을 상품 단위로 (상품 주소·사진·가격·품절)
+SHOPPRO = [("torecaplaza55", "트레카플라자55", "https://torecaplaza55.com/")]
+def scan_shoppro(h, shop, base):
+    items = {}
+    for blk in re.split(r'<li class="c-item-list__item"', h)[1:]:
+        tm = re.search(r'c-item-list__ttl">\s*<a href="\?pid=(\d+)"[^>]*>(.*?)</a>', blk, re.S)
+        if not tm: continue
+        pid, title = tm.group(1), text_of(tm.group(2))
+        if not title or not relevant(title): continue
+        im = re.search(r'<img src="(https://img\d*\.shop-pro\.jp/[^"]+)"', blk)
+        pm = re.findall(r'c-item-list__price(?![^"]*strikethrough)[^"]*">\s*([\d,]+)円', blk)
+        st = "out" if "is-soldout" in blk or "SOLD OUT" in blk else "instock"
+        items[f"{shop}:{pid}"] = {"shop": shop, "title": title, "url": f"{base}?pid={pid}", "status": st,
+                                  "price": (pm[-1] + "엔") if pm else "", "img": im.group(1) if im else ""}
+    return items
+
 def scan_rakuten(h):
     items = {}
     for blk in re.split(r'<div class="rbcomp__item-list__item"', h)[1:]:
@@ -464,6 +480,21 @@ def main():
         if avail and not was and not first_run:
             new_events.append({"key": k, "kind": "item", "shop_kr": "라쿠텐북스", "title": v["title"], "url": v["url"], "status": v["status"], "price": v.get("price", ""), "img": v.get("img", "")})
         items[k] = v
+    # 트레카플라자55 등 shop-pro 쇼핑몰
+    for shop, sname, url in SHOPPRO:
+        h = get(url)
+        if not h: continue
+        cur = scan_shoppro(h, shop, url); fresh = not any(k.startswith(shop + ":") for k in items)
+        for k, v in cur.items():
+            old = items.get(k)
+            v["since"] = old.get("since", "") if (old and old["status"] == v["status"]) else NOW.strftime("%m/%d %H:%M")
+            if (not old) or old["status"] != v["status"]: status_changed.append(k)
+            if v["status"] == "instock" and not (old and old["status"] == "instock") and not first_run and not fresh:
+                new_events.append({"key": k, "kind": "item", "shop_kr": sname, "title": v["title"], "url": v["url"], "status": "instock", "price": v.get("price", ""), "img": v.get("img", "")})
+            items[k] = v
+        # 목록에서 빠지고 오래된 상품 정리
+        for k in [k for k in items if k.startswith(shop + ":") and k not in cur]:
+            items.pop(k)
     # 추첨·공지 페이지
     for sid, name, url in PAGES:
         h = get(url)

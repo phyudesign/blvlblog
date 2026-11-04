@@ -1,2 +1,68 @@
-monitor UA 500 8971 https://pokemonkorea.co.kr/news/2/21508
-['/img/main_logo.png', '/img/icon/icon_poke.png', '/img/icon/icon_poke.png', '/img/main_logo.png', '/s3.php?key=home%2Fdata%2Fdata1_www%2Fnewdata%2F2026%2F10%2F2026-10-16_09-51-11-86092-1792111871.png', '/s3.php?key=home%2Fdata%2Fdata1_www%2Fnewdata%2F2026%2F10%2F2026-10-16_09-51-17-28327-1792111877.png']
+285705 202975
+>
+                </div>
+
+                
+                <div class="c-item-list__ttl">
+                  <a href="?pid=194321406"><img class='new_mark_img1' src='https://img.shop-pro.jp/img/new/icons16.gif' style='border:none;display:inline;margin:0px;padding:0px;width:auto;' />【訳アリ】切札縫合 アビス記号jS(SR)(11/99)</a>
+                </div>
+              
+                
+                
+						                      
+                                      
+                    
+                                            <div class="c-item-list__price is-strikethrough">
+                                                        500円(内税)
+                        </div>
+                                        <div class="c-item-list__price">
+                                            350円(内税)
+                    </div>
+                  
+                                    
+                  
+                						    
+                                
+                                                
+                
+                						    <script 
+                  type='text/javascript'
+                  src='https://torecaplaza.shop-pro.jp/?mode=cartjs&pid=194321406&style=normal_gray&name=y&img=y&expl=y&stock=y&price=y&optview=y&inq=y&sk=y'
+                  charset='euc-jp'>
+                </script>
+                                
+
+              </div>
+            </li>
+                      <li class="c-item-list__item">
+              
+              <div class="c-item-list__img u-img-scale">
+                <a href="?pid=194321297">
+                                        <img src="https://img21.shop-pro.jp/PA01507/938/product/194321297_th.jpg?cmsp_timestamp=20261104161949" class="item" />
+                                    <img class="c-item-list__badge" src="" alt="">
+                </a><br />
+              </div>
+              
+              <div class="c-item-list__txt">
+                
+					      <div class="product-list__fav-items">
+                  <button type="button" class="favorite-button"  data-favorite-button-selector="DOMSelector" data-product-id="194321297" data-added-class="fav-items"></button>
+                </div>
+
+                
+                <div class="c-item-list__ttl">
+                  <a href="?pid=194321297"><img class='new_mark_img1' src='https://img.shop-pro.jp/img/new/icons5.gif' style='border:none;display:inline;margin:0px;padding:0px;width:auto;' />ブロック＆パック！【ポケモンカード : 余福】[261104]-[4] [ブロパ！]</a>
+                </div>
+              
+                
+                
+						                                        <div class="c-item-list__price is-soldout">
+                    SOLD OUT
+                  </div>
+                						    
+                                
+                                                
+                
+                						    <script 
+                  type='text/javascript'
+                  src='https://torecaplaza.shop-pro.jp/?mode=cartjs&pid=194321297&style=normal_gray&name=y&img=y&expl=y&stock=y&price=y&optvi

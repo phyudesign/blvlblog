@@ -1,0 +1,28 @@
+{
+ "model": "gpt-image-2",
+ "prompt": "Gyomyo crouches in a dramatic martial-arts stance, both paws pushed forward with a swirling blue aura energy ball glowing between them (no Pokémon, just abstract energy). Around him float a few blank holographic cards, small paper lottery tickets and a plain closed booster box with no logos or artwork.",
+ "refs": [
+  "_character/gyomyo/front.png",
+  "_character/gyomyo/turnaround.png",
+  "_character/style/magazine-1.png"
+ ],
+ "outputs": [
+  "_thumbs/out/gyomyo-hadou-seeker-1.png",
+  "_thumbs/out/gyomyo-hadou-seeker-2.png"
+ ],
+ "usage": {
+  "input_tokens": 6654,
+  "input_tokens_details": {
+   "image_tokens": 5632,
+   "text_tokens": 1022
+  },
+  "output_tokens": 14048,
+  "output_tokens_details": {
+   "image_tokens": 14048,
+   "text_tokens": 0
+  },
+  "total_tokens": 20702
+ },
+ "est_cost_usd": 0.4716,
+ "created": "2026-11-06 14:20:23"
+}

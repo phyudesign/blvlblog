@@ -1,0 +1,28 @@
+{
+ "model": "gpt-image-2",
+ "prompt": "Gyomyo reads a big folded newspaper with both paws, peeking over the top excitedly, a pencil behind one ear. Around him float a few blank holographic cards, small paper lottery tickets and a tiny alarm clock. The newspaper has no readable text, only abstract lines.",
+ "refs": [
+  "_character/gyomyo/front.png",
+  "_character/gyomyo/turnaround.png",
+  "_character/style/magazine-1.png"
+ ],
+ "outputs": [
+  "_thumbs/out/gyomyo-tcg-daily-1.png",
+  "_thumbs/out/gyomyo-tcg-daily-2.png"
+ ],
+ "usage": {
+  "input_tokens": 6640,
+  "input_tokens_details": {
+   "image_tokens": 5632,
+   "text_tokens": 1008
+  },
+  "output_tokens": 14048,
+  "output_tokens_details": {
+   "image_tokens": 14048,
+   "text_tokens": 0
+  },
+  "total_tokens": 20688
+ },
+ "est_cost_usd": 0.4715,
+ "created": "2026-11-06 23:48:17"
+}

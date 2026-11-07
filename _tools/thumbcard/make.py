@@ -18,11 +18,15 @@ title = "".join(f'<div class="t{i}">{html.escape(x)}</div>' for i, x in enumerat
 emo = cfg.get("emo")
 emo_html = (f'<div class="emo"><img src="{u("wp-content/uploads/emoticons/gyomyo/"+emo+".webp")}"></div>'
             + (f'<div class="say">{html.escape(cfg["say"])}</div>' if cfg.get("say") else "")) if emo else ""
+bgcss = (f"url('{u(cfg['bgimg'])}') center/cover no-repeat" if cfg.get("bgimg")
+         else f"radial-gradient(circle at 50% 72%,{cfg.get('bg','#3aa0ff')} 0%,{cfg.get('bg2','#0d5fd6')} 78%)")
+head = "" if cfg.get("bgimg") else f'<div class="head"><div class="kick">{cfg.get("kicker","<b>blvl.</b> TCG 정보통")}</div>{title}</div>'
+dots = "" if cfg.get("bgimg") else "dots"
 page = f"""<html><head><style>
 *{{margin:0;box-sizing:border-box}}
 body{{width:1024px;height:1024px;overflow:hidden;font-family:"Noto Sans CJK KR",sans-serif;position:relative;
- background:radial-gradient(circle at 50% 72%,{cfg.get('bg',"#3aa0ff")} 0%,{cfg.get('bg2',"#0d5fd6")} 78%)}}
-body:before{{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.13) 2px,transparent 2.4px);background-size:22px 22px;
+ background:{bgcss}}}
+body.dots:before{{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.13) 2px,transparent 2.4px);background-size:22px 22px;
  -webkit-mask:linear-gradient(180deg,#000 0,transparent 55%);mask:linear-gradient(180deg,#000 0,transparent 55%)}}
 .head{{position:absolute;left:0;right:0;top:46px;text-align:center;z-index:20;color:{cfg.get('ink',"#fff")}}}
 .kick{{display:inline-block;font-size:26px;font-weight:800;padding:8px 22px;border-radius:999px;background:rgba(0,0,0,.28);color:#fff;letter-spacing:.5px}}
@@ -35,9 +39,9 @@ body:before{{content:"";position:absolute;inset:0;background-image:radial-gradie
 .emo img{{width:100%;height:100%;object-fit:contain}}
 .say{{position:absolute;right:200px;bottom:150px;z-index:31;background:#fff;color:#16171b;font-size:25px;font-weight:900;padding:12px 20px;border-radius:22px 22px 4px 22px;box-shadow:0 8px 18px rgba(0,0,0,.2)}}
 .logo{{position:absolute;left:34px;bottom:30px;height:34px;z-index:30;filter:brightness(0) invert(1);opacity:.9}}
-</style></head><body>
-<div class="head"><div class="kick">{cfg.get('kicker','<b>blvl.</b> TCG 정보통')}</div>{title}</div>
-{items}{emo_html}<img class="logo" src="{u('assets/logo-blvl.png')}">
+</style></head><body class="{dots}">
+{head}
+{items}{emo_html}{'' if cfg.get('bgimg') else '<img class="logo" src="'+u('assets/logo-blvl.png')+'">'}
 </body></html>"""
 tmp = pathlib.Path("/tmp") / "blvl_thumb.html"; tmp.write_text(page, encoding="utf-8")
 js = f"""const {{chromium}}=require('playwright');(async()=>{{const b=await chromium.launch();const p=await b.newPage({{viewport:{{width:1024,height:1024}}}});

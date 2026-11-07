@@ -17,6 +17,7 @@
   - slug: `tcg-데일리-YYYYMMDD`, date/mod: `YYYY-MM-DD HH:MM:SS`(한국 시간), category: `tcg`
   - thumb: `/wp-content/uploads/2026/11/blvl-tcg-daily.jpg`, tags: 포켓몬카드/원피스카드 등
   - desc: 오늘 소식 요약 1~2문장
+- 중간 제목 색 박스: `<h2 class="h-key">오늘의 핵심</h2>`, `<h2 class="h-pk">포켓몬카드</h2>`, `<h2 class="h-op">원피스카드</h2>`, `<h2 class="h-sch">응모·예약 일정</h2>` (다른 h2는 class 없이 = 검정 박스). 소식 제목 `<h3>` 은 자동으로 왼쪽 색 막대 박스.
 - 본문 구성: 짧은 인사 → `<h2>오늘의 핵심</h2>` 3줄 요약 → `<h2>포켓몬카드</h2>` / `<h2>원피스카드</h2>` 소식별 `<h3>` + 2~4문장(날짜·가격·구성·한국에서 응모 가능 여부) → `<h2>응모·예약 일정</h2>` 표(마감 빠른 순) → 교묘 말풍선 1~2개 → 맨 아래 `참고한 곳:` 링크.
 - 교묘 말풍선 형식(기존 글 참고): `<div class="emo"><img src="/wp-content/uploads/emoticons/gyomyo/{이름}.webp" ...><div class="bubble"><b>미친고양이 교묘</b>…냥</div></div>`
   이모티콘 이름: great heok happy-cards hmm-question good kyaa sob watching hmm price-check rare too-many hoho angry nyamnyam flat mine happy-sleep sounds-good lets-go blank what-now best sigh

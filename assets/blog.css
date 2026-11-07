@@ -680,3 +680,11 @@ html.mn-lock,html.mn-lock body{overflow:hidden}
 .mn-sub .mn-list a{font-size:21px}
 /* 좁은 화면 응모 판: 탭과 관계없이 높이 고정 (탭 버튼 위치가 움직이지 않게) */
 @media(max-width:1659px){.inv-float.open{height:min(70vh,640px)}}
+/* 본문 중간 제목: 단락 구분 박스 (h2 = 색 띠, h3 = 왼쪽 색 막대 박스) */
+.entry-content h2{--hc:#17181d;--ht:#fff;background:var(--hc);color:var(--ht);border-radius:14px;padding:14px 20px;margin:2.2em 0 1em;font-size:22px;line-height:1.35;letter-spacing:-.3px}
+.entry-content h2 a{color:inherit}
+.entry-content h2.h-pk{--hc:#FFD54A;--ht:#16171b}.entry-content h2.h-op{--hc:#E8473C;--ht:#fff}
+.entry-content h2.h-key{--hc:#C9B2FF;--ht:#16171b}.entry-content h2.h-sch{--hc:#8FD0FF;--ht:#16171b}
+.entry-content h3{--bc:#17181d;background:#f3f4f7;border-left:6px solid var(--bc);border-radius:6px 12px 12px 6px;padding:11px 16px;margin:1.8em 0 .8em;font-size:19px;line-height:1.4}
+.entry-content h2.h-pk~h3{--bc:#F2B705}.entry-content h2.h-op~h3{--bc:#E8473C}
+@media(max-width:768px){.entry-content h2{font-size:19px;padding:12px 16px;border-radius:12px}.entry-content h3{font-size:17px;padding:10px 14px}}

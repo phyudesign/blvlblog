@@ -13,7 +13,7 @@ for it in cfg["items"]:
     cls = "it card" if it.get("card") else "it"
     items += (f'<img class="{cls}" src="{u(it["src"])}" style="left:{it["x"]}%;top:{it["y"]}%;height:{it["h"]}%;'
               f'transform:translate(-50%,-50%) rotate({it.get("r",0)}deg);z-index:{it.get("z",1)}">')
-t = cfg["title"]
+t = cfg.get("title", [])
 title = "".join(f'<div class="t{i}">{html.escape(x)}</div>' for i, x in enumerate(t))
 emo = cfg.get("emo")
 emo_html = (f'<div class="emo"><img src="{u("wp-content/uploads/emoticons/gyomyo/"+emo+".webp")}"></div>'

@@ -61,7 +61,20 @@
 
   function updateCount(slug, s) { (counters[slug] || []).forEach(function (el) { fill(el, s); }); }
 
-  if (hitEl) {
+  // 운영자 기기 제외: 주소 끝에 ?owner=on 을 한 번 붙여 열면 이 브라우저는 조회수에 안 잡혀요 (?owner=off 로 해제)
+  var owner = false;
+  try {
+    var q = (location.search.match(/[?&]owner=(on|off)/) || [])[1];
+    if (q === "on") localStorage.setItem("blvl_owner", "1");
+    if (q === "off") localStorage.removeItem("blvl_owner");
+    owner = localStorage.getItem("blvl_owner") === "1";
+    if (q) { var t = document.createElement("div"); t.textContent = owner ? "이 브라우저는 이제 조회수에 안 잡혀요 (운영자 모드)" : "운영자 모드 해제 — 다시 조회수에 잡혀요";
+      t.style.cssText = "position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#17181d;color:#fff;padding:12px 18px;border-radius:12px;font-size:14px;z-index:9999";
+      document.body.appendChild(t); setTimeout(function () { t.remove(); }, 4000); }
+  } catch (e) {}
+  if (hitEl && owner) {
+    rpc("blog_stats", { p_slugs: [hitEl.dataset.slug] }).then(function (rows) { updateCount(hitEl.dataset.slug, rows[0]); }).catch(function () {});
+  } else if (hitEl) {
     rpc("blog_hit", { p_slug: hitEl.dataset.slug, p_visitor: visitor() })
       .then(function (s) { updateCount(hitEl.dataset.slug, s); })
       .catch(function () { hitEl.style.display = "none"; });

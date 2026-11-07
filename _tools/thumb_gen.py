@@ -66,6 +66,18 @@ MODES = {
                  "excitedly looking and pointing toward the empty area on the left; (5) IMPORTANT: the lower-left and lower-center area "
                  "(from 42% to 100% height, from 0% to 62% width) must stay EMPTY flat background with nothing in it, because real "
                  "product photos will be placed there later. Write the given Korean text exactly, letter for letter, with no extra words. "),
+    # 카드 포스터(2026-11-08 슨생 샘플 _character/style/cardposter-1.png): 실제 카드·팩이 주인공, 교묘는 오른쪽 아래 작게
+    "cardposter": ("Square blog thumbnail. Copy the layout and drawing style of the LAST attached reference (the STYLE sample) closely: "
+                   "a {bg} paper background with a few crayon doodles, sparkles and motion strokes; a tiny top label between two thin "
+                   "horizontal rules; a huge two-line title in ultra-heavy, chunky, slightly rough crayon-textured Korean letters, line 1 "
+                   "black, line 2 red, in the top 38%; below it, the TRADING CARDS and the BOOSTER PACK from the attached product "
+                   "references are the MAIN SUBJECT, drawn very large (together about 60% of the image), overlapping and slightly tilted "
+                   "like a fanned display, each with a thick black crayon outline so they sit naturally inside the illustration. Reproduce "
+                   "the cards and the pack FAITHFULLY from their references: same artwork, same Pokémon, same colors and layout, same "
+                   "card names, HP numbers and pack logo; do not invent different creatures. The character from the character references "
+                   "is SMALL, only in the lower-right corner (about 30% of the image tall), peeking up from the bottom edge, holding one "
+                   "card, with its signature CRAZY EYES (pupils: {eyes}), rough sketchy pencil lines and light hand-colored fills. "
+                   "Write the given Korean text exactly, letter for letter, with no extra words. "),
     # 본문 삽화: 썸네일과 같은 그림체, 글자 없음, 가로형
     "scene": ("A wide blog illustration in the same drawing style as the attached STYLE reference: rough sketchy pencil lines with "
               "grainy texture and light hand-colored fills, on a single flat solid background color: {bg}. The character is the star "
@@ -97,6 +109,12 @@ def build_prompt(req):
     who = (f"The attached reference images show {c['name']}, an original mascot of the blvl blog: {c['desc']} " if c else
            "The attached reference image(s) show an original mascot character of the blvl blog. ")
     text = ""
+    if req.get("mode") == "cardposter":
+        text = (f'Text to write — top label: "{req.get("badge", "")}"; title line 1 (black): "{req.get("title", "")}"; '
+                f'title line 2 (red): "{req.get("title2", "")}". ')
+        mode = MODES["cardposter"].format(bg=req.get("bg", "bright yellow"), eyes=req.get("eyes", "sparkling yellow stars"))
+        return (who + "The other attached images are the real product references (trading cards and a booster pack). " + LOOK + mode
+                + text + "Scene: " + req.get("prompt", ""))
     if req.get("mode") == "magcards":
         text = (f'Text to write — top label: "{req.get("badge", "")}"; title line 1 (black): "{req.get("title", "")}"; '
                 f'title line 2 (red): "{req.get("title2", "")}". ')

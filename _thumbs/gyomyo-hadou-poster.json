@@ -1,0 +1,14 @@
+{
+ "character": "gyomyo",
+ "mode": "cardposter",
+ "bg": "bright sky blue",
+ "eyes": "glowing blue swirling spiral pupils",
+ "badge": "교묘의 TCG 정보통",
+ "title": "파동시커",
+ "title2": "응모 총정리!",
+ "refs": ["_character/gyomyo/front.png", "_character/refs/m7-pack.png", "_character/refs/m7-maxi-sar.png", "_character/refs/m7-lucario.png", "_character/refs/m7-garchomp.png", "_character/refs/m7-absol.png"],
+ "style_refs": ["_character/style/cardposter-1.png"],
+ "prompt": "The booster pack stands on the left. In the center the big 'Maxie's hot blood' SAR card (the wrestler support card) is the largest, with Mega Lucario Z ex, Mega Garchomp Z ex and Mega Absol Z ex fanned behind it. Gyomyo peeks from the bottom-right corner holding a card, super excited.",
+ "n": 2,
+ "quality": "high"
+}

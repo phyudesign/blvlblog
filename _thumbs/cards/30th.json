@@ -1,0 +1,32 @@
+{
+ "out": "wp-content/uploads/2026/10/blvl-tcg-30th-v5.jpg",
+ "bg": "#FF8A65",
+ "bg2": "#C62828",
+ "accent": "#FFE14D",
+ "kicker": "<b>blvl.</b> 교묘의 TCG 정보통",
+ "title": [
+  "30주년 박스",
+  "시세 총정리"
+ ],
+ "size0": 100,
+ "items": [
+  {
+   "src": "assets/products/B0GXCM4BCZ.webp",
+   "x": 27,
+   "y": 66,
+   "h": 44,
+   "r": -6,
+   "z": 2
+  },
+  {
+   "src": "assets/products/B0GXCRBL5J.webp",
+   "x": 62,
+   "y": 66,
+   "h": 50,
+   "r": 3,
+   "z": 3
+  }
+ ],
+ "emo": "price-check",
+ "say": "얼마냥?"
+}

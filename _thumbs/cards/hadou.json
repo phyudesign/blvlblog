@@ -1,0 +1,9 @@
+{"out":"wp-content/uploads/2026/11/blvl-tcg-hadou-seeker-v2.jpg","bg":"#4FC3F7","bg2":"#0B5ED7","accent":"#FFE14D",
+ "kicker":"<b>blvl.</b> 교묘의 TCG 정보통","title":["파동시커","응모 총정리"],
+ "items":[
+  {"src":"assets/products/B0H4PQ6LR5.webp","x":50,"y":56,"h":40,"r":0,"z":2},
+  {"src":"assets/cards/m7-garchomp.webp","x":19,"y":67,"h":40,"r":-12,"z":3},
+  {"src":"assets/cards/m7-absol.webp","x":81,"y":66,"h":40,"r":12,"z":3},
+  {"src":"assets/cards/m7-lucario.webp","x":36,"y":77,"h":40,"r":-4,"z":5},
+  {"src":"assets/cards/m7-maxi-sar.webp","x":63,"y":78,"h":38,"r":5,"z":6,"card":true}],
+ "emo":"kyaa","say":"11/27 발매냥!"}

@@ -1,0 +1,49 @@
+{
+ "out": "wp-content/uploads/2026/10/blvl-tcg-amazon-v4.jpg",
+ "bg": "#FFB74D",
+ "bg2": "#E65100",
+ "accent": "#16171b",
+ "ink": "#16171b",
+ "kicker": "<b>blvl.</b> 교묘의 TCG 정보통",
+ "title": [
+  "아마존 응모",
+  "포켓몬·원피스"
+ ],
+ "size1": 86,
+ "items": [
+  {
+   "src": "assets/products/B0GXCRBL5J.webp",
+   "x": 20,
+   "y": 63,
+   "h": 36,
+   "r": -10,
+   "z": 2
+  },
+  {
+   "src": "assets/products/B0HFVPJF4Q.webp",
+   "x": 78,
+   "y": 61,
+   "h": 38,
+   "r": 9,
+   "z": 2
+  },
+  {
+   "src": "assets/products/B0HB3JQ6P4.webp",
+   "x": 63,
+   "y": 68,
+   "h": 38,
+   "r": 4,
+   "z": 3
+  },
+  {
+   "src": "assets/products/B0H4PQ6LR5.webp",
+   "x": 41,
+   "y": 67,
+   "h": 42,
+   "r": -2,
+   "z": 4
+  }
+ ],
+ "emo": "lets-go",
+ "say": "초대 요청 누르자냥!"
+}

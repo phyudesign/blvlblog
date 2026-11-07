@@ -10,7 +10,7 @@ cfg = json.loads(pathlib.Path(sys.argv[1]).read_text(encoding="utf-8"))
 def u(p): return (ROOT / p).as_uri()
 items = ""
 for it in cfg["items"]:
-    cls = "it card" if it.get("card") else "it"
+    cls = ("it card" if it.get("card") else "it") + (" ink" if it.get("ink", cfg.get("ink_all")) else "")
     items += (f'<img class="{cls}" src="{u(it["src"])}" style="left:{it["x"]}%;top:{it["y"]}%;height:{it["h"]}%;'
               f'transform:translate(-50%,-50%) rotate({it.get("r",0)}deg);z-index:{it.get("z",1)}">')
 t = cfg.get("title", [])
@@ -35,6 +35,7 @@ body.dots:before{{content:"";position:absolute;inset:0;background-image:radial-g
 .t1{{font-size:{cfg.get('size1',96)}px;font-weight:900;letter-spacing:-3px;line-height:1.05;color:{cfg.get('accent',"#FFE14D")};text-shadow:0 6px 0 rgba(0,0,0,.22)}}
 .it{{position:absolute;filter:drop-shadow(0 18px 24px rgba(0,0,0,.35))}}
 .it.card{{border-radius:16px;filter:none;box-shadow:0 18px 34px rgba(0,0,0,.4)}}
+.it.ink{{filter:drop-shadow(4px 0 0 #1b1b1f) drop-shadow(-4px 0 0 #1b1b1f) drop-shadow(0 4px 0 #1b1b1f) drop-shadow(0 -4px 0 #1b1b1f) drop-shadow(0 18px 22px rgba(0,0,0,.28));box-shadow:none;border-radius:14px}}
 .emo{{position:absolute;right:30px;bottom:28px;width:190px;height:190px;border-radius:50%;background:#fff;z-index:30;padding:14px;box-shadow:0 10px 24px rgba(0,0,0,.25)}}
 .emo img{{width:100%;height:100%;object-fit:contain}}
 .say{{position:absolute;right:200px;bottom:150px;z-index:31;background:#fff;color:#16171b;font-size:25px;font-weight:900;padding:12px 20px;border-radius:22px 22px 4px 22px;box-shadow:0 8px 18px rgba(0,0,0,.2)}}

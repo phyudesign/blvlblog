@@ -437,7 +437,7 @@ for pg in pages:
 # Featured Posts 섹션은 2026-11-08 슨생 요청으로 없앴어요. 홈은 최신 글만.
 home = f'''{live_hero()}
 <section class="gb-section latest"><h2 class="custom-title">Latest Posts</h2>
-<div class="lgrid">{"".join(gcard(p) for p in sorted(articles, key=lambda p: p["date"], reverse=True)[:12])}</div>
+<div class="lgrid">{"".join(gcard(p) for p in sorted(articles, key=lambda p: p["date"], reverse=True)[:9])}</div>
 <div class="gbtn-wrap"><a class="gbtn" href="/blog/">Read All Article</a></div></section>'''
 write("/", page(TITLE, home, DESC, "/", active="/", ticker=False))
 listing("/blog/", articles, "BLOG")

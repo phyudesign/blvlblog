@@ -17,7 +17,7 @@ DESC = "포켓몬카드·미니카·피규어·게임 — 직접 모으고 즐�
 ADSENSE = "ca-pub-4380904134243959"
 AUTHOR = "blvl."
 PER_PAGE = 10
-CSS_VER = 84
+CSS_VER = 85
 JS_VER = 1
 
 # 카테고리: (슬러그, 메뉴명, 설명)
@@ -92,7 +92,7 @@ def page(title, content, desc=DESC, canon="/", og_img="", head_extra="", active=
     ogi = f'<meta property="og:image" content="{esc(SITE + og_img if og_img.startswith("/") else og_img)}">' if og_img else ""
     robots = '<meta name="robots" content="noindex,follow">' if noindex else ""
     return f'''<!doctype html>
-<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" id="vp" content="width=device-width,initial-scale=1"><script>try{{if(localStorage.getItem("blvl_view")==="desktop")document.getElementById("vp").setAttribute("content","width=1280")}}catch(e){{}}</script>
 <title>{esc(full)}</title><meta name="description" content="{esc(desc)}">{robots}
 <link rel="canonical" href="{SITE}{canon}"><meta property="og:type" content="website"><meta property="og:title" content="{esc(full)}">
 <meta property="og:description" content="{esc(desc)}"><meta property="og:url" content="{SITE}{canon}">{ogi}
@@ -111,7 +111,7 @@ def page(title, content, desc=DESC, canon="/", og_img="", head_extra="", active=
 {f'<div class="tk-sticky">{CHROME["ticker"]}</div>' if ticker else ""}{CHROME["float"]}
 {content}
 <script defer src="/assets/blvl-stats.js?v={JS_VER}"></script>
-<footer class="site-footer"><nav class="footer-links" aria-label="사이트 정보"><a href="/stock/">재고 현황판</a> · <a href="/about/">소개</a> · <a href="/privacy/">개인정보처리방침</a> · <a href="/contact/">문의</a></nav>© {YEAR} {TITLE}</footer>
+<footer class="site-footer"><nav class="footer-links" aria-label="사이트 정보"><a href="/stock/">재고 현황판</a> · <a href="/about/">소개</a> · <a href="/privacy/">개인정보처리방침</a> · <a href="/contact/">문의</a></nav><div class="view-switch"><button type="button" id="viewsw" hidden></button></div><script>(function(){{var b=document.getElementById("viewsw"),d;try{{d=localStorage.getItem("blvl_view")==="desktop"}}catch(e){{}}if(!d&&screen.width>900)return;b.hidden=false;b.textContent=d?"📱 모바일 보기로":"🖥 데스크톱 보기로";b.onclick=function(){{try{{d?localStorage.removeItem("blvl_view"):localStorage.setItem("blvl_view","desktop")}}catch(e){{}}location.reload()}}}})()</script>© {YEAR} {TITLE}</footer>
 </body></html>'''
 
 # 모바일 전체화면 메뉴 (애플 홈페이지 방식: 1단계 큰 메뉴 → 누르면 하위 메뉴, 위에 뒤로가기)

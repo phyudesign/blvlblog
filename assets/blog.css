@@ -618,7 +618,7 @@ body{letter-spacing:-.3px}
 .live-hero .lh-nav{top:240px}
 /* 상단바와 슬라이드 띠 사이 틈(가는 선) 메우기 */
 .live-hero::before{top:-2px!important}
-.site-header{position:relative;z-index:2}
+.site-header{position:relative;z-index:25}
 .site-header:not(.open){box-shadow:0 1px 0 #17181d}
 
 /* 하위 메뉴 한글: 프리텐다드 */

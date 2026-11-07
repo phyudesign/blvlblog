@@ -1,0 +1,15 @@
+{
+ "character": "gyomyo",
+ "mode": "magcards",
+ "bg": "bright sky blue",
+ "eyes": "big sparkling yellow four-point star pupils",
+ "badge": "교묘의 TCG 정보통",
+ "title": "아마존 응모",
+ "title2": "포켓몬·원피스!",
+ "style_refs": [
+  "_character/style/magazine-1.png"
+ ],
+ "prompt": "Match the energy of a bold crayon poster: red and orange crayon burst strokes radiating around the title, black outlined four-point sparkles scattered around. Gyomyo is small in the bottom-right corner, peeking up with both paws raised, holding one card whose back shows a yellow paw print and stars on navy blue, with two yellow exclamation marks next to its head. In the very bottom-left corner a small messy pile of the same navy paw-print card backs. Keep the middle and left of the lower half empty yellow background.",
+ "n": 1,
+ "quality": "high"
+}

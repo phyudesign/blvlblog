@@ -18,7 +18,7 @@ ADSENSE = "ca-pub-4380904134243959"
 AUTHOR = "blvl."
 PER_PAGE = 10
 CSS_VER = 85
-JS_VER = 2
+JS_VER = 3
 
 # 카테고리: (슬러그, 메뉴명, 설명)
 CATS = [

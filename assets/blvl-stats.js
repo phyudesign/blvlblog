@@ -71,6 +71,9 @@
     if (q) { var t = document.createElement("div"); t.textContent = owner ? "이 브라우저는 이제 조회수에 안 잡혀요 (운영자 모드)" : "운영자 모드 해제 — 다시 조회수에 잡혀요";
       t.style.cssText = "position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#17181d;color:#fff;padding:12px 18px;border-radius:12px;font-size:14px;z-index:9999";
       document.body.appendChild(t); setTimeout(function () { t.remove(); }, 4000); }
+    if (owner) { var f = document.querySelector(".site-footer"); if (f) { var b = document.createElement("div");
+      b.textContent = "🔒 운영자 모드 — 이 브라우저는 조회수에 안 잡혀요";
+      b.style.cssText = "margin-top:8px;font-size:12px;color:#888"; f.appendChild(b); } }
   } catch (e) {}
   if (hitEl && owner) {
     rpc("blog_stats", { p_slugs: [hitEl.dataset.slug] }).then(function (rows) { updateCount(hitEl.dataset.slug, rows[0]); }).catch(function () {});

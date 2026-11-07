@@ -1,0 +1,32 @@
+{
+ "model": "gpt-image-2",
+ "prompt": "The booster pack stands on the left. In the center the big 'Maxie's hot blood' SAR card (the wrestler support card) is the largest, with Mega Lucario Z ex, Mega Garchomp Z ex and Mega Absol Z ex fanned behind it. Gyomyo peeks from the bottom-right corner holding a card, super excited.",
+ "refs": [
+  "_character/gyomyo/front.png",
+  "_character/refs/m7-pack.png",
+  "_character/refs/m7-maxi-sar.png",
+  "_character/refs/m7-lucario.png",
+  "_character/refs/m7-garchomp.png",
+  "_character/refs/m7-absol.png",
+  "_character/style/cardposter-1.png"
+ ],
+ "outputs": [
+  "_thumbs/out/gyomyo-hadou-poster-1.png",
+  "_thumbs/out/gyomyo-hadou-poster-2.png"
+ ],
+ "usage": {
+  "input_tokens": 13164,
+  "input_tokens_details": {
+   "image_tokens": 12042,
+   "text_tokens": 1122
+  },
+  "output_tokens": 14048,
+  "output_tokens_details": {
+   "image_tokens": 14048,
+   "text_tokens": 0
+  },
+  "total_tokens": 27212
+ },
+ "est_cost_usd": 0.5234,
+ "created": "2026-11-07 18:18:16"
+}

@@ -51,7 +51,7 @@ SUBS = SUBMENU["tcg"]   # 예전 코드 호환
 EXTRA = {"tcg": [("TCG LIVE", "/category/news/")]}
 NAV = [(n, f"/category/{k}/", [(sn, f"/category/{k}/{sk}/") for sk, sn, _, _ in SUBMENU.get(k, [])] + EXTRA.get(k, []))
                               for k, n, _ in CATS if k != "news"]
-KEEP = {".git", ".github", "CNAME", "_tools", "_posts", "_pages", "_character", "_thumbs", "_monitor", "assets", "wp-content", "ads.txt", ".nojekyll", "favicon.ico", ".gitignore", "README.md"}
+KEEP = {".git", ".github", "CNAME", "_tools", "_posts", "_pages", "_character", "_thumbs", "_monitor", "_fetch", "assets", "wp-content", "ads.txt", ".nojekyll", "favicon.ico", ".gitignore", "README.md"}
 SEARCH_SVG = '<svg viewBox="0 0 512 512" aria-hidden="true" fill="currentColor"><path d="M208 48c-88.4 0-160 71.6-160 160s71.6 160 160 160 160-71.6 160-160S296.4 48 208 48zM0 208C0 93.1 93.1 0 208 0s208 93.1 208 208c0 48.8-16.8 93.7-45 129.2l135 135-34 34-135-135C301.7 399.2 256.8 416 208 416 93.1 416 0 322.9 0 208z"/></svg>'
 
 esc = lambda s: html.escape(s, quote=True)

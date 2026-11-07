@@ -18,6 +18,8 @@ title = "".join(f'<div class="t{i}">{html.escape(x)}</div>' for i, x in enumerat
 emo = cfg.get("emo")
 emo_html = (f'<div class="emo"><img src="{u("wp-content/uploads/emoticons/gyomyo/"+emo+".webp")}"></div>'
             + (f'<div class="say">{html.escape(cfg["say"])}</div>' if cfg.get("say") else "")) if emo else ""
+st = cfg.get("stamp")
+stamp_html = (f'<div class="stamp" style="left:{st.get("x",4)}%;top:{st.get("y",4)}%;transform:rotate({st.get("r",-8)}deg)">{html.escape(st["text"])}</div>' if st else "")
 bgcss = (f"url('{u(cfg['bgimg'])}') center/cover no-repeat" if cfg.get("bgimg")
          else f"radial-gradient(circle at 50% 72%,{cfg.get('bg','#3aa0ff')} 0%,{cfg.get('bg2','#0d5fd6')} 78%)")
 head = "" if cfg.get("bgimg") else f'<div class="head"><div class="kick">{cfg.get("kicker","<b>blvl.</b> TCG 정보통")}</div>{title}</div>'
@@ -39,10 +41,11 @@ body.dots:before{{content:"";position:absolute;inset:0;background-image:radial-g
 .emo{{position:absolute;right:30px;bottom:28px;width:190px;height:190px;border-radius:50%;background:#fff;z-index:30;padding:14px;box-shadow:0 10px 24px rgba(0,0,0,.25)}}
 .emo img{{width:100%;height:100%;object-fit:contain}}
 .say{{position:absolute;right:200px;bottom:150px;z-index:31;background:#fff;color:#16171b;font-size:25px;font-weight:900;padding:12px 20px;border-radius:22px 22px 4px 22px;box-shadow:0 8px 18px rgba(0,0,0,.2)}}
+.stamp{{position:absolute;z-index:40;background:#e8382f;color:#fff;font-size:44px;font-weight:900;padding:10px 24px 12px;border-radius:14px;border:5px solid #1b1b1f;box-shadow:4px 6px 0 #1b1b1f;letter-spacing:-1px}}
 .logo{{position:absolute;left:34px;bottom:30px;height:34px;z-index:30;filter:brightness(0) invert(1);opacity:.9}}
 </style></head><body class="{dots}">
 {head}
-{items}{emo_html}{'' if cfg.get('bgimg') else '<img class="logo" src="'+u('assets/logo-blvl.png')+'">'}
+{items}{emo_html}{stamp_html}{'' if cfg.get('bgimg') else '<img class="logo" src="'+u('assets/logo-blvl.png')+'">'}
 </body></html>"""
 tmp = pathlib.Path("/tmp") / "blvl_thumb.html"; tmp.write_text(page, encoding="utf-8")
 js = f"""const {{chromium}}=require('playwright');(async()=>{{const b=await chromium.launch();const p=await b.newPage({{viewport:{{width:1024,height:1024}}}});

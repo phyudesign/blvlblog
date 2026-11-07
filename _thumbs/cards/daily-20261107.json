@@ -1,47 +1,65 @@
 {
- "out": "wp-content/uploads/2026/11/blvl-tcg-daily-20261107-thumb.jpg",
- "bg": "#B9A2FF",
- "bg2": "#5B3FD0",
- "accent": "#FFE14D",
- "kicker": "<b>blvl.</b> TCG 데일리 뉴스",
- "title": [
-  "11월 7일",
-  "TCG 소식"
+ "out": "wp-content/uploads/2026/11/blvl-tcg-daily-20261107-thumb2.jpg",
+ "bgimg": "_thumbs/out/gyomyo-daily-stage-1.png",
+ "ink_all": true,
+ "front": [
+  [
+   48,
+   56,
+   100,
+   100
+  ],
+  [
+   0,
+   82,
+   46,
+   100
+  ]
  ],
+ "bgkey": [
+  400,
+  600
+ ],
+ "tol": 70,
+ "stamp": {
+  "text": "11월 7일",
+  "x": 3,
+  "y": 3,
+  "r": -8
+ },
  "items": [
   {
    "src": "assets/products/op-eb06.webp",
-   "x": 20,
-   "y": 64,
+   "x": 16,
+   "y": 75,
    "h": 40,
-   "r": -8,
+   "r": -9,
    "z": 2
   },
   {
    "src": "assets/products/op-op19.webp",
-   "x": 80,
-   "y": 64,
-   "h": 40,
-   "r": 8,
+   "x": 68,
+   "y": 68,
+   "h": 38,
+   "r": 10,
    "z": 2
   },
   {
    "src": "assets/products/B0H4PQ6LR5.webp",
-   "x": 50,
-   "y": 55,
-   "h": 34,
+   "x": 52,
+   "y": 66,
+   "h": 30,
+   "r": 3,
    "z": 1
   },
   {
    "src": "assets/cards/m7-maxi-sar.webp",
-   "x": 50,
-   "y": 73,
-   "h": 42,
-   "r": -2,
+   "x": 42,
+   "y": 79,
+   "h": 50,
+   "r": -3,
    "z": 5,
    "card": true
   }
- ],
- "emo": "too-many",
- "say": "신상 폭탄이다냥!"
+ ]
 }

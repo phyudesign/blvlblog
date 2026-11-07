@@ -1,49 +1,58 @@
 {
- "out": "wp-content/uploads/2026/10/blvl-tcg-amazon-v4.jpg",
- "bg": "#FFB74D",
- "bg2": "#E65100",
- "accent": "#16171b",
- "ink": "#16171b",
- "kicker": "<b>blvl.</b> 교묘의 TCG 정보통",
- "title": [
-  "아마존 응모",
-  "포켓몬·원피스"
+ "out": "wp-content/uploads/2026/10/blvl-tcg-amazon-v5.jpg",
+ "bgimg": "_thumbs/out/gyomyo-amazon-stage-1.png",
+ "ink_all": true,
+ "front": [
+  [
+   48,
+   56,
+   100,
+   100
+  ],
+  [
+   0,
+   82,
+   46,
+   100
+  ]
  ],
- "size1": 86,
+ "bgkey": [
+  400,
+  600
+ ],
+ "tol": 70,
  "items": [
   {
    "src": "assets/products/B0GXCRBL5J.webp",
-   "x": 20,
-   "y": 63,
-   "h": 36,
-   "r": -10,
+   "x": 17,
+   "y": 74,
+   "h": 38,
+   "r": -9,
    "z": 2
   },
   {
    "src": "assets/products/B0HFVPJF4Q.webp",
-   "x": 78,
-   "y": 61,
-   "h": 38,
+   "x": 66,
+   "y": 70,
+   "h": 40,
    "r": 9,
    "z": 2
   },
   {
    "src": "assets/products/B0HB3JQ6P4.webp",
-   "x": 63,
-   "y": 68,
-   "h": 38,
-   "r": 4,
+   "x": 53,
+   "y": 76,
+   "h": 40,
+   "r": 3,
    "z": 3
   },
   {
    "src": "assets/products/B0H4PQ6LR5.webp",
-   "x": 41,
-   "y": 67,
-   "h": 42,
-   "r": -2,
+   "x": 35,
+   "y": 79,
+   "h": 44,
+   "r": -3,
    "z": 4
   }
- ],
- "emo": "lets-go",
- "say": "초대 요청 누르자냥!"
+ ]
 }

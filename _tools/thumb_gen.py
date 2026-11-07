@@ -55,6 +55,17 @@ MODES = {
                  "(6) the character's head and body overlap IN FRONT of the lower part of the title so some letters are partly hidden, "
                  "like a magazine cover, but every letter must stay readable. Write the given Korean text exactly, letter for letter, "
                  "with no extra words. "),
+    # 상품 표지(2026-11-08 슨생): 잡지 표지 그림체 그대로, 교묘는 작게, 가운데~왼쪽 아래를 비워 실제 카드·박스 사진을 올림
+    "magcards": ("Square blog thumbnail designed like a bold magazine cover. Match the attached STYLE reference closely. "
+                 "Rules: (1) a single flat solid background color: {bg}, with a few small sparkles and crayon motion lines; "
+                 "(2) a tiny top label between two thin horizontal rules; (3) a huge title in two lines in the SAME typeface as the "
+                 "reference: ultra-heavy, chunky, slightly rough-edged hand-cut bold Korean letters, line 1 in black, line 2 in red, "
+                 "filling the top 40% of the image; (4) the character is drawn SMALLER than usual, only in the lower-right corner, "
+                 "about 38% of the image tall, rough sketchy pencil lines with grainy texture and light hand-colored fills, cropped by "
+                 "the bottom edge, with its signature CRAZY EYES (big wide eyes, slightly sharp pointed outer corners; pupils: {eyes}), "
+                 "excitedly looking and pointing toward the empty area on the left; (5) IMPORTANT: the lower-left and lower-center area "
+                 "(from 42% to 100% height, from 0% to 62% width) must stay EMPTY flat background with nothing in it, because real "
+                 "product photos will be placed there later. Write the given Korean text exactly, letter for letter, with no extra words. "),
     # 본문 삽화: 썸네일과 같은 그림체, 글자 없음, 가로형
     "scene": ("A wide blog illustration in the same drawing style as the attached STYLE reference: rough sketchy pencil lines with "
               "grainy texture and light hand-colored fills, on a single flat solid background color: {bg}. The character is the star "
@@ -86,6 +97,11 @@ def build_prompt(req):
     who = (f"The attached reference images show {c['name']}, an original mascot of the blvl blog: {c['desc']} " if c else
            "The attached reference image(s) show an original mascot character of the blvl blog. ")
     text = ""
+    if req.get("mode") == "magcards":
+        text = (f'Text to write — top label: "{req.get("badge", "")}"; title line 1 (black): "{req.get("title", "")}"; '
+                f'title line 2 (red): "{req.get("title2", "")}". ')
+        mode = MODES["magcards"].format(bg=req.get("bg", "warm yellow"), eyes=req.get("eyes", "sparkling yellow stars"))
+        return who + LOOK + mode + text + SAFE + "Scene: " + req.get("prompt", "")
     if req.get("mode", "magazine") == "magazine":
         text = (f'Text to write — top label: "{req.get("badge", "")}"; title line 1 (black): "{req.get("title", "")}"; '
                 f'title line 2 (red): "{req.get("title2", "")}". ')
@@ -121,7 +137,7 @@ def refs_for(req):
     if req.get("mode") == "studio": return []
     folder = CHAR_DIR / req["character"] if req.get("character") else CHAR_DIR
     paths = [ROOT / p for p in req.get("refs", [])] or sorted(p for p in folder.iterdir() if p.suffix.lower() in IMG_EXT)
-    style = req.get("style_refs") or (["_character/style/magazine-1.png"] if req.get("mode", "magazine") in ("magazine", "scene", "sprite") else [])
+    style = req.get("style_refs") or (["_character/style/magazine-1.png"] if req.get("mode", "magazine") in ("magazine", "magcards", "scene", "sprite") else [])
     paths += [ROOT / p for p in style]
     return [p for p in paths if p.exists()][:16]
 

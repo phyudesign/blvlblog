@@ -35,6 +35,7 @@
   m.STATE.write_text(json.dumps(st, ensure_ascii=False, indent=1), encoding="utf-8")
   PY
   ```
+  (제목에 응모 목록 상품명(파동시커, OP-18 …)을 그대로 넣으면 홈 LIVE 카드에 그 상품 사진이 자동으로 붙어요. 목록에 없는 새 상품이면 먼저 `INVITE_JP`·`AMZ_IMG` 에 추가.)
   (status: 국내판이면 `krnews`, 그 밖은 `invite`. 같은 key로 24시간 안이면 기존 글에 기록만 추가돼요.)
 
 ## 4. 빌드·올리기

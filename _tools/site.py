@@ -177,6 +177,18 @@ def sidebar():
 </div></div>'''
 
 # ── 홈 상단 속보 전광판: 최근 48시간 속보 글 + 지금 구매·예약 가능한 상품
+def match_asin(title):
+    """속보 제목에 응모 목록 상품 이름(파동시커, OP-18 …)이 들어 있으면 그 상품 ASIN"""
+    try:
+        from monitor import INVITE_JP, INVITE_US
+    except Exception: return ""
+    t = title.replace(" ", "")
+    for a, name, brand, grp in INVITE_JP + INVITE_US:
+        if grp: continue
+        key = re.match(r"(OP-\d+|EB-\d+|PRB-\d+|ST-\d+|\S+)", name).group(1)
+        if len(key) >= 3 and key in t: return a
+    return ""
+
 def live_rows():
     """전광판·홈 슬라이드에 쓰는 줄: (종류, 꼬리표, 문장, 링크, 시각, 외부링크, 미리보기정보)"""
     try:
@@ -197,8 +209,15 @@ def live_rows():
         name = q["title"].replace("[추첨·판매 속보] ", "").replace("[입고 속보] ", "")
         sub = " · ".join(x for x in (q.get("shop_kr", ""), q.get("status_kr", ""), q.get("price", "")) if x)
         direct = q.get("shop_url", "") if q.get("shop_url", "").count("/") > 3 else ""   # 상품 페이지 주소가 있으면 바로 연결
-        rows.append(("hot", "속보", name, direct or url(q["slug"]), q["date"][5:16].replace("-", "/"), bool(direct),
-                     {"img": re.sub(r"downsize=\d+", "downsize=400", q.get("pimg") or ""), "name": name, "sub": sub or "TCG LIVE 속보", "cta": "속보 글 보기"}))
+        pv = {"img": re.sub(r"downsize=\d+", "downsize=400", q.get("pimg") or ""), "name": name, "sub": sub or "TCG LIVE 속보", "cta": "속보 글 보기"}
+        a = q.get("asin") or match_asin(name)   # 상품 사진이 없는 속보는 같은 상품의 아마존 사진·누끼를 씀
+        if a:
+            pv["asin"] = a
+            if not pv["img"]:
+                try:
+                    from monitor import amz_img; pv["img"] = amz_img(a)
+                except Exception: pass
+        rows.append(("hot", "속보", name, direct or url(q["slug"]), q["date"][5:16].replace("-", "/"), bool(direct), pv))
     try:
         from monitor import invite_list, amz_img
         for a, name, price, brand, grp, new, link in [r for r in invite_list(st, "jp") if not r[4]][:6]:
@@ -416,6 +435,8 @@ for pg in pages:
     write(url(pg["slug"]), page(pg["title"], with_sidebar(main), pg["desc"], url(pg["slug"])))
 
 feat = [p for p in articles if p.get("featured")]
+newest = max(articles, key=lambda p: p["date"]) if articles else None   # 가장 최근 글은 항상 큰 칸에
+feat = ([newest] if newest else []) + [p for p in feat if p is not newest]
 feat = (feat + [p for p in articles if p not in feat])[:5]
 featured = ""
 if feat:

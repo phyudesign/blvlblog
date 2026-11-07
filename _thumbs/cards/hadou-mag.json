@@ -1,7 +1,67 @@
-{"out":"_thumbs/out/test-hadou-mag.jpg","bgimg":"_thumbs/out/gyomyo-hadou-cards-1.png","ink_all":true,
- "items":[
-  {"src":"assets/products/B0H4PQ6LR5.webp","x":17,"y":71,"h":40,"r":-8,"z":2},
-  {"src":"assets/cards/m7-absol.webp","x":62,"y":64,"h":34,"r":10,"z":3},
-  {"src":"assets/cards/m7-lucario.webp","x":52,"y":65,"h":36,"r":3,"z":3},
-  {"src":"assets/cards/m7-garchomp.webp","x":27,"y":80,"h":40,"r":-10,"z":4},
-  {"src":"assets/cards/m7-maxi-sar.webp","x":46,"y":79,"h":46,"r":-2,"z":5,"card":true}]}
+{
+ "out": "_thumbs/out/test-hadou-mag.jpg",
+ "bgimg": "_thumbs/out/gyomyo-hadou-stage-1.png",
+ "ink_all": true,
+ "front": [
+  [
+   48,
+   56,
+   100,
+   100
+  ],
+  [
+   0,
+   82,
+   46,
+   100
+  ]
+ ],
+ "bgkey": [
+  400,
+  600
+ ],
+ "tol": 70,
+ "items": [
+  {
+   "src": "assets/products/B0H4PQ6LR5.webp",
+   "x": 17,
+   "y": 76,
+   "h": 40,
+   "r": -8,
+   "z": 2
+  },
+  {
+   "src": "assets/cards/m7-absol.webp",
+   "x": 70,
+   "y": 70,
+   "h": 36,
+   "r": 11,
+   "z": 3
+  },
+  {
+   "src": "assets/cards/m7-lucario.webp",
+   "x": 58,
+   "y": 69,
+   "h": 38,
+   "r": 5,
+   "z": 3
+  },
+  {
+   "src": "assets/cards/m7-garchomp.webp",
+   "x": 30,
+   "y": 82,
+   "h": 42,
+   "r": -9,
+   "z": 4
+  },
+  {
+   "src": "assets/cards/m7-maxi-sar.webp",
+   "x": 47,
+   "y": 79,
+   "h": 50,
+   "r": -2,
+   "z": 5,
+   "card": true
+  }
+ ]
+}

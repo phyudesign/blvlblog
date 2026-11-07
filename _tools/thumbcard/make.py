@@ -49,3 +49,33 @@ js = f"""const {{chromium}}=require('playwright');(async()=>{{const b=await chro
 await p.goto('file://{tmp}');await p.waitForTimeout(500);await p.screenshot({{path:'{ROOT / cfg["out"]}',type:'jpeg',quality:88}});await b.close()}})()"""
 subprocess.run(["node", "-e", js], check=True)
 print("saved", cfg["out"])
+
+# "front": [[x0,y0,x1,y1], ...] (%) — 배경 그림에서 이 영역의 '배경색이 아닌 부분'(교묘 등)을 카드 위로 다시 올려요
+if cfg.get("bgimg") and cfg.get("front"):
+    from PIL import Image, ImageFilter
+    bg = Image.open(ROOT / cfg["bgimg"]).convert("RGB").resize((1024, 1024))
+    out = Image.open(ROOT / cfg["out"]).convert("RGB")
+    key = bg.getpixel(tuple(cfg.get("bgkey", [512, 600])))
+    tol = cfg.get("tol", 60)
+    from collections import deque
+    mask = Image.new("L", (1024, 1024), 0); mp = mask.load(); bp = bg.load()
+    near = lambda c: abs(c[0] - key[0]) + abs(c[1] - key[1]) + abs(c[2] - key[2]) <= tol
+    for x0, y0, x1, y1 in cfg["front"]:
+        X0, Y0, X1, Y1 = int(x0 * 10.24), int(y0 * 10.24), min(1024, int(x1 * 10.24)), min(1024, int(y1 * 10.24))
+        # 영역 테두리에서 이어진 배경색만 '배경', 나머지(캐릭터 안쪽 노란 무늬 포함)는 전부 앞으로
+        bgset = set(); q = deque()
+        for x in range(X0, X1):
+            for y in (Y0, Y1 - 1): q.append((x, y))
+        for y in range(Y0, Y1):
+            for x in (X0, X1 - 1): q.append((x, y))
+        while q:
+            x, y = q.popleft()
+            if (x, y) in bgset or not (X0 <= x < X1 and Y0 <= y < Y1) or not near(bp[x, y]): continue
+            bgset.add((x, y)); q.extend(((x+1, y), (x-1, y), (x, y+1), (x, y-1)))
+        for y in range(Y0, Y1):
+            for x in range(X0, X1):
+                if (x, y) not in bgset: mp[x, y] = 255
+    # 캐릭터 안쪽 구멍 메우기 + 가장자리 부드럽게
+    mask = mask.filter(ImageFilter.MaxFilter(5)).filter(ImageFilter.MinFilter(3)).filter(ImageFilter.GaussianBlur(1))
+    out.paste(bg, (0, 0), mask); out.save(ROOT / cfg["out"], "JPEG", quality=88)
+    print("front layer applied")

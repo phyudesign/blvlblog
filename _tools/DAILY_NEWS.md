@@ -20,7 +20,7 @@
 - 본문 구성: 짧은 인사 → `<h2>오늘의 핵심</h2>` 3줄 요약 → `<h2>포켓몬카드</h2>` / `<h2>원피스카드</h2>` 소식별 `<h3>` + 2~4문장(날짜·가격·구성·한국에서 응모 가능 여부) → `<h2>응모·예약 일정</h2>` 표(마감 빠른 순) → 교묘 말풍선 1~2개 → 맨 아래 `참고한 곳:` 링크.
 - 교묘 말풍선 형식(기존 글 참고): `<div class="emo"><img src="/wp-content/uploads/emoticons/gyomyo/{이름}.webp" ...><div class="bubble"><b>미친고양이 교묘</b>…냥</div></div>`
   이모티콘 이름: great heok happy-cards hmm-question good kyaa sob watching hmm price-check rare too-many hoho angry nyamnyam flat mine happy-sleep sounds-good lets-go blank what-now best sigh
-- **상품 소식마다(`<h3>` 하나마다) 그 상품의 아마존 재팬 박스 사진을 `<h3>` 바로 아래에 꼭 넣어요.** 사진 주소는 `monitor.py` 의 `AMZ_IMG`(ASIN→이미지 키)를 먼저 쓰고, 없으면 아마존 상품 페이지에서 찾아 `AMZ_IMG` 에도 추가. 아직 아마존에 안 올라온 신상품만 사진 없이 두고, 올라오면 다음 데일리에서 사진과 함께 업데이트.
+- **상품 소식마다(`<h3>` 하나마다) 그 상품의 아마존 재팬 박스 사진을 `<h3>` 바로 아래에 꼭 넣어요.** 사진 주소는 `monitor.py` 의 `AMZ_IMG`(ASIN→이미지 키)를 먼저 쓰고, 없으면 아마존 상품 페이지에서 찾아 `AMZ_IMG` 에도 추가. 아마존에 아직 없는 신상품이나 가격·일정 같은 소식은 **blvl 정보 카드 이미지**(1200px, 다크 배경, 상품별 색 카드, 교묘 이모티콘, 출처 줄)를 직접 만들어 넣어요: `_tools/infocard/` 의 예시 HTML(op.html, pk.html)을 복사해 내용만 바꾸고 `REPO` 를 저장소 경로로 바꾼 뒤 `node r.js` 로 jpg를 만들어 `wp-content/uploads/YYYY/MM/blvl-tcg-daily-YYYYMMDD-이름.jpg` 로 저장. **사진 없는 소식은 하나도 없게.** alt 에는 상품명·발매일·가격 키워드를 넣어요(검색 노출용). 아마존 페이지가 생기면 다음 데일리에서 박스 사진으로 업데이트.
 - 이미지: 박스 사진은 아마존 상품 사진만, 출처·링크 표기(기존 `파동시커-응모-총정리.html` 의 figure 형식). 공식 유튜브는 youtube-nocookie 임베드 + 출처. 다른 사이트 이미지 복사 금지.
 - **새 소식이 거의 없는 날은 글을 쓰지 않아요.** (같은 내용 반복 금지 — 애드센스 품질)
 

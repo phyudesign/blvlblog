@@ -1,6 +1,6 @@
 {"out":"_thumbs/out/test-hadou-mag.jpg","bgimg":"_thumbs/out/gyomyo-hadou-cards-1.png",
  "items":[
-  {"src":"assets/products/B0H4PQ6LR5.webp","x":30,"y":60,"h":30,"r":-3,"z":2},
-  {"src":"assets/cards/m7-garchomp.webp","x":10,"y":75,"h":34,"r":-14,"z":3},
-  {"src":"assets/cards/m7-lucario.webp","x":27,"y":79,"h":36,"r":-5,"z":4},
-  {"src":"assets/cards/m7-maxi-sar.webp","x":47,"y":80,"h":35,"r":6,"z":5,"card":true}]}
+  {"src":"assets/products/B0H4PQ6LR5.webp","x":37,"y":63,"h":28,"r":-3,"z":2},
+  {"src":"assets/cards/m7-garchomp.webp","x":12,"y":76,"h":44,"r":-13,"z":3},
+  {"src":"assets/cards/m7-lucario.webp","x":32,"y":79,"h":46,"r":-4,"z":4},
+  {"src":"assets/cards/m7-maxi-sar.webp","x":53,"y":79,"h":45,"r":6,"z":5,"card":true}]}

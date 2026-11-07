@@ -1,0 +1,28 @@
+{
+ "model": "gpt-image-2",
+ "prompt": "Gyomyo pops up from the bottom-right corner, one paw pointing at the empty space on the left with a small swirling blue aura energy spark at the paw tip, mouth open in excitement.",
+ "refs": [
+  "_character/gyomyo/front.png",
+  "_character/gyomyo/turnaround.png",
+  "_character/style/magazine-1.png"
+ ],
+ "outputs": [
+  "_thumbs/out/gyomyo-hadou-cards-1.png",
+  "_thumbs/out/gyomyo-hadou-cards-2.png"
+ ],
+ "usage": {
+  "input_tokens": 6682,
+  "input_tokens_details": {
+   "image_tokens": 5632,
+   "text_tokens": 1050
+  },
+  "output_tokens": 14048,
+  "output_tokens_details": {
+   "image_tokens": 14048,
+   "text_tokens": 0
+  },
+  "total_tokens": 20730
+ },
+ "est_cost_usd": 0.4717,
+ "created": "2026-11-07 18:00:34"
+}

@@ -6,7 +6,7 @@
 실행:      python3 _tools/site.py            (저장소 루트에서)
 
 글 머리말 필드: title, slug, date("YYYY-MM-DD HH:MM:SS"), mod, desc, thumb(정사각형 이미지 경로),
-             category(tcg|minicar|toys|game|tech), tags(목록), featured(true면 홈 상단 고정)
+             category(tcg|minicar|toys|game|tech), tags(목록), featured(현재 안 씀 — 홈은 최신 글만)
 """
 import re, json, html, shutil, urllib.parse, datetime
 from pathlib import Path
@@ -434,17 +434,10 @@ for pg in pages:
 <div class="entry-content">{pg["body"]}</div></article>'''
     write(url(pg["slug"]), page(pg["title"], with_sidebar(main), pg["desc"], url(pg["slug"])))
 
-feat = [p for p in articles if p.get("featured")]
-newest = max(articles, key=lambda p: p["date"]) if articles else None   # 가장 최근 글은 항상 큰 칸에
-feat = ([newest] if newest else []) + [p for p in feat if p is not newest]
-feat = (feat + [p for p in articles if p not in feat])[:5]
-featured = ""
-if feat:
-    featured = f'''<section class="gb-section"><h2 class="custom-title">Featured Posts</h2>
-<div class="feat"><div class="big">{gcard(feat[0], True)}</div><div class="small">{"".join(gcard(p) for p in feat[1:5])}</div></div></section>'''
-home = f'''{live_hero()}{featured}
+# Featured Posts 섹션은 2026-11-08 슨생 요청으로 없앴어요. 홈은 최신 글만.
+home = f'''{live_hero()}
 <section class="gb-section latest"><h2 class="custom-title">Latest Posts</h2>
-<div class="lgrid">{"".join(gcard(p) for p in articles[:9])}</div>
+<div class="lgrid">{"".join(gcard(p) for p in sorted(articles, key=lambda p: p["date"], reverse=True)[:12])}</div>
 <div class="gbtn-wrap"><a class="gbtn" href="/blog/">Read All Article</a></div></section>'''
 write("/", page(TITLE, home, DESC, "/", active="/", ticker=False))
 listing("/blog/", articles, "BLOG")

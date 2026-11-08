@@ -691,3 +691,16 @@ html.mn-lock,html.mn-lock body{overflow:hidden}
 /* 하단 데스크톱/모바일 보기 전환 */
 .view-switch{margin:10px 0 6px}.view-switch button{font:inherit;font-size:13px;color:#555;background:#fff;border:1px solid #d8dbe2;border-radius:999px;padding:6px 14px;cursor:pointer}
 .view-switch button:hover{border-color:#17181d;color:#17181d}
+/* 모바일 메뉴: 햄버거 두 줄 → X 로 접히는 애니메이션, X 는 햄버거와 같은 자리 */
+.mn-close{z-index:5}
+.mn-close .mc{position:relative;display:flex;flex-direction:column;gap:6px;width:18px}
+.mn-close .mc i{display:block;height:1.6px;background:currentColor;border-radius:2px;transition:transform .32s cubic-bezier(.4,0,.2,1)}
+.mnav.on .mn-close .mc i:first-child{transform:translateY(3.8px) rotate(45deg)}
+.mnav.on .mn-close .mc i:last-child{transform:translateY(-3.8px) rotate(-45deg)}
+.mt-bars i{transition:transform .32s cubic-bezier(.4,0,.2,1)}
+.menu-toggle[aria-expanded="true"] .mt-bars i:first-child{transform:translateY(3.8px) rotate(45deg)}
+.menu-toggle[aria-expanded="true"] .mt-bars i:last-child{transform:translateY(-3.8px) rotate(-45deg)}
+@media(prefers-reduced-motion:reduce){.mn-close .mc i,.mt-bars i{transition:none}}
+.mn-close .mc::before,.mn-close .mc::after{display:none!important}
+.mn-close .mc{height:auto!important}
+.menu-toggle,.mn-close,.mn-back{-webkit-tap-highlight-color:transparent}

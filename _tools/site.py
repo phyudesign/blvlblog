@@ -17,7 +17,7 @@ DESC = "포켓몬카드·미니카·피규어·게임 — 직접 모으고 즐�
 ADSENSE = "ca-pub-4380904134243959"
 AUTHOR = "blvl."
 PER_PAGE = 10
-CSS_VER = 85
+CSS_VER = 86
 JS_VER = 3
 
 # 카테고리: (슬러그, 메뉴명, 설명)
@@ -128,10 +128,10 @@ def _mnav():
     top.append('<li><a href="/stock/">LIVE 현황판</a></li>')
     return (f'''<div class="mnav" id="mnav" hidden aria-label="메뉴">
 <div class="mn-bar"><button type="button" class="mn-back" aria-label="뒤로" hidden><svg viewBox="0 0 12 16" width="11" height="15" aria-hidden="true"><path d="M9 2L3.5 8 9 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-<button type="button" class="mn-close" aria-label="메뉴 닫기"><span aria-hidden="true"></span></button></div>
+<button type="button" class="mn-close" aria-label="메뉴 닫기"><span class="mc" aria-hidden="true"><i></i><i></i></span></button></div>
 <div class="mn-stage"><div class="mn-panel mn-root" data-p="root"><ul class="mn-list mn-big">{"".join(top)}</ul>
 <form class="mn-search" action="/search/"><input name="q" placeholder="블로그 검색" aria-label="검색"></form></div>{"".join(subs)}</div></div>
-<script defer src="/assets/blvl-mnav.js?v=1"></script>''')
+<script defer src="/assets/blvl-mnav.js?v=2"></script>''')
 MNAV = _mnav()
 
 CHROME = {"ticker": "", "float": ""}   # 모든 페이지 공통: 상단 LIVE 전광판, 오른쪽 아마존 응모 판 (아래에서 채움)

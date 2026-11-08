@@ -3,9 +3,18 @@
   var m = document.getElementById("mnav"), btn = document.querySelector(".menu-toggle");
   if (!m || !btn) return;
   var back = m.querySelector(".mn-back"), root = m.querySelector(".mn-root"), cur = null;
+  var x = m.querySelector(".mn-close"), bars = btn.querySelector(".mt-bars");
+  // 닫기(X) 버튼을 햄버거와 정확히 같은 자리에 두고, 두 줄이 X로 접히게
+  function place() {
+    if (!bars) return;
+    var r = bars.getBoundingClientRect(), mc = x.querySelector(".mc");
+    x.style.position = "fixed"; x.style.margin = "0";
+    x.style.left = (r.left + r.width / 2 - 22) + "px"; x.style.top = (r.top + r.height / 2 - 22) + "px";
+    if (mc) mc.style.width = r.width + "px";
+  }
   function open() {
-    m.hidden = false; document.documentElement.classList.add("mn-lock");
-    requestAnimationFrame(function () { m.classList.add("on"); });
+    m.hidden = false; place(); document.documentElement.classList.add("mn-lock");
+    requestAnimationFrame(function () { requestAnimationFrame(function () { m.classList.add("on"); }); });
     btn.setAttribute("aria-expanded", "true"); showRoot(true);
   }
   function close() {

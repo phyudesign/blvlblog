@@ -92,7 +92,7 @@ def page(title, content, desc=DESC, canon="/", og_img="", head_extra="", active=
     ogi = f'<meta property="og:image" content="{esc(SITE + og_img if og_img.startswith("/") else og_img)}">' if og_img else ""
     robots = '<meta name="robots" content="noindex,follow">' if noindex else ""
     return f'''<!doctype html>
-<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" id="vp" content="width=device-width,initial-scale=1"><script>try{{if(localStorage.getItem("blvl_view")==="desktop")document.getElementById("vp").setAttribute("content","width=1280")}}catch(e){{}}</script>
+<html lang="ko"><head><meta charset="utf-8"><meta name="naver-site-verification" content="706d239472a6ecce3af288ce3327b84d1b473c29"><meta name="viewport" id="vp" content="width=device-width,initial-scale=1"><script>try{{if(localStorage.getItem("blvl_view")==="desktop")document.getElementById("vp").setAttribute("content","width=1280")}}catch(e){{}}</script>
 <title>{esc(full)}</title><meta name="description" content="{esc(desc)}">{robots}
 <link rel="canonical" href="{SITE}{canon}"><meta property="og:type" content="website"><meta property="og:title" content="{esc(full)}">
 <meta property="og:description" content="{esc(desc)}"><meta property="og:url" content="{SITE}{canon}">{ogi}

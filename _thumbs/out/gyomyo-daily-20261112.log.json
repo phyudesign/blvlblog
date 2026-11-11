@@ -1,0 +1,27 @@
+{
+ "model": "gpt-image-2",
+ "prompt": "Match the energy of a bold crayon poster: red and orange crayon burst strokes radiating around the title, black outlined four-point sparkles scattered around. Gyomyo is small in the bottom-right corner (keep the huge wide head and tiny stubby body exactly like the references). POSE: standing and holding up a big wall calendar page with one tiny paw, drawing a red crayon circle around a date with the other paw, a few small red circles and check marks already on the calendar, focused and excited. In the very bottom-left corner a small messy pile of navy blue card backs with a yellow paw print and stars. Keep the middle and left of the lower half empty background.",
+ "refs": [
+  "_character/gyomyo/front.png",
+  "_character/gyomyo/turnaround.png",
+  "_character/style/magazine-1.png"
+ ],
+ "outputs": [
+  "_thumbs/out/gyomyo-daily-20261112-1.png"
+ ],
+ "usage": {
+  "input_tokens": 3531,
+  "input_tokens_details": {
+   "image_tokens": 2816,
+   "text_tokens": 715
+  },
+  "output_tokens": 7024,
+  "output_tokens_details": {
+   "image_tokens": 7024,
+   "text_tokens": 0
+  },
+  "total_tokens": 10555
+ },
+ "est_cost_usd": 0.2368,
+ "created": "2026-11-11 22:56:56"
+}

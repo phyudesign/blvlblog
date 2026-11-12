@@ -1,0 +1,16 @@
+{
+ "character": "gyomyo",
+ "mode": "magcards",
+ "bg": "soft lilac purple",
+ "eyes": "big round sparkling eyes wide open, mouth wide open shouting excitedly",
+ "badge": "교묘의 TCG 정보통",
+ "title": "TCG 데일리",
+ "title2": "오늘의 소식!",
+ "style_refs": [
+  "_character/style/magazine-1.png"
+ ],
+ "prompt": "Match the energy of a bold crayon poster: red and orange crayon burst strokes radiating around the title, black outlined four-point sparkles scattered around. Gyomyo is small in the bottom-right corner (keep the huge wide head and tiny stubby body exactly like the references). POSE: standing on tiptoe and shouting into a big red-and-white crayon megaphone held up with both tiny paws, small sound-wave lines and a few lottery tickets flying out of the megaphone, very excited. In the very bottom-left corner a small messy pile of navy blue card backs with a yellow paw print and stars. Keep the middle and left of the lower half empty background.",
+ "n": 1,
+ "quality": "high",
+ "regenerate": false
+}

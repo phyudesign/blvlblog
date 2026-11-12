@@ -704,3 +704,5 @@ html.mn-lock,html.mn-lock body{overflow:hidden}
 .mn-close .mc::before,.mn-close .mc::after{display:none!important}
 .mn-close .mc{height:auto!important}
 .menu-toggle,.mn-close,.mn-back{-webkit-tap-highlight-color:transparent}
+/* 홈 최근 글: 속보 카드는 상품 사진을 흰 바탕에 맞춰 보여 줌 */
+.gimg img.gprod{object-fit:contain;background:#fff;padding:8%}

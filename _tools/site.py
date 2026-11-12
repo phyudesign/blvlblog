@@ -17,7 +17,7 @@ DESC = "포켓몬카드·미니카·피규어·게임 — 직접 모으고 즐�
 ADSENSE = "ca-pub-4380904134243959"
 AUTHOR = "blvl."
 PER_PAGE = 10
-CSS_VER = 86
+CSS_VER = 87
 JS_VER = 3
 
 # 카테고리: (슬러그, 메뉴명, 설명)
@@ -155,8 +155,17 @@ def comments_box(p):
 
 def catlink(k): return f'<a href="/category/{k}/">{esc(CAT_NAME[k])}</a>'
 
+def home_feed():
+    """홈 최근 글: 정식 글 + 최근 48시간 안의 속보(최대 3개)를 시간순으로 9개"""
+    cut = (datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9))) - datetime.timedelta(hours=48)).strftime("%Y-%m-%d %H:%M:%S")
+    hot = [q for q in posts if q["category"] == NEWS and q["date"] >= cut][:3]
+    return sorted(articles + hot, key=lambda q: q["date"], reverse=True)[:9]
+
 def gcard(p, exc=False):
-    img = f'<img loading="lazy" src="{esc(p["thumb"])}" alt="{esc(p["title"])}">' if p["thumb"] else ""
+    th = p["thumb"]
+    if p["category"] == NEWS and p.get("pimg"):   # 속보는 공용 그림 대신 실제 상품 사진
+        th = re.sub(r"downsize=\d+(:\*)?", "downsize=500", p["pimg"])
+    img = f'<img loading="lazy" src="{esc(th)}" alt="{esc(p["title"])}" referrerpolicy="no-referrer"{" class=\"gprod\"" if th != p["thumb"] else ""}>' if th else ""
     ex = f'<p class="gexc">{esc(p["desc"][:110])}…</p>' if exc else ""
     return f'''<div class="gbc"><a class="gimg" href="{url(p["slug"])}">{img}</a>
 <div class="gcat">{catlink(p["category"])}</div><h2 class="gtitle"><a href="{url(p["slug"])}">{esc(p["title"])}</a></h2>
@@ -437,7 +446,7 @@ for pg in pages:
 # Featured Posts 섹션은 2026-11-08 슨생 요청으로 없앴어요. 홈은 최신 글만.
 home = f'''{live_hero()}
 <section class="gb-section latest"><h2 class="custom-title">Latest Posts</h2>
-<div class="lgrid">{"".join(gcard(p) for p in sorted(articles, key=lambda p: p["date"], reverse=True)[:9])}</div>
+<div class="lgrid">{"".join(gcard(p) for p in home_feed())}</div>
 <div class="gbtn-wrap"><a class="gbtn" href="/blog/">Read All Article</a></div></section>'''
 write("/", page(TITLE, home, DESC, "/", active="/", ticker=False))
 listing("/blog/", articles, "BLOG")

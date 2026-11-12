@@ -282,6 +282,7 @@ INVITE_SEED = {
 # 아마존 응모 판에 보여 줄 목록 (위가 최신). 2026-11-02 TCG 브레이커 응모 목록 순서를 참고해 정리.
 # (ASIN, 이름, 브랜드, 묶음)
 INVITE_JP = [
+    ("B0HMZ9WLVZ", "EB-06 EAST BLUE BOX", "원피스", ""),
     ("B0H4PQ6LR5", "파동시커 BOX", "포켓몬", ""),
     ("B0HFVPJF4Q", "OP-18 신의 지배 BOX", "원피스", ""),
     ("B0FX7X71KK", "OP-13 이어지는 의지 BOX", "원피스", ""),
@@ -321,6 +322,7 @@ INVITE_JP = [
 ]
 # 상품 사진 (아마존 상품 페이지 대표 이미지 주소, 2026-11-02 확인) — 홈 슬라이드·미리보기 카드 배경
 AMZ_IMG = {
+    "B0HMZ9WLVZ": "61fcPWlRwhL",
     "B0HPRX138T": "71I7EZSM4DL",
     "B0H4PQ6LR5": "715oCiYpb-L", "B0HFVPJF4Q": "61FmZOBIZlL", "B0FX7X71KK": "81tO30I8gwL", "B0FJ7Z6RML": "61X1xcYYFCL",
     "B0HB3JQ6P4": "61UK9XZctYL", "B0GP928YDZ": "715FaccxhwL", "B0H43ZX8LK": "61DEiJm305L", "B0GXCRBL5J": "711dPI8FndL",

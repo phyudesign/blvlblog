@@ -557,6 +557,10 @@
   "rakuten:18864053": {
    "file": "속보-20261112-1335-라쿠텐북스-af91ab.html",
    "at": "2026-11-12T13:35:50.713193+09:00"
+  },
+  "amazon:B0HMZ9WLVZ": {
+   "file": "속보-20261112-2049-아마존-재팬-b26d31.html",
+   "at": "2026-11-12T20:49:13.782790+09:00"
   }
  },
  "anews": [
@@ -837,6 +841,12 @@
    "src": "전격온라인",
    "srcurl": "https://dengekionline.com/article/202608/83452",
    "ord": 120
+  },
+  "B0HMZ9WLVZ": {
+   "name": "원피스카드 엑스트라 부스터 EAST BLUE【EB-06】 BOX",
+   "price": "5,782엔",
+   "first": "2026-11-12 20:49",
+   "url": "https://www.amazon.co.jp/dp/B0HMZ9WLVZ"
   }
  },
  "kr": {
@@ -875,6 +885,6 @@
    "img": "https://pokemoncard.co.kr/s3.php?key=home%2Fdata%2Fdata1_www%2F2026%2F09%2F2026-09-23_17-09-20-50627-1790150960.png"
   }
  },
- "alert_bg_last": "stock-a",
- "alert_emo_last": "hmm"
+ "alert_bg_last": "invite-b",
+ "alert_emo_last": "mine"
 }

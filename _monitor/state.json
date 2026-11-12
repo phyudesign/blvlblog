@@ -561,6 +561,14 @@
   "amazon:B0HMZ9WLVZ": {
    "file": "속보-20261112-2049-아마존-재팬-b26d31.html",
    "at": "2026-11-12T20:49:13.782790+09:00"
+  },
+  "daily:rakutenbooks-pk-20261113": {
+   "file": "속보-20261113-0803-라쿠텐북스-9a04e2.html",
+   "at": "2026-11-13T08:03:03.476844+09:00"
+  },
+  "daily:edion-hadou-20261113": {
+   "file": "속보-20261113-0803-에디온-트레카캐피탈-bb3351.html",
+   "at": "2026-11-13T08:03:03.476844+09:00"
   }
  },
  "anews": [
@@ -885,6 +893,6 @@
    "img": "https://pokemoncard.co.kr/s3.php?key=home%2Fdata%2Fdata1_www%2F2026%2F09%2F2026-09-23_17-09-20-50627-1790150960.png"
   }
  },
- "alert_bg_last": "invite-b",
- "alert_emo_last": "mine"
+ "alert_bg_last": "stock-a",
+ "alert_emo_last": "hmm"
 }

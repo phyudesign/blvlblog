@@ -111,3 +111,48 @@ def make_alert_thumb(kind, product, out_path, last_bg=""):
     out_path = pathlib.Path(out_path); out_path.parent.mkdir(parents=True, exist_ok=True)
     out.save(out_path, "JPEG", quality=86, optimize=True)
     return key
+
+
+# ── 교묘 이모티콘판 (슨생이 직접 그린 교묘 이모티콘 24종을 돌려 써요 — 매번 다른 포즈, 비용 0) ──
+EMO_DIR = ROOT / "wp-content" / "uploads" / "emoticons" / "gyomyo"
+EMOS = {"stock": ["rare", "lets-go", "kyaa", "great", "mine", "happy-cards", "best", "heok", "watching", "too-many", "good", "nyamnyam"],
+        "lottery": ["lets-go", "kyaa", "hoho", "watching", "hmm", "mine", "great", "sounds-good", "what-now", "best"],
+        "invite": ["kyaa", "lets-go", "watching", "hmm-question", "mine", "great", "sounds-good", "happy-cards"],
+        "krnews": ["great", "kyaa", "good", "best", "watching", "sounds-good", "lets-go", "heok"]}
+
+
+def make_alert_thumb_emo(kind, product, out_path, last_emo="", last_bg=""):
+    """AI 배경의 제목 부분만 쓰고 아래는 배경색으로 비운 뒤, 상품 사진 + 교묘 이모티콘(직전과 다른 것)을 얹어요.
+    (사용한 이모티콘 이름, 배경 키)를 돌려줘요."""
+    key = pick_bg(kind, last_bg) or pick_bg("stock", last_bg)
+    if not key: return "", ""
+    bg = Image.open(OUT / f"gyomyo-alert-{key}-1.png").convert("RGB").resize((SIZE, SIZE))
+    col = bg.getpixel((SIZE // 2, int(SIZE * .47)))
+    cut = int(SIZE * .47)
+    out = bg.copy(); out.paste(col, (0, cut, SIZE, SIZE))
+    # 제목 영역 오른쪽 아래에 걸친 AI 교묘 조각이 있으면 지워요
+    out = out.convert("RGBA")
+    pool = [e for e in EMOS.get(kind, EMOS["stock"]) if (EMO_DIR / f"{e}.webp").exists() and e != last_emo]
+    emo = random.choice(pool) if pool else ""
+    if product:
+        try:
+            p = _cutout(_load(product))
+            box_w, box_h = int(SIZE * .56), int(SIZE * .44)
+            scale = min(box_w / p.width, box_h / p.height)
+            p = p.resize((max(1, int(p.width * scale)), max(1, int(p.height * scale))), Image.LANCZOS)
+            p = _ink(p).rotate(random.choice((-5, -3, 3, 4)), expand=True, resample=Image.BICUBIC)
+            cx, cy = int(SIZE * .34), int(SIZE * .74)
+            out.alpha_composite(p, (max(0, cx - p.width // 2), min(SIZE - p.height, max(int(SIZE * .44), cy - p.height // 2))))
+        except Exception as e:
+            print("속보 표지: 상품 사진 실패", e)
+    if emo:
+        e = Image.open(EMO_DIR / f"{emo}.webp").convert("RGBA")
+        w = int(SIZE * .44); e = e.resize((w, int(e.height * w / e.width)), Image.LANCZOS)
+        # 흰 스티커 테두리
+        a = e.split()[3].filter(ImageFilter.MaxFilter(15))
+        st = Image.new("RGBA", e.size, (255, 255, 255, 255)); st.putalpha(a)
+        x, y = SIZE - w - int(SIZE * .02), SIZE - e.height - int(SIZE * .02)
+        out.alpha_composite(st, (x, y)); out.alpha_composite(e, (x, y))
+    out_path = pathlib.Path(out_path); out_path.parent.mkdir(parents=True, exist_ok=True)
+    out.convert("RGB").save(out_path, "JPEG", quality=86, optimize=True)
+    return emo, key

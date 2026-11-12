@@ -118,7 +118,7 @@ def tg_chat():
 def heal_alert_thumbs(state, hours=72):
     """최근 속보 중 공용 표지(blvl-stock-alert.jpg)를 쓰는 글을 교묘 속보 표지로 바꿔요. 바꾼 개수를 돌려줘요."""
     try:
-        from alertcard import make_alert_thumb
+        from alertcard import make_alert_thumb_emo
     except Exception as e:
         print("속보 표지 도구 없음", e); return 0
     cut = (NOW - datetime.timedelta(hours=hours)).strftime("%Y-%m-%d %H:%M:%S"); n = 0
@@ -139,9 +139,9 @@ def heal_alert_thumbs(state, hours=72):
                 if not grp and len(kw) >= 3 and kw in t and (ROOT / "assets" / "products" / f"{a_}.webp").exists():
                     pimg = str(ROOT / "assets" / "products" / f"{a_}.webp"); break
         rel = f'wp-content/uploads/{fm["date"][:4]}/{fm["date"][5:7]}/blvl-alert-{hashlib.md5(f.name.encode()).hexdigest()[:8]}.jpg'
-        k = make_alert_thumb(kind, pimg, ROOT / rel, state.get("alert_bg_last", ""))
+        emo_used, k = make_alert_thumb_emo(kind, pimg, ROOT / rel, state.get("alert_emo_last", ""), state.get("alert_bg_last", ""))
         if not k: continue
-        state["alert_bg_last"] = k
+        state["alert_bg_last"] = k; state["alert_emo_last"] = emo_used
         f.write_text(s.replace(f'"thumb": "{fm["thumb"]}"', f'"thumb": "/{rel}"', 1), encoding="utf-8"); n += 1
         print("속보 표지 교체:", f.name, k)
     return n
@@ -217,7 +217,7 @@ def write_alert_post(ev, state):
           "shop_kr": ev["shop_kr"], "status_kr": STATUS_KR.get(ev["status"], ""), "price": ev.get("price", "")}
     # 속보 표지: 매번 다른 포즈의 교묘 배경 + 실제 상품 사진 (alertcard.py)
     try:
-        from alertcard import make_alert_thumb
+        from alertcard import make_alert_thumb_emo
         kind = "invite" if is_amazon else "krnews" if is_krnews else "lottery" if is_lottery else "stock"
         pimg = re.sub(r"downsize=\d+", "downsize=600", ev.get("img", "") or "")
         if not pimg:   # 상품 사진이 없으면 응모 목록 상품 이름으로 박스 누끼를 찾아요
@@ -227,8 +227,8 @@ def write_alert_post(ev, state):
                 if not grp and len(kw) >= 3 and kw in t and (ROOT / "assets" / "products" / f"{a_}.webp").exists():
                     pimg = str(ROOT / "assets" / "products" / f"{a_}.webp"); break
         rel = f'wp-content/uploads/{NOW.strftime("%Y/%m")}/blvl-alert-{hashlib.md5((key + stamp).encode()).hexdigest()[:8]}.jpg'
-        k = make_alert_thumb(kind, pimg, ROOT / rel, state.get("alert_bg_last", ""))
-        if k: fm["thumb"] = "/" + rel; state["alert_bg_last"] = k
+        emo_used, k = make_alert_thumb_emo(kind, pimg, ROOT / rel, state.get("alert_emo_last", ""), state.get("alert_bg_last", ""))
+        if k: fm["thumb"] = "/" + rel; state["alert_bg_last"] = k; state["alert_emo_last"] = emo_used
     except Exception as e:
         print("속보 표지 실패", e)
     lead = (f'<strong>아마존 재팬</strong>에서 아래 상품의 <strong>초대 요청(응모)</strong>이 열린 걸 blvl 감시기가 잡았어요. 초대 요청은 빨리 눌러 둘수록 좋으니 <strong>링크에서 바로 눌러 두세요.</strong>' if is_amazon else

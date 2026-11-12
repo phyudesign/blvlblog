@@ -431,6 +431,33 @@
    "price": "",
    "img": "https://tshop.r10s.jp/book/cabinet/4732/4521329394732_1_2.jpg?downsize=130:*",
    "since": "11/02 11:06"
+  },
+  "rakuten:18664603": {
+   "shop": "rakuten",
+   "title": "ポケモンカードゲーム MEGA 拡張パック ハドウシーカー",
+   "url": "https://books.rakuten.co.jp/rb/18664603/",
+   "status": "unknown",
+   "price": "",
+   "img": "https://tshop.r10s.jp/book/cabinet/2448/4521329462448.jpg?downsize=130:*",
+   "since": "11/12 10:56"
+  },
+  "rakuten:18664602": {
+   "shop": "rakuten",
+   "title": "ポケモンカードゲーム MEGA スペシャルデッキセットMEGA メガオーダイル・メガカイリュー・メガゲンガー",
+   "url": "https://books.rakuten.co.jp/rb/18664602/",
+   "status": "unknown",
+   "price": "",
+   "img": "https://tshop.r10s.jp/book/cabinet/3155/4521329463155_1_3.jpg?downsize=130:*",
+   "since": "11/12 10:56"
+  },
+  "rakuten:18812865": {
+   "shop": "rakuten",
+   "title": "ONE PIECEカードゲーム ブースターパック 神の支配【OP18】",
+   "url": "https://books.rakuten.co.jp/rb/18812865/",
+   "status": "unknown",
+   "price": "",
+   "img": "https://tshop.r10s.jp/book/cabinet/7194/4582770067194_1_2.jpg?downsize=130:*",
+   "since": "11/12 10:56"
   }
  },
  "lines": {

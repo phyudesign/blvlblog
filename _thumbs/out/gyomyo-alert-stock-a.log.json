@@ -1,0 +1,27 @@
+{
+ "model": "gpt-image-2",
+ "prompt": "Match the energy of a bold crayon poster: red and orange crayon burst strokes radiating around the title, black outlined four-point sparkles scattered around. Gyomyo is small in the bottom-right corner (keep the huge wide head and tiny stubby body exactly like the references). POSE: wearing a flashing red siren light on its head, pointing forward excitedly with one paw, mouth wide open shouting. In the very bottom-left corner a small messy pile of navy blue card backs with a yellow paw print and stars. Keep the middle and left of the lower half empty background.",
+ "refs": [
+  "_character/gyomyo/front.png",
+  "_character/gyomyo/turnaround.png",
+  "_character/style/magazine-1.png"
+ ],
+ "outputs": [
+  "_thumbs/out/gyomyo-alert-stock-a-1.png"
+ ],
+ "usage": {
+  "input_tokens": 3499,
+  "input_tokens_details": {
+   "image_tokens": 2816,
+   "text_tokens": 683
+  },
+  "output_tokens": 7024,
+  "output_tokens_details": {
+   "image_tokens": 7024,
+   "text_tokens": 0
+  },
+  "total_tokens": 10523
+ },
+ "est_cost_usd": 0.2367,
+ "created": "2026-11-12 05:12:47"
+}

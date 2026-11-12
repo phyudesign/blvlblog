@@ -42,7 +42,9 @@ for asin, (l, t, r, b) in CROP.items():
         bg.save(ART / f"{asin}.jpg", "JPEG", quality=86); print("art", asin, bg.size)
     except Exception as e: print("art fail", asin, e)
 
+SKIP = {"B0HMZ9WLVZ"}  # 박스가 흰색이라 자동 누끼가 안 돼 공식 사이트 이미지로 대체
 for asin in AMZ_IMG:
+    if asin in SKIP: continue
     try:
         r = requests.get(amz_img(asin, 1000), headers=H, timeout=30); r.raise_for_status()
         cut(Image.open(io.BytesIO(r.content))).save(OUT / f"{asin}.webp", "WEBP", quality=88)

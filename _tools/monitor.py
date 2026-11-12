@@ -115,6 +115,9 @@ def tg_chat():
     except Exception: pass
     return ""
 
+TG_QUEUE = []
+TG_QUEUE_FILE = ROOT / "_monitor" / "tg_queue.json"
+
 def telegram(msg):
     """보낸 결과를 문자열로 돌려줌: ok / no_token / no_chat / 오류"""
     if not TG_TOKEN: return "no_token"
@@ -524,8 +527,11 @@ def main():
     for ev in new_events[:8]:  # 한 번에 너무 많이 쓰지 않도록
         f = write_alert_post(ev, state)
         events.insert(0, {"at": NOW.strftime("%m/%d %H:%M"), "shop_kr": ev["shop_kr"], "title": ev["title"], "status": ev["status"]})
-        telegram(f'🐱 blvl {"아마존 응모 속보" if ev["status"] == "invite" else "재고 속보"}\n{ev["shop_kr"]} · {STATUS_KR.get(ev["status"], "")}\n{kr(ev["title"])[:80]}\n{ev.get("price","")}\n{ev["url"]}\n블로그: https://blvlblog.com/{urllib.parse.quote(f[:-5])}/')
+        # 텔레그램은 블로그에 글이 실제로 올라간 뒤 보내요(워크플로 마지막 단계 tg_flush.py) — 알림 눌렀는데 글이 없는 일 방지
+        TG_QUEUE.append(f'🐱 blvl {"아마존 응모 속보" if ev["status"] == "invite" else "재고 속보"}\n{ev["shop_kr"]} · {STATUS_KR.get(ev["status"], "")}\n{kr(ev["title"])[:80]}\n{ev.get("price","")}\n{ev["url"]}\n블로그: https://blvlblog.com/{urllib.parse.quote(f[:-5])}/')
         print("EVENT", ev["shop_kr"], ev["status"], ev["title"][:60])
+    if TG_QUEUE:
+        TG_QUEUE_FILE.write_text(json.dumps(TG_QUEUE, ensure_ascii=False), encoding="utf-8")
     state["events"] = events[:100]
     if changed:
         write_board(state)

@@ -5,12 +5,12 @@ on:
   workflow_dispatch:
     inputs:
       test: { description: "텔레그램 시험 메시지 보내기", required: false, default: "0" }
-permissions: { contents: write }
+permissions: { contents: write, actions: read }
 concurrency: { group: stock-monitor, cancel-in-progress: false }
 jobs:
   watch:
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -30,3 +30,20 @@ jobs:
           git add -A; git reset -q _monitor/changed
           git commit -m "재고 감시: $(date -u +%Y-%m-%dT%H:%MZ)" || exit 0
           for i in 1 2 3; do git pull --rebase -q origin main && git push -q origin HEAD:main && break; sleep 5; done
+      - name: 블로그 반영 뒤 텔레그램 알림
+        if: always()
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          [ -f _monitor/tg_queue.json ] || { echo "보낼 알림 없음"; exit 0; }
+          SHA=$(git rev-parse HEAD)
+          # 이 커밋의 GitHub Pages 배포가 끝날 때까지 최대 4분 기다려요
+          for i in $(seq 1 24); do
+            st=$(gh api "repos/${{ github.repository }}/actions/runs?head_sha=$SHA&per_page=5" --jq '[.workflow_runs[]|select(.name|test("pages"))|.status][0]' 2>/dev/null)
+            [ "$st" = "completed" ] && { echo "배포 완료"; break; }
+            sleep 10
+          done
+          sleep 15
+          python _tools/tg_flush.py

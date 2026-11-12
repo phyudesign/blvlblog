@@ -1,0 +1,16 @@
+{
+ "character": "gyomyo",
+ "mode": "magcards",
+ "bg": "bright violet purple",
+ "eyes": "closed crossed-fingers hopeful eyes",
+ "badge": "blvl 재고 감시기",
+ "title": "일본 쇼핑몰",
+ "title2": "추첨 소식!",
+ "style_refs": [
+  "_character/style/magazine-1.png"
+ ],
+ "prompt": "Match the energy of a bold crayon poster: red and orange crayon burst strokes radiating around the title, black outlined four-point sparkles scattered around. Gyomyo is small in the bottom-right corner (keep the huge wide head and tiny stubby body exactly like the references). POSE: holding a raffle ticket tightly with both paws and crossing its fingers, small sweat drop. In the very bottom-left corner a small messy pile of navy blue card backs with a yellow paw print and stars. Keep the middle and left of the lower half empty background.",
+ "n": 1,
+ "quality": "high",
+ "regenerate": false
+}

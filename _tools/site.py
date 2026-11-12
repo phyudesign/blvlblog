@@ -163,7 +163,7 @@ def home_feed():
 
 def gcard(p, exc=False):
     th = p["thumb"]
-    if p["category"] == NEWS and p.get("pimg"):   # 속보는 공용 그림 대신 실제 상품 사진
+    if p["category"] == NEWS and p.get("pimg") and p["thumb"].endswith("blvl-stock-alert.jpg"):   # 교묘 속보 표지가 없는 옛 속보만 상품 사진
         th = re.sub(r"downsize=\d+", "downsize=500", p["pimg"])
     img = f'<img loading="lazy" src="{esc(th)}" alt="{esc(p["title"])}" referrerpolicy="no-referrer"{" class=\"gprod\"" if th != p["thumb"] else ""}>' if th else ""
     ex = f'<p class="gexc">{esc(p["desc"][:110])}…</p>' if exc else ""

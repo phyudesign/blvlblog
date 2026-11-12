@@ -115,6 +115,37 @@ def tg_chat():
     except Exception: pass
     return ""
 
+def heal_alert_thumbs(state, hours=72):
+    """최근 속보 중 공용 표지(blvl-stock-alert.jpg)를 쓰는 글을 교묘 속보 표지로 바꿔요. 바꾼 개수를 돌려줘요."""
+    try:
+        from alertcard import make_alert_thumb
+    except Exception as e:
+        print("속보 표지 도구 없음", e); return 0
+    cut = (NOW - datetime.timedelta(hours=hours)).strftime("%Y-%m-%d %H:%M:%S"); n = 0
+    for f in sorted((ROOT / "_posts").glob("속보-*.html"), reverse=True)[:30]:
+        s = f.read_text(encoding="utf-8")
+        m = re.search(r"<!--\s*(\{.*?\})\s*-->", s, re.S)
+        if not m: continue
+        fm = json.loads(m.group(1))
+        if fm.get("date", "") < cut or not fm.get("thumb", "").endswith("blvl-stock-alert.jpg"): continue
+        title = fm.get("title", "")
+        kind = ("invite" if title.startswith("[아마존 응모]") else "krnews" if title.startswith("[국내판") else
+                "lottery" if ("추첨" in title or "응모 소식" in title) else "stock")
+        pimg = re.sub(r"downsize=\d+", "downsize=600", fm.get("pimg", "") or "")
+        if not pimg:
+            t = title.replace(" ", "")
+            for a_, nm, _b, grp in INVITE_JP + INVITE_US:
+                kw = re.match(r"(OP-\d+|EB-\d+|PRB-\d+|\S+)", nm).group(1)
+                if not grp and len(kw) >= 3 and kw in t and (ROOT / "assets" / "products" / f"{a_}.webp").exists():
+                    pimg = str(ROOT / "assets" / "products" / f"{a_}.webp"); break
+        rel = f'wp-content/uploads/{fm["date"][:4]}/{fm["date"][5:7]}/blvl-alert-{hashlib.md5(f.name.encode()).hexdigest()[:8]}.jpg'
+        k = make_alert_thumb(kind, pimg, ROOT / rel, state.get("alert_bg_last", ""))
+        if not k: continue
+        state["alert_bg_last"] = k
+        f.write_text(s.replace(f'"thumb": "{fm["thumb"]}"', f'"thumb": "/{rel}"', 1), encoding="utf-8"); n += 1
+        print("속보 표지 교체:", f.name, k)
+    return n
+
 TG_QUEUE = []
 TG_QUEUE_FILE = ROOT / "_monitor" / "tg_queue.json"
 
@@ -164,7 +195,7 @@ def write_alert_post(ev, state):
             s = re.sub(r'"mod": "[^"]+"', f'"mod": "{NOW.strftime("%Y-%m-%d %H:%M:%S")}"', s, 1)
             p.write_text(s, encoding="utf-8"); return prev["file"]
     is_lottery = ev["kind"] == "page"
-    is_amazon = ev["status"] == "invite"
+    is_amazon = ev["status"] == "invite" and ("아마존" in ev.get("shop_kr", "") or "amazon" in ev.get("url", ""))
     name = ev["title"]; kname = kr(name)
     is_krnews = ev["status"] == "krnews"
     title = (f'[국내판 속보] {name[:80]}' if is_krnews else
@@ -184,6 +215,22 @@ def write_alert_post(ev, state):
           "thumb": "/wp-content/uploads/2026/10/blvl-stock-alert.jpg", "category": "news",
           "tags": ["입고 속보", "일본 쇼핑몰", ev["shop_kr"]], "pimg": ev.get("img", ""), "shop_url": ev["url"],
           "shop_kr": ev["shop_kr"], "status_kr": STATUS_KR.get(ev["status"], ""), "price": ev.get("price", "")}
+    # 속보 표지: 매번 다른 포즈의 교묘 배경 + 실제 상품 사진 (alertcard.py)
+    try:
+        from alertcard import make_alert_thumb
+        kind = "invite" if is_amazon else "krnews" if is_krnews else "lottery" if is_lottery else "stock"
+        pimg = re.sub(r"downsize=\d+", "downsize=600", ev.get("img", "") or "")
+        if not pimg:   # 상품 사진이 없으면 응모 목록 상품 이름으로 박스 누끼를 찾아요
+            t = kname.replace(" ", "")
+            for a_, nm, _b, grp in INVITE_JP + INVITE_US:
+                kw = re.match(r"(OP-\d+|EB-\d+|PRB-\d+|\S+)", nm).group(1)
+                if not grp and len(kw) >= 3 and kw in t and (ROOT / "assets" / "products" / f"{a_}.webp").exists():
+                    pimg = str(ROOT / "assets" / "products" / f"{a_}.webp"); break
+        rel = f'wp-content/uploads/{NOW.strftime("%Y/%m")}/blvl-alert-{hashlib.md5((key + stamp).encode()).hexdigest()[:8]}.jpg'
+        k = make_alert_thumb(kind, pimg, ROOT / rel, state.get("alert_bg_last", ""))
+        if k: fm["thumb"] = "/" + rel; state["alert_bg_last"] = k
+    except Exception as e:
+        print("속보 표지 실패", e)
     lead = (f'<strong>아마존 재팬</strong>에서 아래 상품의 <strong>초대 요청(응모)</strong>이 열린 걸 blvl 감시기가 잡았어요. 초대 요청은 빨리 눌러 둘수록 좋으니 <strong>링크에서 바로 눌러 두세요.</strong>' if is_amazon else
             f'<strong>{html.escape(ev["shop_kr"])}</strong>에서 아래 상품의 상태가 바뀐 걸 blvl 재고 감시기가 잡았어요. 재고는 몇 분 만에 끝나는 경우가 많으니 <strong>링크에서 바로 확인</strong>하세요.')
     body = f'''<p>{lead}</p>
@@ -530,6 +577,7 @@ def main():
         # 텔레그램은 블로그에 글이 실제로 올라간 뒤 보내요(워크플로 마지막 단계 tg_flush.py) — 알림 눌렀는데 글이 없는 일 방지
         TG_QUEUE.append(f'🐱 blvl {"아마존 응모 속보" if ev["status"] == "invite" else "재고 속보"}\n{ev["shop_kr"]} · {STATUS_KR.get(ev["status"], "")}\n{kr(ev["title"])[:80]}\n{ev.get("price","")}\n{ev["url"]}\n블로그: https://blvlblog.com/{urllib.parse.quote(f[:-5])}/')
         print("EVENT", ev["shop_kr"], ev["status"], ev["title"][:60])
+    if heal_alert_thumbs(state): changed = True
     if TG_QUEUE:
         TG_QUEUE_FILE.write_text(json.dumps(TG_QUEUE, ensure_ascii=False), encoding="utf-8")
     state["events"] = events[:100]

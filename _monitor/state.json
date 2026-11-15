@@ -605,6 +605,22 @@
   "daily:kojima-hadou-20261113": {
    "file": "속보-20261114-0757-코지마-앱-b4aaf6.html",
    "at": "2026-11-14T07:57:33.363681+09:00"
+  },
+  "daily:ryunoshippo-hadou-1115": {
+   "file": "속보-20261116-0801-류노싯포-aa36bd.html",
+   "at": "2026-11-16T08:01:14.703424+09:00"
+  },
+  "daily:yellowsub-30th-1115": {
+   "file": "속보-20261116-0801-옐로서브마린-d80a72.html",
+   "at": "2026-11-16T08:01:14.703424+09:00"
+  },
+  "amazon:B0HN6SF9V1": {
+   "file": "속보-20261116-0801-아마존-재팬-51a000.html",
+   "at": "2026-11-16T08:01:24.149495+09:00"
+  },
+  "amazon:B0HN6Q2STG": {
+   "file": "속보-20261116-0801-아마존-재팬-ba3d0d.html",
+   "at": "2026-11-16T08:01:24.149495+09:00"
   }
  },
  "anews": [
@@ -891,6 +907,24 @@
    "price": "5,782엔",
    "first": "2026-11-12 20:49",
    "url": "https://www.amazon.co.jp/dp/B0HMZ9WLVZ"
+  },
+  "B0HN6SF9V1": {
+   "name": "ST-37 스타트 덱 사막의 왕녀와 해적들",
+   "price": "1,430엔",
+   "first": "2026-11-16",
+   "last": "2026-11-16",
+   "src": "blvl 데일리",
+   "srcurl": "https://nyuka-now.com/archives/97393",
+   "ord": 122
+  },
+  "B0HN6Q2STG": {
+   "name": "ST-38 스타트 덱 바로크 워크스",
+   "price": "1,430엔",
+   "first": "2026-11-16",
+   "last": "2026-11-16",
+   "src": "blvl 데일리",
+   "srcurl": "https://nyuka-now.com/archives/97393",
+   "ord": 123
   }
  },
  "kr": {
@@ -929,6 +963,6 @@
    "img": "https://pokemoncard.co.kr/s3.php?key=home%2Fdata%2Fdata1_www%2F2026%2F09%2F2026-09-23_17-09-20-50627-1790150960.png"
   }
  },
- "alert_bg_last": "stock-a",
- "alert_emo_last": "hmm"
+ "alert_bg_last": "invite-a",
+ "alert_emo_last": "sounds-good"
 }

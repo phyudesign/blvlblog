@@ -631,6 +631,18 @@
   "kr:https://pokemoncard.co.kr/card/988": {
    "file": "속보-20261116-1832-포켓몬카드-공식-1b7b33.html",
    "at": "2026-11-16T18:32:29.850612+09:00"
+  },
+  "daily:pbandai-op17-4th-1116": {
+   "file": "속보-20261117-0809-프리미엄-반다이-0bd69f.html",
+   "at": "2026-11-17T08:09:35.213006+09:00"
+  },
+  "daily:yamashiroya-op-1115": {
+   "file": "속보-20261117-0809-야마시로야-d6290d.html",
+   "at": "2026-11-17T08:09:35.213006+09:00"
+  },
+  "daily:dorasuta-hadou-1116": {
+   "file": "속보-20261117-0809-도라스타-통판-f171e7.html",
+   "at": "2026-11-17T08:09:35.213006+09:00"
   }
  },
  "anews": [
@@ -984,6 +996,6 @@
    "img": ""
   }
  },
- "alert_bg_last": "kr-a",
- "alert_emo_last": "good"
+ "alert_bg_last": "stock-a",
+ "alert_emo_last": "sounds-good"
 }

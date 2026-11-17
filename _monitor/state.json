@@ -993,10 +993,16 @@
    "first": "2026-11-16",
    "posted": "2026-11-16",
    "last": "2026-11-18",
-   "img_try": 2,
+   "img_try": 3,
    "img": ""
   }
  },
  "alert_bg_last": "lottery-b",
- "alert_emo_last": "sounds-good"
+ "alert_emo_last": "sounds-good",
+ "alert_bg_last_by": {
+  "lottery": "lottery-b",
+  "stock": "stock-b",
+  "invite": "invite-a",
+  "krnews": "kr-a"
+ }
 }

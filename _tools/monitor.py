@@ -479,9 +479,13 @@ def scan_kr(state):
         try: ph = requests.get(link, headers=UA, timeout=30).text   # 포켓몬코리아 공지는 내용이 있어도 500을 돌려줌
         except Exception: ph = ""
         time.sleep(2)
-        im = re.search(r'<img[^>]+src="([^"]*s3\.php\?key=[^"]*(?:newdata|20[2-9]\d)%2F[^"]*)"', ph or "")   # 본문 첫 사진
+        im = (re.search(r'<img[^>]+src="([^"]*s3\.php\?key=[^"]*(?:newdata|20[2-9]\d|editor)[^"]*)"', ph or "")   # 본문 첫 사진
+              or re.search(r'<img[^>]+src="([^"]*s3\.php\?key=[^"]*)"', ph or ""))
         v["img"] = html.unescape(im.group(1)) if im else ""
         if v["img"].startswith("/"): v["img"] = re.match(r"https://[^/]+", link).group(0) + v["img"]
+    for ev in events:   # 속보 표지·LIVE 카드에 공지 대표 사진을 쓰게
+        if ev.get("status") == "krnews" and not ev.get("img"):
+            ev["img"] = kr_s.get(ev["url"], {}).get("img", "")
     for k in [k for k, v in kr_s.items() if (NOW.date() - datetime.date.fromisoformat(v["last"])).days > 45]: kr_s.pop(k)
     return events, seed
 

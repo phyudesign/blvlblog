@@ -23,8 +23,8 @@ def pick_bg(kind, last=""):
     if not pool and kind == "lottery":
         pool = [k for k in POOLS["stock"] if (OUT / f"gyomyo-alert-{k}-1.png").exists()]
     if not pool: return ""
-    choices = [k for k in pool if k != last] or pool
-    return random.choice(choices)
+    # 종류별로 순서대로 돌려 써요 → 같은 포즈가 pool 크기만큼 지나야 다시 나와요
+    return pool[(pool.index(last) + 1) % len(pool)] if last in pool else pool[0]
 
 
 def _load(src):

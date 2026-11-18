@@ -17,8 +17,8 @@ DESC = "포켓몬카드·미니카·피규어·게임 — 직접 모으고 즐�
 ADSENSE = "ca-pub-4380904134243959"
 AUTHOR = "blvl."
 PER_PAGE = 10
-CSS_VER = 89
-JS_VER = 3
+CSS_VER = 90
+JS_VER = 4
 
 # 카테고리: (슬러그, 메뉴명, 설명)
 CATS = [
@@ -111,6 +111,7 @@ def page(title, content, desc=DESC, canon="/", og_img="", head_extra="", active=
 {f'<div class="tk-sticky">{CHROME["ticker"]}</div>' if ticker else ""}{CHROME["float"]}
 {content}
 <script defer src="/assets/blvl-stats.js?v={JS_VER}"></script>
+<script defer src="/assets/blvl-req.js?v={JS_VER}"></script>
 <footer class="site-footer"><nav class="footer-links" aria-label="사이트 정보"><a href="/stock/">재고 현황판</a> · <a href="/about/">소개</a> · <a href="/privacy/">개인정보처리방침</a> · <a href="/contact/">문의</a></nav><div class="view-switch"><button type="button" id="viewsw" hidden></button></div><script>(function(){{var b=document.getElementById("viewsw"),d;try{{d=localStorage.getItem("blvl_view")==="desktop"}}catch(e){{}}if(!d&&screen.width>900)return;b.hidden=false;b.textContent=d?"📱 모바일 보기로":"🖥 데스크톱 보기로";b.onclick=function(){{try{{d?localStorage.removeItem("blvl_view"):localStorage.setItem("blvl_view","desktop")}}catch(e){{}}location.reload()}}}})()</script>© {YEAR} {TITLE}</footer>
 </body></html>'''
 
@@ -166,6 +167,11 @@ def amz_pill(new=""):
     """슬라이더 맨 위 LIVE 알약 자리에 들어가는 아마존 배지(글자를 가리지 않게 제자리에)"""
     return AMZ_BADGE[:-7] + new + "</span>"
 
+def post_asin(p):
+    """아마존 응모 속보 글의 상품 ASIN (신청 표시에 씀)"""
+    m = re.search(r"amazon\.[a-z.]+/(?:dp|gp/product)/([A-Z0-9]{10})", p.get("shop_url", "") + " " + p.get("url", ""))
+    return m.group(1) if m else match_asin(p["title"])
+
 def is_amz(p):
     return "amazon.co.jp" in (p.get("shop_url", "") + p.get("url", "")) or p.get("shop_kr", "") == "아마존 재팬" or p["title"].startswith("[아마존 응모]")
 
@@ -179,7 +185,8 @@ def gcard(p, exc=False):
     if p["category"] == NEWS:
         if is_amz(p): badge = AMZ_BADGE
         elif p.get("shop_kr"): badge = f'<span class="shop-badge">{esc(p["shop_kr"])}</span>'
-    return f'''<div class="gbc"><a class="gimg" href="{url(p["slug"])}">{img}</a>
+    da = f' data-asin="{post_asin(p)}"' if p["category"] == NEWS and is_amz(p) and post_asin(p) else ""
+    return f'''<div class="gbc"{da}><a class="gimg" href="{url(p["slug"])}">{img}</a>
 <div class="gcat">{catlink(p["category"])}{badge}</div><h2 class="gtitle"><a href="{url(p["slug"])}">{esc(p["title"])}</a></h2>
 <div class="gmeta"><span>Written by:</span><b>{AUTHOR}</b><span>/</span><time>{kdate(p["date"])}</time>{pstat(p)}</div>{ex}</div>'''
 
@@ -328,7 +335,7 @@ def live_hero():
             back = f"/assets/art/{art.name}" if use_art else f"/assets/studio/{bgk}.webp"
             if pv.get("kr"): use_art, back = True, img
             title = re.sub(r"\s*BOX$", "", name)
-            slides.append(f'''<a class="lh-slide studio st-bg{" st-art" if use_art else ""}" href="{esc(href)}"{attrs} style="--b1:{th[0]};--b2:{th[1]};--ac:{th[2]};--px:{px}%;--py:{py}%;--pw:{pw}%" draggable="false">
+            slides.append(f'''<a class="lh-slide studio st-bg{" st-art" if use_art else ""}" href="{esc(href)}"{attrs}{f' data-asin="{pv["asin"]}"' if kind == "inv" and pv.get("asin") else ""} style="--b1:{th[0]};--b2:{th[1]};--ac:{th[2]};--px:{px}%;--py:{py}%;--pw:{pw}%" draggable="false">
 <img class="st-back" src="{esc(back)}" referrerpolicy="no-referrer" alt="" loading="{"eager" if i < 3 else "lazy"}" draggable="false">
 {f'<img class="{prod_cls}" src="{esc(prod_src)}" alt="{esc(name)} 상품 사진" loading="{"eager" if i < 3 else "lazy"}" referrerpolicy="no-referrer" draggable="false">' if prod_src else ""}
 <span class="st-text">{amz_pill(new) if kind == "inv" else f'<span class="st-pill"><i></i><b>LIVE</b>· {esc(pv.get("shop") or LH_LABEL.get(kind, "TCG LIVE"))}{new}</span>'}
@@ -336,7 +343,7 @@ def live_hero():
 <span class="st-sub">{esc(pv.get("sub", ""))}</span><span class="st-cta">{esc(pv.get("cta", "자세히 보기"))} →</span></span></a>''')
             continue
         th = LH_THEME_ROT[i % len(LH_THEME_ROT)]; bgk = f"default{i % 3 + 1}"; px, py, pw = LH_BG[bgk]
-        slides.append(f'''<a class="lh-slide studio st-bg st-noimg" href="{esc(href)}"{attrs} style="--b1:{th[0]};--b2:{th[1]};--ac:{th[2]};--px:{px}%;--py:{py}%;--pw:{pw}%" draggable="false">
+        slides.append(f'''<a class="lh-slide studio st-bg st-noimg" href="{esc(href)}"{attrs}{f' data-asin="{pv["asin"]}"' if kind == "inv" and pv.get("asin") else ""} style="--b1:{th[0]};--b2:{th[1]};--ac:{th[2]};--px:{px}%;--py:{py}%;--pw:{pw}%" draggable="false">
 <img class="st-back" src="/assets/studio/{bgk}.webp" alt="" loading="lazy" draggable="false">
 <img class="st-prod cut" src="/wp-content/uploads/emoticons/gyomyo/{emo}.webp" alt="" loading="lazy" draggable="false">
 <span class="st-text">{amz_pill(new) if kind == "inv" else f'<span class="st-pill"><i></i><b>LIVE</b>· {esc(pv.get("shop") or LH_LABEL.get(kind, "TCG LIVE"))}{new}</span>'}

@@ -719,3 +719,21 @@ html.mn-lock,html.mn-lock body{overflow:hidden}
 .lh-slide .amz-badge b{font-size:17px}.lh-slide .amz-badge i{font-size:11.5px}.lh-slide .amz-badge em{font-size:11.5px}
 .lh-slide .amz-badge>em+em,.lh-slide .amz-badge em:last-child:not(:nth-of-type(1)){background:#e8362d;color:#fff}
 @media(max-width:768px){.lh-slide .amz-badge{padding:5px 10px 6px}.lh-slide .amz-badge b{font-size:14px}.lh-slide .amz-badge em{font-size:10.5px}}
+/* 아마존 초대 요청 '신청했어요' 표시 (blvl-req.js, 방문자 브라우저에만 저장) */
+.inv-panel li.req-row{display:flex;align-items:center;gap:8px}
+.inv-panel li.req-row>a{flex:1 1 auto;min-width:0}
+.req-btn{flex:none;font:inherit;font-size:11.5px;font-weight:800;line-height:1;color:#16171b;background:#fff;border:1.5px solid #c9ccd3;border-radius:999px;padding:6px 9px;cursor:pointer;white-space:nowrap;transition:background .15s,border-color .15s,color .15s}
+.req-btn:hover{border-color:#16171b}
+.req-btn[aria-pressed="true"]{background:#16a34a;border-color:#16a34a;color:#fff}
+.req-btn.big{font-size:13px;padding:7px 12px;margin-left:10px;vertical-align:middle}
+.req-btn.mini{width:20px;height:20px;padding:0;border-radius:50%;font-size:11px;display:inline-grid;place-items:center;margin-left:-4px;position:relative;z-index:1}
+.req-chip{display:inline-flex;align-items:center}
+.req-chip.req-on>a{background:#e9f7ee;border-color:#9ad7b0;color:#15803d}
+.req-row.req-on .ip-name{color:#8d909a}
+.req-filter{align-self:flex-start;margin-top:6px;font:inherit;font-size:11.5px;font-weight:800;color:#3a3d46;background:#f1f2f5;border:1px solid #e1e4ea;border-radius:999px;padding:5px 10px;cursor:pointer}
+.req-filter[aria-pressed="true"]{background:#16171b;border-color:#16171b;color:#fff}
+.inv-panel.req-todo li.req-on,.inv-panel.req-todo .req-chip.req-on{display:none}
+.req-on .amz-badge em:first-of-type{display:none}
+.req-on .amz-badge::after{content:"✓ 신청함";order:1;font-family:var(--f-ko,inherit);font-size:10.5px;font-weight:800;background:#16a34a;color:#fff;border-radius:4px;padding:2px 5px;margin-left:6px}
+.lh-slide.req-on .amz-badge::after{font-size:11.5px}
+.req-on .amz-badge em+em{order:2;margin-left:4px}

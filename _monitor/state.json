@@ -655,6 +655,26 @@
   "daily:7net-20261119": {
    "file": "속보-20261118-0803-세븐넷-쇼핑-4da584.html",
    "at": "2026-11-18T08:03:14.074770+09:00"
+  },
+  "daily:20261119-joshin-store-op18": {
+   "file": "속보-20261119-0802-조신-매장-70b23e.html",
+   "at": "2026-11-19T08:02:15.755372+09:00"
+  },
+  "daily:20261119-shimamura-op": {
+   "file": "속보-20261119-0802-시마무라-앱-5ba469.html",
+   "at": "2026-11-19T08:02:15.755372+09:00"
+  },
+  "daily:20261119-hareruya2": {
+   "file": "속보-20261119-0802-하레루야2-4e63a0.html",
+   "at": "2026-11-19T08:02:15.755372+09:00"
+  },
+  "daily:20261119-dmm-op": {
+   "file": "속보-20261119-0802-DMM-통판-b30fc5.html",
+   "at": "2026-11-19T08:02:15.755372+09:00"
+  },
+  "daily:20261119-dorasuta-eb05": {
+   "file": "속보-20261119-0802-도라스타-통판-c25880.html",
+   "at": "2026-11-19T08:02:15.755372+09:00"
   }
  },
  "anews": [
@@ -1012,7 +1032,7 @@
  "alert_bg_last": "lottery-b",
  "alert_emo_last": "sounds-good",
  "alert_bg_last_by": {
-  "lottery": "lottery-c",
+  "lottery": "lottery-b",
   "stock": "stock-b",
   "invite": "invite-b",
   "krnews": "kr-b"

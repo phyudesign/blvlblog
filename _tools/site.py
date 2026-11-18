@@ -17,7 +17,7 @@ DESC = "포켓몬카드·미니카·피규어·게임 — 직접 모으고 즐�
 ADSENSE = "ca-pub-4380904134243959"
 AUTHOR = "blvl."
 PER_PAGE = 10
-CSS_VER = 88
+CSS_VER = 89
 JS_VER = 3
 
 # 카테고리: (슬러그, 메뉴명, 설명)
@@ -162,6 +162,10 @@ def home_feed():
     return sorted(articles + hot, key=lambda q: q["date"], reverse=True)[:9]
 
 AMZ_BADGE = '<span class="amz-badge"><b>amazon</b><i>.co.jp</i><em>초대 요청</em></span>'
+def amz_pill(new=""):
+    """슬라이더 맨 위 LIVE 알약 자리에 들어가는 아마존 배지(글자를 가리지 않게 제자리에)"""
+    return AMZ_BADGE[:-7] + new + "</span>"
+
 def is_amz(p):
     return "amazon.co.jp" in (p.get("shop_url", "") + p.get("url", "")) or p.get("shop_kr", "") == "아마존 재팬" or p["title"].startswith("[아마존 응모]")
 
@@ -175,8 +179,8 @@ def gcard(p, exc=False):
     if p["category"] == NEWS:
         if is_amz(p): badge = AMZ_BADGE
         elif p.get("shop_kr"): badge = f'<span class="shop-badge">{esc(p["shop_kr"])}</span>'
-    return f'''<div class="gbc"><a class="gimg{" has-badge" if badge else ""}" href="{url(p["slug"])}">{img}{badge}</a>
-<div class="gcat">{catlink(p["category"])}</div><h2 class="gtitle"><a href="{url(p["slug"])}">{esc(p["title"])}</a></h2>
+    return f'''<div class="gbc"><a class="gimg" href="{url(p["slug"])}">{img}</a>
+<div class="gcat">{catlink(p["category"])}{badge}</div><h2 class="gtitle"><a href="{url(p["slug"])}">{esc(p["title"])}</a></h2>
 <div class="gmeta"><span>Written by:</span><b>{AUTHOR}</b><span>/</span><time>{kdate(p["date"])}</time>{pstat(p)}</div>{ex}</div>'''
 
 def sidebar():
@@ -327,16 +331,16 @@ def live_hero():
             slides.append(f'''<a class="lh-slide studio st-bg{" st-art" if use_art else ""}" href="{esc(href)}"{attrs} style="--b1:{th[0]};--b2:{th[1]};--ac:{th[2]};--px:{px}%;--py:{py}%;--pw:{pw}%" draggable="false">
 <img class="st-back" src="{esc(back)}" referrerpolicy="no-referrer" alt="" loading="{"eager" if i < 3 else "lazy"}" draggable="false">
 {f'<img class="{prod_cls}" src="{esc(prod_src)}" alt="{esc(name)} 상품 사진" loading="{"eager" if i < 3 else "lazy"}" referrerpolicy="no-referrer" draggable="false">' if prod_src else ""}
-<span class="st-text"><span class="st-pill"><i></i><b>LIVE</b>· {LH_LABEL.get(kind, "TCG LIVE")}{new}</span>
-{AMZ_BADGE if kind == "inv" else (f'<span class="shop-badge">{esc(pv["shop"])}</span>' if pv.get("shop") else "")}<span class="st-rib">{esc(brand or "TCG")}</span><b class="st-title">{esc(title)}</b><span class="st-line"></span>
+<span class="st-text">{amz_pill(new) if kind == "inv" else f'<span class="st-pill"><i></i><b>LIVE</b>· {esc(pv.get("shop") or LH_LABEL.get(kind, "TCG LIVE"))}{new}</span>'}
+<span class="st-rib">{esc(brand or "TCG")}</span><b class="st-title">{esc(title)}</b><span class="st-line"></span>
 <span class="st-sub">{esc(pv.get("sub", ""))}</span><span class="st-cta">{esc(pv.get("cta", "자세히 보기"))} →</span></span></a>''')
             continue
         th = LH_THEME_ROT[i % len(LH_THEME_ROT)]; bgk = f"default{i % 3 + 1}"; px, py, pw = LH_BG[bgk]
         slides.append(f'''<a class="lh-slide studio st-bg st-noimg" href="{esc(href)}"{attrs} style="--b1:{th[0]};--b2:{th[1]};--ac:{th[2]};--px:{px}%;--py:{py}%;--pw:{pw}%" draggable="false">
 <img class="st-back" src="/assets/studio/{bgk}.webp" alt="" loading="lazy" draggable="false">
 <img class="st-prod cut" src="/wp-content/uploads/emoticons/gyomyo/{emo}.webp" alt="" loading="lazy" draggable="false">
-<span class="st-text"><span class="st-pill"><i></i><b>LIVE</b>· {LH_LABEL.get(kind, "TCG LIVE")}{new}</span>
-{AMZ_BADGE if kind == "inv" else (f'<span class="shop-badge">{esc(pv["shop"])}</span>' if pv.get("shop") else "")}<span class="st-rib">{esc(brand or "TCG")}</span><b class="st-title">{esc(name)}</b><span class="st-line"></span>
+<span class="st-text">{amz_pill(new) if kind == "inv" else f'<span class="st-pill"><i></i><b>LIVE</b>· {esc(pv.get("shop") or LH_LABEL.get(kind, "TCG LIVE"))}{new}</span>'}
+<span class="st-rib">{esc(brand or "TCG")}</span><b class="st-title">{esc(name)}</b><span class="st-line"></span>
 <span class="st-sub">{esc(pv.get("sub", ""))}</span><span class="st-cta">{esc(pv.get("cta", "자세히 보기"))} →</span></span></a>''')
         continue
         slides.append(f'''<a class="lh-slide" href="{esc(href)}"{attrs} style="--c:{LH_COLORS[i % len(LH_COLORS)]}" draggable="false">

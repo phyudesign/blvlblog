@@ -35,11 +35,31 @@ def _load(src):
     return Image.open(src)
 
 
+def _hull_fill(im):
+    """누끼가 상자 가장자리 흰 부분까지 파먹었을 때(이 빠진 모양) 좁고 얕게 파인 곳만 다시 채워요.
+    (닫힘 연산: 비스듬한 상자 윗면 바깥처럼 넓은 빈 곳은 그대로 둬요)"""
+    w, h = im.size; k = max(9, int(min(w, h) * .07)) | 1
+    a = im.split()[3].point(lambda v: 255 if v > 128 else 0)
+    pad = Image.new("L", (w + 2 * k, h + 2 * k), 0); pad.paste(a, (k, k))
+    f = 4  # 작게 줄여서 계산 (빠름)
+    sm = pad.resize((pad.width // f, pad.height // f), Image.BILINEAR).point(lambda v: 255 if v > 100 else 0)
+    kk = max(3, k // f) | 1
+    sm = sm.filter(ImageFilter.MaxFilter(kk)).filter(ImageFilter.MinFilter(kk))
+    cl = sm.resize(pad.size, Image.BILINEAR).filter(ImageFilter.GaussianBlur(1)).crop((k, k, k + w, k + h)).point(lambda v: 255 if v > 140 else 0)
+    add = Image.composite(cl, Image.new("L", im.size, 0), a.point(lambda v: 255 - v))   # 새로 채울 곳
+    n = sum(1 for v in add.getdata() if v)
+    if n < w * h * .004: return im
+    rgb = Image.new("RGBA", im.size, (250, 250, 250, 255)); rgb.alpha_composite(im)
+    rgb.putalpha(Image.composite(Image.new("L", im.size, 255), im.split()[3], add))
+    return rgb
+
+
 def _cutout(im):
     """흰 배경 상품 사진이면 가장자리에서 이어진 흰색을 지워요(투명 PNG는 그대로)."""
     im = im.convert("RGBA")
     if im.getextrema()[3][0] < 250:  # 이미 투명 영역이 있음
-        return im.crop(im.getbbox())
+        im = im.crop(im.getbbox())
+        return _hull_fill(im)
     w, h = im.size; px = im.load(); seen = bytearray(w * h); q = deque()
     for x in range(w): q.append((x, 0)); q.append((x, h - 1))
     for y in range(h): q.append((0, y)); q.append((w - 1, y))
@@ -51,7 +71,7 @@ def _cutout(im):
         seen[y * w + x] = 1; px[x, y] = (r, g, b, 0)
         q.extend(((x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)))
     bb = im.getbbox()
-    return im.crop(bb) if bb else im
+    return _hull_fill(im.crop(bb)) if bb else im
 
 
 def _ink(im, width=7):

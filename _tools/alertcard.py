@@ -89,6 +89,27 @@ def _front_mask(bg, regions=((48, 50, 100, 100), (0, 82, 46, 100)), key_xy=(400,
     return mask.filter(ImageFilter.MaxFilter(5)).filter(ImageFilter.MinFilter(3)).filter(ImageFilter.GaussianBlur(1))
 
 
+def _amz_badge(out):
+    """아마존 응모 표지 왼쪽(제목 아래)에 'amazon.co.jp 초대 요청' 배지"""
+    from PIL import ImageDraw, ImageFont
+    f = ROOT / "_tools" / "fonts" / "DejaVuSans-Bold.ttf"
+    try:
+        big, small = ImageFont.truetype(str(f), 46), ImageFont.truetype(str(f), 26)
+    except Exception:
+        return out
+    w1 = big.getlength("amazon"); w2 = small.getlength(".co.jp")
+    W, H = int(w1 + w2 + 64), 92
+    b = Image.new("RGBA", (W + 12, H + 12), (0, 0, 0, 0)); d = ImageDraw.Draw(b)
+    d.rounded_rectangle((8, 10, W + 8, H + 10), 22, fill=(27, 27, 31, 255))            # 크레용 그림자
+    d.rounded_rectangle((0, 0, W, H), 22, fill=(19, 25, 33, 255), outline=(27, 27, 31, 255), width=4)
+    d.text((28, 14), "amazon", font=big, fill=(255, 255, 255, 255))
+    d.text((28 + w1 + 2, 30), ".co.jp", font=small, fill=(255, 153, 0, 255))
+    d.rounded_rectangle((32, 70, 28 + w1 - 8, 76), 3, fill=(255, 153, 0, 255))        # 주황 밑줄
+    b = b.rotate(-4, expand=True, resample=Image.BICUBIC)
+    out.alpha_composite(b, (int(SIZE * .04), int(SIZE * .47)))
+    return out
+
+
 def make_alert_thumb(kind, product, out_path, last_bg=""):
     """만든 배경 키를 돌려줘요(다음 번에 같은 포즈를 피하려고 저장). 배경이 없으면 ""."""
     key = pick_bg(kind, last_bg)
@@ -106,6 +127,7 @@ def make_alert_thumb(kind, product, out_path, last_bg=""):
             out.alpha_composite(p, (max(0, cx - p.width // 2), min(SIZE - p.height, max(int(SIZE * .40), cy - p.height // 2))))
         except Exception as e:
             print("속보 표지: 상품 사진 실패", e)
+    if kind == "invite": out = _amz_badge(out)
     out = out.convert("RGB")
     out.paste(bg, (0, 0), _front_mask(bg))
     out_path = pathlib.Path(out_path); out_path.parent.mkdir(parents=True, exist_ok=True)

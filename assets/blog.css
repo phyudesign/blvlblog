@@ -706,3 +706,15 @@ html.mn-lock,html.mn-lock body{overflow:hidden}
 .menu-toggle,.mn-close,.mn-back{-webkit-tap-highlight-color:transparent}
 /* 홈 최근 글: 속보 카드는 상품 사진을 흰 바탕에 맞춰 보여 줌 */
 .gimg img.gprod{object-fit:contain;background:#fff;padding:8%}
+/* 속보 카드: 아마존 응모는 아마존 배지로 확실하게, 다른 곳은 쇼핑몰 이름 배지 */
+.gimg.has-badge{position:relative}
+.amz-badge{position:absolute;z-index:4;display:inline-flex;align-items:baseline;gap:1px;background:#131921;color:#fff;border-radius:10px;padding:7px 12px 8px;box-shadow:0 6px 16px rgba(0,0,0,.25);font-family:Arial,"Helvetica Neue",sans-serif;line-height:1;pointer-events:none}
+.amz-badge b{font-size:19px;font-weight:800;letter-spacing:-.4px;position:relative}
+.amz-badge b::after{content:"";position:absolute;left:2px;right:6px;bottom:-5px;height:3px;border-radius:3px;background:#ff9900}
+.amz-badge i{font-style:normal;font-size:12px;font-weight:700;color:#ff9900}
+.amz-badge em{font-style:normal;font-family:var(--f-ko,inherit);font-size:11.5px;font-weight:800;background:#ff9900;color:#131921;border-radius:6px;padding:3px 6px;margin-left:8px;align-self:center}
+.shop-badge{position:absolute;z-index:4;background:#fff;color:#16171b;border:2px solid #16171b;border-radius:999px;padding:4px 11px;font-size:12.5px;font-weight:800;box-shadow:2px 3px 0 #16171b;pointer-events:none;white-space:nowrap}
+.gimg .amz-badge,.gimg .shop-badge{left:10px;top:10px}
+.lh-slide .amz-badge,.lh-slide .shop-badge{right:18px;top:18px}
+.lh-slide .amz-badge b{font-size:22px}
+@media(max-width:768px){.amz-badge b{font-size:16px}.amz-badge{padding:6px 10px 7px}.lh-slide .amz-badge{right:12px;top:12px}.lh-slide .amz-badge b{font-size:18px}}

@@ -738,3 +738,21 @@ html.mn-lock,html.mn-lock body{overflow:hidden}
 .lh-slide.req-on .amz-badge::after{font-size:11.5px}
 .req-on .amz-badge em+em{order:2;margin-left:4px}
 .entry-content p.when{margin:-6px 0 12px;font-size:14px;color:#b4372f}
+/* 총정리 글: 카드 갤러리 · 큰 구매/응모 버튼 */
+.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(118px,1fr));gap:12px 10px;margin:1.2em 0 1.8em}
+.cgrid figure{margin:0;text-align:center}.cgrid img{width:100%;height:auto;border-radius:7px;box-shadow:0 3px 10px rgba(0,0,0,.14);background:#eee}
+.cgrid figcaption{font-size:12.5px;line-height:1.35;color:#333;margin-top:5px}.cgrid figcaption small{display:block;color:#8a8f99;font-size:11.5px}
+.cgrid.big{grid-template-columns:repeat(3,1fr)}@media(max-width:560px){.cgrid{grid-template-columns:repeat(3,1fr)}.cgrid.big{grid-template-columns:repeat(3,1fr)}}
+.cgrid-src{font-size:12.5px;color:#888;text-align:center;margin:-1.2em 0 1.8em}
+.type-h{display:flex;align-items:center;gap:8px;font-weight:800;font-size:15px;margin:1.4em 0 .2em}.type-h i{width:12px;height:12px;border-radius:50%;display:inline-block}
+.buy-box{border:2.5px solid #16171b;border-radius:16px;padding:16px;margin:1.6em 0;background:#fffdf5}
+.buy-box h4{margin:0 0 10px;font-size:17px}
+.buy-btn{display:flex;align-items:center;gap:12px;text-decoration:none!important;border-radius:12px;padding:13px 16px;margin:9px 0;font-weight:800;font-size:16px;line-height:1.35;color:#16171b!important;background:#fff;border:2px solid #16171b;box-shadow:0 3px 0 #16171b;transition:transform .08s}
+.buy-btn:hover{transform:translateY(1px);box-shadow:0 2px 0 #16171b}
+.buy-btn small{display:block;font-weight:600;font-size:12.5px;color:#5b606b}
+.buy-btn .go{margin-left:auto;font-size:20px}
+.buy-btn.amz{background:#131921;color:#fff!important;border-color:#131921;box-shadow:0 3px 0 #ff9900}.buy-btn.amz small{color:#ffbf66}
+.buy-btn .tag{flex:none;font-size:11.5px;font-weight:800;padding:4px 8px;border-radius:999px;background:#16a34a;color:#fff}
+.buy-btn .tag.no{background:#e5e7eb;color:#4b5563}.buy-btn .tag.mid{background:#f59e0b;color:#111}
+.point3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:1.2em 0}.point3 div{background:#f1f5ff;border-radius:12px;padding:12px;font-size:14px;line-height:1.5}.point3 b{display:block;font-size:22px;color:#1f4fd8}
+@media(max-width:560px){.point3{grid-template-columns:1fr}}

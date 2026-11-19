@@ -13,7 +13,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 SITE = "https://blvlblog.com"; TITLE = "blvl blog"
-DESC = "포켓몬카드·미니카·피규어·게임 — 직접 모으고 즐기는 취미 기록"
+DESC = "포켓몬카드·원피스카드 일본·한국 발매, 추첨, 아마존 초대 응모, 입고 소식을 매일 정리하는 TCG 블로그"
 ADSENSE = "ca-pub-4380904134243959"
 AUTHOR = "blvl."
 PER_PAGE = 10
@@ -78,6 +78,17 @@ for p in posts:
     assert p["category"] in CAT_NAME, f'{p["slug"]}: 알 수 없는 카테고리 {p["category"]}'
 posts.sort(key=lambda p: p["date"], reverse=True)
 articles = [p for p in posts if p["category"] != NEWS]  # 사람이 쓴 정식 글
+# 글이 아직 없는 카테고리·하위 메뉴는 메뉴에서 숨겨요 (빈 페이지가 보이면 '준비 안 된 사이트'로 보임). 글이 생기면 자동으로 다시 나타나요.
+def _sub_has(parent, sk, words):
+    inp = [p for p in articles if p["category"] == parent]
+    txt = lambda p: p["title"] + " ".join(p.get("tags", []))
+    if sk == "etc":
+        known = [w for _, _, ws, _ in SUBMENU[parent] for w in ws]
+        return any(not any(w in txt(p) for w in known) for p in inp)
+    return any(any(w in txt(p) for w in words) for p in inp)
+LIVE_CATS = {p["category"] for p in articles}
+NAV = [(n, f"/category/{k}/", [(sn, f"/category/{k}/{sk}/") for sk, sn, ws, _ in SUBMENU.get(k, []) if _sub_has(k, sk, ws)] + EXTRA.get(k, []))
+       for k, n, _ in CATS if k != "news" and k in LIVE_CATS]
 pages = load("_pages")
 YEAR = datetime.date.today().year
 
@@ -196,7 +207,7 @@ def sidebar():
     news = (f'<aside class="widget widget_recent_entries"><h2 class="widget-title">TCG LIVE</h2><ul>' +
             "".join(f'<li><a href="{url(q["slug"])}">{esc(q["title"].replace("[추첨·판매 속보] ", ""))}</a> <small>{q["date"][5:16]}</small></li>' for q in nw) +
             '<li><a href="/category/news/">속보 전체 보기 →</a></li></ul></aside>') if nw else ""
-    cl = "".join(f'<li><a href="/category/{k}/">{esc(n)}</a></li>' for k, n, _ in CATS)
+    cl = "".join(f'<li><a href="/category/{k}/">{esc(n)}</a></li>' for k, n, _ in CATS if k in LIVE_CATS or k == NEWS)
     # 순서: Recent Posts → 아마존 응모 판 → 검색 (응모 판·검색은 스크롤해도 따라옴)
     return f'''<div class="sidebar"><div class="inside-right-sidebar">
 <aside class="widget widget_recent_entries"><h2 class="widget-title">Recent Posts</h2><ul>{rec}</ul>
@@ -512,6 +523,14 @@ def rfc(d): return datetime.datetime.strptime(d, "%Y-%m-%d %H:%M:%S").strftime("
 rss = "".join(f'<item><title>{esc(p["title"])}</title><link>{SITE}{url(p["slug"])}</link><guid>{SITE}{url(p["slug"])}</guid><pubDate>{rfc(p["date"])}</pubDate><description>{esc(p["desc"])}</description></item>' for p in articles[:20])
 (ROOT / "feed.xml").write_text(f'<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><title>{TITLE}</title><link>{SITE}</link><description>{DESC}</description>{rss}</channel></rss>', encoding="utf-8")
 write("/feed/", '<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0;url=/feed.xml">')
+# 옛 워드프레스 주소 → 새 주소로 넘겨주기 (서치 콘솔에 404·색인 안 됨으로 남던 것들)
+def redirect(src, dst):
+    write(src, f'<!doctype html><meta charset="utf-8"><title>이동 중…</title><link rel="canonical" href="{SITE}{dst}"><meta name="robots" content="noindex,follow"><meta http-equiv="refresh" content="0;url={dst}"><a href="{dst}">이 페이지는 옮겨졌어요 →</a>')
+for p in articles:
+    redirect(url(p["slug"]) + "feed/", url(p["slug"]))   # 글마다 붙던 /글주소/feed/
+OLD_MOVED = {"속보-20261101-0310-세븐넷-37e3fc": "/category/news/"}  # 지운 속보 → 속보 목록
+for src, dst in OLD_MOVED.items():
+    if not any(p["slug"] == src for p in posts): redirect(url(src), dst)
 (ROOT / ".nojekyll").write_text("")
 
 # ── 안 쓰는 이미지 정리

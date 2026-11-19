@@ -17,7 +17,7 @@ DESC = "포켓몬카드·원피스카드 일본·한국 발매, 추첨, 아마�
 ADSENSE = "ca-pub-4380904134243959"
 AUTHOR = "blvl."
 PER_PAGE = 10
-CSS_VER = 90
+CSS_VER = 91
 JS_VER = 4
 
 # 카테고리: (슬러그, 메뉴명, 설명)
@@ -78,6 +78,16 @@ for p in posts:
     assert p["category"] in CAT_NAME, f'{p["slug"]}: 알 수 없는 카테고리 {p["category"]}'
 posts.sort(key=lambda p: p["date"], reverse=True)
 articles = [p for p in posts if p["category"] != NEWS]  # 사람이 쓴 정식 글
+# 본문이 너무 짧은 글은 검색·애드센스 평가에 도움이 안 돼서 자동으로 검색 제외(noindex)+사이트맵 제외해요.
+# 글을 보강해 기준을 넘기면 자동으로 다시 검색에 올라가요. 일부러 정하려면 글 머리에 "noindex": true / false
+THIN_MIN = 1200  # 공백 뺀 본문 글자 수
+def body_chars(p):
+    t = re.sub(r"<(script|style|figure)[^>]*>.*?</\1>", " ", p["body"], flags=re.S)  # 사진 캡션·임베드는 빼고 셈
+    return len(re.sub(r"\s+", "", html.unescape(re.sub(r"<[^>]+>", " ", t))))
+def is_noindex(p):
+    if p["category"] == NEWS: return True
+    if "noindex" in p: return bool(p["noindex"])
+    return body_chars(p) < THIN_MIN
 # 글이 아직 없는 카테고리·하위 메뉴는 메뉴에서 숨겨요 (빈 페이지가 보이면 '준비 안 된 사이트'로 보임). 글이 생기면 자동으로 다시 나타나요.
 def _sub_has(parent, sk, words):
     inp = [p for p in articles if p["category"] == parent]
@@ -464,7 +474,7 @@ for idx, p in enumerate(posts):
 <div class="entry-content">{p["body"]}</div>
 <footer><div class="entry-meta">카테고리: {catlink(p["category"])}</div><div class="gp-custom-tag-section">{tag_html}</div>{nav}</footer></article>
 {comments_box(p)}'''
-    write(url(p["slug"]), page(p["title"], with_sidebar(main), p["desc"], url(p["slug"]), p["thumb"], f'<script type="application/ld+json">{ld}</script>', noindex=p["category"] == NEWS))
+    write(url(p["slug"]), page(p["title"], with_sidebar(main), p["desc"], url(p["slug"]), p["thumb"], f'<script type="application/ld+json">{ld}</script>', noindex=is_noindex(p)))
 
 # ── 고정 페이지
 for pg in pages:
@@ -514,7 +524,7 @@ I.addEventListener('input',go);
 (ROOT / "404.html").write_text(page("페이지를 찾을 수 없어요", with_sidebar('<article class="inside-article"><h1 class="entry-title">페이지를 찾을 수 없어요</h1><div class="entry-content"><p>요청한 페이지가 없거나 블로그 개편으로 정리된 글이에요. <a href="/">홈으로 가기</a></p></div></article>'), canon="/404.html", noindex=True), encoding="utf-8")
 (ROOT / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {SITE}/sitemap.xml\n", encoding="utf-8")
 sm = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">', f"<url><loc>{SITE}/</loc></url>"]
-sm += [f'<url><loc>{SITE}{url(p["slug"])}</loc><lastmod>{p["mod"][:10]}</lastmod></url>' for p in articles]
+sm += [f'<url><loc>{SITE}{url(p["slug"])}</loc><lastmod>{p["mod"][:10]}</lastmod></url>' for p in articles if not is_noindex(p)]
 sm += [f"<url><loc>{SITE}/category/{k}/</loc></url>" for k, _, _ in CATS if k != NEWS and any(p["category"] == k for p in posts)]
 sm += [f"<url><loc>{SITE}/category/{pa}/{sk}/</loc></url>" for pa, subs in SUBMENU.items() for sk, _, words, _ in subs if sub_posts(pa, words, sk)]
 sm += [f'<url><loc>{SITE}{url(pg["slug"])}</loc></url>' for pg in pages]

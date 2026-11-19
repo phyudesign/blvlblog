@@ -675,6 +675,22 @@
   "daily:20261119-dorasuta-eb05": {
    "file": "속보-20261119-0802-도라스타-통판-c25880.html",
    "at": "2026-11-19T08:02:15.755372+09:00"
+  },
+  "daily:20261120-pokecen-store-hadou": {
+   "file": "속보-20261120-0752-포켓몬센터-매장-6847e2.html",
+   "at": "2026-11-20T07:52:44.439327+09:00"
+  },
+  "daily:20261120-otakara-hadou": {
+   "file": "속보-20261120-0752-오타카라소코-앱-662f6d.html",
+   "at": "2026-11-20T07:52:44.439327+09:00"
+  },
+  "daily:20261120-7net-espeon": {
+   "file": "속보-20261120-0752-세븐넷-쇼핑-ca531d.html",
+   "at": "2026-11-20T07:52:44.439327+09:00"
+  },
+  "daily:20261120-itoyokado-30th": {
+   "file": "속보-20261120-0752-이토요카도-아리오-a6421e.html",
+   "at": "2026-11-20T07:52:44.439327+09:00"
   }
  },
  "anews": [
@@ -1035,7 +1051,7 @@
  "alert_bg_last": "lottery-b",
  "alert_emo_last": "sounds-good",
  "alert_bg_last_by": {
-  "lottery": "lottery-b",
+  "lottery": "lottery-c",
   "stock": "stock-b",
   "invite": "invite-b",
   "krnews": "kr-b"

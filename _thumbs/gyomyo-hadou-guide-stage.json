@@ -1,0 +1,16 @@
+{
+ "character": "gyomyo",
+ "mode": "magcards",
+ "bg": "pale sky blue",
+ "eyes": "fierce determined eyes under thick bold eyebrows",
+ "badge": "교묘의 TCG 정보통",
+ "title": "파동시커",
+ "title2": "총정리!",
+ "style_refs": [
+  "_character/style/magazine-1.png"
+ ],
+ "prompt": "Match the energy of a bold crayon poster: blue and orange crayon burst strokes radiating around the title, black outlined four-point sparkles scattered around. Gyomyo is small in the bottom-right corner (keep the huge wide head and tiny stubby body exactly like the references, normal cat body, no muscles, no clothes). POSE: an original dramatic martial-arts pose of its own - low wide stance with one short paw thrust forward palm-out, releasing a swirling ring of blue crayon aura energy waves, a small red cloth headband with ends fluttering, mouth open shouting, crayon speed lines and a few small rocks floating around. No scars, no jacket, no shoulder pads, no human character costume. In the very bottom-left corner a small messy pile of navy blue card backs with a yellow paw print and stars. Keep the middle and left of the lower half empty background.",
+ "n": 1,
+ "quality": "high",
+ "regenerate": false
+}

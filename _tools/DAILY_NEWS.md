@@ -104,7 +104,4 @@ for i in 1 2 3; do git pull --rebase origin main && git push origin main && brea
 5. "색인 생성 요청이 거부됨"이 나오면 그 글의 noindex·canonical을 확인하고 요약에 적어요.
 
 색인 요청 대기 목록 (처리하면 지우기):
-- https://blvlblog.com/파동시커-응모-총정리/ (2026-11-19 한도 초과로 못 함)
-- https://blvlblog.com/다빈치-리졸브-컬러/ (2026-11-19 "거부됨" — 실시간 테스트 다시 해 보기)
-- https://blvlblog.com/포켓몬카드-30주년-박스-시세/ (상태 확인 안 함)
-- https://blvlblog.com/미드저니에서-전신-이미지/ (상태 확인 안 함)
+- https://blvlblog.com/다빈치-리졸브-컬러/ (2026-11-20 또 "거부됨" — 실시간 테스트에서 Googlebot이 404(찾을 수 없음)를 받음. 브라우저에선 200으로 열림. 주소·호스팅 확인 필요)

@@ -691,6 +691,14 @@
   "daily:20261120-itoyokado-30th": {
    "file": "속보-20261120-0752-이토요카도-아리오-a6421e.html",
    "at": "2026-11-20T07:52:44.439327+09:00"
+  },
+  "daily:fullcomp-hadou-1122": {
+   "file": "속보-20261121-0758-풀콤프-9개-매장-LivePocket-65a050.html",
+   "at": "2026-11-21T07:58:57.075905+09:00"
+  },
+  "daily:lounge-storm-1122": {
+   "file": "속보-20261121-0758-포켓몬카드-라운지-시부야-20acb6.html",
+   "at": "2026-11-21T07:58:57.075905+09:00"
   }
  },
  "anews": [
@@ -1051,7 +1059,7 @@
  "alert_bg_last": "lottery-b",
  "alert_emo_last": "sounds-good",
  "alert_bg_last_by": {
-  "lottery": "lottery-c",
+  "lottery": "lottery-b",
   "stock": "stock-b",
   "invite": "invite-b",
   "krnews": "kr-b"

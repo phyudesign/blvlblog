@@ -739,7 +739,7 @@ html.mn-lock,html.mn-lock body{overflow:hidden}
 .req-on .amz-badge em+em{order:2;margin-left:4px}
 .entry-content p.when{margin:-6px 0 12px;font-size:14px;color:#b4372f}
 /* 총정리 글: 카드 갤러리 · 큰 구매/응모 버튼 */
-.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(118px,1fr));gap:12px 10px;margin:1.2em 0 1.8em}
+.cgrid{display:grid;align-items:end;grid-template-columns:repeat(auto-fill,minmax(118px,1fr));gap:12px 10px;margin:1.2em 0 1.8em}
 .cgrid figure{margin:0;text-align:center}.cgrid img{width:100%;height:auto;border-radius:7px;box-shadow:0 3px 10px rgba(0,0,0,.14);background:#eee}
 .cgrid figcaption{font-size:12.5px;line-height:1.35;color:#333;margin-top:5px}.cgrid figcaption small{display:block;color:#8a8f99;font-size:11.5px}
 .cgrid.big{grid-template-columns:repeat(3,1fr)}@media(max-width:560px){.cgrid{grid-template-columns:repeat(3,1fr)}.cgrid.big{grid-template-columns:repeat(3,1fr)}}

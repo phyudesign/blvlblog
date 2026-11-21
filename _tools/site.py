@@ -17,7 +17,7 @@ DESC = "포켓몬카드·원피스카드 일본·한국 발매, 추첨, 아마�
 ADSENSE = "ca-pub-4380904134243959"
 AUTHOR = "blvl."
 PER_PAGE = 10
-CSS_VER = 92
+CSS_VER = 93
 JS_VER = 4
 
 # 카테고리: (슬러그, 메뉴명, 설명)

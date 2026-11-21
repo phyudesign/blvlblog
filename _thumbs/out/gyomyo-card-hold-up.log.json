@@ -1,0 +1,27 @@
+{
+ "model": "gpt-image-2",
+ "prompt": "standing on tiny legs and lifting high above its head with both front paws a LARGE blank portrait rectangle the shape of a playing card (width:height = 63:88), taller than Gyomyo's whole body, filled with flat solid pure green color #00FF00 (no texture, no outline color bleeding, crisp black crayon outline around the rectangle). Proud smug grin, eyes sparkling, showing it off. Paws overlap the bottom edge of the rectangle.",
+ "refs": [
+  "_character/gyomyo/front.png",
+  "_character/gyomyo/turnaround.png",
+  "_character/style/magazine-1.png"
+ ],
+ "outputs": [
+  "_thumbs/out/gyomyo-card-hold-up-1.png"
+ ],
+ "usage": {
+  "input_tokens": 3239,
+  "input_tokens_details": {
+   "image_tokens": 2816,
+   "text_tokens": 423
+  },
+  "output_tokens": 7024,
+  "output_tokens_details": {
+   "image_tokens": 7024,
+   "text_tokens": 0
+  },
+  "total_tokens": 10263
+ },
+ "est_cost_usd": 0.2354,
+ "created": "2026-11-21 16:24:56"
+}

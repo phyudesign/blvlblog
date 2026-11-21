@@ -1,0 +1,27 @@
+{
+ "model": "gpt-image-2",
+ "prompt": "standing and taking a photo with a smartphone held in both paws, aiming toward the upper left, tongue out in concentration, a small camera flash sparkle.",
+ "refs": [
+  "_character/gyomyo/front.png",
+  "_character/gyomyo/turnaround.png",
+  "_character/style/magazine-1.png"
+ ],
+ "outputs": [
+  "_thumbs/out/gyomyo-card-photo-1.png"
+ ],
+ "usage": {
+  "input_tokens": 3175,
+  "input_tokens_details": {
+   "image_tokens": 2816,
+   "text_tokens": 359
+  },
+  "output_tokens": 7024,
+  "output_tokens_details": {
+   "image_tokens": 7024,
+   "text_tokens": 0
+  },
+  "total_tokens": 10199
+ },
+ "est_cost_usd": 0.235,
+ "created": "2026-11-21 16:32:43"
+}

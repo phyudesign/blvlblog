@@ -1,0 +1,27 @@
+{
+ "model": "gpt-image-2",
+ "prompt": "sitting cross-legged and leaning forward, holding a big round magnifying glass up toward the upper right, one eye huge through the lens, serious appraiser face, a tiny notepad beside it.",
+ "refs": [
+  "_character/gyomyo/front.png",
+  "_character/gyomyo/turnaround.png",
+  "_character/style/magazine-1.png"
+ ],
+ "outputs": [
+  "_thumbs/out/gyomyo-card-magnifier-1.png"
+ ],
+ "usage": {
+  "input_tokens": 3184,
+  "input_tokens_details": {
+   "image_tokens": 2816,
+   "text_tokens": 368
+  },
+  "output_tokens": 7024,
+  "output_tokens_details": {
+   "image_tokens": 7024,
+   "text_tokens": 0
+  },
+  "total_tokens": 10208
+ },
+ "est_cost_usd": 0.2351,
+ "created": "2026-11-21 16:27:31"
+}

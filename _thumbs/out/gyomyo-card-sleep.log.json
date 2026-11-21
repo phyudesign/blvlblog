@@ -1,0 +1,27 @@
+{
+ "model": "gpt-image-2",
+ "prompt": "sitting on the floor and leaning its back against a flat vertical wall on its right side (do not draw the wall), fast asleep with a bubble from its nose and small zzz letters, paws on its round belly.",
+ "refs": [
+  "_character/gyomyo/front.png",
+  "_character/gyomyo/turnaround.png",
+  "_character/style/magazine-1.png"
+ ],
+ "outputs": [
+  "_thumbs/out/gyomyo-card-sleep-1.png"
+ ],
+ "usage": {
+  "input_tokens": 3189,
+  "input_tokens_details": {
+   "image_tokens": 2816,
+   "text_tokens": 373
+  },
+  "output_tokens": 7024,
+  "output_tokens_details": {
+   "image_tokens": 7024,
+   "text_tokens": 0
+  },
+  "total_tokens": 10213
+ },
+ "est_cost_usd": 0.2351,
+ "created": "2026-11-21 16:33:59"
+}

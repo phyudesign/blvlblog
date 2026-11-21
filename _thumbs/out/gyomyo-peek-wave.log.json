@@ -1,0 +1,27 @@
+{
+ "model": "gpt-image-2",
+ "prompt": "Gyomyo popping up over the top of a wall: big wide head and one paw gripping a straight horizontal edge, the other paw raised waving hello, mouth open happy, a few sparkles. The image ends in a perfectly straight horizontal cut just below the gripping paw. Do not draw the wall itself.",
+ "refs": [
+  "_character/gyomyo/front.png",
+  "_character/gyomyo/turnaround.png",
+  "_character/style/magazine-1.png"
+ ],
+ "outputs": [
+  "_thumbs/out/gyomyo-peek-wave-1.png"
+ ],
+ "usage": {
+  "input_tokens": 3207,
+  "input_tokens_details": {
+   "image_tokens": 2816,
+   "text_tokens": 391
+  },
+  "output_tokens": 7024,
+  "output_tokens_details": {
+   "image_tokens": 7024,
+   "text_tokens": 0
+  },
+  "total_tokens": 10231
+ },
+ "est_cost_usd": 0.2352,
+ "created": "2026-11-21 10:42:09"
+}

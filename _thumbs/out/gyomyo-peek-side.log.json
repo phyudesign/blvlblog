@@ -1,0 +1,27 @@
+{
+ "model": "gpt-image-2",
+ "prompt": "Gyomyo peeking out sideways from behind the right side of a tall wall: only half of the big wide head (tilted) and one small front paw gripping a straight vertical edge are visible, sly grin, eyes looking left at the viewer. The image ends in a perfectly straight vertical cut on the right side just behind the paw (the rest of the body is hidden). Do not draw the wall itself.",
+ "refs": [
+  "_character/gyomyo/front.png",
+  "_character/gyomyo/turnaround.png",
+  "_character/style/magazine-1.png"
+ ],
+ "outputs": [
+  "_thumbs/out/gyomyo-peek-side-1.png"
+ ],
+ "usage": {
+  "input_tokens": 3229,
+  "input_tokens_details": {
+   "image_tokens": 2816,
+   "text_tokens": 413
+  },
+  "output_tokens": 7024,
+  "output_tokens_details": {
+   "image_tokens": 7024,
+   "text_tokens": 0
+  },
+  "total_tokens": 10253
+ },
+ "est_cost_usd": 0.2353,
+ "created": "2026-11-21 10:39:35"
+}

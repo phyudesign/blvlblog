@@ -582,12 +582,12 @@ def main():
     # 알림 + 글
     changed = bool(new_events) or bool(status_changed) or first_run or a_changed or TG_NEW or os.environ.get("TG_TEST") == "1"
     for ev in new_events[:8]:  # 한 번에 너무 많이 쓰지 않도록
-        f = write_alert_post(ev, state)
-        events.insert(0, {"at": NOW.strftime("%m/%d %H:%M"), "shop_kr": ev["shop_kr"], "title": ev["title"], "status": ev["status"]})
-        # 텔레그램은 블로그에 글이 실제로 올라간 뒤 보내요(워크플로 마지막 단계 tg_flush.py) — 알림 눌렀는데 글이 없는 일 방지
-        TG_QUEUE.append(f'🐱 blvl {"아마존 응모 속보" if ev["status"] == "invite" else "재고 속보"}\n{ev["shop_kr"]} · {STATUS_KR.get(ev["status"], "")}\n{kr(ev["title"])[:80]}\n{ev.get("price","")}\n{ev["url"]}\n블로그: https://blvlblog.com/{urllib.parse.quote(f[:-5])}/')
+        # 2026-11-21: 애드센스 '자동 생성 콘텐츠' 문제로 속보를 블로그 글로 만들지 않아요.
+        # 새 소식은 현황판(/stock/)·홈 전광판(state.events)·텔레그램으로만 알려요.
+        events.insert(0, {"at": NOW.strftime("%m/%d %H:%M"), "ts": NOW.strftime("%Y-%m-%d %H:%M:%S"), "shop_kr": ev["shop_kr"], "title": ev["title"],
+                          "status": ev["status"], "url": ev.get("url", ""), "price": ev.get("price", ""), "img": ev.get("img", ""), "asin": ev.get("asin", "")})
+        TG_QUEUE.append(f'🐱 blvl {"아마존 응모 소식" if ev["status"] == "invite" else "재고 소식"}\n{ev["shop_kr"]} · {STATUS_KR.get(ev["status"], "")}\n{kr(ev["title"])[:80]}\n{ev.get("price","")}\n{ev["url"]}\n현황판: https://blvlblog.com/stock/')
         print("EVENT", ev["shop_kr"], ev["status"], ev["title"][:60])
-    if heal_alert_thumbs(state): changed = True
     if TG_QUEUE:
         TG_QUEUE_FILE.write_text(json.dumps(TG_QUEUE, ensure_ascii=False), encoding="utf-8")
     state["events"] = events[:100]

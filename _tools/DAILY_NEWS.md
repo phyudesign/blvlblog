@@ -57,19 +57,18 @@
 
 ## 3. LIVE(응모 판·속보)에 올리기 — 초대 요청·예약·추첨·응모가 있을 때
 - **아마존 재팬 초대 요청 상품**: `_tools/monitor.py` 의 `INVITE_JP` 맨 위에 `("ASIN", "한글 상품명", "포켓몬|원피스", "")` 추가, `AMZ_IMG` 에 대표 사진 키(가능하면) 추가. 미국 아마존은 `INVITE_US`.
-- **그 밖의 추첨·예약·응모(포켓몬센터, 국내판 등)**: 속보 글을 만들어요.
+- **그 밖의 추첨·예약·응모(포켓몬센터, 국내판 등)**: **속보 글은 더 만들지 않아요** (2026-11-21 애드센스 '정책 위반' 반려 후 결정 — 자동으로 찍어낸 짧은 글이 직접 쓴 글보다 많았음). 대신 홈 전광판·현황판에 뜨도록 감시기 기록(state.events)에만 넣고, 내용은 데일리 글 본문에 써요.
   ```
   cd 저장소 && python3 - <<'PY'
-  import sys, json; sys.path.insert(0, "_tools"); import monitor as m
-  st = json.loads(m.STATE.read_text(encoding="utf-8"))
-  m.write_alert_post({"key": "daily:고유키", "kind": "page", "shop_kr": "포켓몬센터 온라인", "title": "상품명 추첨 접수 (마감 11/11)",
-                      "url": "공식 공지 주소", "status": "krnews 또는 invite", "price": ""}, st)
+  import sys, json, datetime; sys.path.insert(0, "_tools"); import monitor as m
+  st = json.loads(m.STATE.read_text(encoding="utf-8")); now = m.NOW
+  st.setdefault("events", []).insert(0, {"at": now.strftime("%m/%d %H:%M"), "ts": now.strftime("%Y-%m-%d %H:%M:%S"),
+      "shop_kr": "포켓몬센터 온라인", "title": "상품명 추첨 접수 (마감 11/11)", "status": "new",
+      "url": "공식 공지 주소", "price": "", "img": "", "asin": ""})
   m.STATE.write_text(json.dumps(st, ensure_ascii=False, indent=1), encoding="utf-8")
   PY
   ```
-  (제목에 응모 목록 상품명(파동시커, OP-18 …)을 그대로 넣으면 홈 LIVE 카드에 그 상품 사진이 자동으로 붙어요. 목록에 없는 새 상품이면 먼저 `INVITE_JP`·`AMZ_IMG` 에 추가.)
-  (LIVE 카드에 상품 사진이 꼭 있어야 해요. 특정 상품이 아닌 행사·팝업 속보면 관련 박스 누끼 2~3개를 합친 투명 webp 를 `assets/products/이름.webp` 로 만들고, 속보 글 앞머리에 `"pimg": "/assets/products/이름.webp"`, `"asin": "이름"` 을 넣어요.)
-  (status: 국내판이면 `krnews`, 그 밖은 `invite`. 같은 key로 24시간 안이면 기존 글에 기록만 추가돼요.)
+  (제목에 응모 목록 상품명(파동시커, OP-18 …)을 넣으면 전광판 카드에 그 상품 사진이 자동으로 붙어요. `/속보-…` 글 파일(`_posts/속보-*.html`)은 절대 새로 만들지 않아요.)
 
 ## 4. 빌드·올리기
 ```
@@ -97,7 +96,7 @@ for i in 1 2 3; do git pull --rebase origin main && git push origin main && brea
 
 ## 7. 구글 서치 콘솔 색인 요청 (오전 11시대 맥 브라우저 작업에서, 슨생 2026-11-19)
 슨생 맥의 Claude 앱 브라우저는 구글에 로그인돼 있어요(로그인·비밀번호 입력은 절대 하지 않기, 로그인 화면이 나오면 건너뛰고 요약에 적기).
-1. 대상: 최근 48시간 안에 새로 올리거나 크게 고친 **검색 노출 글**만. 사이트맵(`sitemap.xml`)에 있는 주소만 해당돼요 — 속보(`/속보-…`), 본문 1,200자 미만 글처럼 noindex인 글은 요청하지 않아요.
+1. 대상: 최근 48시간 안에 새로 올리거나 크게 고친 **검색 노출 글**만. 사이트맵(`sitemap.xml`)에 있는 주소만 해당돼요 — 본문 1,200자 미만 글처럼 noindex인 글은 요청하지 않아요.
 2. https://search.google.com/search-console?resource_id=https%3A%2F%2Fblvlblog.com%2F 를 열고, 위쪽 돋보기(URL 검사)에 글 주소(한글 그대로)를 넣고 Enter.
 3. "URL이 Google에 등록되어 있지 않음"이면 **색인 생성 요청**을 눌러요. 이미 "등록되어 있음"이면 내용을 크게 고친 글만 다시 요청해요. 실시간 테스트에 1~2분 걸려요.
 4. 하루 요청 한도가 있어요(대략 10건). "오류 발생"이 두 번 연속 나오거나 한도 안내가 나오면 그날은 멈추고, 못 한 주소를 아래 대기 목록에 남겨 다음 날 먼저 처리해요.

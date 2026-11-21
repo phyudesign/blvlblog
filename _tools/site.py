@@ -48,7 +48,7 @@ SUBMENU = {
              ("umamusume", "우마무스메", ["우마무스메", "우마 무스메", "ウマ娘"], "우마무스메 육성 공략과 덱 기록")],
 }
 SUBS = SUBMENU["tcg"]   # 예전 코드 호환
-EXTRA = {"tcg": [("TCG LIVE", "/category/news/")]}
+EXTRA = {"tcg": [("TCG LIVE 현황판", "/stock/")]}
 NAV = [(n, f"/category/{k}/", [(sn, f"/category/{k}/{sk}/") for sk, sn, _, _ in SUBMENU.get(k, [])] + EXTRA.get(k, []))
                               for k, n, _ in CATS if k != "news"]
 KEEP = {".git", ".github", "CNAME", "_tools", "_posts", "_pages", "_character", "_thumbs", "_monitor", "_fetch", "assets", "wp-content", "ads.txt", ".nojekyll", "favicon.ico", ".gitignore", "README.md"}
@@ -217,7 +217,7 @@ def sidebar():
     news = (f'<aside class="widget widget_recent_entries"><h2 class="widget-title">TCG LIVE</h2><ul>' +
             "".join(f'<li><a href="{url(q["slug"])}">{esc(q["title"].replace("[추첨·판매 속보] ", ""))}</a> <small>{q["date"][5:16]}</small></li>' for q in nw) +
             '<li><a href="/category/news/">속보 전체 보기 →</a></li></ul></aside>') if nw else ""
-    cl = "".join(f'<li><a href="/category/{k}/">{esc(n)}</a></li>' for k, n, _ in CATS if k in LIVE_CATS or k == NEWS)
+    cl = "".join(f'<li><a href="/category/{k}/">{esc(n)}</a></li>' for k, n, _ in CATS if k in LIVE_CATS)
     # 순서: Recent Posts → 아마존 응모 판 → 검색 (응모 판·검색은 스크롤해도 따라옴)
     return f'''<div class="sidebar"><div class="inside-right-sidebar">
 <aside class="widget widget_recent_entries"><h2 class="widget-title">Recent Posts</h2><ul>{rec}</ul>
@@ -249,24 +249,22 @@ def live_rows():
     except Exception: st = {}
     now = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9))).replace(tzinfo=None)
     rows = []
-    for q in posts:
-        if q["category"] != NEWS: continue
-        try: t = datetime.datetime.strptime(q["date"], "%Y-%m-%d %H:%M:%S")
+    for ev in st.get("events", []):   # 감시기가 최근 48시간 안에 잡은 새 소식 (속보 글은 더 만들지 않아요)
+        try: t = datetime.datetime.strptime(ev.get("ts", ""), "%Y-%m-%d %H:%M:%S")
         except ValueError: continue
         if (now - t).total_seconds() > 48 * 3600: break
-        if "amazon.co.jp/dp/" in q.get("shop_url", ""): continue   # 아마존 응모 상품은 아래 '응모 중' 줄로 보여 줌
-        name = q["title"].replace("[추첨·판매 속보] ", "").replace("[입고 속보] ", "")
-        sub = " · ".join(x for x in (q.get("shop_kr", ""), q.get("status_kr", ""), q.get("price", "")) if x)
-        direct = q.get("shop_url", "") if q.get("shop_url", "").count("/") > 3 else ""   # 상품 페이지 주소가 있으면 바로 연결
-        pv = {"img": re.sub(r"downsize=\d+", "downsize=400", q.get("pimg") or ""), "name": name, "sub": sub or "TCG LIVE 속보", "cta": "속보 글 보기", "shop": q.get("shop_kr", "")}
-        a = q.get("asin") or match_asin(name)   # 상품 사진이 없는 속보는 같은 상품의 아마존 사진·누끼를 씀
+        if ev.get("status") in ("invite", "krnews") or not ev.get("url"): continue   # 아마존 응모·국내판은 아래 자기 줄로
+        name = kr(ev["title"])[:60]
+        sub = " · ".join(x for x in (ev.get("shop_kr", ""), STATUS_KR.get(ev.get("status"), ""), ev.get("price", "")) if x)
+        pv = {"img": re.sub(r"downsize=\d+", "downsize=400", ev.get("img") or ""), "name": name, "sub": sub, "cta": "쇼핑몰에서 보기", "shop": ev.get("shop_kr", "")}
+        a = ev.get("asin") or match_asin(name)
         if a:
             pv["asin"] = a
             if not pv["img"]:
                 try:
                     from monitor import amz_img; pv["img"] = amz_img(a)
                 except Exception: pass
-        rows.append(("hot", "속보", name, direct or url(q["slug"]), q["date"][5:16].replace("-", "/"), bool(direct), pv))
+        rows.append(("hot", "새 소식", name, ev["url"], t.strftime("%m/%d %H:%M"), True, pv))
     try:
         from monitor import invite_list, amz_img
         for a, name, price, brand, grp, new, link in [r for r in invite_list(st, "jp") if not r[4]][:6]:
@@ -298,7 +296,7 @@ def ticker():
         track = "".join(one(r) for r in rows)
     dur = max(28, min(120, len(re.sub(r"<[^>]+>", "", track)) // 5))
     return f'''<section class="ticker" aria-label="TCG LIVE 실시간 재고 속보">
-<a class="tk-label" href="/category/news/"><i aria-hidden="true"></i>LIVE</a>
+<a class="tk-label" href="/stock/"><i aria-hidden="true"></i>LIVE</a>
 <div class="tk-view"><div class="tk-track" style="--dur:{dur}s"><div class="tk-run">{track}</div><div class="tk-run" aria-hidden="true">{track}</div></div></div>
 <a class="tk-more" href="/stock/">현황판 →</a></section>
 <script defer src="/assets/blvl-ticker.js?v=9"></script>'''
@@ -538,7 +536,10 @@ def redirect(src, dst):
     write(src, f'<!doctype html><meta charset="utf-8"><title>이동 중…</title><link rel="canonical" href="{SITE}{dst}"><meta name="robots" content="noindex,follow"><meta http-equiv="refresh" content="0;url={dst}"><a href="{dst}">이 페이지는 옮겨졌어요 →</a>')
 for p in articles:
     redirect(url(p["slug"]) + "feed/", url(p["slug"]))   # 글마다 붙던 /글주소/feed/
-OLD_MOVED = {"속보-20261101-0310-세븐넷-37e3fc": "/category/news/"}  # 지운 속보 → 속보 목록
+# 2026-11-21 속보 글을 없앴어요(애드센스 자동 생성 콘텐츠 문제) → 옛 속보 주소는 모두 재고 현황판으로
+OLD_MOVED = {k: "/stock/" for k in json.loads((ROOT / "_tools" / "old_alerts.json").read_text(encoding="utf-8"))}
+OLD_MOVED["속보-20261101-0310-세븐넷-37e3fc"] = "/stock/"
+redirect("/category/news/", "/stock/")
 for src, dst in OLD_MOVED.items():
     if not any(p["slug"] == src for p in posts): redirect(url(src), dst)
 (ROOT / ".nojekyll").write_text("")

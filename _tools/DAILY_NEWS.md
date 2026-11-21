@@ -42,6 +42,15 @@
 - 파일: `_posts/tcg-데일리-YYYYMMDD.html` (한국 날짜). 맨 위 JSON 앞머리는 기존 글과 같은 형식:
   - title: `TCG 데일리 뉴스 M월 D일 — {가장 큰 소식 한 줄}`
   - slug: `tcg-데일리-YYYYMMDD`, date/mod: `YYYY-MM-DD HH:MM:SS`(한국 시간), category: `tcg`
+  - **표지 시리즈 (슨생 확정 2026-11-22) — 글 종류마다 틀이 달라요.** 틀(배경 콘셉트·라벨·제목 위치)은 시리즈마다 고정, **교묘 포즈·소품·부제·앞에 놓는 상품은 매번 바꿔요.**
+    | 시리즈 | 배경 틀 (`_thumbs/` 템플릿) | 라벨 / 제목 | 교묘 |
+    |---|---|---|---|
+    | 데일리 뉴스 | `gyomyo-series-daily-template.json` — 크레용 **신문 1면**(누런 신문지, 이중 괘선, 오른쪽 기사 칸) | 교묘 TCG 일보 / 오늘의 TCG + 빨간 부제(호외요 호외!·마감 임박!·신상 공개! 등 그날 맞게) | 신문팔이·기자·편집장 등 신문 관련 포즈를 매일 다르게 |
+    | 시세·가격 글 | `gyomyo-series-price-template.json` — **칠판 시세판**(초록 칠판, 분필 화살표·차트) | 교묘의 시세판 / 시세 체크 + 노란 부제 | 안경·지시봉·계산기 등 매번 다르게 |
+    | 총정리·가이드·응모 정리 | magcards 잡지형(예: `gyomyo-hadou-guide-stage.json`) | 교묘의 TCG 정보통 / 글 주제 | 글 내용에 맞는 동작 |
+    | TECH | 기존 방식 | | |
+    템플릿을 복사해 `_thumbs/gyomyo-daily-YYYYMMDD.json`(데일리) 등으로 만들고 `prompt` 의 Gyomyo 문장(포즈)·`eyes`·`title2` 만 바꿔 push. 나머지 합성 순서는 아래와 같아요. 신문형은 날짜 도장을 제목 오른쪽 위(`"stamp": {"text": "11월 21일", "x": 64, "y": 4, "r": 6}`), front 는 `[[54,52,100,100],[0,82,22,100]]` 부터 맞춰 봐요.
+  - **본문 카드·상품 이미지에 교묘 빼꼼 (슨생 확정 2026-11-22):** 글마다 핵심 카드·상품 2~4장은 `python3 _tools/peek.py 원본 top|wave 저장.webp 위치(0~1)` 로 교묘가 카드 **뒤에 숨어 윗변을 앞발로 잡고 빼꼼** 내민 이미지로 넣어요(교묘 몸은 카드 뒤, 앞발만 카드 앞 — 카드 한가운데서 튀어나와 보이면 안 돼요). 원본은 `_thumbs/peek-src/` 에 두고(wp-content 에 두면 안 쓰는 이미지로 지워져요), 위치는 글 안에서 매번 다르게(.1~.9), top 과 wave 를 섞어 써요. 합성한 뒤 꼭 한 번 열어 보고, 교묘 몸·잘린 면이 카드 위로 보이면 다시 만들어요. alt 끝에 "— 카드 뒤에서 빼꼼 고개를 내민 교묘".
   - thumb: **슨생 확정 스타일(2026-11-08)** — 크레용 잡지 표지 배경(교묘가 오른쪽 아래에서 작게 카드 들고 '!!', 왼쪽 아래 카드 뒷면 더미) 위에 **그날 소식의 실제 카드·팩·박스를 가운데 크게** 얹고, 교묘·카드 더미는 그 앞으로. **데일리 표지 배경은 매일 새로 그려요(같은 포즈 재사용 금지, 슨생 요청 2026-11-11).** 먼저 `_thumbs/POSES.md` 를 읽고 지금까지 안 쓴 포즈(그날 소식과 어울리는 동작: 팩 뜯기, 망원경으로 살피기, 달력에 동그라미, 줄 서기, 택배 상자 열기, 메가폰으로 외치기 등)를 골라, `_thumbs/gyomyo-daily-stage-c.json` 을 복사한 `_thumbs/gyomyo-daily-YYYYMMDD.json` 의 prompt 안 `POSE:` 문장과 eyes 만 바꿔 push → GitHub '썸네일' 작업이 끝나 `_thumbs/out/gyomyo-daily-YYYYMMDD-1.png` 가 생기면(pull 하며 최대 5분 대기) 그걸 bgimg 로 써요. 만든 뒤 `_thumbs/POSES.md` 에 한 줄 추가. 배경 생성이 실패하거나 5분 넘게 안 나오면 POSES.md 에서 가장 오래전에 쓴 공용 배경(stage-1/b/c)을 쓰고 요약에 적어요. 날짜는 빨간 도장(stamp)으로. 교묘 앞 레이어 영역(front)은 배경마다 교묘 위치를 보고 맞춰요. `_thumbs/cards/daily-20261107.json` 을 복사해 `daily-YYYYMMDD.json` 으로 만들고 out(`wp-content/uploads/YYYY/MM/blvl-tcg-daily-YYYYMMDD-thumb.jpg`)·stamp 글자·items(그날 상품: 박스 누끼 `assets/products/*.webp`, 카드 `assets/cards/*.webp`)만 바꿔 `python3 _tools/thumbcard/make.py _thumbs/cards/daily-YYYYMMDD.json`. 카드·박스가 화면의 주인공, 교묘는 조연. 새 카드·박스는 배경 투명 webp 로 저장(흰 배경은 가장자리 흰색 지우기). 상품 이미지가 하나도 없을 때만 공용 표지 `/wp-content/uploads/2026/11/blvl-tcg-daily.jpg`. 일반(데일리 아닌) TCG 글은 **매번 다른 교묘 포즈**(글 내용에 맞는 동작: 돋보기로 시세 보기, 기도하며 응모, 복권 들고 점프 등, 이미 쓴 포즈와 겹치지 않게)로 같은 방식으로 `_thumbs/gyomyo-*-stage.json`(magcards 모드)에 제목을 넣어 배경을 새로 만든 뒤 합성.
   - tags: 포켓몬카드/원피스카드 등
   - desc: 오늘 소식 요약 1~2문장

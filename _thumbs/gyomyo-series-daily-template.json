@@ -1,0 +1,12 @@
+{
+ "character": "gyomyo",
+ "mode": "magcards",
+ "bg": "warm off-white newsprint paper with faint grey crayon column lines",
+ "eyes": "wide excited eyes",
+ "badge": "교묘 TCG 일보",
+ "title": "오늘의 TCG",
+ "title2": "호외요 호외!",
+ "style_refs": ["_character/style/magazine-1.png"],
+ "prompt": "SERIES LOOK: a hand-drawn crayon NEWSPAPER FRONT PAGE. A thick black double rule under the top label like a newspaper masthead, the title in heavy black crayon letters, the second line in red. Thin grey crayon column lines and tiny scribbled headline blocks only in the far right margin. Gyomyo is small in the bottom-right corner (keep the huge wide head and tiny stubby body exactly like the references): a newsboy wearing a small flat cap, holding a rolled newspaper high over its head and shouting. In the very bottom-left corner a small messy pile of navy blue card backs with a yellow paw print and stars. Keep the middle and left of the lower half empty paper.",
+ "n": 1, "quality": "high", "regenerate": false
+}

@@ -47,21 +47,30 @@ def sprite(kind):
     return im
 
 
+def _head_bottom(s, kind):
+    """교묘 머리(몸)가 끝나는 줄. 카드 윗변을 여기에 맞추면 몸은 카드 뒤로 숨고 앞발만 카드 앞에 걸쳐요."""
+    if kind == "wave":
+        return int(s.height * .80)          # 손 흔드는 판은 몸·꼬리가 길어서 아랫부분을 카드 뒤로 넉넉히 숨겨요
+    a = s.split()[3].load(); cx = s.width // 2
+    ys = [y for y in range(s.height // 2, s.height) if a[cx, y] > 128]
+    return max(ys) if ys else int(s.height * .85)
+
+
 def make(card, kind, out, pos=.5, scale=.62):
+    """kind: top(두 앞발로 윗변 잡고 빼꼼) | wave(빼꼼 + 손 흔들기). 위치 pos: 0=왼쪽 ~ 1=오른쪽.
+    순서: 교묘(뒤) → 카드 → 카드 윗변 아래로 내려온 앞발만 다시 앞에. 그래서 카드 한가운데서 튀어나와 보이지 않아요."""
+    if kind == "side": kind = "top"
     c = Image.open(card).convert("RGBA")
     W, H = c.size; s = sprite(kind)
-    if kind == "side":
-        sh = int(H * scale * .62); s = s.resize((int(s.width * sh / s.height), sh), Image.LANCZOS)
-        grip = int(s.width * .07)                        # 앞발이 카드 왼쪽 가장자리를 덮는 폭
-        pad = s.width - grip
-        cv = Image.new("RGBA", (W + pad, H), (0, 0, 0, 0)); cv.alpha_composite(c, (pad, 0))
-        y = int((H - sh) * pos); cv.alpha_composite(s, (0, y))
-    else:
-        sw = int(W * scale); s = s.resize((sw, int(s.height * sw / s.width)), Image.LANCZOS)
-        grip = int(s.height * (.16 if kind == "top" else .12))   # 앞발이 카드 윗변을 덮는 높이
-        pad = s.height - grip
-        cv = Image.new("RGBA", (W, H + pad), (0, 0, 0, 0)); cv.alpha_composite(c, (0, pad))
-        x = int((W - sw) * pos); cv.alpha_composite(s, (x, 0))
+    sw = int(W * scale); s = s.resize((sw, int(s.height * sw / s.width)), Image.LANCZOS)
+    hb = _head_bottom(s, kind)                       # 이 줄 = 카드 윗변
+    x = int((W - sw) * min(max(pos, .02), .98))
+    cv = Image.new("RGBA", (W, H + hb), (0, 0, 0, 0))
+    cv.alpha_composite(s, (x, 0))                    # 1) 교묘 (몸 아래쪽은 카드에 가려져요)
+    cv.alpha_composite(c, (0, hb))                   # 2) 카드
+    if kind == "top":                                # 3) 윗변에 걸친 앞발만 카드 앞으로
+        paws = s.crop((0, hb, s.width, s.height))
+        cv.alpha_composite(paws, (x, hb))
     out = pathlib.Path(out); out.parent.mkdir(parents=True, exist_ok=True)
     cv.save(out, "WEBP", quality=86, method=6)
     return cv.size

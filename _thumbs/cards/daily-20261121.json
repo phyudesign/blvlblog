@@ -1,18 +1,18 @@
 {
- "out": "wp-content/uploads/2026/11/blvl-tcg-daily-20261121-thumb.jpg",
- "bgimg": "_thumbs/out/gyomyo-daily-20261121-1.png",
+ "out": "wp-content/uploads/2026/11/blvl-tcg-daily-20261121-news.jpg",
+ "bgimg": "_thumbs/out/gyomyo-series-daily-1.png",
  "ink_all": true,
  "front": [
   [
-   55,
-   58,
+   54,
+   52,
    100,
    100
   ],
   [
    0,
-   80,
-   36,
+   82,
+   22,
    100
   ]
  ],
@@ -23,9 +23,9 @@
  "tol": 70,
  "stamp": {
   "text": "11월 21일",
-  "x": 3,
-  "y": 3,
-  "r": -8
+  "x": 64,
+  "y": 4,
+  "r": 6
  },
  "items": [
   {

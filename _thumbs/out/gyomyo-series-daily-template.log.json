@@ -1,0 +1,27 @@
+{
+ "model": "gpt-image-2",
+ "prompt": "SERIES LOOK: a hand-drawn crayon NEWSPAPER FRONT PAGE. A thick black double rule under the top label like a newspaper masthead, the title in heavy black crayon letters, the second line in red. Thin grey crayon column lines and tiny scribbled headline blocks only in the far right margin. Gyomyo is small in the bottom-right corner (keep the huge wide head and tiny stubby body exactly like the references): a newsboy wearing a small flat cap, holding a rolled newspaper high over its head and shouting. In the very bottom-left corner a small messy pile of navy blue card backs with a yellow paw print and stars. Keep the middle and left of the lower half empty paper.",
+ "refs": [
+  "_character/gyomyo/front.png",
+  "_character/gyomyo/turnaround.png",
+  "_character/style/magazine-1.png"
+ ],
+ "outputs": [
+  "_thumbs/out/gyomyo-series-daily-template-1.png"
+ ],
+ "usage": {
+  "input_tokens": 3532,
+  "input_tokens_details": {
+   "image_tokens": 2816,
+   "text_tokens": 716
+  },
+  "output_tokens": 7024,
+  "output_tokens_details": {
+   "image_tokens": 7024,
+   "text_tokens": 0
+  },
+  "total_tokens": 10556
+ },
+ "est_cost_usd": 0.2368,
+ "created": "2026-11-21 15:52:40"
+}

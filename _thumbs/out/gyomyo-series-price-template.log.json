@@ -1,0 +1,27 @@
+{
+ "model": "gpt-image-2",
+ "prompt": "SERIES LOOK: a crayon-and-chalk PRICE BOARD. The title in thick white chalk letters, the second line in yellow chalk. A few hand-drawn chalk up arrows in red and down arrows in blue and a small zig-zag line chart doodle only along the top-right edge. Gyomyo is small in the bottom-right corner (keep the huge wide head and tiny stubby body exactly like the references): wearing small round glasses, pointing at the board with a long wooden pointer stick, other paw on hip, confident smirk. In the very bottom-left corner a small messy pile of navy blue card backs with a yellow paw print and stars. Keep the middle and left of the lower half empty chalkboard.",
+ "refs": [
+  "_character/gyomyo/front.png",
+  "_character/gyomyo/turnaround.png",
+  "_character/style/magazine-1.png"
+ ],
+ "outputs": [
+  "_thumbs/out/gyomyo-series-price-template-1.png"
+ ],
+ "usage": {
+  "input_tokens": 3532,
+  "input_tokens_details": {
+   "image_tokens": 2816,
+   "text_tokens": 716
+  },
+  "output_tokens": 7024,
+  "output_tokens_details": {
+   "image_tokens": 7024,
+   "text_tokens": 0
+  },
+  "total_tokens": 10556
+ },
+ "est_cost_usd": 0.2368,
+ "created": "2026-11-21 15:54:03"
+}

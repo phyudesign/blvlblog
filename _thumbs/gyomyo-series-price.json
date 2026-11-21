@@ -1,0 +1,12 @@
+{
+ "character": "gyomyo",
+ "mode": "magcards",
+ "bg": "deep green chalkboard with chalk dust smudges",
+ "eyes": "sharp focused eyes",
+ "badge": "교묘의 시세판",
+ "title": "시세 체크",
+ "title2": "올랐냥? 내렸냥?",
+ "style_refs": ["_character/style/magazine-1.png"],
+ "prompt": "SERIES LOOK: a crayon-and-chalk PRICE BOARD. The title in thick white chalk letters, the second line in yellow chalk. A few hand-drawn chalk up arrows in red and down arrows in blue and a small zig-zag line chart doodle only along the top-right edge. Gyomyo is small in the bottom-right corner (keep the huge wide head and tiny stubby body exactly like the references): wearing small round glasses, pointing at the board with a long wooden pointer stick, other paw on hip, confident smirk. In the very bottom-left corner a small messy pile of navy blue card backs with a yellow paw print and stars. Keep the middle and left of the lower half empty chalkboard.",
+ "n": 1, "quality": "high", "regenerate": false
+}

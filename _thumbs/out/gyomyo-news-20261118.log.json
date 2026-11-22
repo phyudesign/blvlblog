@@ -1,6 +1,6 @@
 {
  "model": "gpt-image-2",
- "prompt": "Gyomyo POSE: holding two smartphones, one in each paw, eyes darting left and right. A small messy pile of navy blue card backs with a yellow paw print and stars near Gyomyo. Title line 1 black, line 2 red.",
+ "prompt": "Gyomyo POSE: as a news reporter holding a microphone, wearing a tie, pointing excitedly. A small messy pile of navy blue card backs with a yellow paw print and stars near Gyomyo. Title line 1 black, line 2 red.",
  "refs": [
   "_character/gyomyo/front.png",
   "_character/gyomyo/turnaround.png",
@@ -10,18 +10,18 @@
   "_thumbs/out/gyomyo-news-20261118-1.png"
  ],
  "usage": {
-  "input_tokens": 3442,
+  "input_tokens": 3422,
   "input_tokens_details": {
    "image_tokens": 2816,
-   "text_tokens": 626
+   "text_tokens": 606
   },
   "output_tokens": 7024,
   "output_tokens_details": {
    "image_tokens": 7024,
    "text_tokens": 0
   },
-  "total_tokens": 10466
+  "total_tokens": 10446
  },
- "est_cost_usd": 0.2364,
- "created": "2026-11-22 04:55:46"
+ "est_cost_usd": 0.2363,
+ "created": "2026-11-22 14:08:22"
 }

@@ -1,6 +1,6 @@
 {
  "model": "gpt-image-2",
- "prompt": "Gyomyo POSE: as a detective in a deerstalker hat holding a magnifying glass and pointing a warning finger. A small messy pile of navy blue card backs with a yellow paw print and stars near Gyomyo. Title line 1 black, line 2 red.",
+ "prompt": "Gyomyo POSE: wearing a yellow safety helmet, blowing a whistle and holding up a red STOP paddle sign. A small messy pile of navy blue card backs with a yellow paw print and stars near Gyomyo. Title line 1 black, line 2 red.",
  "refs": [
   "_character/gyomyo/front.png",
   "_character/gyomyo/turnaround.png",
@@ -10,18 +10,18 @@
   "_thumbs/out/gyomyo-news-20261113-1.png"
  ],
  "usage": {
-  "input_tokens": 3448,
+  "input_tokens": 3423,
   "input_tokens_details": {
    "image_tokens": 2816,
-   "text_tokens": 632
+   "text_tokens": 607
   },
   "output_tokens": 7024,
   "output_tokens_details": {
    "image_tokens": 7024,
    "text_tokens": 0
   },
-  "total_tokens": 10472
+  "total_tokens": 10447
  },
- "est_cost_usd": 0.2364,
- "created": "2026-11-22 04:48:33"
+ "est_cost_usd": 0.2363,
+ "created": "2026-11-22 14:03:28"
 }

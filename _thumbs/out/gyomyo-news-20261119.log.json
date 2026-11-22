@@ -1,6 +1,6 @@
 {
  "model": "gpt-image-2",
- "prompt": "Gyomyo POSE: wearing a folded newspaper pirate hat and looking through a toy telescope. A small messy pile of navy blue card backs with a yellow paw print and stars near Gyomyo. Title line 1 black, line 2 red.",
+ "prompt": "Gyomyo POSE: wearing a pirate tricorn hat, looking through a brass telescope, one paw on hip. A small messy pile of navy blue card backs with a yellow paw print and stars near Gyomyo. Title line 1 black, line 2 red.",
  "refs": [
   "_character/gyomyo/front.png",
   "_character/gyomyo/turnaround.png",
@@ -10,18 +10,18 @@
   "_thumbs/out/gyomyo-news-20261119-1.png"
  ],
  "usage": {
-  "input_tokens": 3440,
+  "input_tokens": 3416,
   "input_tokens_details": {
    "image_tokens": 2816,
-   "text_tokens": 624
+   "text_tokens": 600
   },
   "output_tokens": 7024,
   "output_tokens_details": {
    "image_tokens": 7024,
    "text_tokens": 0
   },
-  "total_tokens": 10464
+  "total_tokens": 10440
  },
- "est_cost_usd": 0.2364,
- "created": "2026-11-22 04:57:28"
+ "est_cost_usd": 0.2362,
+ "created": "2026-11-22 14:10:06"
 }

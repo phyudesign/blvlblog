@@ -1,6 +1,6 @@
 {
  "model": "gpt-image-2",
- "prompt": "Gyomyo POSE: as a paperboy running with a big stack of newspapers under one arm, waving one newspaper. A small messy pile of navy blue card backs with a yellow paw print and stars near Gyomyo. Title line 1 black, line 2 red.",
+ "prompt": "Gyomyo POSE: turning the handle of a small round lottery ball machine with both paws, excited, a ball popping out. A small messy pile of navy blue card backs with a yellow paw print and stars near Gyomyo. Title line 1 black, line 2 red.",
  "refs": [
   "_character/gyomyo/front.png",
   "_character/gyomyo/turnaround.png",
@@ -10,18 +10,18 @@
   "_thumbs/out/gyomyo-news-20261110-1.png"
  ],
  "usage": {
-  "input_tokens": 3457,
+  "input_tokens": 3437,
   "input_tokens_details": {
    "image_tokens": 2816,
-   "text_tokens": 641
+   "text_tokens": 621
   },
   "output_tokens": 7024,
   "output_tokens_details": {
    "image_tokens": 7024,
    "text_tokens": 0
   },
-  "total_tokens": 10481
+  "total_tokens": 10461
  },
- "est_cost_usd": 0.2365,
- "created": "2026-11-22 04:45:05"
+ "est_cost_usd": 0.2364,
+ "created": "2026-11-22 13:59:58"
 }

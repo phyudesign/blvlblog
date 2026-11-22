@@ -1,0 +1,27 @@
+{
+ "model": "gpt-image-2",
+ "prompt": "riding a small wooden toy camel, wearing a light desert scarf, a little sun doodle.",
+ "refs": [
+  "_character/gyomyo/front.png",
+  "_character/gyomyo/turnaround.png",
+  "_character/style/magazine-1.png"
+ ],
+ "outputs": [
+  "_thumbs/out/gyomyo-card-camel-1.png"
+ ],
+ "usage": {
+  "input_tokens": 3164,
+  "input_tokens_details": {
+   "image_tokens": 2816,
+   "text_tokens": 348
+  },
+  "output_tokens": 7024,
+  "output_tokens_details": {
+   "image_tokens": 7024,
+   "text_tokens": 0
+  },
+  "total_tokens": 10188
+ },
+ "est_cost_usd": 0.235,
+ "created": "2026-11-22 03:29:33"
+}

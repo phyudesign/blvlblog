@@ -73,27 +73,33 @@ def source(key, src_url):
     return keep
 
 
-def run():
+def run(plan=None):
+    """plan: gyo_plan.PLAN 형식 (slug, key, 배치, 스티커, 옵션, 행동 설명)"""
+    import gyo_plan
+    plan = plan or gyo_plan.PLAN
     OUTD.mkdir(parents=True, exist_ok=True)
-    for slug, key, kind, opt in PLAN:
+    for slug, key, lay, stk, opt, act in plan:
         p = ROOT / "_posts" / f"{slug}.html"; s = p.read_text(encoding="utf-8")
         m = None
         for mm in re.finditer(r'<img\b[^>]*>', s):
             src = re.search(r'src="([^"]+)"', mm.group(0)).group(1)
-            if key in src and "/gyo/" not in src: m = mm; break
+            if key in src and "/gyo/" not in src and "gc-" not in src: m = mm; break
         if not m: print("못 찾음", slug, key); continue
         tag = m.group(0); src = re.search(r'src="([^"]+)"', tag).group(1)
-        name = f"{slug[:24]}-{re.sub(r'[^A-Za-z0-9]', '', key)[:18]}-{kind}.webp"
+        name = f"{slug[:24]}-{re.sub(r'[^A-Za-z0-9]', '', key)[:18]}-{stk}.webp"
         out = OUTD / name
-        size = gyocard.make(kind, source(key, src), out, opt.get("side", "right"), opt.get("pos", .5))
+        if stk in gyo_plan.NEW:
+            size = gyocard.make(lay, source(key, src), out, opt.get("side", "right"), opt.get("pos", .5), sticker=stk)
+        else:   # 처음 만든 공용 스티커(pray·push·sit·photo·wave …)는 블로그 전체에서 한 번씩만
+            size = gyocard.make(stk, source(key, src), out, opt.get("side", "right"), opt.get("pos", .5))
         alt = re.search(r'alt="([^"]*)"', tag); alt = alt.group(1) if alt else ""
         new = re.sub(r'src="[^"]+"', f'src="/wp-content/uploads/2026/11/gyo/{name}"', tag)
         new = re.sub(r'\s(width|height|referrerpolicy)="[^"]*"', "", new)
-        new = re.sub(r'alt="[^"]*"', f'alt="{alt} — {ACT[kind]}"', new) if 'alt="' in new else new.replace("<img", f'<img alt="{ACT[kind]}"', 1)
+        new = re.sub(r'alt="[^"]*"', f'alt="{alt} — {act}"', new) if 'alt="' in new else new.replace("<img", f'<img alt="{act}"', 1)
         new = new.replace('background:#fff', 'background:transparent')
         s = s[:m.start()] + new + s[m.end():]
         p.write_text(s, encoding="utf-8")
-        print("ok", slug, kind, size)
+        print("ok", slug, stk, size)
 
 
 if __name__ == "__main__":

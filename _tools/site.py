@@ -272,10 +272,16 @@ def live_rows():
             rows.append(("inv", "새 응모" if new else "응모 중", f"{brand} {name} — 아마존 초대 요청", link, "", True,
                          {"img": amz_img(a), "name": f"{brand} {name}", "sub": sub, "cta": "아마존에서 초대 요청하기", "asin": a}))
     except Exception: pass
+    kr_cut = (now - datetime.timedelta(days=14)).strftime("%Y-%m-%d")   # 국내판 공지는 2주 지나면 (추첨 마감·발매 지난 소식) 빼요
     for u, v in sorted(st.get("kr", {}).items(), key=lambda kv: kv[1].get("posted", kv[1]["first"]), reverse=True)[:4]:
+        if v.get("posted", v["first"])[:10] < kr_cut or v.get("ended"): continue
         rows.append(("kr", "국내판", v["title"], u, "", True, {"img": v.get("img", ""), "name": v["title"], "sub": v["src"] + " 공지", "cta": "공지 보기", "kr": "1"}))
     for v in st.get("items", {}).values():
         if v.get("status") not in ("instock", "preorder"): continue
+        try:   # 일주일 넘게 계속 팔리는 상품은 '지금 소식'이 아니라서 슬라이드·전광판에서 빼요
+            since = datetime.datetime.strptime(f'{now.year}/{v.get("since", "")}', "%Y/%m/%d %H:%M")
+            if (now - since).days > 7: continue
+        except ValueError: pass
         name = re.sub(r"^\s+|\s+$", "", kr(v["title"]))[:48]
         extra = " · ".join(x for x in (SHOP_KR.get(v.get("shop"), ""), STATUS_KR.get(v["status"], ""), v.get("price", "")) if x)
         rows.append(("on", "판매 중" if v["status"] == "instock" else "예약 중", f"{name} — {extra}", v["url"], "", True,

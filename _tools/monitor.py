@@ -343,6 +343,10 @@ INVITE_US = [  # 아마존 미국 (amazon.com) — 직접 확인된 초대 판�
 US_PRICE = {"B0H78BB9TY": "정가 $49.99"}
 INVITE_INFO = {a: (n, "", g) for a, n, b, g in INVITE_JP}   # 예전 코드 호환
 
+# 아마존에서 초대 요청을 더 받지 않는 상품 (2026-11-23 아마존 상품 페이지에서 하나씩 확인: 초대 버튼 없음·다른 판매자만·일반 판매)
+INVITE_ENDED = {"B0HN6SF9V1", "B0HN6Q2STG", "B0H4PQ6LR5", "B0GP928YDZ", "B0GXCYMRGL", "B0GXCC7W7Q", "B0GXCX36HP", "B0GXCX46KQ",
+                "B0GXCZ1VDC", "B0GXCSGX8Y", "B0GXCPF84C", "B0GXCTRZ8L", "B0GXCT83HB", "B0GP9JJ4B7", "B0GP9FPZJH", "B0GP9QQ1JG", "B0GTTJ9X7C"}
+
 def invite_list(state, region="jp"):
     """응모 판 목록: [(asin, 이름, 가격, 브랜드, 묶음, NEW, 링크)] — 감시기가 새로 찾은 상품을 맨 위에"""
     inv = state.get("amazon", {})
@@ -352,9 +356,10 @@ def invite_list(state, region="jp"):
     rows = []
     if region == "jp":   # 감시기가 새로 찾은 상품 (최근 것부터)
         for a, v in sorted(inv.items(), key=lambda kv: kv[1]["first"], reverse=True):
-            if a in known or v["first"] <= "2026-11-02": continue
+            if a in known or a in INVITE_ENDED or v["first"] <= "2026-11-02": continue
             nm = kr(v["name"]); brand = "원피스" if "원피스" in nm else "포켓몬"
             rows.append((a, nm.replace("포켓몬카드 ", "").replace("원피스카드 ", ""), v.get("price", ""), brand, "", True, host + a))
+    if region == "jp": base = [r for r in base if r[0] not in INVITE_ENDED]
     for i, (a, n, b, g) in enumerate(base):
         price = (inv.get(a) or {}).get("price", "") if region == "jp" else US_PRICE.get(a, "")
         rows.append((a, n, price, b, g, i == 0 and not rows, host + a))

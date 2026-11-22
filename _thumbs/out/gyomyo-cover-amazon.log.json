@@ -1,0 +1,27 @@
+{
+ "model": "gpt-image-2",
+ "prompt": "Gyomyo POSE: popping out of an open cardboard delivery box, holding an envelope with a red seal. Title line 1 black, line 2 red.",
+ "refs": [
+  "_character/gyomyo/front.png",
+  "_character/gyomyo/turnaround.png",
+  "_character/style/magazine-1.png"
+ ],
+ "outputs": [
+  "_thumbs/out/gyomyo-cover-amazon-1.png"
+ ],
+ "usage": {
+  "input_tokens": 3402,
+  "input_tokens_details": {
+   "image_tokens": 2816,
+   "text_tokens": 586
+  },
+  "output_tokens": 7024,
+  "output_tokens_details": {
+   "image_tokens": 7024,
+   "text_tokens": 0
+  },
+  "total_tokens": 10426
+ },
+ "est_cost_usd": 0.2362,
+ "created": "2026-11-22 04:36:17"
+}

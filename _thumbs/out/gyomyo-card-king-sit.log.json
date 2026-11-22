@@ -1,0 +1,27 @@
+{
+ "model": "gpt-image-2",
+ "prompt": "sitting proudly like a king, the bottom of its round body cut perfectly flat and horizontal (as if sitting on a flat edge that is not drawn), tiny hind legs dangling in front, wearing a small golden crown and a red royal cape, holding a little scepter, smug face.",
+ "refs": [
+  "_character/gyomyo/front.png",
+  "_character/gyomyo/turnaround.png",
+  "_character/style/magazine-1.png"
+ ],
+ "outputs": [
+  "_thumbs/out/gyomyo-card-king-sit-1.png"
+ ],
+ "usage": {
+  "input_tokens": 3202,
+  "input_tokens_details": {
+   "image_tokens": 2816,
+   "text_tokens": 386
+  },
+  "output_tokens": 7024,
+  "output_tokens_details": {
+   "image_tokens": 7024,
+   "text_tokens": 0
+  },
+  "total_tokens": 10226
+ },
+ "est_cost_usd": 0.2352,
+ "created": "2026-11-22 03:58:47"
+}

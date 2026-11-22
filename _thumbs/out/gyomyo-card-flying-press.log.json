@@ -1,0 +1,27 @@
+{
+ "model": "gpt-image-2",
+ "prompt": "leaping through the air like a pro wrestler doing a flying body press from the top rope, arms and legs spread wide, determined face.",
+ "refs": [
+  "_character/gyomyo/front.png",
+  "_character/gyomyo/turnaround.png",
+  "_character/style/magazine-1.png"
+ ],
+ "outputs": [
+  "_thumbs/out/gyomyo-card-flying-press-1.png"
+ ],
+ "usage": {
+  "input_tokens": 3173,
+  "input_tokens_details": {
+   "image_tokens": 2816,
+   "text_tokens": 357
+  },
+  "output_tokens": 7024,
+  "output_tokens_details": {
+   "image_tokens": 7024,
+   "text_tokens": 0
+  },
+  "total_tokens": 10197
+ },
+ "est_cost_usd": 0.235,
+ "created": "2026-11-22 03:47:19"
+}

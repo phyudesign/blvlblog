@@ -1,0 +1,27 @@
+{
+ "model": "gpt-image-2",
+ "prompt": "dashing super fast with a jet-like dust trail behind it, mouth open with excitement, motion streaks.",
+ "refs": [
+  "_character/gyomyo/front.png",
+  "_character/gyomyo/turnaround.png",
+  "_character/style/magazine-1.png"
+ ],
+ "outputs": [
+  "_thumbs/out/gyomyo-card-sonic-dash-1.png"
+ ],
+ "usage": {
+  "input_tokens": 3167,
+  "input_tokens_details": {
+   "image_tokens": 2816,
+   "text_tokens": 351
+  },
+  "output_tokens": 7024,
+  "output_tokens_details": {
+   "image_tokens": 7024,
+   "text_tokens": 0
+  },
+  "total_tokens": 10191
+ },
+ "est_cost_usd": 0.235,
+ "created": "2026-11-22 04:23:06"
+}

@@ -1,0 +1,27 @@
+{
+ "model": "gpt-image-2",
+ "prompt": "hiding under a white bedsheet like a ghost, only its crazy eyes showing through two holes, wiggly spooky pose.",
+ "refs": [
+  "_character/gyomyo/front.png",
+  "_character/gyomyo/turnaround.png",
+  "_character/style/magazine-1.png"
+ ],
+ "outputs": [
+  "_thumbs/out/gyomyo-card-ghost-sheet-1.png"
+ ],
+ "usage": {
+  "input_tokens": 3170,
+  "input_tokens_details": {
+   "image_tokens": 2816,
+   "text_tokens": 354
+  },
+  "output_tokens": 7024,
+  "output_tokens_details": {
+   "image_tokens": 7024,
+   "text_tokens": 0
+  },
+  "total_tokens": 10194
+ },
+ "est_cost_usd": 0.235,
+ "created": "2026-11-22 03:53:14"
+}

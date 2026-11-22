@@ -1,0 +1,27 @@
+{
+ "model": "gpt-image-2",
+ "prompt": "Gyomyo POSE: wearing a backpack and holding an unfolded paper map, pointing at a red pin. Title line 1 black, line 2 red.",
+ "refs": [
+  "_character/gyomyo/front.png",
+  "_character/gyomyo/turnaround.png",
+  "_character/style/magazine-1.png"
+ ],
+ "outputs": [
+  "_thumbs/out/gyomyo-cover-japan-shops-1.png"
+ ],
+ "usage": {
+  "input_tokens": 3426,
+  "input_tokens_details": {
+   "image_tokens": 2816,
+   "text_tokens": 610
+  },
+  "output_tokens": 7024,
+  "output_tokens_details": {
+   "image_tokens": 7024,
+   "text_tokens": 0
+  },
+  "total_tokens": 10450
+ },
+ "est_cost_usd": 0.2363,
+ "created": "2026-11-22 04:39:48"
+}

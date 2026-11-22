@@ -1,0 +1,27 @@
+{
+ "model": "gpt-image-2",
+ "prompt": "peeking up with a worried face, ears down, two small red exclamation marks above its head. The image ends in a perfectly straight horizontal cut just below its front paws, which grip a straight horizontal edge (the rest of the body is hidden behind a wall that is not drawn).",
+ "refs": [
+  "_character/gyomyo/front.png",
+  "_character/gyomyo/turnaround.png",
+  "_character/style/magazine-1.png"
+ ],
+ "outputs": [
+  "_thumbs/out/gyomyo-card-peek-worry-1.png"
+ ],
+ "usage": {
+  "input_tokens": 3203,
+  "input_tokens_details": {
+   "image_tokens": 2816,
+   "text_tokens": 387
+  },
+  "output_tokens": 7024,
+  "output_tokens_details": {
+   "image_tokens": 7024,
+   "text_tokens": 0
+  },
+  "total_tokens": 10227
+ },
+ "est_cost_usd": 0.2352,
+ "created": "2026-11-22 04:12:23"
+}

@@ -1,0 +1,27 @@
+{
+ "model": "gpt-image-2",
+ "prompt": "Gyomyo POSE: cutting a red ribbon with giant scissors, wearing a little bow tie. A small messy pile of navy blue card backs with a yellow paw print and stars near Gyomyo. Title line 1 black, line 2 red.",
+ "refs": [
+  "_character/gyomyo/front.png",
+  "_character/gyomyo/turnaround.png",
+  "_character/style/magazine-1.png"
+ ],
+ "outputs": [
+  "_thumbs/out/gyomyo-news-20261114-1.png"
+ ],
+ "usage": {
+  "input_tokens": 3441,
+  "input_tokens_details": {
+   "image_tokens": 2816,
+   "text_tokens": 625
+  },
+  "output_tokens": 7024,
+  "output_tokens_details": {
+   "image_tokens": 7024,
+   "text_tokens": 0
+  },
+  "total_tokens": 10465
+ },
+ "est_cost_usd": 0.2364,
+ "created": "2026-11-22 04:50:14"
+}

@@ -1,0 +1,27 @@
+{
+ "model": "gpt-image-2",
+ "prompt": "sitting cross-legged meditating with eyes closed and a calm smile, small blue aura wisps rising from its paws, sensing the air.",
+ "refs": [
+  "_character/gyomyo/front.png",
+  "_character/gyomyo/turnaround.png",
+  "_character/style/magazine-1.png"
+ ],
+ "outputs": [
+  "_thumbs/out/gyomyo-card-meditate-1.png"
+ ],
+ "usage": {
+  "input_tokens": 3172,
+  "input_tokens_details": {
+   "image_tokens": 2816,
+   "text_tokens": 356
+  },
+  "output_tokens": 7024,
+  "output_tokens_details": {
+   "image_tokens": 7024,
+   "text_tokens": 0
+  },
+  "total_tokens": 10196
+ },
+ "est_cost_usd": 0.235,
+ "created": "2026-11-22 04:06:23"
+}

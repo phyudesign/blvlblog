@@ -1,0 +1,27 @@
+{
+ "model": "gpt-image-2",
+ "prompt": "wearing a blue inflatable dolphin swim ring around its waist and a tiny red cape, striking a superhero pose with one paw pointing to the sky.",
+ "refs": [
+  "_character/gyomyo/front.png",
+  "_character/gyomyo/turnaround.png",
+  "_character/style/magazine-1.png"
+ ],
+ "outputs": [
+  "_thumbs/out/gyomyo-card-dolphin-hero-1.png"
+ ],
+ "usage": {
+  "input_tokens": 3173,
+  "input_tokens_details": {
+   "image_tokens": 2816,
+   "text_tokens": 357
+  },
+  "output_tokens": 7024,
+  "output_tokens_details": {
+   "image_tokens": 7024,
+   "text_tokens": 0
+  },
+  "total_tokens": 10197
+ },
+ "est_cost_usd": 0.235,
+ "created": "2026-11-22 03:40:00"
+}

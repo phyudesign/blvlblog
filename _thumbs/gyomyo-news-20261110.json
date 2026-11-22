@@ -12,7 +12,7 @@
  "prompt": "Gyomyo POSE: turning the handle of a small round lottery ball machine with both paws, excited, a ball popping out. A small messy pile of navy blue card backs with a yellow paw print and stars near Gyomyo. Title line 1 black, line 2 red.",
  "n": 1,
  "quality": "high",
- "regenerate": true,
+ "regenerate": false,
  "tpos": "in the upper-left area, left-aligned, taking about 68% of the width",
  "cpos": "in the upper-right corner beside the title, popping up from behind the masthead rule",
  "empty": "the whole lower half of the image (from 48% to 100% height, full width)"

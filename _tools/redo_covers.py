@@ -8,6 +8,12 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 POSJ = json.loads((ROOT / "_thumbs" / "cover_positions.json").read_text())
 FRONT = {"A": [[58, 50, 100, 100]], "B": [[0, 50, 42, 100]], "C": [[64, 0, 100, 50]], "D": [[62, 30, 100, 84]]}
 STAMP = {"A": {"x": 66, "y": 4, "r": 6}, "B": {"x": 66, "y": 4, "r": 6}, "C": {"x": 74, "y": 90, "r": -6}, "D": {"x": 66, "y": 4, "r": 6}}
+# 콘셉트 배경마다 제목 길이·교묘 자리가 달라서 날짜별로 덮어쓰는 값
+OVR = {"20261107": {"stamp": {"x": 4, "y": 40, "r": -6},
+                    "items": [{"src": "assets/products/B0H4PQ6LR5.webp", "x": 30, "y": 70, "h": 30, "r": -3, "z": 1},
+                              {"src": "assets/products/op-eb06.webp", "x": 12, "y": 78, "h": 36, "r": -9, "z": 2},
+                              {"src": "assets/cards/m7-maxi-sar.webp", "x": 40, "y": 80, "h": 44, "r": 4, "z": 5, "card": True}]},
+       "20261112": {"stamp": {"x": 74, "y": 92, "r": -6}}}
 BGKEY = {"A": [300, 620], "B": [700, 620], "C": [500, 640], "D": [300, 640]}
 
 
@@ -29,8 +35,9 @@ def layout(items, pos):
 def build(cfg_path, bg, out, pos, stamp_text=None):
     c = json.loads((ROOT / cfg_path).read_text())
     c["bgimg"] = bg; c["out"] = out; c["front"] = FRONT[pos]; c["bgkey"] = BGKEY[pos]; c["tol"] = 70
-    c["items"] = layout(c["items"], pos)
-    if stamp_text: c["stamp"] = dict(STAMP[pos], text=stamp_text)
+    o = OVR.get(pathlib.Path(cfg_path).stem.replace("daily-", ""), {})
+    c["items"] = o["items"] if "items" in o else layout(c["items"], pos)
+    if stamp_text: c["stamp"] = dict(o.get("stamp", STAMP[pos]), text=stamp_text)
     else: c.pop("stamp", None)
     tmp = ROOT / "_thumbs" / "cards" / (pathlib.Path(cfg_path).stem + "-v2.json")
     tmp.write_text(json.dumps(c, ensure_ascii=False, indent=1))

@@ -12,7 +12,7 @@
  "prompt": "Gyomyo POSE: holding giant scissors cutting a red ribbon with a bow, joyful. A small messy pile of navy blue card backs with a yellow paw print and stars near Gyomyo. Title line 1 black, line 2 red.",
  "n": 1,
  "quality": "high",
- "regenerate": true,
+ "regenerate": false,
  "tpos": "across the top 40%",
  "cpos": "in the lower-left corner, cropped by the bottom edge",
  "empty": "the lower-right and lower-center area (from 42% to 100% height, from 38% to 100% width)"

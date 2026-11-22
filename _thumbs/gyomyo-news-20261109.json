@@ -1,0 +1,19 @@
+{
+ "character": "gyomyo",
+ "mode": "concept",
+ "concept": "a crayon-drawn NEWSPAPER FRONT PAGE on warm off-white newsprint paper: a newspaper masthead with a thick black double rule under the top label, thin grey crayon column lines and tiny scribbled headline blocks only along the outer margins",
+ "badge": "교묘 TCG 일보",
+ "title": "오늘의 TCG",
+ "title2": "격투 대공개!",
+ "eyes": "wide excited eyes",
+ "style_refs": [
+  "_character/style/magazine-1.png"
+ ],
+ "prompt": "Gyomyo POSE: as a newspaper reporter wearing a press hat with a paper card tucked in it, writing in a notepad with a pencil, eager face. A small messy pile of navy blue card backs with a yellow paw print and stars near Gyomyo. Title line 1 black, line 2 red.",
+ "n": 1,
+ "quality": "high",
+ "regenerate": false,
+ "tpos": "across the top 40%",
+ "cpos": "in the lower-left corner, cropped by the bottom edge",
+ "empty": "the lower-right and lower-center area (from 42% to 100% height, from 38% to 100% width)"
+}

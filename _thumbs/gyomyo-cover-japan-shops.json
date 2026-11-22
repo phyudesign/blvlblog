@@ -1,0 +1,19 @@
+{
+ "character": "gyomyo",
+ "mode": "concept",
+ "concept": "a crayon-drawn TRAVEL MAP: pale blue sea background with a simple crayon outline of the Japanese islands, dotted route lines and red map pins only in the upper-right and right margins",
+ "badge": "교묘의 응모 가이드",
+ "title": "일본 쇼핑몰",
+ "title2": "추첨 총정리",
+ "eyes": "sparkling yellow stars",
+ "style_refs": [
+  "_character/style/magazine-1.png"
+ ],
+ "prompt": "Gyomyo POSE: wearing a backpack and holding an unfolded paper map, pointing at a red pin. Title line 1 black, line 2 red.",
+ "n": 1,
+ "quality": "high",
+ "regenerate": false,
+ "tpos": "across the top 38%",
+ "cpos": "at the right edge around the middle height (from 35% to 80% height), leaning in from the right edge",
+ "empty": "the lower-left and center area (from 42% to 100% height, from 0% to 64% width)"
+}

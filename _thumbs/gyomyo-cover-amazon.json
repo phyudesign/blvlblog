@@ -1,0 +1,19 @@
+{
+ "character": "gyomyo",
+ "mode": "concept",
+ "concept": "a crayon-drawn PARCEL: brown kraft cardboard background with strips of packing tape and a shipping label doodle only near the edges",
+ "badge": "교묘의 응모 가이드",
+ "title": "아마존 응모",
+ "title2": "초대받는 법!",
+ "eyes": "sparkling yellow stars",
+ "style_refs": [
+  "_character/style/magazine-1.png"
+ ],
+ "prompt": "Gyomyo POSE: popping out of an open cardboard delivery box, holding an envelope with a red seal. Title line 1 black, line 2 red.",
+ "n": 1,
+ "quality": "high",
+ "regenerate": false,
+ "tpos": "across the top 40%",
+ "cpos": "in the lower-left corner, cropped by the bottom edge",
+ "empty": "the lower-right and lower-center area (from 42% to 100% height, from 38% to 100% width)"
+}

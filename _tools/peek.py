@@ -32,7 +32,9 @@ def _cut_white(im):
 
 def sprite(kind):
     if kind in _cache: return _cache[kind]
-    im = _cut_white(Image.open(SRC / f"gyomyo-peek-{kind}-1.png"))
+    f = SRC / f"gyomyo-peek-{kind}-1.png"
+    if not f.exists(): f = SRC / f"gyomyo-card-{kind}-1.png"      # 글마다 새로 그린 빼꼼 스티커
+    im = _cut_white(Image.open(f))
     a = im.split()[3]; w, h = im.size
     if kind == "wave":   # 바닥 선과 그 아래(꼬리)를 잘라내요
         dark = [sum(1 for x in range(w) if im.getpixel((x, y))[3] > 0 and sum(im.getpixel((x, y))[:3]) < 200) for y in range(h)]
@@ -60,6 +62,7 @@ def make(card, kind, out, pos=.5, scale=.62):
     """kind: top(두 앞발로 윗변 잡고 빼꼼) | wave(빼꼼 + 손 흔들기). 위치 pos: 0=왼쪽 ~ 1=오른쪽.
     순서: 교묘(뒤) → 카드 → 카드 윗변 아래로 내려온 앞발만 다시 앞에. 그래서 카드 한가운데서 튀어나와 보이지 않아요."""
     if kind == "side": kind = "top"
+    flat = kind != "wave"
     c = Image.open(card).convert("RGBA")
     W, H = c.size; s = sprite(kind)
     sw = int(W * scale); s = s.resize((sw, int(s.height * sw / s.width)), Image.LANCZOS)
@@ -68,7 +71,7 @@ def make(card, kind, out, pos=.5, scale=.62):
     cv = Image.new("RGBA", (W, H + hb), (0, 0, 0, 0))
     cv.alpha_composite(s, (x, 0))                    # 1) 교묘 (몸 아래쪽은 카드에 가려져요)
     cv.alpha_composite(c, (0, hb))                   # 2) 카드
-    if kind == "top":                                # 3) 윗변에 걸친 앞발만 카드 앞으로
+    if flat:                                         # 3) 윗변에 걸친 앞발만 카드 앞으로
         paws = s.crop((0, hb, s.width, s.height))
         cv.alpha_composite(paws, (x, hb))
     out = pathlib.Path(out); out.parent.mkdir(parents=True, exist_ok=True)

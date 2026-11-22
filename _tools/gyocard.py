@@ -78,7 +78,18 @@ def prep(src):
     return im
 
 
-def make(kind, src, out, side="right", pos=.5):
+def make(kind, src, out, side="right", pos=.5, sticker=None):
+    # 새 배치 이름(글마다 새로 그린 스티커 sticker=이름 과 함께): side·front·top·lean·push·hold·hug·peek
+    LAY = {"side": "photo", "front": "pack", "top": "sit", "lean": "sleep"}
+    if sticker:
+        if kind == "peek":
+            tmp = pathlib.Path(out).with_suffix(".src.png"); prep(src).save(tmp)
+            r = peek.make(tmp, sticker, out, pos); tmp.unlink(); return r
+        STICK["_custom"] = sticker
+        kind = {"side": "photo", "front": "pack", "top": "sit", "lean": "sleep", "push": "push", "hold": "hold", "hug": "hug"}[kind]
+        STICK_BACKUP = STICK[kind]; STICK[kind] = sticker
+        try: return make(kind, src, out, side, pos)
+        finally: STICK[kind] = STICK_BACKUP
     if kind in ("peek", "top", "wave"):
         tmp = pathlib.Path(out).with_suffix(".src.png"); prep(src).save(tmp)
         r = peek.make(tmp, "wave" if kind == "wave" else "top", out, pos); tmp.unlink(); return r

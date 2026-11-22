@@ -66,6 +66,15 @@ MODES = {
                  "excitedly looking and pointing toward the empty area on the left; (5) IMPORTANT: the lower-left and lower-center area "
                  "(from 42% to 100% height, from 0% to 62% width) must stay EMPTY flat background with nothing in it, because real "
                  "product photos will be placed there later. Write the given Korean text exactly, letter for letter, with no extra words. "),
+    # 시리즈 표지(2026-11-22 슨생): 글 종류마다 다른 콘셉트(신문·칠판·지도·우편…) + 교묘 위치를 매번 바꿈
+    "concept": ("Square blog thumbnail drawn entirely in rough crayon and colored pencil on paper, matching the drawing style of the "
+                "attached STYLE reference. CONCEPT: {concept}. Rules: (1) a tiny top label between two thin rules; (2) a huge title "
+                "in two lines in ultra-heavy, chunky, slightly rough-edged hand-cut bold Korean letters, line 1 dark, line 2 in an "
+                "accent color, placed {tpos}; (3) the character is SMALL (about 34% of the image tall), placed {cpos}, rough sketchy "
+                "pencil lines with grainy texture and light hand-colored fills, keeping its huge wide head and tiny stubby body exactly "
+                "like the character references, with its signature CRAZY EYES (pupils: {eyes}); (4) IMPORTANT: {empty} must stay EMPTY "
+                "plain background with nothing in it, because real product photos will be placed there later. Write the given Korean "
+                "text exactly, letter for letter, with no extra words. "),
     # 카드 포스터(2026-11-08 슨생 샘플 _character/style/cardposter-1.png): 실제 카드·팩이 주인공, 교묘는 오른쪽 아래 작게
     "cardposter": ("Square blog thumbnail. Copy the layout and drawing style of the LAST attached reference (the STYLE sample) closely: "
                    "a {bg} paper background with a few crayon doodles, sparkles and motion strokes; a tiny top label between two thin "
@@ -115,6 +124,13 @@ def build_prompt(req):
         mode = MODES["cardposter"].format(bg=req.get("bg", "bright yellow"), eyes=req.get("eyes", "sparkling yellow stars"))
         return (who + "The other attached images are the real product references (trading cards and a booster pack). " + LOOK + mode
                 + text + "Scene: " + req.get("prompt", ""))
+    if req.get("mode") == "concept":
+        text = (f'Text to write — top label: "{req.get("badge", "")}"; title line 1: "{req.get("title", "")}"; '
+                f'title line 2: "{req.get("title2", "")}". ')
+        mode = MODES["concept"].format(concept=req.get("concept", "a crayon magazine cover"), tpos=req.get("tpos", "across the top 40%"),
+                                       cpos=req.get("cpos", "in the lower-right corner"), eyes=req.get("eyes", "sparkling yellow stars"),
+                                       empty=req.get("empty", "the lower-left and lower-center area"))
+        return who + LOOK + mode + text + SAFE + "Scene: " + req.get("prompt", "")
     if req.get("mode") == "magcards":
         text = (f'Text to write — top label: "{req.get("badge", "")}"; title line 1 (black): "{req.get("title", "")}"; '
                 f'title line 2 (red): "{req.get("title2", "")}". ')

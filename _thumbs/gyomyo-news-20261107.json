@@ -1,18 +1,18 @@
 {
  "character": "gyomyo",
  "mode": "concept",
- "concept": "a crayon-drawn NEWSPAPER FRONT PAGE on warm off-white newsprint paper: a newspaper masthead with a thick black double rule under the top label, thin grey crayon column lines and tiny scribbled headline blocks only along the outer margins",
- "badge": "교묘 TCG 일보",
- "title": "오늘의 TCG",
+ "concept": "a crayon ELECTRONIC PRICE TICKER BOARD like a stock exchange: black board with orange dot-matrix price rows and little red up-arrows ONLY along the outer edges",
+ "badge": "교묘 시세 속보",
+ "title": "카드값 시세판",
  "title2": "팩값 오른다!",
  "eyes": "wide excited eyes",
  "style_refs": [
   "_character/style/magazine-1.png"
  ],
- "prompt": "Gyomyo POSE: sitting on the floor crying while holding up an empty wallet, newspaper hat on its head. A small messy pile of navy blue card backs with a yellow paw print and stars near Gyomyo. Title line 1 black, line 2 red.",
+ "prompt": "Gyomyo POSE: sitting on the floor crying while holding up an empty wallet, wearing a tiny necktie, coins rolling away. A small messy pile of navy blue card backs with a yellow paw print and stars near Gyomyo. Title line 1 black, line 2 red.",
  "n": 1,
  "quality": "high",
- "regenerate": false,
+ "regenerate": true,
  "tpos": "across the top 40%",
  "cpos": "in the lower-right corner, cropped by the bottom edge",
  "empty": "the lower-left and lower-center area (from 42% to 100% height, from 0% to 62% width)"

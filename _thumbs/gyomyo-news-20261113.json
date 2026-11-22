@@ -1,18 +1,18 @@
 {
  "character": "gyomyo",
  "mode": "concept",
- "concept": "a crayon-drawn NEWSPAPER FRONT PAGE on warm off-white newsprint paper: a newspaper masthead with a thick black double rule under the top label, thin grey crayon column lines and tiny scribbled headline blocks only along the outer margins",
- "badge": "교묘 TCG 일보",
- "title": "오늘의 TCG",
+ "concept": "a crayon CAUTION warning poster: yellow paper with black-and-yellow hazard stripes along the top and bottom edges and small warning triangles in the corners",
+ "badge": "교묘 안전 경보",
+ "title": "주의 경보",
  "title2": "사칭 메일 주의!",
  "eyes": "wide excited eyes",
  "style_refs": [
   "_character/style/magazine-1.png"
  ],
- "prompt": "Gyomyo POSE: as a detective in a deerstalker hat holding a magnifying glass and pointing a warning finger. A small messy pile of navy blue card backs with a yellow paw print and stars near Gyomyo. Title line 1 black, line 2 red.",
+ "prompt": "Gyomyo POSE: wearing a yellow safety helmet, blowing a whistle and holding up a red STOP paddle sign. A small messy pile of navy blue card backs with a yellow paw print and stars near Gyomyo. Title line 1 black, line 2 red.",
  "n": 1,
  "quality": "high",
- "regenerate": false,
+ "regenerate": true,
  "tpos": "across the top 40%",
  "cpos": "in the lower-right corner, cropped by the bottom edge",
  "empty": "the lower-left and lower-center area (from 42% to 100% height, from 0% to 62% width)"

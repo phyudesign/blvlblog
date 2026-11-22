@@ -1,18 +1,18 @@
 {
  "character": "gyomyo",
  "mode": "concept",
- "concept": "a crayon-drawn NEWSPAPER FRONT PAGE on warm off-white newsprint paper: a newspaper masthead with a thick black double rule under the top label, thin grey crayon column lines and tiny scribbled headline blocks only along the outer margins",
- "badge": "교묘 TCG 일보",
- "title": "오늘의 TCG",
+ "concept": "a crayon AIRMAIL LETTER: envelope paper with a red-and-blue striped airmail border, postage stamps and a round postmark in the corners",
+ "badge": "교묘 우편",
+ "title": "초대장 도착",
  "title2": "아마존 초대!",
  "eyes": "wide excited eyes",
  "style_refs": [
   "_character/style/magazine-1.png"
  ],
- "prompt": "Gyomyo POSE: popping out of an open delivery cardboard box holding an envelope up high. A small messy pile of navy blue card backs with a yellow paw print and stars near Gyomyo. Title line 1 black, line 2 red.",
+ "prompt": "Gyomyo POSE: wearing a postman cap and shoulder mail bag, holding up a sealed invitation letter with a red wax seal. A small messy pile of navy blue card backs with a yellow paw print and stars near Gyomyo. Title line 1 black, line 2 red.",
  "n": 1,
  "quality": "high",
- "regenerate": false,
+ "regenerate": true,
  "tpos": "in the upper-left area, left-aligned, taking about 68% of the width",
  "cpos": "in the upper-right corner beside the title, popping up from behind the masthead rule",
  "empty": "the whole lower half of the image (from 48% to 100% height, full width)"

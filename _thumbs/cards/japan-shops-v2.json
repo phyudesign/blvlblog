@@ -1,0 +1,52 @@
+{
+ "out": "wp-content/uploads/2026/11/blvl-tcg-japan-shops-cover-v2.jpg",
+ "bgimg": "_thumbs/out/gyomyo-cover-japan-shops-1.png",
+ "ink_all": true,
+ "front": [
+  [
+   62,
+   30,
+   100,
+   84
+  ]
+ ],
+ "bgkey": [
+  300,
+  640
+ ],
+ "tol": 70,
+ "items": [
+  {
+   "src": "assets/products/B0H43ZX8LK.webp",
+   "x": 15,
+   "y": 74,
+   "h": 40,
+   "r": -9,
+   "z": 2
+  },
+  {
+   "src": "assets/products/B0GP928YDZ.webp",
+   "x": 56,
+   "y": 70,
+   "h": 38,
+   "r": 9,
+   "z": 2
+  },
+  {
+   "src": "assets/products/B0HFVPJF4Q.webp",
+   "x": 53,
+   "y": 77,
+   "h": 40,
+   "r": 3,
+   "z": 3
+  },
+  {
+   "src": "assets/products/B0H4PQ6LR5.webp",
+   "x": 34,
+   "y": 79,
+   "h": 44,
+   "r": -3,
+   "z": 4
+  }
+ ]
+}

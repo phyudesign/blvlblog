@@ -1,0 +1,52 @@
+{
+ "out": "wp-content/uploads/2026/11/blvl-tcg-amazon-cover-v2.jpg",
+ "bgimg": "_thumbs/out/gyomyo-cover-amazon-1.png",
+ "ink_all": true,
+ "front": [
+  [
+   0,
+   50,
+   42,
+   100
+  ]
+ ],
+ "bgkey": [
+  700,
+  620
+ ],
+ "tol": 70,
+ "items": [
+  {
+   "src": "assets/products/B0GXCRBL5J.webp",
+   "x": 83,
+   "y": 74,
+   "h": 38,
+   "r": 9,
+   "z": 2
+  },
+  {
+   "src": "assets/products/B0HFVPJF4Q.webp",
+   "x": 34,
+   "y": 70,
+   "h": 40,
+   "r": -9,
+   "z": 2
+  },
+  {
+   "src": "assets/products/B0HB3JQ6P4.webp",
+   "x": 47,
+   "y": 76,
+   "h": 40,
+   "r": -3,
+   "z": 3
+  },
+  {
+   "src": "assets/products/B0H4PQ6LR5.webp",
+   "x": 65,
+   "y": 79,
+   "h": 44,
+   "r": 3,
+   "z": 4
+  }
+ ]
+}

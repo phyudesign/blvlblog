@@ -1,0 +1,61 @@
+{
+ "out": "wp-content/uploads/2026/11/blvl-tcg-hadou-lottery-cover-v2.jpg",
+ "bgimg": "_thumbs/out/gyomyo-cover-hadou-lottery-1.png",
+ "ink_all": true,
+ "front": [
+  [
+   64,
+   0,
+   100,
+   50
+  ]
+ ],
+ "bgkey": [
+  500,
+  640
+ ],
+ "tol": 70,
+ "items": [
+  {
+   "src": "assets/products/B0H4PQ6LR5.webp",
+   "x": 20,
+   "y": 74,
+   "h": 38,
+   "r": -8,
+   "z": 2
+  },
+  {
+   "src": "assets/cards/m7-absol.webp",
+   "x": 80,
+   "y": 78,
+   "h": 34,
+   "r": 11,
+   "z": 3
+  },
+  {
+   "src": "assets/cards/m7-lucario.webp",
+   "x": 65,
+   "y": 78,
+   "h": 36,
+   "r": 5,
+   "z": 3
+  },
+  {
+   "src": "assets/cards/m7-garchomp.webp",
+   "x": 35,
+   "y": 74,
+   "h": 40,
+   "r": -9,
+   "z": 4
+  },
+  {
+   "src": "assets/cards/m7-maxi-sar.webp",
+   "x": 50,
+   "y": 78,
+   "h": 48,
+   "r": -2,
+   "z": 5,
+   "card": true
+  }
+ ]
+}

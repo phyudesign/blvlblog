@@ -1,0 +1,59 @@
+{
+ "out": "wp-content/uploads/2026/11/blvl-tcg-daily-20261107-news.jpg",
+ "bgimg": "_thumbs/out/gyomyo-news-20261107-1.png",
+ "ink_all": true,
+ "front": [
+  [
+   58,
+   50,
+   100,
+   100
+  ]
+ ],
+ "bgkey": [
+  300,
+  620
+ ],
+ "tol": 70,
+ "stamp": {
+  "x": 66,
+  "y": 4,
+  "r": 6,
+  "text": "11월 7일"
+ },
+ "items": [
+  {
+   "src": "assets/products/op-eb06.webp",
+   "x": 16,
+   "y": 75,
+   "h": 40,
+   "r": -9,
+   "z": 2
+  },
+  {
+   "src": "assets/products/op-op19.webp",
+   "x": 68,
+   "y": 68,
+   "h": 38,
+   "r": 10,
+   "z": 2
+  },
+  {
+   "src": "assets/products/B0H4PQ6LR5.webp",
+   "x": 52,
+   "y": 66,
+   "h": 30,
+   "r": 3,
+   "z": 1
+  },
+  {
+   "src": "assets/cards/m7-maxi-sar.webp",
+   "x": 42,
+   "y": 79,
+   "h": 50,
+   "r": -3,
+   "z": 5,
+   "card": true
+  }
+ ]
+}

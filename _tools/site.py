@@ -341,6 +341,8 @@ def live_hero():
         attrs = ' target="_blank" rel="nofollow noopener"' if ext else ""
         new = '<em>NEW</em>' if tag in ("새 응모", "속보") else ""
         img = pv.get("img", "")
+        if not img and pv.get("asin") and (ROOT / "assets" / "products" / f'{pv["asin"]}.webp').exists():
+            img = f'/assets/products/{pv["asin"]}.webp'   # 아마존 사진 주소가 아직 없어도 누끼가 있으면 그걸로
         if img:   # 상품 사진 + 스튜디오 연출 (상품마다 색·무대가 다름)
             th = LH_THEME.get(pv.get("asin", ""), LH_THEME_ROT[i % len(LH_THEME_ROT)])
             stage = LH_STAGES[i % len(LH_STAGES)]

@@ -11,6 +11,9 @@
   sleep         카드에 등을 기대고 낮잠                       (gyomyo-card-sleep)
   photo         카드 옆에서 휴대폰으로 사진 찍기              (gyomyo-card-photo)
   aura / flex   카드 옆에서 카드 속 포즈 따라 하기 (파동 / 레슬러) (gyomyo-card-mimic-*)
+  sit           상품(박스) 위에 걸터앉기                      (gyomyo-card-sit)
+  push          무거운 박스를 옆에서 영차 밀기                (gyomyo-card-push)
+  pray          상품 옆에서 추첨권 들고 기도                  (gyomyo-card-pray)
 원본 스티커: _thumbs/out/gyomyo-card-*-1.png (흰 배경 → 투명). 결과는 투명 배경 webp.
 """
 import sys, pathlib
@@ -21,9 +24,12 @@ import peek
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 OUT = ROOT / "_thumbs" / "out"
 STICK = {"hold": "hold-up", "hug": "hug", "pack": "open-pack", "loupe": "magnifier", "sleep": "sleep",
-         "photo": "photo", "aura": "mimic-aura", "flex": "mimic-flex"}
+         "photo": "photo", "aura": "mimic-aura", "flex": "mimic-flex",
+         "sit": "sit", "push": "push", "pray": "pray"}
 
 
+import functools
+@functools.lru_cache(maxsize=None)
 def _sticker(name, green=False):
     im = peek._cut_white(Image.open(OUT / f"gyomyo-card-{name}-1.png"))
     box = None
@@ -51,23 +57,59 @@ def _fit(im, h):
     return im.resize((max(1, int(im.width * h / im.height)), h), Image.LANCZOS)
 
 
+def prep(src):
+    """원본 정리: 흰(밝은) 여백을 잘라 내고, 카드가 아닌 상품 사진이면 흰 배경을 투명하게.
+    여백이 남아 있으면 교묘가 카드 가장자리가 아니라 여백에 붙어서 카드 한가운데서 나온 것처럼 보여요."""
+    im = Image.open(src).convert("RGBA")
+    if im.getextrema()[3][0] < 250:                       # 이미 투명 누끼
+        return im.crop(im.getbbox())
+    w, h = im.size; px = im.load()
+    corners = [px[0, 0], px[w - 1, 0], px[0, h - 1], px[w - 1, h - 1]]
+    if all(min(c[:3]) > 225 for c in corners):
+        from PIL import ImageChops
+        bg = Image.new("RGB", im.size, tuple(int(sum(c[i] for c in corners) / 4) for i in range(3)))
+        diff = ImageChops.difference(im.convert("RGB"), bg).convert("L").point(lambda v: 255 if v > 22 else 0)
+        bb = diff.getbbox()
+        if bb: im = im.crop(bb)
+        ratio = im.width / im.height
+        if not (.66 < ratio < .76):                       # 카드 비율이 아니면 상품 → 흰 배경 지우기
+            sys.path.insert(0, str(ROOT / "_tools")); import alertcard
+            im = alertcard._cutout(im)
+    return im
+
+
 def make(kind, src, out, side="right", pos=.5):
     if kind in ("peek", "top", "wave"):
-        return peek.make(src, "wave" if kind == "wave" else "top", out, pos)
-    card = Image.open(src).convert("RGBA"); H = 900
+        tmp = pathlib.Path(out).with_suffix(".src.png"); prep(src).save(tmp)
+        r = peek.make(tmp, "wave" if kind == "wave" else "top", out, pos); tmp.unlink(); return r
+    card = prep(src); H = 900
     card = _fit(card, H); W = card.width
     if kind in ("hold", "hug"):
-        s, box = _sticker(STICK[kind], green=True)
+        s, box = _sticker(STICK[kind], green=True); s = s.copy()
         if not box: raise SystemExit("초록 카드 자리를 못 찾았어요")
         bw, bh = box[2] - box[0], box[3] - box[1]
         k = H * 1.0 / bh                                   # 카드가 원래 크기(900px)로 들어가게 스티커를 키워요
         s = s.resize((int(s.width * k), int(s.height * k)), Image.LANCZOS)
         box = tuple(int(v * k) for v in box); bw, bh = box[2] - box[0], box[3] - box[1]
-        c = Image.open(src).convert("RGBA").resize((bw + 6, bh + 6), Image.LANCZOS)
+        c = prep(src).resize((bw + 6, bh + 6), Image.LANCZOS)
         cv = Image.new("RGBA", s.size, (0, 0, 0, 0))
         cv.alpha_composite(c, (box[0] - 3, box[1] - 3))   # 카드는 교묘 뒤(앞발·테두리가 카드 위에 얹혀요)
         cv.alpha_composite(s)
-    elif kind in ("pack", "loupe", "photo", "aura", "flex"):
+    elif kind == "sit":                                    # 상품 위에 걸터앉기: 엉덩이 선을 상품 윗변보다 조금 아래에
+        s, _ = _sticker(STICK[kind]); s = _fit(s, int(H * .5))
+        a = s.split()[3].load(); cx = s.width // 2
+        seat = max(y for y in range(s.height) if a[cx, y] > 128)      # 몸 가운데 아래 끝 = 앉은 선
+        top = int(H * .06)                                            # 상품 윗변에서 살짝 아래
+        y0 = max(0, seat - top)
+        cv = Image.new("RGBA", (max(W, s.width), H + y0), (0, 0, 0, 0))
+        cv.alpha_composite(card, ((cv.width - W) // 2, y0))
+        cv.alpha_composite(s, (int((cv.width - s.width) * pos), 0))
+    elif kind == "push":                                   # 왼쪽에서 상품을 미는 교묘
+        s, _ = _sticker(STICK[kind]); s = _fit(s, int(H * .5))
+        over = int(s.width * .06)
+        cv = Image.new("RGBA", (W + s.width - over, H), (0, 0, 0, 0))
+        cv.alpha_composite(card, (s.width - over, 0)); cv.alpha_composite(s, (0, H - s.height - int(H * .03)))
+    elif kind in ("pack", "loupe", "photo", "aura", "flex", "pray"):
         s, _ = _sticker(STICK[kind]); s = _fit(s, int(H * (.5 if kind in ("pack", "loupe") else .62)))
         if kind in ("pack", "loupe"):                      # 카드 앞에 앉아서 — 카드 아래쪽을 조금 가려요
             pad = int(s.width * .45)

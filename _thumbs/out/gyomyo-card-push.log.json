@@ -1,0 +1,27 @@
+{
+ "model": "gpt-image-2",
+ "prompt": "leaning forward hard and pushing with both front paws stretched out to the right against an invisible heavy flat wall on its right side (do not draw the wall), back legs braced, sweat drops and crayon effort lines, determined clenched face.",
+ "refs": [
+  "_character/gyomyo/front.png",
+  "_character/gyomyo/turnaround.png",
+  "_character/style/magazine-1.png"
+ ],
+ "outputs": [
+  "_thumbs/out/gyomyo-card-push-1.png"
+ ],
+ "usage": {
+  "input_tokens": 3194,
+  "input_tokens_details": {
+   "image_tokens": 2816,
+   "text_tokens": 378
+  },
+  "output_tokens": 7024,
+  "output_tokens_details": {
+   "image_tokens": 7024,
+   "text_tokens": 0
+  },
+  "total_tokens": 10218
+ },
+ "est_cost_usd": 0.2351,
+ "created": "2026-11-22 02:41:28"
+}

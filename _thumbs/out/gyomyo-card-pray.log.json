@@ -1,0 +1,27 @@
+{
+ "model": "gpt-image-2",
+ "prompt": "standing with eyes shut tight and both front paws pressed together in a prayer, holding a small paper lottery ticket with a star between its paws, tiny sweat drop, a few sparkles, wishing hard.",
+ "refs": [
+  "_character/gyomyo/front.png",
+  "_character/gyomyo/turnaround.png",
+  "_character/style/magazine-1.png"
+ ],
+ "outputs": [
+  "_thumbs/out/gyomyo-card-pray-1.png"
+ ],
+ "usage": {
+  "input_tokens": 3185,
+  "input_tokens_details": {
+   "image_tokens": 2816,
+   "text_tokens": 369
+  },
+  "output_tokens": 7024,
+  "output_tokens_details": {
+   "image_tokens": 7024,
+   "text_tokens": 0
+  },
+  "total_tokens": 10209
+ },
+ "est_cost_usd": 0.2351,
+ "created": "2026-11-22 02:39:59"
+}

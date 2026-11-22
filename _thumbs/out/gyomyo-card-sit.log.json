@@ -1,0 +1,27 @@
+{
+ "model": "gpt-image-2",
+ "prompt": "sitting on the edge of a shelf seen from the front: the bottom of its round body is cut perfectly flat and horizontal (as if sitting on a flat surface edge that is not drawn), both short hind legs dangling down in front below that line, front paws resting on its knees, happy relaxed smile, little sparkles.",
+ "refs": [
+  "_character/gyomyo/front.png",
+  "_character/gyomyo/turnaround.png",
+  "_character/style/magazine-1.png"
+ ],
+ "outputs": [
+  "_thumbs/out/gyomyo-card-sit-1.png"
+ ],
+ "usage": {
+  "input_tokens": 3210,
+  "input_tokens_details": {
+   "image_tokens": 2816,
+   "text_tokens": 394
+  },
+  "output_tokens": 7024,
+  "output_tokens_details": {
+   "image_tokens": 7024,
+   "text_tokens": 0
+  },
+  "total_tokens": 10234
+ },
+ "est_cost_usd": 0.2352,
+ "created": "2026-11-22 02:42:54"
+}

@@ -1,6 +1,6 @@
 {
  "model": "gpt-image-2",
- "prompt": "Gyomyo POSE: sitting on the floor crying while holding up an empty wallet, newspaper hat on its head. A small messy pile of navy blue card backs with a yellow paw print and stars near Gyomyo. Title line 1 black, line 2 red.",
+ "prompt": "Gyomyo POSE: sitting on the floor crying while holding up an empty wallet, wearing a tiny necktie, coins rolling away. A small messy pile of navy blue card backs with a yellow paw print and stars near Gyomyo. Title line 1 black, line 2 red.",
  "refs": [
   "_character/gyomyo/front.png",
   "_character/gyomyo/turnaround.png",
@@ -10,18 +10,18 @@
   "_thumbs/out/gyomyo-news-20261107-1.png"
  ],
  "usage": {
-  "input_tokens": 3444,
+  "input_tokens": 3436,
   "input_tokens_details": {
    "image_tokens": 2816,
-   "text_tokens": 628
+   "text_tokens": 620
   },
   "output_tokens": 7024,
   "output_tokens_details": {
    "image_tokens": 7024,
    "text_tokens": 0
   },
-  "total_tokens": 10468
+  "total_tokens": 10460
  },
- "est_cost_usd": 0.2364,
- "created": "2026-11-22 04:41:29"
+ "est_cost_usd": 0.2363,
+ "created": "2026-11-22 13:43:35"
 }

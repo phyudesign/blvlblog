@@ -1,6 +1,6 @@
 {
  "model": "gpt-image-2",
- "prompt": "Gyomyo POSE: as a newspaper reporter wearing a press hat with a paper card tucked in it, writing in a notepad with a pencil, eager face. A small messy pile of navy blue card backs with a yellow paw print and stars near Gyomyo. Title line 1 black, line 2 red.",
+ "prompt": "Gyomyo POSE: in a boxing fighting stance wearing red boxing gloves and a headband, punching toward the viewer with impact lines. A small messy pile of navy blue card backs with a yellow paw print and stars near Gyomyo. Title line 1 black, line 2 red.",
  "refs": [
   "_character/gyomyo/front.png",
   "_character/gyomyo/turnaround.png",
@@ -10,18 +10,18 @@
   "_thumbs/out/gyomyo-news-20261109-1.png"
  ],
  "usage": {
-  "input_tokens": 3455,
+  "input_tokens": 3427,
   "input_tokens_details": {
    "image_tokens": 2816,
-   "text_tokens": 639
+   "text_tokens": 611
   },
   "output_tokens": 7024,
   "output_tokens_details": {
    "image_tokens": 7024,
    "text_tokens": 0
   },
-  "total_tokens": 10479
+  "total_tokens": 10451
  },
- "est_cost_usd": 0.2364,
- "created": "2026-11-22 04:43:21"
+ "est_cost_usd": 0.2363,
+ "created": "2026-11-22 13:45:17"
 }

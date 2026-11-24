@@ -515,6 +515,61 @@
  },
  "events": [
   {
+   "at": "11/25 07:57",
+   "ts": "2026-11-25 07:57:42",
+   "shop_kr": "하비스테이션",
+   "title": "파동시커 BOX WEB 추첨 (마감 11/26 23:59)",
+   "status": "new",
+   "url": "https://livepocket.jp/e/d275s",
+   "price": "",
+   "img": "",
+   "asin": ""
+  },
+  {
+   "at": "11/25 07:57",
+   "ts": "2026-11-25 07:57:42",
+   "shop_kr": "조신 매장",
+   "title": "파동시커 BOX 매장 추첨 (마감 11/26 19:00)",
+   "status": "new",
+   "url": "https://shop.joshin.co.jp/app/",
+   "price": "",
+   "img": "",
+   "asin": ""
+  },
+  {
+   "at": "11/25 07:57",
+   "ts": "2026-11-25 07:57:42",
+   "shop_kr": "야마다덴키 앱",
+   "title": "30th CELEBRATION 카드 세트 9종 재판매 추첨 (마감 11/25 23:59)",
+   "status": "new",
+   "url": "https://www.yamada-denki.jp/service/pointservice/digital-kaiin.html",
+   "price": "",
+   "img": "",
+   "asin": ""
+  },
+  {
+   "at": "11/25 07:57",
+   "ts": "2026-11-25 07:57:42",
+   "shop_kr": "트레카스테이션",
+   "title": "OP-17 세계 최강의 전사 재판매 추첨 (마감 11/29)",
+   "status": "new",
+   "url": "https://nyuka-now.com/archives/97393",
+   "price": "",
+   "img": "",
+   "asin": ""
+  },
+  {
+   "at": "11/25 07:57",
+   "ts": "2026-11-25 07:57:42",
+   "shop_kr": "이온 큐슈 앱",
+   "title": "ST-37 · ST-38 스타트 덱 추첨 (마감 11/29)",
+   "status": "new",
+   "url": "https://nyuka-now.com/archives/97393",
+   "price": "",
+   "img": "",
+   "asin": ""
+  },
+  {
    "at": "11/16 18:32",
    "shop_kr": "포켓몬카드 공식",
    "title": "포켓몬 카드 게임 아크릴 카드 홀더 세트 「개굴닌자」「님피아」발매!",

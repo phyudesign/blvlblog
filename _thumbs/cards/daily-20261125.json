@@ -1,0 +1,14 @@
+{
+ "out": "wp-content/uploads/2026/11/blvl-tcg-daily-20261125-thumb.jpg",
+ "bgimg": "_thumbs/out/gyomyo-daily-20261125-1.png",
+ "ink_all": true,
+ "front": [[60,60,100,100],[42,82,72,100]],
+ "bgkey": [400, 600],
+ "tol": 70,
+ "stamp": {"text": "11월 25일", "x": 60, "y": 47, "r": -6},
+ "items": [
+  {"src": "assets/products/B0H43ZX8LK.webp", "x": 15, "y": 72, "h": 34, "r": -8, "z": 1},
+  {"src": "assets/products/B0HN6SF9V1.webp", "x": 50, "y": 70, "h": 34, "r": 9, "z": 1},
+  {"src": "assets/products/B0H4PQ6LR5.webp", "x": 32, "y": 75, "h": 38, "r": -2, "z": 3}
+ ]
+}

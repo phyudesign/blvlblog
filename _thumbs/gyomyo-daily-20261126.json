@@ -1,0 +1,19 @@
+{
+ "character": "gyomyo",
+ "mode": "concept",
+ "concept": "a crayon DESK CALENDAR (flip-style, spiral binding on top) standing on a desk: the big page shows the month grid of November with several dates circled in red crayon and one date marked with a big star, small sticky notes stuck to the edges",
+ "badge": "교묘의 탁상 달력",
+ "title": "발매 D-1",
+ "title2": "주말까지 추첨 동그라미!",
+ "eyes": "focused eyes with a small sweat drop",
+ "style_refs": [
+  "_character/style/magazine-1.png"
+ ],
+ "prompt": "Gyomyo POSE: standing on tiptoe next to the calendar, holding a big red crayon with both paws and drawing a circle on a date, tongue slightly out in concentration. A small messy pile of navy blue card backs with a yellow paw print and stars near Gyomyo. Title line 1 black, line 2 red.",
+ "n": 1,
+ "quality": "high",
+ "regenerate": false,
+ "tpos": "in the upper-left area, left-aligned, taking about 68% of the width",
+ "cpos": "in the bottom-right corner, small",
+ "empty": "the middle and left of the lower half of the image (from 48% to 100% height)"
+}

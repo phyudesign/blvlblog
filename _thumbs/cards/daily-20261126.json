@@ -1,0 +1,14 @@
+{
+ "out": "wp-content/uploads/2026/11/blvl-tcg-daily-20261126-thumb.jpg",
+ "bgimg": "_thumbs/out/gyomyo-daily-stage-b-1.png",
+ "ink_all": true,
+ "front": [[48,50,100,100],[0,82,46,100]],
+ "bgkey": [400, 600],
+ "tol": 70,
+ "stamp": {"text": "11월 26일", "x": 3, "y": 3, "r": -8},
+ "items": [
+  {"src": "assets/products/B0GXCM4BCZ.webp", "x": 18, "y": 72, "h": 40, "r": -8, "z": 2},
+  {"src": "assets/products/B0GP928YDZ.webp", "x": 66, "y": 70, "h": 34, "r": 9, "z": 1},
+  {"src": "assets/products/B0H4PQ6LR5.webp", "x": 43, "y": 76, "h": 38, "r": -2, "z": 3}
+ ]
+}

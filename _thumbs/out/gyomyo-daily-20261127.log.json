@@ -1,0 +1,27 @@
+{
+ "model": "gpt-image-2",
+ "prompt": "Gyomyo POSE: cutting a big red opening-ceremony ribbon with oversized golden scissors held in both paws, a small rosette pinned on the chest, mouth wide open cheering. A small messy pile of navy blue card backs with a yellow paw print and stars near Gyomyo. Title line 1 black, line 2 red.",
+ "refs": [
+  "_character/gyomyo/front.png",
+  "_character/gyomyo/turnaround.png",
+  "_character/style/magazine-1.png"
+ ],
+ "outputs": [
+  "_thumbs/out/gyomyo-daily-20261127-1.png"
+ ],
+ "usage": {
+  "input_tokens": 3470,
+  "input_tokens_details": {
+   "image_tokens": 2816,
+   "text_tokens": 654
+  },
+  "output_tokens": 7024,
+  "output_tokens_details": {
+   "image_tokens": 7024,
+   "text_tokens": 0
+  },
+  "total_tokens": 10494
+ },
+ "est_cost_usd": 0.2365,
+ "created": "2026-11-26 22:50:11"
+}

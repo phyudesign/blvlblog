@@ -1,0 +1,19 @@
+{
+ "character": "gyomyo",
+ "mode": "concept",
+ "concept": "a crayon GRAND OPENING SALE FLYER: bright yellow paper with a red zigzag starburst border, a scalloped ribbon banner at the top, little hand-drawn balloons and confetti in the corners, a small 'OPEN 7:00' clock sticker",
+ "badge": "오늘 발매!",
+ "title": "파동시커 발매일",
+ "title2": "오늘 열린 추첨 총집합",
+ "eyes": "excited sparkling star eyes",
+ "style_refs": [
+  "_character/style/magazine-1.png"
+ ],
+ "prompt": "Gyomyo POSE: cutting a big red opening-ceremony ribbon with oversized golden scissors held in both paws, a small rosette pinned on the chest, mouth wide open cheering. A small messy pile of navy blue card backs with a yellow paw print and stars near Gyomyo. Title line 1 black, line 2 red.",
+ "n": 1,
+ "quality": "high",
+ "regenerate": false,
+ "tpos": "in the upper-left area, left-aligned, taking about 68% of the width",
+ "cpos": "in the bottom-right corner, small",
+ "empty": "the middle and left of the lower half of the image (from 48% to 100% height)"
+}

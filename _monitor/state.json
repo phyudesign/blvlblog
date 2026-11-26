@@ -515,6 +515,83 @@
  },
  "events": [
   {
+   "at": "11/27 07:56",
+   "ts": "2026-11-27 07:56:22",
+   "shop_kr": "포켓몬센터 온라인",
+   "title": "카드 일러스트 피규어 30th CELEBRATION 추첨 (11/27 16:00~11/30 16:59)",
+   "status": "new",
+   "url": "https://www.pokemon-card.com/info/005764.html",
+   "price": "",
+   "img": "",
+   "asin": ""
+  },
+  {
+   "at": "11/27 07:56",
+   "ts": "2026-11-27 07:56:22",
+   "shop_kr": "이온 스타일 온라인",
+   "title": "스타터 세트 ex 3종 WEB 추첨 (마감 11/29 23:59)",
+   "status": "new",
+   "url": "https://aeonretail.com/Page/k-lottery_sale_02.aspx",
+   "price": "",
+   "img": "",
+   "asin": ""
+  },
+  {
+   "at": "11/27 07:56",
+   "ts": "2026-11-27 07:56:22",
+   "shop_kr": "빅카메라 난바점",
+   "title": "30th CELEBRATION BOX 등 6종 매장 추첨 (마감 11/29)",
+   "status": "new",
+   "url": "https://nyuka-now.com/archives/2459",
+   "price": "",
+   "img": "",
+   "asin": ""
+  },
+  {
+   "at": "11/27 07:56",
+   "ts": "2026-11-27 07:56:22",
+   "shop_kr": "로손 Loppi",
+   "title": "30주년 에브이·블래키 덱 세트 재판매 추첨 (마감 11/29 23:30)",
+   "status": "new",
+   "url": "https://img.hmv.co.jp/cont/online/pkloppicard_lp/",
+   "price": "",
+   "img": "",
+   "asin": ""
+  },
+  {
+   "at": "11/27 07:56",
+   "ts": "2026-11-27 07:56:22",
+   "shop_kr": "드래곤스타 통판",
+   "title": "스톰 에메랄드 BOX WEB 추첨 (마감 11/27 23:59)",
+   "status": "new",
+   "url": "https://dorasuta.membercard.jp/lottery",
+   "price": "",
+   "img": "",
+   "asin": ""
+  },
+  {
+   "at": "11/27 07:56",
+   "ts": "2026-11-27 07:56:22",
+   "shop_kr": "오레탄 3개 점",
+   "title": "파동시커 재판매분 WEB 추첨 (마감 11/29 23:59)",
+   "status": "new",
+   "url": "https://oretan.membercard.jp/lottery",
+   "price": "",
+   "img": "",
+   "asin": ""
+  },
+  {
+   "at": "11/27 07:56",
+   "ts": "2026-11-27 07:56:22",
+   "shop_kr": "조신 웹숍",
+   "title": "OP-18 신의 지배 · OP-17 회원 초대 추첨 (결과 12/8·12/15)",
+   "status": "new",
+   "url": "https://nyuka-now.com/archives/97393",
+   "price": "",
+   "img": "",
+   "asin": ""
+  },
+  {
    "at": "11/25 07:57",
    "ts": "2026-11-25 07:57:42",
    "shop_kr": "하비스테이션",

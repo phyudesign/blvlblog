@@ -1,0 +1,19 @@
+{
+ "character": "gyomyo",
+ "mode": "concept",
+ "concept": "a crayon LOTTERY TV GAME SHOW STAGE: a purple velvet curtain backdrop, a row of round marquee light bulbs along the top edge, a big glittering lottery drum on a stand to one side, little spotlight beams and gold confetti falling, a small 'ON AIR' sign in a corner",
+ "badge": "추가 추첨!",
+ "title": "30주년 BOX 다시 추첨",
+ "title2": "12/1 14시 포켓몬센터 온라인",
+ "eyes": "determined shining eyes",
+ "style_refs": [
+  "_character/style/magazine-1.png"
+ ],
+ "prompt": "Gyomyo POSE: standing as a game show host in a tiny sparkly bow tie, one paw raised high holding a microphone, the other paw pointing dramatically at a single golden lottery ticket floating in a spotlight, tail curled up. A small messy pile of navy blue card backs with a yellow paw print and stars near Gyomyo. Title line 1 black, line 2 red.",
+ "n": 1,
+ "quality": "high",
+ "regenerate": false,
+ "tpos": "in the upper-left area, left-aligned, taking about 68% of the width",
+ "cpos": "in the bottom-right corner, small",
+ "empty": "the middle and left of the lower half of the image (from 48% to 100% height)"
+}

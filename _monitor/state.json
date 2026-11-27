@@ -515,6 +515,39 @@
  },
  "events": [
   {
+   "at": "11/28 07:55",
+   "ts": "2026-11-28 07:55:38",
+   "shop_kr": "포켓몬센터 온라인",
+   "title": "30th CELEBRATION BOX·에브이·블래키·FUTURISTIC 추가 추첨 (12/1 14:00~12/7)",
+   "status": "new",
+   "url": "https://www.pokemoncenter-online.com/news/?id=20261127",
+   "price": "",
+   "img": "",
+   "asin": ""
+  },
+  {
+   "at": "11/28 07:55",
+   "ts": "2026-11-28 07:55:38",
+   "shop_kr": "포켓몬카드 라운지 시부야",
+   "title": "30th CELEBRATION BOX 추첨 접수 (마감 11/29)",
+   "status": "new",
+   "url": "https://cloud-pass.jp/pr/98e6a804c482ebeb4e329c49224a346767bc80eb5e4ca4372d5960292993347b",
+   "price": "",
+   "img": "",
+   "asin": ""
+  },
+  {
+   "at": "11/28 07:55",
+   "ts": "2026-11-28 07:55:38",
+   "shop_kr": "DMM 마이카",
+   "title": "파동시커 BOX 추첨 접수 (마감 12/3)",
+   "status": "new",
+   "url": "https://myca.dmm.com/campaign/k29-4t-8r",
+   "price": "",
+   "img": "",
+   "asin": ""
+  },
+  {
    "at": "11/28 00:27",
    "ts": "2026-11-28 00:27:40",
    "shop_kr": "포켓몬코리아",

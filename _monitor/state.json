@@ -515,6 +515,17 @@
  },
  "events": [
   {
+   "at": "11/28 00:27",
+   "ts": "2026-11-28 00:27:40",
+   "shop_kr": "포켓몬코리아",
+   "title": "포켓몬 카드 게임 MEGA「30th CELEBRATION 프리미엄 덱 세트 에브이·블래키」 추첨 응모 일정 안내",
+   "status": "krnews",
+   "url": "https://pokemonkorea.co.kr/news/2/21588",
+   "price": "",
+   "img": "https://pokemonkorea.co.kr/s3.php?key=home%2Fdata%2Fdata1_www%2Fnewdata%2F2026%2F11%2F2026-11-27_11-56-58-07473c6b7bff0651.png",
+   "asin": ""
+  },
+  {
    "at": "11/27 07:56",
    "ts": "2026-11-27 07:56:22",
    "shop_kr": "포켓몬센터 온라인",
@@ -834,6 +845,8 @@
   }
  },
  "anews": [
+  "8f989a8e49f8",
+  "e0251a463b85",
   "ef8abe8103d9",
   "da4ea4085587",
   "fdf3cb230971",
@@ -933,7 +946,7 @@
    "name": "포켓몬카드 확장팩 파동시커 BOX",
    "price": "6,006엔",
    "first": "2026-10-31",
-   "last": "2026-11-20",
+   "last": "2026-11-28",
    "src": "blvl 확인",
    "srcurl": "",
    "ord": 0
@@ -942,7 +955,7 @@
    "name": "포켓몬카드 30th CELEBRATION BOX",
    "price": "7,216엔",
    "first": "2026-10-31",
-   "last": "2026-11-20",
+   "last": "2026-11-28",
    "src": "blvl 확인",
    "srcurl": "",
    "ord": 1
@@ -951,7 +964,7 @@
    "name": "포켓몬카드 30th 스타팅 세트",
    "price": "1,200엔",
    "first": "2026-10-31",
-   "last": "2026-11-20",
+   "last": "2026-11-28",
    "src": "blvl 확인",
    "srcurl": "",
    "ord": 2
@@ -960,7 +973,7 @@
    "name": "포켓몬카드 에브이·블래키 덱 세트",
    "price": "6,201엔",
    "first": "2026-10-31",
-   "last": "2026-11-20",
+   "last": "2026-11-28",
    "src": "blvl 확인",
    "srcurl": "",
    "ord": 3
@@ -969,7 +982,7 @@
    "name": "포켓몬카드 스톰 에메랄드 BOX",
    "price": "6,006엔",
    "first": "2026-10-31",
-   "last": "2026-11-20",
+   "last": "2026-11-28",
    "src": "blvl 확인",
    "srcurl": "",
    "ord": 4
@@ -978,7 +991,7 @@
    "name": "포켓몬카드 메가드림EX BOX",
    "price": "5,500엔",
    "first": "2026-10-31",
-   "last": "2026-11-20",
+   "last": "2026-11-28",
    "src": "blvl 확인",
    "srcurl": "",
    "ord": 5
@@ -987,7 +1000,7 @@
    "name": "포켓몬카드 니힐제로 BOX",
    "price": "5,412엔",
    "first": "2026-10-31",
-   "last": "2026-11-20",
+   "last": "2026-11-28",
    "src": "blvl 확인",
    "srcurl": "",
    "ord": 6
@@ -996,7 +1009,7 @@
    "name": "포켓몬카드 인페르노X BOX",
    "price": "5,412엔",
    "first": "2026-10-31",
-   "last": "2026-11-20",
+   "last": "2026-11-28",
    "src": "blvl 확인",
    "srcurl": "",
    "ord": 7
@@ -1005,7 +1018,7 @@
    "name": "포켓몬카드 메가브레이브 BOX",
    "price": "5,412엔",
    "first": "2026-10-31",
-   "last": "2026-11-20",
+   "last": "2026-11-28",
    "src": "blvl 확인",
    "srcurl": "",
    "ord": 8
@@ -1014,7 +1027,7 @@
    "name": "포켓몬카드 메가심포니아 BOX",
    "price": "5,412엔",
    "first": "2026-10-31",
-   "last": "2026-11-20",
+   "last": "2026-11-28",
    "src": "blvl 확인",
    "srcurl": "",
    "ord": 9
@@ -1041,7 +1054,7 @@
    "name": "カードセット キモリ・アチャモ・ミズゴロウ",
    "price": "1,200엔",
    "first": "2026-10-31",
-   "last": "2026-11-20",
+   "last": "2026-11-28",
    "src": "전격온라인",
    "srcurl": "https://dengekionline.com/article/202608/83452",
    "ord": 112
@@ -1050,7 +1063,7 @@
    "name": "カードセット ツタージャ・ポカブ・ミジュマル",
    "price": "1,200엔",
    "first": "2026-10-31",
-   "last": "2026-11-20",
+   "last": "2026-11-28",
    "src": "전격온라인",
    "srcurl": "https://dengekionline.com/article/202608/83452",
    "ord": 113
@@ -1059,7 +1072,7 @@
    "name": "カードセット ハリマロン・フォッコ・ケロマツ",
    "price": "1,200엔",
    "first": "2026-10-31",
-   "last": "2026-11-20",
+   "last": "2026-11-28",
    "src": "전격온라인",
    "srcurl": "https://dengekionline.com/article/202608/83452",
    "ord": 114
@@ -1068,7 +1081,7 @@
    "name": "カードセット モクロー・ニャビー・アシマリ",
    "price": "1,200엔",
    "first": "2026-10-31",
-   "last": "2026-11-20",
+   "last": "2026-11-28",
    "src": "전격온라인",
    "srcurl": "https://dengekionline.com/article/202608/83452",
    "ord": 115
@@ -1077,7 +1090,7 @@
    "name": "カードセット サルノリ・ヒバニー・メッソン",
    "price": "1,200엔",
    "first": "2026-10-31",
-   "last": "2026-11-20",
+   "last": "2026-11-28",
    "src": "전격온라인",
    "srcurl": "https://dengekionline.com/article/202608/83452",
    "ord": 116
@@ -1086,7 +1099,7 @@
    "name": "カードセット ニャオハ・ホゲータ・クワッス",
    "price": "1,200엔",
    "first": "2026-10-31",
-   "last": "2026-11-20",
+   "last": "2026-11-28",
    "src": "전격온라인",
    "srcurl": "https://dengekionline.com/article/202608/83452",
    "ord": 117
@@ -1095,7 +1108,7 @@
    "name": "ポケモンカードゲーム MEGA 拡張パック アビスアイ BOX",
    "price": "6,006엔",
    "first": "2026-10-31",
-   "last": "2026-11-20",
+   "last": "2026-11-28",
    "src": "전격온라인",
    "srcurl": "https://dengekionline.com/article/202608/83452",
    "ord": 118
@@ -1104,7 +1117,7 @@
    "name": "ポケモンカードゲーム MEGA 拡張パック ニンジャスピナー BOX",
    "price": "5,412엔",
    "first": "2026-10-31",
-   "last": "2026-11-20",
+   "last": "2026-11-28",
    "src": "전격온라인",
    "srcurl": "https://dengekionline.com/article/202608/83452",
    "ord": 119
@@ -1113,7 +1126,7 @@
    "name": "ポケモンカードゲーム MEGA スタートデッキ100 バトルコレクション",
    "price": "891엔",
    "first": "2026-10-31",
-   "last": "2026-11-20",
+   "last": "2026-11-28",
    "src": "전격온라인",
    "srcurl": "https://dengekionline.com/article/202608/83452",
    "ord": 120
@@ -1167,7 +1180,7 @@
    "src": "포켓몬카드 공식",
    "first": "2026-11-02",
    "posted": "2026-10-23",
-   "last": "2026-11-20",
+   "last": "2026-11-28",
    "img": "https://pokemoncard.co.kr/s3.php?key=home%2Fdata%2Fdata1_www%2F2026%2F10%2F2026-10-16_16-48-59-96868-1792136939.png"
   },
   "https://pokemoncard.co.kr/card/966": {
@@ -1183,9 +1196,18 @@
    "src": "포켓몬카드 공식",
    "first": "2026-11-16",
    "posted": "2026-11-16",
-   "last": "2026-11-20",
+   "last": "2026-11-28",
    "img_try": 3,
    "img": "https://pokemoncard.co.kr/s3.php?key=home%2Fdata%2Fdata1_www%2Fpki-editor-webp%2Fa2484eaccac2744e9872433e0b0821af6643528d2dda6893e81f871d2f2be2fc.webp"
+  },
+  "https://pokemonkorea.co.kr/news/2/21588": {
+   "title": "포켓몬 카드 게임 MEGA「30th CELEBRATION 프리미엄 덱 세트 에브이·블래키」 추첨 응모 일정 안내",
+   "src": "포켓몬코리아",
+   "first": "2026-11-28",
+   "posted": "2026-11-27",
+   "last": "2026-11-28",
+   "img_try": 1,
+   "img": "https://pokemonkorea.co.kr/s3.php?key=home%2Fdata%2Fdata1_www%2Fnewdata%2F2026%2F11%2F2026-11-27_11-56-58-07473c6b7bff0651.png"
   }
  },
  "alert_bg_last": "lottery-b",

@@ -1240,7 +1240,9 @@
    "posted": "2026-11-27",
    "last": "2026-11-28",
    "img_try": 1,
-   "img": "https://pokemonkorea.co.kr/s3.php?key=home%2Fdata%2Fdata1_www%2Fnewdata%2F2026%2F11%2F2026-11-27_11-56-58-07473c6b7bff0651.png"
+   "img": "https://pokemonkorea.co.kr/s3.php?key=home%2Fdata%2Fdata1_www%2Fnewdata%2F2026%2F11%2F2026-11-27_11-56-58-07473c6b7bff0651.png",
+   "start": "2026-12-02 10:00",
+   "end": "2026-12-07 23:59"
   }
  },
  "alert_bg_last": "lottery-b",

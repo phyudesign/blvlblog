@@ -345,7 +345,7 @@ INVITE_INFO = {a: (n, "", g) for a, n, b, g in INVITE_JP}   # 예전 코드 호�
 
 # 아마존에서 초대 요청을 더 받지 않는 상품 (2026-11-23 아마존 상품 페이지에서 하나씩 확인: 초대 버튼 없음·다른 판매자만·일반 판매)
 INVITE_ENDED = {"B0HN6SF9V1", "B0HN6Q2STG", "B0H4PQ6LR5", "B0GP928YDZ", "B0GXCYMRGL", "B0GXCC7W7Q", "B0GXCX36HP", "B0GXCX46KQ",
-                "B0GXCZ1VDC", "B0GXCSGX8Y", "B0GXCPF84C", "B0GXCTRZ8L", "B0GXCT83HB", "B0GP9JJ4B7", "B0GP9FPZJH", "B0GP9QQ1JG", "B0GTTJ9X7C"}
+                "B0GXCZ1VDC", "B0GXCSGX8Y", "B0GXCPF84C", "B0GXCTRZ8L", "B0GXCT83HB", "B0GP9JJ4B7", "B0GP9FPZJH", "B0GP9QQ1JG", "B0GTTJ9X7C", "B0HB3JQ6P4"}
 
 def invite_list(state, region="jp"):
     """응모 판 목록: [(asin, 이름, 가격, 브랜드, 묶음, NEW, 링크)] — 감시기가 새로 찾은 상품을 맨 위에"""

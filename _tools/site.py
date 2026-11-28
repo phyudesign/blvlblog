@@ -238,6 +238,21 @@ def match_asin(title):
         if len(key) >= 3 and key in t: return a
     return ""
 
+def open_window(title, now):
+    """제목 속 일정으로 '지금 바로 응모·구매 가능'한지 판단 (슨생: LIVE 패널은 지금 가능한 것만).
+    (M/D HH:MM~M/D HH:MM) 또는 (마감 M/D HH:MM) 를 읽어요. 아직 시작 전이거나 끝났으면 False, 일정을 못 읽으면 None."""
+    def dt(m, d, hm, end):
+        h, mi = (map(int, hm.split(":")) if hm else ((23, 59) if end else (0, 0)))
+        return datetime.datetime(now.year, int(m), int(d), h, mi)
+    D = r"(\d{1,2})/(\d{1,2})(?:\([^)]*\))?\s*(\d{1,2}:\d{2})?"
+    r = re.search(D + r"\s*[~〜]\s*" + D, title)
+    if r:
+        st, en = dt(r[1], r[2], r[3], False), dt(r[4], r[5], r[6], True)
+        return st <= now <= en
+    r = re.search(r"마감\s*" + D, title)
+    if r: return now <= dt(r[1], r[2], r[3], True)
+    return None
+
 def live_rows():
     """전광판·홈 슬라이드에 쓰는 줄: (종류, 꼬리표, 문장, 링크, 시각, 외부링크, 미리보기정보)"""
     try:
@@ -254,6 +269,8 @@ def live_rows():
         except ValueError: continue
         if (now - t).total_seconds() > 48 * 3600: break
         if ev.get("status") in ("invite", "krnews") or not ev.get("url"): continue   # 아마존 응모·국내판은 아래 자기 줄로
+        ok = open_window(ev.get("title", ""), now)
+        if ok is False or (ok is None and ev.get("status") == "new" and not ev.get("open")): continue   # 시작 전·마감·일정 불명 추첨은 빼요
         name = kr(ev["title"])[:60]
         sub = " · ".join(x for x in (ev.get("shop_kr", ""), STATUS_KR.get(ev.get("status"), ""), ev.get("price", "")) if x)
         pv = {"img": re.sub(r"downsize=\d+", "downsize=400", ev.get("img") or ""), "name": name, "sub": sub, "cta": "쇼핑몰에서 보기", "shop": ev.get("shop_kr", "")}
@@ -274,7 +291,10 @@ def live_rows():
     except Exception: pass
     kr_cut = (now - datetime.timedelta(days=14)).strftime("%Y-%m-%d")   # 국내판 공지는 2주 지나면 (추첨 마감·발매 지난 소식) 빼요
     for u, v in sorted(st.get("kr", {}).items(), key=lambda kv: kv[1].get("posted", kv[1]["first"]), reverse=True)[:4]:
-        if v.get("posted", v["first"])[:10] < kr_cut or v.get("ended"): continue
+        if v.get("ended"): continue
+        if v.get("start") or v.get("end"):   # 응모 기간이 적혀 있으면 그 기간 안에만
+            if not (v.get("start", "0") <= now.strftime("%Y-%m-%d %H:%M") <= v.get("end", "9")): continue
+        elif v.get("posted", v["first"])[:10] < kr_cut: continue
         rows.append(("kr", "국내판", v["title"], u, "", True, {"img": v.get("img", ""), "name": v["title"], "sub": v["src"] + " 공지", "cta": "공지 보기", "kr": "1"}))
     for v in st.get("items", {}).values():
         if v.get("status") not in ("instock", "preorder"): continue
@@ -333,7 +353,7 @@ LH_BG = {
 }
 LH_LABEL = {"kr": "국내판 소식", "inv": "아마존 응모", "hot": "TCG 속보", "on": "지금 구매 가능"}
 # 홈 맨 위 슬라이드 첫 장에 고정할 글 (슨생 요청 "블로그 들어오면 바로 보이게") — slug 와 고정 끝나는 날
-PIN = [("파동시커-총정리", "2026-12-12")]
+PIN = []   # 슨생: LIVE 패널은 지금 바로 응모·구매 가능한 정보만 (글 고정 금지)
 def pin_rows():
     today = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9))).strftime("%Y-%m-%d")
     out = []

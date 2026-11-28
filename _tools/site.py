@@ -17,7 +17,7 @@ DESC = "포켓몬카드·원피스카드 일본·한국 발매, 추첨, 아마�
 ADSENSE = "ca-pub-4380904134243959"
 AUTHOR = "blvl."
 PER_PAGE = 10
-CSS_VER = 93
+CSS_VER = 94
 JS_VER = 4
 
 # 카테고리: (슬러그, 메뉴명, 설명)
@@ -332,8 +332,21 @@ LH_BG = {
     "B0HFVPJF4Q": (66, 72, 46), "default1": (72, 67, 46), "default2": (70, 59, 42), "default3": (69, 80, 44),
 }
 LH_LABEL = {"kr": "국내판 소식", "inv": "아마존 응모", "hot": "TCG 속보", "on": "지금 구매 가능"}
+# 홈 맨 위 슬라이드 첫 장에 고정할 글 (슨생 요청 "블로그 들어오면 바로 보이게") — slug 와 고정 끝나는 날
+PIN = [("파동시커-총정리", "2026-12-12")]
+def pin_rows():
+    today = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9))).strftime("%Y-%m-%d")
+    out = []
+    for slug, until in PIN:
+        q = next((x for x in articles if x["slug"] == slug), None)
+        if not q or today > until: continue
+        t = q["title"].split(" — ")
+        out.append(("pin", "추천 글", q["title"], url(slug), "", False,
+                    {"img": q["thumb"], "name": t[0], "sub": t[1] if len(t) > 1 else q["desc"][:60], "cta": "글 읽기", "kr": "1", "pin": "1"}))
+    return out
+
 def live_hero():
-    rows = live_rows()
+    rows = pin_rows() + live_rows()
     if not rows: return ""
     cnt = {}
     slides = []
@@ -365,7 +378,7 @@ def live_hero():
             slides.append(f'''<a class="lh-slide studio st-bg{" st-art" if use_art else ""}" href="{esc(href)}"{attrs}{f' data-asin="{pv["asin"]}"' if kind == "inv" and pv.get("asin") else ""} style="--b1:{th[0]};--b2:{th[1]};--ac:{th[2]};--px:{px}%;--py:{py}%;--pw:{pw}%" draggable="false">
 <img class="st-back" src="{esc(back)}" referrerpolicy="no-referrer" alt="" loading="{"eager" if i < 3 else "lazy"}" draggable="false">
 {f'<img class="{prod_cls}" src="{esc(prod_src)}" alt="{esc(name)} 상품 사진" loading="{"eager" if i < 3 else "lazy"}" referrerpolicy="no-referrer" draggable="false">' if prod_src else ""}
-<span class="st-text">{amz_pill(new) if kind == "inv" else f'<span class="st-pill"><i></i><b>LIVE</b>· {esc(pv.get("shop") or LH_LABEL.get(kind, "TCG LIVE"))}{new}</span>'}
+<span class="st-text">{amz_pill(new) if kind == "inv" else ('<span class="st-pill pin"><b>UPDATE</b>· blvl 추천 글<em>NEW</em></span>' if kind == "pin" else f'<span class="st-pill"><i></i><b>LIVE</b>· {esc(pv.get("shop") or LH_LABEL.get(kind, "TCG LIVE"))}{new}</span>')}
 <span class="st-rib">{esc(brand or "TCG")}</span><b class="st-title">{esc(title)}</b><span class="st-line"></span>
 <span class="st-sub">{esc(pv.get("sub", ""))}</span><span class="st-cta">{esc(pv.get("cta", "자세히 보기"))} →</span></span></a>''')
             continue

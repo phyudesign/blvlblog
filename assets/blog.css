@@ -756,3 +756,4 @@ html.mn-lock,html.mn-lock body{overflow:hidden}
 .buy-btn .tag.no{background:#e5e7eb;color:#4b5563}.buy-btn .tag.mid{background:#f59e0b;color:#111}
 .point3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:1.2em 0}.point3 div{background:#f1f5ff;border-radius:12px;padding:12px;font-size:14px;line-height:1.5}.point3 b{display:block;font-size:22px;color:#1f4fd8}
 @media(max-width:560px){.point3{grid-template-columns:1fr}}
+@media(max-width:768px){.entry-content table.fit{display:table;width:100%}.entry-content table.fit td,.entry-content table.fit th{min-width:0!important;padding:7px 6px}}

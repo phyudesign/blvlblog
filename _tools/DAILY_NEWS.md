@@ -124,3 +124,4 @@ for i in 1 2 3; do git pull --rebase origin main && git push origin main && brea
 - 매일 아마존 응모 상품 페이지를 하나씩 열어 확인: "Invitation requested / Request invitation"(초대 접수 중)이 아니면 `monitor.py` 의 `INVITE_ENDED` 에 넣어요 (초대 버튼 없음·다른 판매자만·일반 판매 = 끝).
 - 국내판 공지는 본문(이미지 포함)의 응모 기간·발표일·발매일을 직접 읽어서 끝난 건 state.kr 항목에 `"ended": true`. 2주 지난 공지는 자동으로 빠져요.
 - 일주일 넘게 계속 재고 있는 상품은 자동으로 빠져요.
+- (2026-11-28 슨생) **LIVE 패널(홈 상단 슬라이드·전광판)은 지금 바로 응모·구매 가능한 정보만.** 글 고정·홍보 금지(site.py PIN 비워 둠). state.events 제목에 반드시 기간을 넣어요: `(마감 M/D HH:MM)` 또는 `(M/D HH:MM~M/D HH:MM)` — 시작 전·마감 지남·기간 없는 추첨은 자동으로 빠져요. 국내판 공지는 state.kr 항목에 "start"/"end"("YYYY-MM-DD HH:MM")를 넣으면 그 기간에만 떠요.

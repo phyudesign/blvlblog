@@ -1,0 +1,3 @@
+const {chromium}=require('playwright');(async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:1200,height:700},deviceScaleFactor:1});
+for(const [f,o] of [['pk1128c','/home/claude/blvlblog/wp-content/uploads/2026/11/blvl-tcg-daily-20261128-c.jpg'],['pk1128d','/home/claude/blvlblog/wp-content/uploads/2026/11/blvl-tcg-daily-20261128-d.jpg']]){await p.goto('file://'+process.cwd()+'/'+f+'.html');await p.waitForTimeout(400);const h=await p.evaluate(()=>document.body.scrollHeight);await p.setViewportSize({width:1200,height:h});await p.screenshot({path:o,type:'jpeg',quality:86});}
+await b.close()})()
